@@ -8,12 +8,12 @@ Rush is a delivery service that allows users to place orders with some of their 
 
 - **Customer**
 
-    | Method | Endpoint     | Description           | Body Data     |
-    | ------ | ------------ | --------------------- | ------------- |
-    | GET    |              |                       |               |
-    | POST   |              |                       |               |
-    | PATCH  |              |                       |               |
-    | DELETE |              |                       |               |
+    | Method | Endpoint            | Description             | Body Data     |
+    | ------ | ------------------- | ----------------------- | ------------- |
+    | GET    |/customers/:email    | Get 1 customer by email | N/A           |
+    | POST   |/customers/register  | Register a new customer | Body Data     |
+    | PATCH  |/customers/edit      | Customer edits info     | Body Data     |
+    | DELETE |/customers/delete    | Customer deletes account| N/A           |
 
 - **Store**
 
