@@ -6,33 +6,35 @@ Rush is a delivery service that allows users to place orders with some of their 
 ## Database Structure
 ![database_schema](./database-schema.png)
 
-## 
+## Endpoints
+
+
 - **Customer**
 
     | Method | Endpoint            | Description             | Body Data     |
     | ------ | ------------------- | ----------------------- | ------------- |
-    | GET    |/customers/:email    | Get a customer by email | N/A           |
-    | POST   |/customers/:register | Register a new customer | Body Data     |
-    | PATCH  |/customers/:edit     | Customer edits info     | Body Data     |
-    | DELETE |/customers/:delete   | Customer deletes account| N/A           |
+    | GET    |/customers/:id       | Get a customer by id    | N/A           |
+    | POST   |/customers/register  | Register a new customer | Body Data     |
+    | PATCH  |/customers/edit/:id  | Customer edits info     | Body Data     |
+    | DELETE |/customers/delete/:id| Customer deletes account| N/A           |
 
 - **Store**
 
     | Method | Endpoint         | Description              | Body Data     |
     | ------ | ---------------- | ------------------------ | ------------- |
-    | GET    | /store/:email    | Get a store by email     | N/A           |
-    | POST   | /store/:register | Register a new store     | Body Data     |
-    | PATCH  | /store/:edit     | Store edits profile info | Body Data     |
-    | DELETE | /store/:delete   | Store deletes account    | N/A           |
+    | GET    | /store/:id       | Get a store by email     | N/A           |
+    | POST   | /store/register  | Register a new store     | Body Data     |
+    | PATCH  | /store/edit/:id  | Store edits profile info | Body Data     |
+    | DELETE | /store/delete/:id| Store deletes account    | N/A           |
 
 - **Courier**
 
-    | Method | Endpoint     | Description           | Body Data     |
-    | ------ | ------------ | --------------------- | ------------- |
-    | GET    |              |                       |               |
-    | POST   |              |                       |               |
-    | PATCH  |              |                       |               |
-    | DELETE |              |                       |               |
+    | Method | Endpoint           | Description                | Body Data     |
+    | ------ | ------------------ | -------------------------- | ------------- |
+    | GET    | /courier/:id       | Get a courier by email     | N/A           |
+    | POST   | /courier/register  | Register a new courier     | Body Data     |
+    | PATCH  | /courier/edit/:id  | Courier edits profile info | Body Data     |
+    | DELETE | /courier/delete/:id| Courier deletes account    | N/A           |
 
 - **Product**
 
