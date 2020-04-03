@@ -6,23 +6,24 @@ Rush is a delivery service that allows users to place orders with some of their 
 ## Database Structure
 ![database_schema](./database-schema.png)
 
+## 
 - **Customer**
 
     | Method | Endpoint            | Description             | Body Data     |
     | ------ | ------------------- | ----------------------- | ------------- |
-    | GET    |/customers/:email    | Get 1 customer by email | N/A           |
-    | POST   |/customers/register  | Register a new customer | Body Data     |
-    | PATCH  |/customers/edit      | Customer edits info     | Body Data     |
-    | DELETE |/customers/delete    | Customer deletes account| N/A           |
+    | GET    |/customers/:email    | Get a customer by email | N/A           |
+    | POST   |/customers/:register | Register a new customer | Body Data     |
+    | PATCH  |/customers/:edit     | Customer edits info     | Body Data     |
+    | DELETE |/customers/:delete   | Customer deletes account| N/A           |
 
 - **Store**
 
-    | Method | Endpoint     | Description           | Body Data     |
-    | ------ | ------------ | --------------------- | ------------- |
-    | GET    |              |                       |               |
-    | POST   |              |                       |               |
-    | PATCH  |              |                       |               |
-    | DELETE |              |                       |               |
+    | Method | Endpoint         | Description              | Body Data     |
+    | ------ | ---------------- | ------------------------ | ------------- |
+    | GET    | /store/:email    | Get a store by email     | N/A           |
+    | POST   | /store/:register | Register a new store     | Body Data     |
+    | PATCH  | /store/:edit     | Store edits profile info | Body Data     |
+    | DELETE | /store/:delete   | Store deletes account    | N/A           |
 
 - **Courier**
 
