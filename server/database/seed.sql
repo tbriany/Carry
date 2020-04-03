@@ -1,13 +1,13 @@
-DROP DATABASE if exists rush;
-CREATE DATABASE rush;
+DROP DATABASE if exists carry;
+CREATE DATABASE carry;
 
-\c rush
+\c carry
 
-CREATE TABLE customer(
+CREATE TABLE customers(
     customer_id SERIAL PRIMARY KEY,
     firstname VARCHAR NOT NULL,
     lastname VARCHAR NOT NULL,
-    phone_number INT UNIQUE,
+    phone_number VARCHAR UNIQUE NOT NULL,
     email VARCHAR UNIQUE NOT NULL,
     address VARCHAR NOT NULL,
     city VARCHAR NOT NULL,
@@ -17,11 +17,11 @@ CREATE TABLE customer(
     password VARCHAR NOT NULL
 );
 
-CREATE TABLE store(
+CREATE TABLE stores(
     store_id SERIAL PRIMARY KEY,
     store_name VARCHAR NOT NULL,
     avatar_url VARCHAR NOT NULL,
-    phone_number INT UNIQUE,
+    phone_number VARCHAR UNIQUE NOT NULL,
     email VARCHAR UNIQUE NOT NULL,
     address VARCHAR NOT NULL,
     city VARCHAR NOT NULL,
@@ -30,11 +30,11 @@ CREATE TABLE store(
     password VARCHAR NOT NULL
 );
 
-CREATE TABLE courier(
+CREATE TABLE couriers(
     courier_id SERIAL PRIMARY KEY,
     firstname VARCHAR NOT NULL,
     lastname VARCHAR NOT NULL,
-    phone_number INT UNIQUE,
+    phone_number VARCHAR UNIQUE NOT NULL,
     email VARCHAR UNIQUE NOT NULL,
     avatar_url VARCHAR NOT NULL,
     password VARCHAR NOT NULL,
@@ -63,12 +63,10 @@ CREATE TABLE brands(
     brand_description VARCHAR
 );
 
-
 CREATE TABLE colors(
     color_id SERIAL PRIMARY KEY,
     color_name VARCHAR NOT NULL
 );
-
 
 CREATE TABLE products(
     product_id SERIAL PRIMARY KEY,
@@ -90,17 +88,16 @@ CREATE TABLE productImage_id(
     product_image_url VARCHAR
 );
 
-
--- ORDERS 
+-- Orders 
 
 CREATE TABLE orders(
    order_id SERIAL PRIMARY KEY,
    order_status VARCHAR,
    required_date INT,
    time_ordered TIMESTAMP, 
-   customer_id INT REFERENCES customer(customer_id),
-   store_id INT REFERENCES store(store_id),
-   courier_id INT REFERENCES courier(courier_id),
+   customer_id INT REFERENCES customers(customer_id),
+   store_id INT REFERENCES stores(store_id),
+   courier_id INT REFERENCES couriers(courier_id),
    delivery_fee INT,
    total INT
 );
@@ -111,8 +108,8 @@ CREATE TABLE ordersItems(
     product_id INT REFERENCES products(product_id)
 );
 
-
 -- Payments
+
 CREATE TABLE payment_type(
     payment_type_id SERIAL PRIMARY KEY,
     payment_type_name VARCHAR
@@ -120,25 +117,23 @@ CREATE TABLE payment_type(
 
 CREATE TABLE payment(
     payment_id SERIAL PRIMARY KEY,
-    customer_id INT REFERENCES customer(customer_id),
+    customer_id INT REFERENCES customers(customer_id),
     payment_type_id INT REFERENCES payment_type(payment_type_id),
     card_number INT,
     exp_date INT, 
     cvv INT
 );
 
-
-
 CREATE TABLE bankInfo(
-    courier_id INT REFERENCES courier(courier_id),
+    bankInfo_id SERIAL PRIMARY KEY,
+    courier_id INT REFERENCES couriers(courier_id),
     account_number INT,
     routing_number INT
 );
 
-
-SELECT * FROM customer;
-SELECT * FROM store;
-SELECT * FROM courier;
+SELECT * FROM customers;
+SELECT * FROM stores;
+SELECT * FROM couriers;
 SELECT * FROM categories;
 SELECT * FROM product_type;
 SELECT * FROM materials;
