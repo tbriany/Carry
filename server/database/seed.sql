@@ -54,7 +54,7 @@ CREATE TABLE product_type(
 
 CREATE TABLE materials(
     material_id SERIAL PRIMARY KEY,
-    materials_name VARCHAR 
+    material_name VARCHAR
 );
 
 CREATE TABLE brands(
@@ -78,7 +78,7 @@ CREATE TABLE products(
     color_id INT REFERENCES colors(color_id),
     product_size VARCHAR,
     product_description VARCHAR,
-    product_type INT REFERENCES product_type(product_type_id),
+    product_type INT REFERENCES product_type( product_type_id),
     quantity INT
 );
 
@@ -146,6 +146,7 @@ SELECT * FROM ordersItems;
 SELECT * FROM payment_type;
 SELECT * FROM payment;
 SELECT * FROM bankInfo;
+
 
 INSERT INTO customers
 (firstname, lastname, phone_number, email, address, city, state, zip_code, avatar_url, password)
