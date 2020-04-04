@@ -207,3 +207,34 @@ VALUES
 (4, 'Scarves'),
 (4, 'Hats & Caps'),
 (4, 'Wallets & Coin purses');
+
+INSERT INTO materials
+(material_name)
+VALUES 
+('Organic Cotton'),
+('Organic Linen'),
+('Hemp'),
+('Suede'),
+('Leather'),
+('Polyester');
+
+INSERT INTO brands
+(brand_name, brand_description)
+VALUES 
+('Lima Sagrada', 'Lima Sagrada is the name of a project that gives shape to raw materials such as leather in its most basic pure form, resulting in a modern and contemporary design founded by Vanessa Vila. Vanessa Vila is an architect, art director, and a stylist in Lima, Peru.');
+
+INSERT INTO colors
+(color_name)
+VALUES 
+('Black'),
+('White'),
+('Green'),
+('Red'),
+('Yellow'),
+('Purple'),
+('Pink'),
+('Gray'),
+('Brown'),
+('Orange'),
+('Blue'),
+('Pink');
