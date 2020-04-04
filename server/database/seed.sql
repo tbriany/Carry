@@ -54,7 +54,7 @@ CREATE TABLE product_type(
 
 CREATE TABLE materials(
     material_id SERIAL PRIMARY KEY,
-    category_name VARCHAR 
+    materials_name VARCHAR 
 );
 
 CREATE TABLE brands(
