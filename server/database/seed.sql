@@ -153,19 +153,19 @@ INSERT INTO customers
 VALUES ('Ana', 'Gomez', '(347)-555-5551', 'Ana@pursuit.org', '47-10 Austell Pl 2nd floor', 'Long Island City', 'NY', 11101, 'img' , 'ana'); 
 
 INSERT INTO stores
-(store_name, avatar_url, phone_number,email, address, city, state, zip_code, password)
+(store_name, avatar_url, phone_number, email, address, city, state, zip_code, password)
 VALUES 
 ('PazLifestyle', 'img', '(347)-555-5552', 'info@pazlifestyle.com', 'address', 'city', 'state', 00000, 'lifestyle');
 
 INSERT INTO couriers
-(firstname, lastname,phone_number, email, avatar_url, password, mode_of_transportation)
+(firstname, lastname, phone_number, email, avatar_url, password, mode_of_transportation)
 VALUES ('Jacob', 'Smith', '(347)-555-5553', 'Smith@courier.com', 'img', 'jacobsmith', 'bike');
 
 INSERT INTO categories 
 (category_name)
 VALUES 
 ('Women''s Clothing'), 
-('Men''s Clohing'), 
+('Men''s Clothing'), 
 ('Beauty'), 
 ('Accessories');
 
