@@ -78,7 +78,7 @@ CREATE TABLE products(
     color_id INT REFERENCES colors(color_id),
     product_size VARCHAR,
     product_description VARCHAR,
-    product_type INT,
+    product_type INT REFERENCES product_type(product_type_id),
     quantity INT
 );
 
