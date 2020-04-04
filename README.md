@@ -1,7 +1,7 @@
-# Rush
+# Carry
 
 
-Rush is a delivery service that allows users to place orders with some of their favorite stores that are within the NYC boroughs. Designed with the idea that customers should be able to get any items in a rush, not just food, we focus on delivering their daily necessities / wants ranging from 3hrs to end of day.
+Carry is a delivery service that allows users to place orders with some of their favorite retail stores that are within the NYC boroughs. Designed with the idea that customers should be able to get any items they need, we focus on delivering their necessities / wants from retail stores in delivery times ranging from 3hrs to end-of-day.
 
 ## Database Structure
 ![database_schema](./database-schema.png)
@@ -50,12 +50,12 @@ Rush is a delivery service that allows users to place orders with some of their 
 
 - **Order**
 
-    | Method  | Endpoint                             | Description           | Body Data     |
-    | ------- | ------------------------------------ | --------------------- | ------------- |
-    | GET ALL | /orders/store_orders/:store_id       |                       |               |
-    | GET ALL | /orders/courier_orders/:courier_id   |                       |               |
-    | GET ALL | /orders/customer_orders/:customer_id |                       |               |
-    | GET ALL | /orders/items/:order_id              |                       |               |
-    | POST    |              |                       |                       |               |
-    | PATCH   |              |                       |                       |               |
-    | DELETE  |              |                       |                       |               |
+    | Method  | Endpoint                             | Description                 | Body Data     |
+    | ------- | ------------------------------------ | --------------------------- | ------------- |
+    | GET ALL | /orders/store_orders/:store_id       | Get orders by store id      | N/A           |
+    | GET ALL | /orders/courier_orders/:courier_id   | Get orders by courier id    | N/A           |
+    | GET ALL | /orders/customer_orders/:customer_id | Get orders by customer id   | N/A           |
+    | GET ALL | /orders/items/:order_id              | Get order items by order id | N/A           |
+    | POST    | /orders/add                          | Add a new order             | Body Data     |
+    | PATCH   | /orders/update/:order_id             | Update an order             | N/A           |
+    | DELETE  | /orders/delete/:order_id             | Delete an order             | N/A           |
