@@ -11,21 +11,21 @@ Rush is a delivery service that allows users to place orders with some of their 
 
 - **Customer**
 
-    | Method | Endpoint            | Description             | Body Data     |
-    | ------ | ------------------- | ----------------------- | ------------- |
-    | GET    |/customers/:id       | Get a customer by id    | N/A           |
-    | POST   |/customers/register  | Register a new customer | Body Data     |
-    | PATCH  |/customers/edit/:id  | Customer edits info     | Body Data     |
-    | DELETE |/customers/delete/:id| Customer deletes account| N/A           |
+    | Method | Endpoint             | Description              | Body Data     |
+    | ------ | -------------------- | ------------------------ | ------------- |
+    | GET    |/customers/:id        | Get a customer by id     | N/A           |
+    | POST   |/customers/register   | Register a new customer  | Body Data     |
+    | PATCH  |/customers/edit/:id   | Customer edits info      | Body Data     |
+    | DELETE |/customers/delete/:id | Customer deletes account | N/A           |
 
 - **Store**
 
-    | Method | Endpoint         | Description              | Body Data     |
-    | ------ | ---------------- | ------------------------ | ------------- |
-    | GET    | /store/:id       | Get a store by email     | N/A           |
-    | POST   | /store/register  | Register a new store     | Body Data     |
-    | PATCH  | /store/edit/:id  | Store edits profile info | Body Data     |
-    | DELETE | /store/delete/:id| Store deletes account    | N/A           |
+    | Method | Endpoint           | Description                | Body Data     |
+    | ------ | ------------------ | -------------------------- | ------------- |
+    | GET    | /store/:id         | Get a store by email       | N/A           |
+    | POST   | /store/register    | Register a new store       | Body Data     |
+    | PATCH  | /store/edit/:id    | Store edits profile info   | Body Data     |
+    | DELETE | /store/delete/:id  | Store deletes account      | N/A           |
 
 - **Courier**
 
@@ -38,15 +38,24 @@ Rush is a delivery service that allows users to place orders with some of their 
 
 - **Product**
 
-    | Method | Endpoint     | Description           | Body Data     |
-    | ------ | ------------ | --------------------- | ------------- |
-    | GET    |              |                       |               |
-    | GET    |              |                       |               |
-    | GET    |              |                       |               |
-    | GET    |              |                       |               |
-    | GET    |              |                       |               |
-    | GET    |              |                       |               |
-    | GET    |              |                       |               |
-    | POST   |              |                       |               |
-    | PATCH  |              |                       |               |
-    | DELETE |              |                       |               |
+    | Method  | Endpoint                                    | Description              | Body Data     |
+    | ------- | ------------------------------------------- | ------------------------ | ------------- |
+    | GET     | /product/:product_id                        | Get single product by id | N/A           |
+    | GET ALL | /product/product_type/:product_type         | Get products by type     | N/A           |
+    | GET ALL | /product/product_name/:product_name         | Get products by name     | N/A           |
+    | GET ALL | /product/product_size/:product_size         | Get products by size     | N/A           |
+    | GET ALL | /product/product_color/:product_color       | Get products by color    | N/A           |
+    | GET ALL | /product/product_brand/:product_brand       | Get products by brand    | N/A           |
+    | GET ALL | /product/product_category/:product_category | Get products by category | N/A           |
+
+- **Order**
+
+    | Method  | Endpoint                             | Description           | Body Data     |
+    | ------- | ------------------------------------ | --------------------- | ------------- |
+    | GET ALL | /orders/store_orders/:store_id       |                       |               |
+    | GET ALL | /orders/courier_orders/:courier_id   |                       |               |
+    | GET ALL | /orders/customer_orders/:customer_id |                       |               |
+    | GET ALL | /orders/items/:order_id              |                       |               |
+    | POST    |              |                       |                       |               |
+    | PATCH   |              |                       |                       |               |
+    | DELETE  |              |                       |                       |               |
