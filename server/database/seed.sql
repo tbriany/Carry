@@ -54,7 +54,7 @@ CREATE TABLE product_type(
 
 CREATE TABLE materials(
     material_id SERIAL PRIMARY KEY,
-    category_name VARCHAR 
+    material_name VARCHAR
 );
 
 CREATE TABLE brands(
@@ -78,7 +78,7 @@ CREATE TABLE products(
     color_id INT REFERENCES colors(color_id),
     product_size VARCHAR,
     product_description VARCHAR,
-    product_type INT,
+    product_type INT REFERENCES product_type( product_type_id),
     quantity INT
 );
 
@@ -146,3 +146,106 @@ SELECT * FROM ordersItems;
 SELECT * FROM payment_type;
 SELECT * FROM payment;
 SELECT * FROM bankInfo;
+
+
+INSERT INTO customers
+(firstname, lastname, phone_number, email, address, city, state, zip_code, avatar_url, password)
+VALUES ('Ana', 'Gomez', '(347)-555-5551', 'Ana@pursuit.org', '47-10 Austell Pl 2nd floor', 'Long Island City', 'NY', 11101, 'img' , 'ana'); 
+
+INSERT INTO stores
+(store_name, avatar_url, phone_number, email, address, city, state, zip_code, password)
+VALUES 
+('PazLifestyle', 'img', '(347)-555-5552', 'info@pazlifestyle.com', 'address', 'city', 'state', 00000, 'lifestyle');
+
+INSERT INTO couriers
+(firstname, lastname, phone_number, email, avatar_url, password, mode_of_transportation)
+VALUES ('Jacob', 'Smith', '(347)-555-5553', 'Smith@courier.com', 'img', 'jacobsmith', 'bike');
+
+INSERT INTO categories 
+(category_name)
+VALUES 
+('Women''s Clothing'), 
+('Men''s Clothing'), 
+('Beauty'), 
+('Accessories');
+
+INSERT INTO product_type
+(category_id, product_type)
+VALUES 
+(1, 'Tops'),
+(1, 'Pants'),
+(1, 'Dresses'),
+(1, 'Jackets & Coats'),
+(1, 'Skirts'),
+(1, 'Shorts'),
+(1, 'Shirts & Blouses'),
+(1, 'Jeans'),
+(1, 'Swimwear'),
+(1, 'Hoodies & Sweatshirts'),
+(1, 'Sportswear'),
+(2, 'Tops'),
+(2, 'Pants'),
+(2, 'Jackets & Coats'),
+(2, 'Shorts'),
+(2, 'Shirts & Blouses'),
+(2, 'Jeans'),
+(2, 'Swimwear'),
+(2, 'Hoodies & Sweatshirts'),
+(2, 'Sportswear'),
+(3, 'Face'),
+(3, 'Eyes'),
+(3, 'Lips'),
+(3, 'Nails'),
+(3, 'Bath & Body Care'),
+(3, 'Hair'),
+(3, 'Brushes & Tools'),
+(4, 'Bags'),
+(4, 'Belts'),
+(4, 'Jewelry'),
+(4, 'Hair Accessories'),
+(4, 'Sunglasses'),
+(4, 'Gloves'),
+(4, 'Scarves'),
+(4, 'Hats & Caps'),
+(4, 'Wallets & Coin purses');
+
+INSERT INTO materials
+(material_name)
+VALUES 
+('Organic Cotton'),
+('Organic Linen'),
+('Hemp'),
+('Suede'),
+('Leather'),
+('Polyester');
+
+INSERT INTO brands
+(brand_name, brand_description)
+VALUES 
+('Lima Sagrada', 'Lima Sagrada is the name of a project that gives shape to raw materials such as leather in its most basic pure form, resulting in a modern and contemporary design founded by Vanessa Vila. Vanessa Vila is an architect, art director, and a stylist in Lima, Peru.');
+
+INSERT INTO colors
+(color_name)
+VALUES 
+('Black'),
+('White'),
+('Green'),
+('Red'),
+('Yellow'),
+('Purple'),
+('Pink'),
+('Gray'),
+('Brown'),
+('Orange'),
+('Blue'),
+('Pink');
+
+INSERT INTO products
+(product_name, brand_id, category_id, product_price, material_id, color_id, product_size, product_description, product_type, quantity)
+VALUES 
+('Milan Leather Backpack', 1, 4, 200.00, 5 , 1, '22cm x 25cm x 10cm', 'Small leather backpack. Made in Peru.', 28, 5  );
+
+
+INSERT INTO productImage_id
+(product_id, product_image_url)
+VALUES(1,'https://cdn.shopify.com/s/files/1/0082/3558/1504/products/lima-sagrada-small-backpack-black_606x606_b48c910d-33ac-46ce-aeb0-8bb3f7b73f7f_1296x.jpg?v=1585956015');
