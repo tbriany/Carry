@@ -159,3 +159,51 @@ VALUES
 INSERT INTO couriers
 (firstname, lastname,phone_number, email, avatar_url, password, mode_of_transportation)
 VALUES ('Jacob', 'Smith', '(347)-555-5553', 'Smith@courier.com', 'img', 'jacobsmith', 'bike');
+
+INSERT INTO categories 
+(category_name)
+VALUES 
+('Women''s Clothing'), 
+('Men''s Clohing'), 
+('Beauty'), 
+('Accessories');
+
+INSERT INTO product_type
+(category_id, product_type)
+VALUES 
+(1, 'Tops'),
+(1, 'Pants'),
+(1, 'Dresses'),
+(1, 'Jackets & Coats'),
+(1, 'Skirts'),
+(1, 'Shorts'),
+(1, 'Shirts & Blouses'),
+(1, 'Jeans'),
+(1, 'Swimwear'),
+(1, 'Hoodies & Sweatshirts'),
+(1, 'Sportswear'),
+(2, 'Tops'),
+(2, 'Pants'),
+(2, 'Jackets & Coats'),
+(2, 'Shorts'),
+(2, 'Shirts & Blouses'),
+(2, 'Jeans'),
+(2, 'Swimwear'),
+(2, 'Hoodies & Sweatshirts'),
+(2, 'Sportswear'),
+(3, 'Face'),
+(3, 'Eyes'),
+(3, 'Lips'),
+(3, 'Nails'),
+(3, 'Bath & Body Care'),
+(3, 'Hair'),
+(3, 'Brushes & Tools'),
+(4, 'Bags'),
+(4, 'Belts'),
+(4, 'Jewelry'),
+(4, 'Hair Accessories'),
+(4, 'Sunglasses'),
+(4, 'Gloves'),
+(4, 'Scarves'),
+(4, 'Hats & Caps'),
+(4, 'Wallets & Coin purses');
