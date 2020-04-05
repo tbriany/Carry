@@ -60,7 +60,8 @@ CREATE TABLE materials(
 CREATE TABLE brands(
     brand_id SERIAL PRIMARY KEY,
     brand_name VARCHAR,
-    brand_description VARCHAR
+    brand_description VARCHAR,
+    store_id INT REFERENCES stores(store_id)
 );
 
 CREATE TABLE colors(
@@ -130,23 +131,6 @@ CREATE TABLE bankInfo(
     account_number INT,
     routing_number INT
 );
-
-SELECT * FROM customers;
-SELECT * FROM stores;
-SELECT * FROM couriers;
-SELECT * FROM categories;
-SELECT * FROM product_type;
-SELECT * FROM materials;
-SELECT * FROM brands;
-SELECT * FROM colors;
-SELECT * FROM products;
-SELECT * FROM productImage_id;
-SELECT * FROM orders;
-SELECT * FROM ordersItems;
-SELECT * FROM payment_type;
-SELECT * FROM payment;
-SELECT * FROM bankInfo;
-
 
 INSERT INTO customers
 (firstname, lastname, phone_number, email, address, city, state, zip_code, avatar_url, password)
@@ -249,3 +233,19 @@ VALUES
 INSERT INTO productImage_id
 (product_id, product_image_url)
 VALUES(1,'https://cdn.shopify.com/s/files/1/0082/3558/1504/products/lima-sagrada-small-backpack-black_606x606_b48c910d-33ac-46ce-aeb0-8bb3f7b73f7f_1296x.jpg?v=1585956015');
+
+SELECT * FROM customers;
+SELECT * FROM stores;
+SELECT * FROM couriers;
+SELECT * FROM categories;
+SELECT * FROM product_type;
+SELECT * FROM materials;
+SELECT * FROM brands;
+SELECT * FROM colors;
+SELECT * FROM products;
+SELECT * FROM productImage_id;
+SELECT * FROM orders;
+SELECT * FROM ordersItems;
+SELECT * FROM payment_type;
+SELECT * FROM payment;
+SELECT * FROM bankInfo;
