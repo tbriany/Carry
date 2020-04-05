@@ -222,17 +222,20 @@ VALUES
 ('Brown'),
 ('Orange'),
 ('Blue'),
-('Pink');
+('Pink'), 
+('Nude');
 
 INSERT INTO products
 (product_name, brand_id, category_id, product_price, material_id, color_id, product_size, product_description, product_type, quantity)
 VALUES 
-('Milan Leather Backpack', 1, 4, 200.00, 5 , 1, '22cm x 25cm x 10cm', 'Small leather backpack. Made in Peru.', 28, 5  );
+('Milan Leather Backpack', 1, 4, 200.00, 5 , 1, '22cm x 25cm x 10cm', 'Small leather backpack. Made in Peru.', 28, 5  ), 
+('Milan Mini Backpack', 1, 4, 150.00, 5, 13, '17cm x 20cm x 9cm', 'Mini leather backpack. Made in Peru.', 28, 5);
 
 
 INSERT INTO productImage_id
 (product_id, product_image_url)
-VALUES(1,'https://cdn.shopify.com/s/files/1/0082/3558/1504/products/lima-sagrada-small-backpack-black_606x606_b48c910d-33ac-46ce-aeb0-8bb3f7b73f7f_1296x.jpg?v=1585956015');
+VALUES(1,'https://cdn.shopify.com/s/files/1/0082/3558/1504/products/lima-sagrada-small-backpack-black_606x606_b48c910d-33ac-46ce-aeb0-8bb3f7b73f7f_1296x.jpg'), 
+(2,'https://cdn.shopify.com/s/files/1/0082/3558/1504/products/Lima-sagrada-milan-mini-soft-pink-19502_1024x1024_2x_89657b17-5194-4bad-adb6-7f66f686e539_1728x.jpg');
 
 SELECT * FROM customers;
 SELECT * FROM stores;
