@@ -6,7 +6,7 @@ const customerQueries = require('../queries/customersQueries')
 
 router.post("/register", async (req, res, next) => {
     try {
-        const { firstname, lastname, phone_number, email, address, city, state, zip_code, avatar_url, password } = req.body
+        const { firstname, lastname, phone_number, email, address, city, state, zip_code, avatar_url, password } = req.body;
         const response = await customerQueries.addCustomer({ firstname, lastname, phone_number, email, address, city, state, zip_code, avatar_url, password });
         res.json({
             status: "success",
@@ -36,7 +36,7 @@ router.get("/:id", async (req, res, next) => {
 
 router.patch("/edit/:id", async (req, res, next) => {
     try {
-        const customer_id = req.params.id
+        const customer_id = req.params.id;
         const { firstname, lastname, phone_number, email, address, city, state, zip_code, avatar_url, password } = req.body
 
         const updatedInfo = await customerQueries.updateCustomerInfo({ customer_id, firstname, lastname, phone_number, email, address, city, state, zip_code, avatar_url, password });
