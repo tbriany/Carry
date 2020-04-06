@@ -15,6 +15,18 @@ router.get('/', async(req, res, next) =>{
     }
 })
 
-
+router.get("/:id", async (req, res, next) => {
+    try {
+        const id = parseInt(req.params.id)
+        const storeById = await storesQueries.getStoreById(id);
+        res.json({
+            status: "success",
+            message: `Store ${id} retrieved`,
+            payload: storeById
+        });
+    } catch (err) {
+        console.log("ERROR", err)
+    }
+});
 
 module.exports = router;
