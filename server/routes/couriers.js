@@ -5,12 +5,12 @@ const couriersQueries = require('../queries/couriersQueries')
 
 router.get("/:id", async (req, res, next) => {
     try {
-        const id = parseInt(req.params.id)
-        const courierById = await couriersQueries.getCourierById(id);
+        const courier_id = parseInt(req.params.id);
+        const courierById = await couriersQueries.getCourierById(courier_id);
 
         res.status(200).json({
             status: "success",
-            message: `Courier ${id} retrieved`,
+            message: `Courier ${courier_id} retrieved`,
             payload: courierById
         });
     } catch (err) {
@@ -23,9 +23,10 @@ router.post("/register", async (req, res, next) => {
     try {
         const { firstname, lastname, phone_number, email, avatar_url, password, mode_of_transportation } = req.body;
         const newCourier = await couriersQueries.addCourier({ firstname, lastname, phone_number, email, avatar_url, password, mode_of_transportation });
+
         res.status(200).json({
             status: "success",
-            message: `Courier ${courier_id} successfully registered`,
+            message: `Courier ${newCourier.courier_id} successfully registered`,
             payload: newCourier
         });
     } catch (err) {
