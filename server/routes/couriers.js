@@ -7,7 +7,8 @@ router.get("/:id", async (req, res, next) => {
     try {
         const id = parseInt(req.params.id)
         const courierById = await couriersQueries.getCourierById(id);
-        res.json({
+
+        res.status(200).json({
             status: "success",
             message: `Courier ${id} retrieved`,
             payload: courierById
@@ -22,7 +23,7 @@ router.post("/register", async (req, res, next) => {
     try {
         const { firstname, lastname, phone_number, email, avatar_url, password, mode_of_transportation } = req.body;
         const newCourier = await couriersQueries.addCourier({ firstname, lastname, phone_number, email, avatar_url, password, mode_of_transportation });
-        res.json({
+        res.status(200).json({
             status: "success",
             message: `${firstname} ${lastname} successfully registered`,
             payload: newCourier
@@ -39,9 +40,9 @@ router.patch("/edit/:id", async (req, res, next) => {
         const { firstname, lastname, phone_number, email, avatar_url, password, mode_of_transportation } = req.body;
 
         const updatedInfo = await couriersQueries.updateCourierInfo({ courier_id, firstname, lastname, phone_number, email, avatar_url, password, mode_of_transportation });
-        res.json({
+        res.status(200).json({
             status: "success",
-            message: 'Courier profile was edited',
+            message: `Courier ${courier_id} was edited`,
             payload: updatedInfo
         });
     } catch (err) {
@@ -54,7 +55,7 @@ router.delete("/delete/:id", async (req, res, next) => {
     try {
         const courier_id = parseInt(req.params.id);
         const deletedCourier = await couriersQueries.deleteCourier(courier_id);
-        res.json({
+        res.status(200).json({
             status: "success",
             message: `Courier ${courier_id} deleted`,
             payload: deletedCourier
