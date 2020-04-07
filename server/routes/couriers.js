@@ -25,7 +25,7 @@ router.post("/register", async (req, res, next) => {
         const newCourier = await couriersQueries.addCourier({ firstname, lastname, phone_number, email, avatar_url, password, mode_of_transportation });
         res.status(200).json({
             status: "success",
-            message: `${firstname} ${lastname} successfully registered`,
+            message: `Courier ${courier_id} successfully registered`,
             payload: newCourier
         });
     } catch (err) {
