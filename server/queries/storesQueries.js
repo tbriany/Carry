@@ -24,6 +24,25 @@ const getStoreById = async (id) => {
   return await db.one(getQuery, { id });
 }
 
+const updateStoreInfo = async (updateObj) => {
+  let updateQuery = `
+      UPDATE stores
+      SET store_name = $/store_name/,
+          avatar_url = $/avatar_url/,
+          phone_number = $/phone_number/,
+          email = $/email/,
+          address = $/address/,
+          city = $/city/,
+          state = $/state/,
+          zip_code = $/zip_code/,
+          password = $/password/
+          WHERE store_id = $/store_id/
+          RETURNING *
+      ;
+  `;
+  return await db.one(updateQuery, updateObj);
+}
+
 module.exports = {
-  getAllStores, getStoreById
+  getAllStores, getStoreById, updateStoreInfo
 };

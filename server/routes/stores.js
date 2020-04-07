@@ -29,4 +29,20 @@ router.get("/:id", async (req, res, next) => {
     }
 });
 
+router.patch("/edit/:id", async (req, res, next) => {
+    try {
+        const store_id = req.params.id;
+        const { store_name, avatar_url, phone_number, email, address, city, state, zip_code, password } = req.body
+  
+        const updatedInfo = await storesQueries.updateStoreInfo({ store_id, store_name, avatar_url, phone_number, email, address, city, state, zip_code, password });
+        res.json({
+            status: "success",
+            message: `Stores profile was edited`,
+            payload: updatedInfo
+        });
+    } catch (err) {
+        console.log("ERROR", err)
+    }
+  });
+
 module.exports = router;
