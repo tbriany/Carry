@@ -36,7 +36,7 @@ router.post("/register", async (req, res, next) => {
         const response = await storesQueries.addStore({ store_name, avatar_url, phone_number, email, address, city, state, zip_code, password });
         res.json({
             status: "success",
-            message: `${store_name}  successfully registered`,
+            message: `${store_name} successfully registered`,
             payload: response
         });
     } catch (err) {
@@ -51,8 +51,8 @@ router.patch("/edit/:id", async (req, res, next) => {
   
         const updatedInfo = await storesQueries.updateStoreInfo({ store_id, store_name, avatar_url, phone_number, email, address, city, state, zip_code, password });
         res.json({
-            status: "success. Store information updated",
-            message: `Stores profile was edited`,
+            status: "success",
+            message: `${store_name}'s profile was updated.`,
             payload: updatedInfo
         });
     } catch (err) {
@@ -66,7 +66,7 @@ router.delete("/delete/:id", async (req, res, next) =>{
         const deletedStore = await storesQueries.deleteStore(store_id)
 
         res.json({
-            status: 'success. Store Deleted', 
+            status: "success", 
             message: `store ${store_id} deleted`,
             payload: deletedStore
         })
