@@ -6,7 +6,8 @@ const cors = require('cors')
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
-const customersRouter = require('./routes/customers')
+const customersRouter = require('./routes/customers');
+const productsRouter = require('./routes/products');
 
 const app = express();
 
@@ -20,7 +21,8 @@ app.use(cors());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/customers',customersRouter)
+app.use('/customers',customersRouter);
+app.use('/products', productsRouter);
 
 app.use("*", (req, res) => {
     res.status(404).send('Error: no such route found. Try again.');
