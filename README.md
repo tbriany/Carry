@@ -56,6 +56,6 @@ Carry is a delivery service that allows users to place orders with some of their
     | GET ALL | /orders/courier_orders/:courier_id   | Get orders by courier id    | N/A           |
     | GET ALL | /orders/customer_orders/:customer_id | Get orders by customer id   | N/A           |
     | GET ALL | /orders/items/:order_id              | Get order items by order id | N/A           |
-    | POST    | /orders/add                          | Add a new order             | Body Data     |
-    | PATCH   | /orders/update/:order_id             | Update an order             | N/A           |
+    | POST    | /orders/add                          | Add a new order             | order_status, required_date, time_ordered, customer_id, store_id, courier_id, delivery_id, total |
+    | PATCH   | /orders/update/:order_id             | Update an order             | order_status, required_date, time_ordered, customer_id, store_id, courier_id, delivery_id, total |
     | DELETE  | /orders/delete/:order_id             | Delete an order             | N/A           |
