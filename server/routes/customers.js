@@ -3,14 +3,13 @@ const router = express.Router();
 const customerQueries = require('../queries/customersQueries')
 
 
-
 router.post("/register", async (req, res, next) => {
     try {
         const { firstname, lastname, phone_number, email, address, city, state, zip_code, avatar_url, password } = req.body;
         const response = await customerQueries.addCustomer({ firstname, lastname, phone_number, email, address, city, state, zip_code, avatar_url, password });
-        res.json({
+        res.status(200).json({
             status: "success",
-            message: `${firstname} ${lastname} successfully registered`,
+            message: `Customer ${response.customer_id} successfully registered`,
             payload: response
         });
     } catch (err) {
@@ -21,11 +20,11 @@ router.post("/register", async (req, res, next) => {
 
 router.get("/:id", async (req, res, next) => {
     try {
-        const id = parseInt(req.params.id)
-        const customerById = await customerQueries.getCustomerById(id);
-        res.json({
+        const customer_id = parseInt(req.params.id);
+        const customerById = await customerQueries.getCustomerById(customer_id);
+        res.status(200).json({
             status: "success",
-            message: `Customer ${id} retrieved`,
+            message: `Customer ${customer_id} retrieved`,
             payload: customerById
         });
     } catch (err) {
@@ -36,13 +35,13 @@ router.get("/:id", async (req, res, next) => {
 
 router.patch("/edit/:id", async (req, res, next) => {
     try {
-        const customer_id = req.params.id;
+        const customer_id = parseInt(req.params.id);
         const { firstname, lastname, phone_number, email, address, city, state, zip_code, avatar_url, password } = req.body
 
         const updatedInfo = await customerQueries.updateCustomerInfo({ customer_id, firstname, lastname, phone_number, email, address, city, state, zip_code, avatar_url, password });
-        res.json({
+        res.status(200).json({
             status: "success",
-            message: `customers profile was edited`,
+            message: `Customer ${customer_id} was edited`,
             payload: updatedInfo
         });
     } catch (err) {
@@ -55,9 +54,9 @@ router.delete("/delete/:id", async (req, res, next) => {
     try {
         const customer_id = parseInt(req.params.id);
         const deletedCustomer = await customerQueries.deleteCustomer(customer_id);
-        res.json({
+        res.status(200).json({
             status: "success",
-            message: `Customer ${customer_id} deleted`,
+            message: `Customer ${customer_id} was deleted`,
             payload: deletedCustomer
         });
     } catch (err) {
