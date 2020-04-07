@@ -79,7 +79,7 @@ CREATE TABLE products(
     color_id INT REFERENCES colors(color_id),
     product_size VARCHAR,
     product_description VARCHAR,
-    product_type INT REFERENCES product_type( product_type_id),
+    product_type INT REFERENCES product_type(product_type_id),
     quantity INT
 );
 
@@ -226,7 +226,7 @@ VALUES
 ('Nude');
 
 INSERT INTO products
-(product_name, brand_id, category_id, product_price, material_id, color_id, product_size, product_description, product_type_name, quantity)
+(product_name, brand_id, category_id, product_price, material_id, color_id, product_size, product_description, product_type, quantity)
 VALUES 
 ('Milan Leather Backpack', 1, 4, 200.00, 5 , 1, '22cm x 25cm x 10cm', 'Small leather backpack. Made in Peru.', 28, 5  ), 
 ('Milan Mini Backpack', 1, 4, 150.00, 5, 13, '17cm x 20cm x 9cm', 'Mini leather backpack. Made in Peru.', 28, 5);
