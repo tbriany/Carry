@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const customerQueries = require('../queries/customersQueries')
+const { handleErrors } = require('../helpers/helpers');
 
 
 router.get("/:id", async (req, res, next) => {
@@ -13,7 +14,7 @@ router.get("/:id", async (req, res, next) => {
             payload: customerById
         });
     } catch (err) {
-        console.log("ERROR", err)
+        handleErrors(res, err)
     }
 });
 
@@ -27,10 +28,9 @@ router.post("/register", async (req, res, next) => {
             payload: response
         });
     } catch (err) {
-        console.log("ERROR", err)
+        handleErrors(res, err)
     }
 });
-
 
 
 router.patch("/edit/:id", async (req, res, next) => {
@@ -45,7 +45,7 @@ router.patch("/edit/:id", async (req, res, next) => {
             payload: updatedInfo
         });
     } catch (err) {
-        console.log("ERROR", err)
+        handleErrors(res, err)
     }
 });
 
@@ -60,7 +60,7 @@ router.delete("/delete/:id", async (req, res, next) => {
             payload: deletedCustomer
         });
     } catch (err) {
-        console.log("ERROR", err)
+        handleErrors(res, err)
     }
 });
 
