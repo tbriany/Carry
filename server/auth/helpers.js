@@ -35,7 +35,7 @@ const loginRequired = (req, res, next) => {
     }
 };
 
-module.export = {
+module.exports = {
     hashPassword,
     comparePassword,
     loginRequired
