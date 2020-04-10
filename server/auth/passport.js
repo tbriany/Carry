@@ -11,7 +11,7 @@ async (request, email, inputPassword, done) => {
             return done(null, false);
         }
         const customerPassword = customer.password;
-        const passMatch = await comparePasswords(inputPassword, customerPassword);
+        const passMatch = await comparePassword(inputPassword, customerPassword);
         if (!passMatch) {
             return done(null, false)
         };
