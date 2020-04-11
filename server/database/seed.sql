@@ -49,7 +49,7 @@ CREATE TABLE categories(
 CREATE TABLE product_type(
     product_type_id SERIAL PRIMARY KEY,
     category_id INT REFERENCES categories(category_id),
-    product_type VARCHAR
+    product_type_name VARCHAR
 );
 
 CREATE TABLE materials(
@@ -79,7 +79,7 @@ CREATE TABLE products(
     color_id INT REFERENCES colors(color_id),
     product_size VARCHAR,
     product_description VARCHAR,
-    product_type INT REFERENCES product_type( product_type_id),
+    product_type INT REFERENCES product_type(product_type_id),
     quantity INT
 );
 
@@ -154,7 +154,7 @@ VALUES
 ('Accessories');
 
 INSERT INTO product_type
-(category_id, product_type)
+(category_id, product_type_name)
 VALUES 
 (1, 'Tops'),
 (1, 'Pants'),

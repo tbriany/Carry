@@ -2,6 +2,23 @@ const db = require('../database/db')
 
 
 
+const getCustomerById = async (id) => {
+    const getQuery = `
+    SELECT  firstname,
+            lastname,
+            phone_number,
+            email,address,
+            city,
+            state,
+            zip_code,
+            avatar_url
+        FROM customers
+        WHERE customer_id = $/id/;
+      `;
+    return await db.one(getQuery, { id });
+}
+
+
 const addCustomer = async (bodyObj) => {
     const postQuery = `
         INSERT INTO customers (
@@ -43,22 +60,6 @@ const addCustomer = async (bodyObj) => {
     return await db.one(postQuery, bodyObj);
 }
 
-
-const getCustomerById = async (id) => {
-    const getQuery = `
-    SELECT  firstname,
-            lastname,
-            phone_number,
-            email,address,
-            city,
-            state,
-            zip_code,
-            avatar_url
-        FROM customers
-        WHERE customer_id = $/id/;
-      `;
-    return await db.one(getQuery, { id });
-}
 
 
 const updateCustomerInfo = async (updateObj) => {
