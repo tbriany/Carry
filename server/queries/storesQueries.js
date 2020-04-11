@@ -17,7 +17,6 @@ const getStoreById = async (id) => {
           city,
           state,
           zip_code,
-          password
       FROM stores
       WHERE store_id = $/id/;
     `;
