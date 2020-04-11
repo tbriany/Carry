@@ -25,7 +25,7 @@ router.post("/add", async (req, res, next) => {
     });
     res.status(200).json({
       status: "success",
-      message: `Order ${response.order_id} successfully registered`,
+      message: `Order id ${response.order_id} successfully registered`,
       payload: response,
     });
   } catch (err) {
@@ -39,7 +39,7 @@ router.get("/store_orders/:store_id", async (req, res, next) => {
     const store_id = parseInt(req.params.store_id);
     const orderByStoreId = await ordersQueries.getOrderByStoreID(store_id);
     res.status(200).json({
-      message: `Orders for store ${store_id} retrieved.`,
+      message: `Orders for store id ${store_id} retrieved.`,
       payload: orderByStoreId,
     });
   } catch (err) {
@@ -55,7 +55,7 @@ router.get("/customer_orders/:customer_id", async (req, res, next) => {
       customer_id
     );
     res.status(200).json({
-      message: `Orders for customer ${customer_id} retrieved.`,
+      message: `Orders for customer id ${customer_id} retrieved.`,
       payload: orderByCustomerId,
     });
   } catch (err) {
@@ -71,7 +71,7 @@ router.get("/courier_orders/:courier_id", async (req, res, next) => {
       courier_id
     );
     res.status(200).json({
-      message: `Orders for courier ${courier_id} retrieved.`,
+      message: `Orders for courier id ${courier_id} retrieved.`,
       payload: orderByCourierId,
     });
   } catch (err) {
