@@ -1,6 +1,11 @@
 const db = require('../database/db')
 
-
+const getCustomerByEmail = async (email) => {
+    const getQuery = `SELECT * FROM customers
+    WHERE email = $/email/;
+    `
+    return await db.one(getQuery, { email });
+};
 
 const getCustomerById = async (id) => {
     const getQuery = `
@@ -43,7 +48,7 @@ const addCustomer = async (bodyObj) => {
             $/state/,
             $/zip_code/,
             $/avatar_url/,
-            $/password/
+            $/password_digest/
         )
         RETURNING 
             customer_id,
@@ -92,7 +97,8 @@ const deleteCustomer = async (id) => {
 
 module.exports = {
     addCustomer,
+    getCustomerByEmail,
     getCustomerById,
     updateCustomerInfo,
-    deleteCustomer
+    deleteCustomer,
 };
