@@ -16,7 +16,7 @@ const getStoreById = async (id) => {
           address,
           city,
           state,
-          zip_code,
+          zip_code
       FROM stores
       WHERE store_id = $/id/;
     `;
