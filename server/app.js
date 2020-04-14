@@ -7,7 +7,6 @@ const session = require('express-session');
 const passport = require('./auth/passport');
 const { loginRequired } = require('./auth/helpers');
 
-const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
 const productsRouter = require('./routes/products');
 const customersRouter = require('./routes/customers');
@@ -32,7 +31,6 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 
-app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use('/products', loginRequired, productsRouter);
 app.use('/customers', loginRequired,customersRouter);

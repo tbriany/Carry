@@ -3,6 +3,21 @@ const router = express.Router();
 const authHelpers = require('../auth/helpers.js');
 const passport = require('../auth/passport.js');
 const customerQueries = require('../queries/customersQueries');
+const { handleErrors } = require('../helpers/helpers')
+
+router.post('/login', passport.authenticate('local'), (req, res, next) => {
+  try {
+    res.status(200)
+    .json({
+        payload: req.customer,
+        message: 'User sucessfully logged in.',
+        error: false,
+    })
+  }
+  catch(err){
+    handleErrors(res, err);
+  }
+});
 
 router.post('/signup', async (req, res, next) => {
   try {
@@ -15,24 +30,8 @@ router.post('/signup', async (req, res, next) => {
         payload: response
     });
 } catch (err) {
-    console.log("ERROR", err)
+  handleErrors(res, err);
 }
-});
-
-router.post('/login', passport.authenticate('local'), (req, res, next) => {
-  try {
-    res.status(200)
-    .json({
-        payload: req.customer,
-        message: "User sucessfully logged in.",
-        error: false,
-    })
-  }
-  catch(err){
-    res.json({
-      error: err
-    })
-  }
 });
 
 router.get('/logout', (req, res, next) => {
