@@ -94,8 +94,8 @@ CREATE TABLE productImage_id(
 CREATE TABLE orders(
    order_id SERIAL PRIMARY KEY,
    order_status VARCHAR,
-   required_date INT,
-   time_ordered TIMESTAMP, 
+   required_date DATE,
+   time_ordered TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
    customer_id INT REFERENCES customers(customer_id),
    store_id INT REFERENCES stores(store_id),
    courier_id INT REFERENCES couriers(courier_id),
