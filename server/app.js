@@ -10,8 +10,10 @@ const { loginRequired } = require('./auth/helpers');
 const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
 const productsRouter = require('./routes/products');
-const customersRouter = require('./routes/customers')
-const couriersRouter = require('./routes/couriers')
+const customersRouter = require('./routes/customers');
+const storesRouter = require('./routes/stores');
+const couriersRouter = require('./routes/couriers');
+const ordersRouter = require('./routes/orders');
 
 const app = express();
 
@@ -33,8 +35,10 @@ app.use(passport.session())
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use('/products', loginRequired, productsRouter);
-app.use('/customers', loginRequired, customersRouter);
+app.use('/customers', loginRequired,customersRouter);
+app.use('/stores', loginRequired, storesRouter);
 app.use('/couriers', loginRequired, couriersRouter);
+app.use('/orders', loginRequired, ordersRouter);
 
 app.use("*", (req, res) => {
     res.status(404).send('Error: no such route found. Try again.');
