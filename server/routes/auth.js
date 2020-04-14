@@ -10,7 +10,7 @@ router.post('/signup', async (req, res, next) => {
     const password_digest = await authHelpers.hashPassword(password);
     const response = await customerQueries.addCustomer({ firstname, lastname, phone_number, email, address, city, state, zip_code, avatar_url, password_digest });
     res.status(200).json({
-        status: "success",
+        status: 'Success',
         message: `Customer ${response.customer_id} successfully registered`,
         payload: response
     });
@@ -34,10 +34,15 @@ router.post('/login', passport.authenticate('local'), (req, res, next) => {
     })
   }
 });
-// //adds middleware form passport thats going to take in username & password and compare them and sucessfully logs them in
 
-// router.get('/logout', (req, res, next) => {
-//     res.send('/logout route')
-//   });
+router.get('/logout', (req, res, next) => {
+    req.logOut();
+    res.status(200)
+    .json({
+      payload: null,
+      message: "User successfully logged out",
+      error: false
+    })
+  });
 
 module.exports = router;
