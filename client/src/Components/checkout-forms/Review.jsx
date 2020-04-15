@@ -4,7 +4,7 @@ import { TextField } from '@material-ui/core';
 const Review = () => {
     return (
         <Fragment>
-            <TextField required variant='outlined' label='Review'></TextField>
+            <TextField required variant='standard' label='Review'></TextField>
         </Fragment>
     )
 };
