@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route, withRouter, Redirect } from 'react-router-dom'
+import { Switch, Route, withRouter, Redirect, Link } from 'react-router-dom'
 import ItemPopUp from './Components/ItemPopUp'
 import CheckoutCart from './Components/CheckoutCart'
 import ItemDetailsContextProvider from './Contexts/ItemDetailsContexts'
@@ -14,10 +14,16 @@ function App() {
          <Navbar/>
       {/* <p>App.js</p> */}
       <ItemDetailsContextProvider>
-        <ItemPopUp />
+        {/* <ItemPopUp /> */}
+        {/* <Link to='/checkout'>
         <CheckoutCart />
+        </Link> */}
+     <Route exact path="/checkout" component={Checkout}/>
+     <Route exact path="/popup" component={ItemPopUp}/>
       </ItemDetailsContextProvider>
-     <Route path="/checkout" component={Checkout}/>
+      <Switch>
+      {/* <Route exact path="/" component={Home}/> */}
+     </Switch>
     </div>
   );
 }
