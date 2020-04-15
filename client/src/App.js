@@ -4,22 +4,20 @@ import ItemPopUp from './Components/ItemPopUp'
 import CheckoutCart from './Components/CheckoutCart'
 import ItemDetailsContextProvider from './Contexts/ItemDetailsContexts'
 import './App.css';
-
-
+import Navbar from './Components/NavBar';
+import Checkout from './Components/Checkout';
 
 
 function App() {
   return (
     <div className="App">
+         <Navbar/>
       {/* <p>App.js</p> */}
-
       <ItemDetailsContextProvider>
-
         <ItemPopUp />
         <CheckoutCart />
       </ItemDetailsContextProvider>
-
-
+     <Route path="/checkout" component={Checkout}/>
     </div>
   );
 }
