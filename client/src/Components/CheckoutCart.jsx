@@ -17,7 +17,6 @@ const CheckoutCart = () => {
     const handleGetItemById = async (itemId) => {
         const itemInfo = await axios.get(`/products/images/${parseInt(itemId)}`)
         let payload = itemInfo.data.payload
-        console.log()
 
 
         let cartObj = []
@@ -36,10 +35,7 @@ const CheckoutCart = () => {
 
         }
        
-      
-        console.log(setItemInfo, "ItemObject==========================")
-        console.log("iteminfo =====", iteminfo)
-
+     
     }
 
 
