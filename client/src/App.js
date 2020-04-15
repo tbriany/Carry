@@ -1,13 +1,11 @@
-import React from 'react';
-import { Switch, Route, withRouter, Redirect } from 'react-router-dom'
-import './App.css';
-
-
+import React from "react";
+import "./App.css";
+import Landing from "./Components/Landing";
 
 function App() {
   return (
     <div className="App">
-     
+      <Landing/>
     </div>
   );
 }
