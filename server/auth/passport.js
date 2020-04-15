@@ -3,8 +3,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const { comparePassword } = require('./helpers');
 const customerQueries = require('../queries/customersQueries');
 
-passport.use(new LocalStrategy({usernameField: 'email', passwordField : 'password', passReqToCallback: true},
-async (request, email, inputPassword, done) => {
+passport.use(new LocalStrategy({usernameField: 'email', passwordField : 'password', passReqToCallback: true}, async (request, email, inputPassword, done) => {
     try {
         const customer = await customerQueries.getCustomerByEmail(email);
         if (!customer) {
