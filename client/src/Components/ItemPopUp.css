@@ -1,0 +1,56 @@
+
+
+.MuiExpansionPanel-rounded {
+    width:50%;
+}
+
+.MuiExpansionPanelSummary-root.Mui-expanded {
+    border-bottom: 1px solid lightgray;
+}
+
+
+
+.makeStyles-paper-4 {
+    color: black;
+}
+
+
+
+
+.MuiExpansionPanelSummary-root {
+    margin: 16px;
+}
+
+
+.MuiExpansionPanelSummary-root {
+    margin-top: 15px;
+}
+
+
+
+.MuiButton-contained {
+    background-color:#caa887;
+}
+
+.quantityInput{
+    padding: 13px;
+    margin-top: 24px;
+    margin-left: 9px;
+    border: 1px solid #eed7c1;
+}
+
+.description{
+    display: flex;
+    justify-content: flex-end;
+   
+
+}
+
+.ItemPopUp-stage{
+    margin: 20px;
+}
+
+.item-color, .item-price , .item-name{
+    font-size: 30px;
+}
+
