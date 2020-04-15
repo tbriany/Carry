@@ -1,17 +1,18 @@
-import React from 'react';
+import React from "react";
+import "./App.css";
 import { Switch, Route, withRouter, Redirect } from 'react-router-dom'
+import Landing from "./Components/Landing";
+import Navbar from './Components/NavBar';
+import Checkout from './Components/Checkout';
 import ItemPopUp from './Components/ItemPopUp'
 import CheckoutCart from './Components/CheckoutCart'
 import ItemDetailsContextProvider from './Contexts/ItemDetailsContexts'
-import './App.css';
-import Navbar from './Components/NavBar';
-import Checkout from './Components/Checkout';
-
 
 function App() {
   return (
     <div className="App">
-         <Navbar/>
+      <Navbar/>
+      <Landing/>
       {/* <p>App.js</p> */}
       <ItemDetailsContextProvider>
         <ItemPopUp />
