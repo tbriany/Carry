@@ -1,5 +1,6 @@
 import React, { useState, Fragment } from 'react';
 import { makeStyles, AppBar, Toolbar, Paper, Stepper, Step, StepLabel, Typography, CssBaseline, Button } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 import AddressForm from './checkout-forms/AddressForm';
 import PaymentForm from './checkout-forms/PaymentForm';
 import Review from './checkout-forms/Review';
@@ -17,6 +18,10 @@ const useStyles = makeStyles((theme) => ({
         marginLeft: theme.spacing(5),
         marginRight: theme.spacing(5),
         padding: theme.spacing(3)
+    },
+    header: {
+        textDecoration: 'none',
+        color: 'black'
     },
     stepper: {
         padding: theme.spacing(3, 0, 5),
@@ -58,17 +63,19 @@ const Checkout = () => {
     };
     return (
         <Fragment>
-            <CssBaseline />
-            <AppBar position='absolute' className={classes.appBar} color='primary'>
+            {/* <CssBaseline />
+            <AppBar position='absolute' className={classes.appBar} color='grey'>
                 <Toolbar>
                     <Typography variant='h6' color='inherit' noWrap>
+                        <Link to='/' className={classes.header}>
                         Carry - Checkout
+                        </Link>
                 </Typography>
                 </Toolbar>
-            </AppBar>
+            </AppBar> */}
             <main className={classes.layout}>
                 <Paper className={classes.paper}>
-                    <Stepper activeStep={activeStep} className={classes.stepper}>
+                    <Stepper activeStep={activeStep} className={classes.stepper} color='grey'>
                         <Step key={steps[0]}>
                             <StepLabel>{steps[0]}</StepLabel>
                         </Step>
@@ -88,7 +95,7 @@ const Checkout = () => {
                                     Back
                                  </Button>
                             )}
-                            <Button onClick={handleNextStep} className={classes.button} variant='contained' color='primary'>
+                            <Button onClick={handleNextStep} className={classes.button} variant='contained' color='grey'>
                                 {activeStep === steps.length -1 ? 'Place Order' : 'Next'}
                             </Button>
                         </div>
