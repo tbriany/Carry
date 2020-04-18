@@ -22,14 +22,16 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: 'nowrap',
     // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
     transform: 'translateZ(0)',
-    spacing: '10'
+    spacing: '10px'
   },
   title: {
+   
     color: theme.palette.primary.light,
   },
   titleBar: {
-    background:
-      'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
+    background: 'white',
+     textAlign: 'center',
+      // 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
   },
 }));
 
@@ -43,7 +45,7 @@ export default function SingleLineGridListItems() {
   
 //make network request to retrieve all stores
   useEffect(()=> {
-    axios.get('http://localhost:4008/stores/')
+    axios.get('/stores/')
     .then(res => {
       console.log(res)
       setStores(res.data.payload)
@@ -81,16 +83,15 @@ export default function SingleLineGridListItems() {
   //     } 
   //    ];
 
-     console.log(stores)
   return (
     
     <div className={classes.root}>
       <GridList className={classes.gridList} cols={3.5}>
         {stores.map((store) => (
-          
-          <GridListTile  key={store.img}>
+        
+          <GridListTile  key={store.store_id}>
   
-            <img src={store.img} alt={store.store_name} />
+            <img src={store.avatar_url} alt={store.store_name} />
             <GridListTileBar
               title={store.store_name}
               classes={{
@@ -99,13 +100,13 @@ export default function SingleLineGridListItems() {
               }}
               actionIcon={
                 <IconButton aria-label={`star ${store.store_name}`}>
-                  <StarBorderIcon className={classes.title} /> 
+                  <StarBorderIcon className={classes.store_name} /> 
                 </IconButton>
               }
 
             />
           </GridListTile> 
-        
+    
         ))}
        
       </GridList>
