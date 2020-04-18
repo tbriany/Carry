@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useContext } from 'react'
-import { Button, InputLabel, MenuItem, Select } from '@material-ui/core'
-import { ItemDetailsContext } from '../Contexts/ItemDetailsContexts'
-import axios from 'axios'
+import React, { useState, useEffect, useContext } from 'react';
+import { Button, InputLabel, MenuItem, Select } from '@material-ui/core';
+import { ItemDetailsContext } from '../Contexts/ItemDetailsContexts';
+import axios from 'axios';
 
 //Material UI
 import { makeStyles, withStyles } from '@material-ui/core/styles';
@@ -9,14 +9,14 @@ import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import FormControl from '@material-ui/core/FormControl';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import InputBase from '@material-ui/core/InputBase';
 
-import "./ItemPopUp.css"
+import "./ItemPopUp.css";
 
 
 const BootstrapInput = withStyles((theme) => ({
@@ -229,5 +229,5 @@ function ItemPopUp() {
     )
 }
 
-export default ItemPopUp
+export default ItemPopUp;
 
