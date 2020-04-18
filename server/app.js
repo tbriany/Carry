@@ -34,7 +34,8 @@ app.use(passport.session())
 app.use('/auth', authRouter);
 app.use('/products', loginRequired, productsRouter);
 app.use('/customers', loginRequired,customersRouter);
-app.use('/stores', loginRequired, storesRouter);
+app.use('/stores', storesRouter);
+//  loginRequired, storesRouter);
 app.use('/couriers', loginRequired, couriersRouter);
 app.use('/orders', loginRequired, ordersRouter);
 
