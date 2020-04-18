@@ -53,27 +53,27 @@ export default function SingleLineGridListItems() {
   const classes = useStyles();
    const tileData = [
       {
-         img: 'https://logoeps.com/wp-content/uploads/2013/05/target-stores-vector-logo.png',
+         img: '1',
          title: 'SHOES ',
          author: 'author',
        }, 
        {
-        img: 'https://cdn.shopify.com/s/files/1/0082/3558/1504/files/pazlogo3_x45@2x.png?v=1555461745',
+        img: '2',
         title: 'PURSE',
         author: 'author',
       }, 
       {
-        img: 'https://icons.iconarchive.com/icons/dapino/people/256/orange-boy-icon.png',
+        img: '3',
         title: 'BACKBAG',
         author: 'author',
       }, 
       {
-        img: 'https://icons.iconarchive.com/icons/dapino/people/256/orange-boy-icon.png',
+        img: '4',
         title: 'HEELS',
         author: 'author',
       }, 
       {
-        img: 'https://icons.iconarchive.com/icons/dapino/people/256/orange-boy-icon.png',
+        img: '5',
         title: 'SANDALS',
         author: 'author',
       } 

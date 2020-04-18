@@ -62,17 +62,17 @@ export default function SingleLineGridList() {
         author: 'author',
       }, 
       {
-        img: 'https://icons.iconarchive.com/icons/dapino/people/256/orange-boy-icon.png',
+        img: '4',
         title: 'Store 3',
         author: 'author',
       }, 
       {
-        img: 'https://icons.iconarchive.com/icons/dapino/people/256/orange-boy-icon.png',
+        img: '5',
         title: 'Store 4',
         author: 'author',
       }, 
       {
-        img: 'https://icons.iconarchive.com/icons/dapino/people/256/orange-boy-icon.png',
+        img: '6',
         title: 'Store 5',
         author: 'author',
       } 

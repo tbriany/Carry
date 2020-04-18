@@ -1,16 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, Route, Switch } from "react-router-dom";
-
+import OutlinedInput from "@material-ui/core/OutlinedInput";
 import SingleLineGridList from "./PopularStores.jsx";
 import SingleLineGridListItems from "./PopularItems";
 
-const landingPage = () => {
+const LandingPage = () => {
+  const [zipCode, setZipCode] = useState("");
+
+  const handleZipCode = (event) => {
+    setZipCode(event.target.value);
+  };
+
   return (
     <div className="LandingPage" style={{ marginTop: "30px" }}>
-
       <div className="mainContent" style={{ marginTop: "50px" }}>
+        <div className="zipCode">
+          <form>
+            <h1> Start shopping TODAY </h1>
+            <OutlinedInput
+              value={zipCode}
+              onChange={handleZipCode}
+              label="zipCode"
+            />
+            <input type="submit" name="submit" />
+          </form>
+        </div>
+
         <div className="catergories" style={{ marginTop: "30px" }}>
-          <div className = 'popularStores'>
+          <div className="popularStores">
             <h3
               style={{ textAlign: "left", fontSize: "20px", color: "#d9b382" }}
             >
@@ -19,17 +36,18 @@ const landingPage = () => {
             </h3>
             <SingleLineGridList />
           </div>
-        </div>
 
-        <div classname = 'popularItems' style={{ marginTop: "50px" }}>
-          <h3 style={{ textAlign: "left", fontSize: "20px", color: "#d9b382" }}>
-            {" "}
-            Check out what these stores Carry:{" "}
-          </h3>
-          <SingleLineGridListItems />
+          <div className="popularItems" style={{ marginTop: "50px" }}>
+            <h3
+              style={{ textAlign: "left", fontSize: "20px", color: "#d9b382" }}
+            >
+              {" "}
+              Check out what these stores Carry:{" "}
+            </h3>
+            <SingleLineGridListItems />
+          </div>
         </div>
       </div>
-
       <div
         className="footer"
         style={{
@@ -52,4 +70,4 @@ const landingPage = () => {
   );
 };
 
-export default landingPage;
+export default LandingPage;
