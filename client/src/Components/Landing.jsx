@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, Route, Switch } from "react-router-dom";
-import OutlinedInput from "@material-ui/core/OutlinedInput";
+import {OutlinedInput, Button} from "@material-ui/core";
 import SingleLineGridList from "./PopularStores.jsx";
 import SingleLineGridListItems from "./PopularItems";
 
@@ -15,14 +15,14 @@ const LandingPage = () => {
     <div className="LandingPage" style={{ marginTop: "30px" }}>
       <div className="mainContent" style={{ marginTop: "50px" }}>
         <div className="zipCode">
-          <form>
-            <h1> Start shopping TODAY </h1>
+          <h1> Start shopping TODAY </h1> <form>
             <OutlinedInput
               value={zipCode}
               onChange={handleZipCode}
-              label="zipCode"
+              label= "zipCode"
+              placeholder="Enter zipcode"
             />
-            <input type="submit" name="submit" />
+           <Button variant="contained" size ='large'>Submit</Button>
           </form>
         </div>
 

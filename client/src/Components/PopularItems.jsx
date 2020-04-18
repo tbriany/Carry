@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {Link} from 'react'
+import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
@@ -32,70 +33,72 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-/**
- * The example data is structured as follows:
- *
- * import image from 'path/to/image.jpg';
- * [etc...]
- *
- * const tileData = [
- *   {
- *     img: image,
- *     title: 'Image',
- *     author: 'author',
- *   },
- *   {
- *     [etc...]
- *   },
- * ];
- */
+
+
+ 
 export default function SingleLineGridListItems() {
   const classes = useStyles();
-   const tileData = [
-      {
-         img: '1',
-         title: 'SHOES ',
-         author: 'author',
-       }, 
-       {
-        img: '2',
-        title: 'PURSE',
-        author: 'author',
-      }, 
-      {
-        img: '3',
-        title: 'BACKBAG',
-        author: 'author',
-      }, 
-      {
-        img: '4',
-        title: 'HEELS',
-        author: 'author',
-      }, 
-      {
-        img: '5',
-        title: 'SANDALS',
-        author: 'author',
-      } 
-     ];
 
-     
+  const [stores, setStores] = useState([])
+  
+//make network request to retrieve all stores
+  useEffect(()=> {
+    axios.get('http://localhost:4008/stores/')
+    .then(res => {
+      console.log(res)
+      setStores(res.data.payload)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }, [])
+
+  //  const tileData = [
+  //     {
+  //        img: '1',
+  //        title: 'SHOES ',
+  //        author: 'author',
+  //      }, 
+  //      {
+  //       img: '2',
+  //       title: 'PURSE',
+  //       author: 'author',
+  //     }, 
+  //     {
+  //       img: '3',
+  //       title: 'BACKBAG',
+  //       author: 'author',
+  //     }, 
+  //     {
+  //       img: '4',
+  //       title: 'HEELS',
+  //       author: 'author',
+  //     }, 
+  //     {
+  //       img: '5',
+  //       title: 'SANDALS',
+  //       author: 'author',
+  //     } 
+  //    ];
+
+     console.log(stores)
   return (
+    
     <div className={classes.root}>
       <GridList className={classes.gridList} cols={3.5}>
-        {tileData.map((tile) => (
+        {stores.map((store) => (
           
-          <GridListTile  key={tile.img}>
+          <GridListTile  key={store.img}>
   
-            <img src={tile.img} alt={tile.title} />
+            <img src={store.img} alt={store.store_name} />
             <GridListTileBar
-              title={tile.title}
+              title={store.store_name}
               classes={{
                 root: classes.titleBar,
                 title: classes.title,
               }}
               actionIcon={
-                <IconButton aria-label={`star ${tile.title}`}>
+                <IconButton aria-label={`star ${store.store_name}`}>
                   <StarBorderIcon className={classes.title} /> 
                 </IconButton>
               }
