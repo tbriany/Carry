@@ -5,7 +5,7 @@ import axios from 'axios'
 
 const CheckoutCart = () => {
     const { updateId, itemId, itemIds, qty, updateQty, totalQty } = useContext(ItemDetailsContext)
-    //Acts like ItemDetailsContext.consumer but allows the entire CheckourCart.jsx access to the state from Contexts/ItemDeatilsContext.js. 
+    //Acts like ItemDetailsContext.consumer but allows the entire CheckoutCart.jsx access to the state from Contexts/ItemDeatilsContext.js. 
     // ItemDetailsContext.consumer is found in the return and wraps around html tags (div, p, h1 etc.). It will only give those specific tags access to the state
 
 
