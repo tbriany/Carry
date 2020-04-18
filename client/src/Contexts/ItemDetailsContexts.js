@@ -7,47 +7,36 @@ class ItemDetailsContextProvider extends React.Component {
         itemId: 1,
         itemIds: [],
         qty: 0,
-        totalQty: 0,
-        updateQty: this.updateQty,
+        totalQty: 0
     }
-  
+    updateId = () => { //functions that updates the amount of quantity per item and which items id the user wants
+        const { itemId, itemIds, qty, totalQty } = this.state
+        if (itemIds.includes(itemId)) {  //includes is currently a problem
+            this.setState({
+                totalQty: +totalQty + +qty,
+                qty: 0
+            })
 
-    updateId = () => {
-
-        const { itemId, itemIds, qty , totalQty} = this.state
-
-        if (itemIds.includes(itemId)) {
-           
-            this.setState({ 
-                totalQty: +totalQty + +qty ,
-                qty: 0})
-           
         } else {
-          
-            this.setState({ 
-                itemIds: ([...itemIds, itemId]) ,
-                totalQty:   qty,
+            this.setState({
+                itemIds: ([...itemIds, itemId]),
+                totalQty: qty,
                 qty: 0,
             })
-            this.setState({  })
-           
+            this.setState({})
         }
-
     }
 
-    updateQty = newQty => {
+    updateQty = (newQty) => {
         this.setState({ qty: newQty })
-    }
-
-
+    } //function the updates the quantity 
 
     render() {
         return (
-
+            // Provider accepts a value containting state and functions. This allows the components access to the state but it must be descendants of the provider.
             <ItemDetailsContext.Provider value={{ ...this.state, updateId: this.updateId, updateQty: this.updateQty }}>
-                {this.props.children}
+                {this.props.children} 
             </ItemDetailsContext.Provider>
-
         );
     }
 }
