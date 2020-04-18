@@ -16,7 +16,7 @@ const CheckoutCart = () => {
     // const [checkout, setCheckout] = useState([])
 
 
-    const handleGetItemById = async (itemId) => { //Create a cart in the front end using an object. If item id exist then upload quntity else, insert id, product info and total quantity.
+    const handleGetItemById = async (itemId) => { //Create a cart in the front end using an object. If item id exists then upload quantity. Else, insert id, product info and total quantity.
         const itemInfo = await axios.get(`/products/images/${itemId}`)
         let payload = itemInfo.data.payload
         let cartObj = []
