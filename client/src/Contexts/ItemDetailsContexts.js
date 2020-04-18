@@ -9,7 +9,7 @@ class ItemDetailsContextProvider extends React.Component {
         qty: 0,
         totalQty: 0
     }
-    updateId = () => { //functions that updates the amount of qunatity per item and which items id the user wants
+    updateId = () => { //functions that updates the amount of quantity per item and which items id the user wants
         const { itemId, itemIds, qty, totalQty } = this.state
         if (itemIds.includes(itemId)) {  //includes is currently a problem
             this.setState({
