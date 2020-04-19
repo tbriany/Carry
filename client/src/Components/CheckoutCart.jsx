@@ -59,7 +59,7 @@ const CheckoutCart = () => {
 
     useEffect(() => {
         for (let i = 0; i < productIds.length; i++) {
-            handleGetItemById(productIds[i;
+            handleGetItemById(productIds[i]);
         }
     }, [totalProductQty]) //Update the checkout when add 1 more quantity mimicking ComponentDidUpdate. 
     //Continous loop but slowly. Need to Change.
