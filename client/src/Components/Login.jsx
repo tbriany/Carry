@@ -11,7 +11,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { checkValidEmail, checkValidPassword } from "./submitHelpers";
+import { checkValidEmail, checkValidPassword } from "./inputHelpers";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -38,20 +38,22 @@ const Login = () => {
     const [customerEmail, setCustomerEmail] = useState({
         email: '',
         error: false,
+        errorText: ''
     });
     const [customerPassword, setCustomerPassword] = useState({
         password: '',
         showPassword: false,
         error: false,
+        errorText: ''
     });
     const handleInputChange = (key) => (e) => {
         key === 'email' ? setCustomerEmail({ ...customerEmail, [key]: e.target.value }) : setCustomerPassword({ ...customerPassword, [key]: e.target.value })
     };
-    const handleEmailError = (str) => {
-        setCustomerEmail({...customerEmail, error: str})
+    const handleEmailError = (bool, str) => {
+        setCustomerEmail({ ...customerEmail, error: bool, errorText: str })
     };
-    const handlePasswordError = (str) => {
-        setCustomerPassword({...customerPassword, error: str})
+    const handlePasswordError = (bool, str) => {
+        setCustomerPassword({ ...customerPassword, error: bool, errorText: str })
     }
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -61,15 +63,15 @@ const Login = () => {
         checkValidPassword(password, handlePasswordError);
         let emailError = customerEmail.error;
         let passwordError = customerPassword.error;
-        if(!emailError && !passwordError){
+        if (!emailError && !passwordError) {
             console.log('valid email and password')
-        // try {
-        //     let loggedInCustomer = axios.post('auth/login', [customerEmail, customerPassword])
-        // }
-        // catch(err){
+            // try {
+            //     let loggedInCustomer = axios.post('auth/login', [customerEmail, customerPassword])
+            // }
+            // catch(err){
 
-        // }
-    }
+            // }
+        }
     };
     return (
         <Container component="main" maxWidth="xs">
@@ -91,7 +93,7 @@ const Login = () => {
                         autoFocus
                         value={customerEmail.email}
                         error={customerEmail.error}
-                        helperText={customerEmail.error}
+                        helperText={customerEmail.errorText}
                         onChange={handleInputChange('email')}
                     />
                     <TextField
@@ -106,7 +108,7 @@ const Login = () => {
                         autoComplete="current-password"
                         value={customerPassword.password}
                         error={customerPassword.error}
-                        helperText={customerPassword.error}
+                        helperText={customerPassword.errorText}
                         onChange={handleInputChange('password')}
                     />
                     {/* <FormControlLabel
@@ -117,7 +119,7 @@ const Login = () => {
                         type="submit"
                         fullWidth
                         variant="contained"
-                        color= "default"
+                        color="default"
                         className={classes.submit}
                     >
                         Sign In
