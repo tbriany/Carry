@@ -74,11 +74,11 @@ export default function Categories() {
                   root: classes.titleBar,
                   title: classes.title,
                 }}
-                actionIcon={
-                  <IconButton aria-label={`Heart ${tile.title}`}>
-                    <StarBorderIcon className={classes.title} />
-                  </IconButton>
-                }
+                // actionIcon={
+                //   <IconButton aria-label={`Heart ${tile.title}`}>
+                //     <StarBorderIcon className={classes.title} />
+                //   </IconButton>}
+                
               />
             </a>
           </GridListTile>
