@@ -64,13 +64,12 @@ const Login = () => {
         let emailError = customerEmail.error;
         let passwordError = customerPassword.error;
         if (!emailError && !passwordError) {
-            console.log('valid email and password')
-            // try {
-            //     let loggedInCustomer = axios.post('auth/login', [customerEmail, customerPassword])
-            // }
-            // catch(err){
-
-            // }
+            try {
+                let loggedInCustomer = await axios.post('auth/login', {email, password})
+            }
+            catch(err){
+                console.log(err)
+            }
         }
     };
     return (
