@@ -21,71 +21,59 @@ const useStyles = makeStyles(theme => ({
 
 
 const CheckoutCart = () => {
-
-
-
     const classes = useStyles();
 
-    const { productId, productIds, productQty, totalProductQty } = useContext(ItemDetailsContext)    //Acts like ItemDetailsContext.consumer but allows the entire CheckoutCart.jsx access to the state from Contexts/ItemDeatilsContext.js. 
-    // ItemDetailsContext.consumer is found in the return and wraps around html tags (div, p, h1 etc.). It will only give those specific tags access to the state
-
-
+    const { productId, productIds, productQty, totalProductQty } = useContext(ItemDetailsContext) //Grab state from context file
     const [checkoutCart, setCheckoutCart] = useState([]) //holds and object that contains the product info in the cart and its quantity
     const [totalPrice, setTotalPrice] = useState(0)
 
 
-    const handleGetItemById = async (productId) => { //Create a cart in the front end using an object. If item id exists then upload quantity. Else, insert id, product info and total quantity.
-        const itemInfo = await axios.get(`/products/images/${productId}`)
-        let payload = itemInfo.data.payload
-        let cartObj = []
-        if (!cartObj[productId]) {
-            cartObj = {
-                productId: productId,
-                productName: payload.product_name,
-                imgUrl: payload.product_image_url,
-                price: payload.product_price,
-                productQty: totalProductQty
-            }
-            setCheckoutCart([cartObj])
-            setTotalPrice(totalPrice + (cartObj.productQty * cartObj.price))
-        } else {
-            cartObj[productId] = totalProductQty
-            setTotalPrice(totalPrice + (totalProductQty * cartObj.price))
+    const handleGetItemById = async (prodId) => { //Create a cart in the front end using an object. If item id exists then upload quantity. Else, insert id, product info and total quantity.
+        const productInfo = await axios.get(`/products/images/${prodId}`)
+        let productPayload = productInfo.data.payload
 
+        let itemExist = checkoutCart.find(id => prodId === id.productId) //Check to see if product id exist in checkoutCart
+
+        if (!itemExist) { //If it does not exist, create a new object and push the object in the array using 
+            let cartObj = {
+                productId: productPayload.product_id,
+                productName: productPayload.product_name,
+                imgUrl: productPayload.product_image_url,
+                price: parseInt(productPayload.product_price),
+                productQty: parseInt(totalProductQty),
+                productTotal: (parseInt(productPayload.product_price) * parseInt(totalProductQty))
+            }
+            setCheckoutCart([...checkoutCart, cartObj])
+            setTotalPrice(totalPrice + (cartObj.productQty * cartObj.price))
+
+        } else {
+            itemExist.productQty = totalProductQty // update the quantity 
+            let prevTotal = itemExist.productTotal //Create a new variable that equals to the prev product total (prev qty * product price)
+            itemExist.productTotal = parseInt(totalProductQty) * parseInt(itemExist.price) //Update the product total (updated quantity * price)
+            setTotalPrice((totalPrice - prevTotal) + (totalProductQty * itemExist.price)) //Update the new Total for the entire cart
         }
     }
-
-
 
     useEffect(() => {
         for (let i = 0; i < productIds.length; i++) {
             handleGetItemById(productIds[i]);
         }
-    }, [totalProductQty]) //Update the checkout when add 1 more quantity mimicking ComponentDidUpdate. 
-    //Continous loop but slowly. Need to Change.
-
-
+    }, [totalProductQty]) //Update the checkout when the totalProductQty is updated. 
 
     return (
-
-
         <div style={{
             margin: "35px",
             padding: "23px",
             margin: '32px',
-
         }} className={classes.root} >
             <p>CHECKOUT  </p>
             <Grid container spacing={4}>
-
                 <Grid item xs={7} sm={3}>
                     <Paper className={classes.paper}
                         style={{
                             boxShadow: " 1px 1px 1px white",
                             color: "black",
-                        }}
-                    >
-
+                        }}>
                         {checkoutCart.length > 0 ? (<div>
                             {checkoutCart.map((item) => {
 
