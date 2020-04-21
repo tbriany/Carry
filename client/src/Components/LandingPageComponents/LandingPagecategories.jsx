@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
+import {Link} from 'react-router-dom';
 import { makeStyles } from "@material-ui/core/styles";
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
-import IconButton from "@material-ui/core/IconButton";
-import StarBorderIcon from "@material-ui/icons/StarBorder";
+// import IconButton from "@material-ui/core/IconButton";
+// import StarBorderIcon from "@material-ui/icons/StarBorder";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -67,7 +68,7 @@ export default function Categories() {
         {categories.map((tile) => (
           <GridListTile key={tile.img}>
             <img src={tile.img} alt={tile.title} />
-            <a href ='http://google.com'>
+            <Link to ='/checkout'>
               <GridListTileBar
                 title={tile.title}
                 classes={{
@@ -80,7 +81,7 @@ export default function Categories() {
                 //   </IconButton>}
                 
               />
-            </a>
+            </Link>
           </GridListTile>
         ))}
       </GridList>

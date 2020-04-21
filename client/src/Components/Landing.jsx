@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, Route, Switch } from "react-router-dom";
 import { OutlinedInput, Button } from "@material-ui/core";
-import SingleLineGridList from "./PopularStores.jsx";
-import SingleLineGridListItems from "./PopularItems";
-import Categories from "./LandingPagecategories";
+import SingleLineGridList from "./LandingPageComponents/PopularStores.jsx";
+import SingleLineGridListItems from "./LandingPageComponents/PopularItems";
+import Categories from "./LandingPageComponents/LandingPagecategories";
 
 const LandingPage = () => {
   // // storing zipCode being entered. 
