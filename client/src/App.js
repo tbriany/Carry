@@ -5,6 +5,7 @@ import Landing from "./Components/Landing";
 import Navbar from './Components/NavBar';
 import Checkout from './Components/Checkout';
 import ItemPopUp from './Components/ItemPopUp'
+import CategoryPage from './Components/LandingPageComponents/CategoryPage'
 import CheckoutCart from './Components/CheckoutCart'
 import ItemDetailsContextProvider from './Contexts/ItemDetailsContexts'
 import Login from './Components/Login';
@@ -21,6 +22,7 @@ function App() {
           <Route exact path="/checkout" component={Checkout} />
           <Route exact path="/popup" component={ItemPopUp} />
           <Route exact path="/login" component={Login}/>
+          <Route exact path="/categories/:subtype" component={CategoryPage}/>
         </ItemDetailsContextProvider>
       </Switch>
       </div>

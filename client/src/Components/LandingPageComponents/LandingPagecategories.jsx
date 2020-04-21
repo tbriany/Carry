@@ -37,24 +37,27 @@ export default function Categories() {
 
   const categories = [
     {
+      id: 1,
       img:
         "https://cdn2.vectorstock.com/i/1000x1000/90/16/fashion-women-in-checkered-dress-drawing-outline-vector-27759016.jpg",
       title: "Women's",
       author: "author",
     },
     {
+      id: 2,
       img:
         "https://thumbs.dreamstime.com/b/fashion-man-men-sketches-white-background-autumn-127439059.jpg",
       title: "Men's",
       author: "author",
     },
     {
+      id: 3,
       img:
         "https://cdn.shopify.com/s/files/1/0580/0721/articles/iStock-1170104811_95fed370-9e0c-4fd8-a668-8d7e806c8f05_grande.jpg?v=1581195777",
       title: "Beauty",
       author: "author",
     },
-    {
+    { id: 4,
       img:
         "https://www.thestatesman.com/wp-content/uploads/2017/12/accessories.jpg",
       title: "Accessories",
@@ -68,7 +71,7 @@ export default function Categories() {
         {categories.map((tile) => (
           <GridListTile key={tile.img}>
             <img src={tile.img} alt={tile.title} />
-            <Link to ='/checkout'>
+            <Link to ={`/categories/${tile.id}`}>
               <GridListTileBar
                 title={tile.title}
                 classes={{
