@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Button, InputLabel, MenuItem, Select } from '@material-ui/core';
 import { ItemDetailsContext } from '../Contexts/ItemDetailsContexts';
+import CheckoutCart from './CheckoutCart';
 import axios from 'axios';
 
 //Material UI
@@ -83,7 +84,10 @@ function ItemPopUp() {
         setExpanded(isExpanded ? panel : false);
     }; //Expnds ItemDescription
 
-    const { updateId, itemId, qty, updateQty } = useContext(ItemDetailsContext)
+
+
+    const { productId, productQty, updateProductQty, addItemToBag } = useContext(ItemDetailsContext);
+
     //Acts like ItemDetailsContext.consumer but allows the entire ItemPopUp.jsx access to the state in Contexts/ItemDeatilsContext.js. 
     // ItemDetailsContext.consumer is found in the return and wraps around all html tags (div, p, h1 etc.) It will only give those specific tags access to the state.
 
@@ -94,7 +98,7 @@ function ItemPopUp() {
 
     const handleItemInfo = async () => {
         try {
-            const itemInfo = await axios.get(`/products/images/${itemId}`)
+            const itemInfo = await axios.get(`/products/images/${productId}`)
             setItemInfo(itemInfo.data.payload)
         } catch (err) {
             console.log("ERROR", err)
@@ -146,7 +150,7 @@ function ItemPopUp() {
                     <Grid item xs={7}>
                         <Paper className={classes.paper}
                             style={{
-                                boxShadow: " 1px 1px 1px white",                             
+                                boxShadow: " 1px 1px 1px white",
                             }}>
 
                             <FormControl className={classes.margin}>
@@ -160,7 +164,7 @@ function ItemPopUp() {
                                     onChange={(e) => setSize(e.target.value)}
                                     input={<BootstrapInput />}
                                 >
-                                    <option value="default" selected="true" disabled="disabled" >Choose a size</option>
+                                    <option value="default" selected={true} disabled="disabled" >Choose a size</option>
                                     <option value={itemInfo.product_size} >{itemInfo.product_size} </option>
                                 </NativeSelect>
                             </FormControl>
@@ -169,11 +173,11 @@ function ItemPopUp() {
                                 className="quantityInput"
                                 type="number" placeholder="0"
                                 min="0" max="100"
-                                value={qty}
+                                value={productQty}
                                 // onChange={(e) => setQuantity(e.target.value)}
                                 onChange={e => {
-                                    updateQty(e.target.value)
-                                }}> 
+                                    updateProductQty(e.target.value)
+                                }}>
                                 {/* Updates the parent state from the child component */}
                             </input>
                             <br></br>
@@ -188,7 +192,7 @@ function ItemPopUp() {
                                 }}
                                 variant="contained"
                                 className="ItemInputSubmit" type="submit" value="ADD TO BAG"
-                                onClick={updateId}>ADD TO BAG</Button>
+                                onClick={addItemToBag}>ADD TO BAG</Button>
 
 
 
@@ -212,8 +216,9 @@ function ItemPopUp() {
                                         border: '1px solid #eed7c1',
                                     }}>
                                         <Typography>
-                                            <p>Materials: {itemInfo.material_name}</p>
-                                            <p>Description: {itemInfo.product_description}</p>
+                                          Materials: {itemInfo.material_name}
+                                          <br></br>
+                                            Description: {itemInfo.product_description}
                                         </Typography>
                                     </ExpansionPanelDetails>
 
@@ -224,6 +229,9 @@ function ItemPopUp() {
                 </Grid>
             </div>
             <br></br>
+
+
+            <CheckoutCart />
 
         </div>
     )
