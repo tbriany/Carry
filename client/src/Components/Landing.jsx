@@ -1,19 +1,18 @@
-import React, { useState, use } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, Route, Switch } from "react-router-dom";
 import { OutlinedInput, Button } from "@material-ui/core";
 import SingleLineGridList from "./PopularStores.jsx";
 import SingleLineGridListItems from "./PopularItems";
 import Categories from "./LandingPagecategories";
-import { useEffect } from "react";
 
 const LandingPage = () => {
-  // storing zipCode being entered. 
-  const [zipCode, setZipCode] = useState("");
-  // when first log in zipcode is not entered. 
-  const [zipCodeEntered, setZipCodeEntered] = useState(false)
-  // store stores with zipcode entered. 
-  const [stores, setStores] = useState([]);
+  // // storing zipCode being entered. 
+  // const [zipCode, setZipCode] = useState("");
+  // // when first log in zipcode is not entered. 
+  // const [zipCodeEntered, setZipCodeEntered] = useState(false)
+  // // store stores with zipcode entered. 
+  // const [stores, setStores] = useState([]);
 
 
   // //grab zipcode. 
@@ -58,7 +57,7 @@ const LandingPage = () => {
           
           <form >
             <OutlinedInput
-              value={zipCode}
+              
               label="zipCode"
               placeholder="Enter zipcode"
             />
