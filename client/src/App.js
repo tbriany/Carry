@@ -7,6 +7,7 @@ import Checkout from './Components/Checkout';
 import ItemPopUp from './Components/ItemPopUp'
 import CheckoutCart from './Components/CheckoutCart'
 import ItemDetailsContextProvider from './Contexts/ItemDetailsContexts'
+import Login from './Components/Login';
 
 function App() {
   return (
@@ -14,14 +15,12 @@ function App() {
       <ItemDetailsContextProvider>
         <Navbar />
       </ItemDetailsContextProvider>
-
-      {/* <Landing/> */}
-      {/* <p>App.js</p> */}
       <Switch>
         <ItemDetailsContextProvider>
           <Route exact path="/" component={Landing} />
           <Route exact path="/checkout" component={Checkout} />
           <Route exact path="/popup" component={ItemPopUp} />
+          <Route exact path="/login" component={Login}/>
         </ItemDetailsContextProvider>
       </Switch>
       </div>
