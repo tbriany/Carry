@@ -13,6 +13,7 @@ const customersRouter = require('./routes/customers');
 const storesRouter = require('./routes/stores');
 const couriersRouter = require('./routes/couriers');
 const ordersRouter = require('./routes/orders');
+const checkoutCartRouter = require ('./routes/CheckoutCart')
 
 const app = express();
 
@@ -32,11 +33,12 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 app.use('/auth', authRouter);
-app.use('/products', loginRequired, productsRouter);
-app.use('/customers', loginRequired,customersRouter);
-app.use('/stores', loginRequired, storesRouter);
-app.use('/couriers', loginRequired, couriersRouter);
-app.use('/orders', loginRequired, ordersRouter);
+app.use('/products',  productsRouter);
+app.use('/customers', customersRouter);
+app.use('/stores',  storesRouter);
+app.use('/couriers',  couriersRouter);
+app.use('/orders',  ordersRouter);
+app.use('/checkoutCart',checkoutCartRouter)
 
 app.use("*", (req, res) => {
     res.status(404).send('Error: no such route found. Try again.');
