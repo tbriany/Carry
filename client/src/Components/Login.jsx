@@ -11,7 +11,7 @@ import { Visibility, VisibilityOff } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { checkValidEmail, checkValidPassword } from "./inputHelpers";
-import { FormControl, InputAdornment, OutlinedInput, InputLabel } from '@material-ui/core';
+import InputAdornment from '@material-ui/core/InputAdornment';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
