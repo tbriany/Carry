@@ -15,20 +15,20 @@ function App() {
   return (
     <div className="App">
       <ItemDetailsContextProvider>
+      <CustomerContextProvider>
+    
         <Navbar />
-      </ItemDetailsContextProvider>
       <Switch>
-        <ItemDetailsContextProvider>
           <Route exact path="/" component={Landing} />
           <Route exact path="/checkout" component={Checkout} />
           <Route exact path="/popup" component={ItemPopUp} />
-      <CustomerContextProvider>
           <Route exact path="/login" component={Login}/>
-      </CustomerContextProvider>
           <Route exact path="/signup" component={Signup}/>
-        </ItemDetailsContextProvider>
       </Switch>
-      </div>
+    
+     </CustomerContextProvider>
+     </ItemDetailsContextProvider>
+    </div>
       );
     }
     
