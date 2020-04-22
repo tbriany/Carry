@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,6 +12,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { checkValidEmail, checkValidPassword } from "./inputHelpers";
 import InputAdornment from '@material-ui/core/InputAdornment';
+import CustomerContext from '../Contexts/CustomerContext';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -33,7 +34,9 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: 'cream'
     },
 }));
+
 const Login = () => {
+    const { customerDetails, logCustomerIn } = useContext(CustomerContext);
     const classes = useStyles();
     const [customerEmail, setCustomerEmail] = useState({
         email: '',
@@ -61,8 +64,9 @@ const Login = () => {
     const handleWrongInputs = () => {
         console.log('Wrong email or password')
     };
-    const handleNextPage = () => {
-        console.log('Next page')
+    const handleNextPage = (customer) => {
+        console.log(customer)
+        logCustomerIn(customer);
     }
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -74,8 +78,8 @@ const Login = () => {
         let passwordError = customerPassword.error;
         if (!emailError && !passwordError) {
             try {
-                let loggedInCustomer = await axios.post('auth/login', { email, password });
-                !loggedInCustomer ? handleWrongInputs() : handleNextPage();
+                let loggedInCustomer = await axios.post('auth/login', { email, password }).then(res => res.data.payload);
+                !loggedInCustomer ? handleWrongInputs() : handleNextPage(loggedInCustomer);
             }
             catch (err) {
                 console.log(err)
