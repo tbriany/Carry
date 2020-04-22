@@ -9,7 +9,7 @@ router.post('/login', passport.authenticate('local'), (req, res, next) => {
   try {
     res.status(200)
     .json({
-        payload: req.customer,
+        payload: req.user,
         message: 'User sucessfully logged in.',
         error: false,
     })
