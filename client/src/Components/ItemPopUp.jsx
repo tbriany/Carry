@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Button, InputLabel, MenuItem, Select } from '@material-ui/core';
 import { ItemDetailsContext } from '../Contexts/ItemDetailsContexts';
+import CartPopUp from './CartPopUp';
 import CheckoutCart from './CheckoutCart';
 import axios from 'axios';
 
@@ -86,7 +87,7 @@ function ItemPopUp() {
 
 
 
-    const { productId, productQty, updateProductQty, addItemToBag } = useContext(ItemDetailsContext);
+    const { productId, productQty, updateProductQty, addItemToBag, getProductPrice , getProductSize} = useContext(ItemDetailsContext);
 
     //Acts like ItemDetailsContext.consumer but allows the entire ItemPopUp.jsx access to the state in Contexts/ItemDeatilsContext.js. 
     // ItemDetailsContext.consumer is found in the return and wraps around all html tags (div, p, h1 etc.) It will only give those specific tags access to the state.
@@ -100,6 +101,8 @@ function ItemPopUp() {
         try {
             const itemInfo = await axios.get(`/products/images/${productId}`)
             setItemInfo(itemInfo.data.payload)
+            getProductPrice(itemInfo.data.payload.product_price)
+
         } catch (err) {
             console.log("ERROR", err)
         }
@@ -112,7 +115,14 @@ function ItemPopUp() {
 
     return (
 
-        <div className="ItemPopUp-stage">
+        <div className="ItemPopUp-stage"
+
+            style={{
+                color: "black",
+                boxShadow: " 1px 1px 1px white",
+                // borderBottom: "1px solid #eed7c1",
+                height: "200px",
+            }}>>
             <p>ITEM POP UP</p>
             <div className={classes.root}>
                 <Grid container spacing={2} height="100px">
@@ -161,7 +171,10 @@ function ItemPopUp() {
                                     }}
                                     id="demo-customized-select-native"
                                     // value={}
-                                    onChange={(e) => setSize(e.target.value)}
+                                    onChange={e => {
+                                        getProductSize(e.target.value)
+                                    }}
+
                                     input={<BootstrapInput />}
                                 >
                                     <option value="default" selected={true} disabled="disabled" >Choose a size</option>
@@ -216,8 +229,8 @@ function ItemPopUp() {
                                         border: '1px solid #eed7c1',
                                     }}>
                                         <Typography>
-                                          Materials: {itemInfo.material_name}
-                                          <br></br>
+                                            Materials: {itemInfo.material_name}
+                                            <br></br>
                                             Description: {itemInfo.product_description}
                                         </Typography>
                                     </ExpansionPanelDetails>
@@ -229,8 +242,7 @@ function ItemPopUp() {
                 </Grid>
             </div>
             <br></br>
-
-
+            <CartPopUp />
             <CheckoutCart />
 
         </div>
