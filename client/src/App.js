@@ -6,8 +6,10 @@ import Navbar from './Components/NavBar';
 import Checkout from './Components/Checkout';
 import ItemPopUp from './Components/ItemPopUp'
 import CheckoutCart from './Components/CheckoutCart'
-import ItemDetailsContextProvider from './Contexts/ItemDetailsContexts'
+import ItemDetailsContextProvider from './Contexts/ItemDetailsContexts';
+import CustomerContextProvider from './Contexts/CustomerContext';
 import Login from './Components/Login';
+import Signup from './Components/Signup';
 
 function App() {
   return (
@@ -20,7 +22,10 @@ function App() {
           <Route exact path="/" component={Landing} />
           <Route exact path="/checkout" component={Checkout} />
           <Route exact path="/popup" component={ItemPopUp} />
+      <CustomerContextProvider>
           <Route exact path="/login" component={Login}/>
+      </CustomerContextProvider>
+          <Route exact path="/signup" component={Signup}/>
         </ItemDetailsContextProvider>
       </Switch>
       </div>
