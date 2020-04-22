@@ -23,6 +23,24 @@ const getStoreById = async (id) => {
   return await db.one(getQuery, { id });
 }
 
+
+const getStoreByZipCode = async (zipcode) => {
+  const getQuery = `
+  SELECT  store_name,
+          avatar_url,
+          phone_number,
+          email,
+          address,
+          city,
+          state,
+          zip_code
+      FROM stores
+      WHERE zip_code = $/zipcode/;
+    `;
+  return await db.any(getQuery, { zipcode });
+}
+
+
 const addStore = async (bodyObj) => {
   const postQuery = `
       INSERT INTO stores (
@@ -89,5 +107,5 @@ const deleteStore = async (id) =>{
 };
 
 module.exports = {
-  getAllStores, getStoreById, addStore, updateStoreInfo, deleteStore
+  getAllStores, getStoreById, addStore, updateStoreInfo, deleteStore, getStoreByZipCode
 };

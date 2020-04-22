@@ -31,6 +31,21 @@ router.get("/:id", async (req, res, next) => {
         }
 });
 
+router.get("/location/:zipcode", async (req, res, next) => {
+    try {
+        const zipcode = parseInt(req.params.zipcode)
+        const storeByZipCode = await storesQueries.getStoreByZipCode(zipcode);
+
+        res.status(200).json({
+            status: "success",
+            message: `Store with zipcodes ${zipcode} retrieved`,
+            payload: storeByZipCode
+        });
+    } catch (err) {
+        console.log("ERROR", err)
+        }
+});
+
 router.post("/register", async (req, res, next) => {
     try {
         const { store_name, avatar_url, phone_number, email, address, city, state, zip_code, password } = req.body;
