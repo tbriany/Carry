@@ -67,6 +67,7 @@ const Login = () => {
     const handleNextPage = (customer) => {
         console.log(customer)
         logCustomerIn(customer);
+        //error with logCustomerIn => function not working
     }
     const handleLogin = async (e) => {
         e.preventDefault();
