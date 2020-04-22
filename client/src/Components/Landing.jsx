@@ -7,26 +7,24 @@ import SingleLineGridListItems from "./LandingPageComponents/PopularItems";
 import Categories from "./LandingPageComponents/LandingPagecategories";
 
 const LandingPage = () => {
-  // // storing zipCode being entered. 
+  // // storing zipCode being entered.
   // const [zipCode, setZipCode] = useState("");
-  // // when first log in zipcode is not entered. 
+  // // when first log in zipcode is not entered.
   // const [zipCodeEntered, setZipCodeEntered] = useState(false)
-  // // store stores with zipcode entered. 
+  // // store stores with zipcode entered.
   // const [stores, setStores] = useState([]);
 
-
-  // //grab zipcode. 
+  // //grab zipcode.
   // const handleZipCode = (event) => {
   //   setZipCode(event.target.value);
   // };
 
-  // 
-  // const HandleOnSubmit = (event) => {  
+  //
+  // const HandleOnSubmit = (event) => {
   //   setZipCodeEntered(true);
   //   event.preventDefault();
   //     alert("zipcode was entered")
   //   }
-    
 
   //   if (zipCodeEntered !== false){ useEffect(() => {
   //     axios.get(`stores/location/${zipCode}`)
@@ -39,9 +37,36 @@ const LandingPage = () => {
   //       });
   //   }, [])
   // }
-  
-// console.log(stores)
 
+
+  // trying to write function to get geolocation 
+  // function showLocation(position) {
+  //   const latitude = position.coords.latitude;
+  //   const longitude = position.coords.longitude;
+  //   alert("Latitude : " + latitude + " Longitude: " + longitude);
+  // }
+
+  // function errorHandler(err) {
+  //   if (err.code == 1) {
+  //     alert("Error: Access is denied!");
+  //   } else if (err.code == 2) {
+  //     alert("Error: Position is unavailable!");
+  //   }
+  // }
+
+  // function getLocation() {
+  //   if (navigator.geolocation) {
+  //     // timeout at 60000 milliseconds (60 seconds)
+  //     var options = { timeout: 60000 };
+  //     navigator.geolocation.getCurrentPosition(
+  //       showLocation,
+  //       errorHandler,
+  //       options
+  //     );
+  //   } else {
+  //     alert("Sorry, browser does not support geolocation!");
+  //   }
+  // }
 
   return (
     <div className="LandingPage" style={{ marginTop: "30px" }}>
@@ -49,25 +74,26 @@ const LandingPage = () => {
         className="mainContent"
         style={{ marginTop: "50px", marginLeft: "45px", marginRight: "45px" }}
       >
+        <div className="Testing">
+          <form>
+            <input type="button" />
+          </form>
+        </div>
+
         <div className="zipCode" style={{ textAlign: "center" }}>
           <h1 style={{ fontFamily: "Palatino Linotype" }}>
             {" "}
             Start shopping TODAY{" "}
           </h1>{" "}
-          
-          <form >
-            <OutlinedInput
-              
-              label="zipCode"
-              placeholder="Enter zipcode"
-            />
+          <form>
+            <OutlinedInput label="zipCode" placeholder="Enter zipcode" />
             <Button
               type="submit"
               value="submit"
               variant="contained"
               size="large"
             >
-              Submit
+              Enter
             </Button>
           </form>
         </div>
@@ -124,6 +150,6 @@ const LandingPage = () => {
       </div>
     </div>
   );
-}
+};
 
 export default LandingPage;

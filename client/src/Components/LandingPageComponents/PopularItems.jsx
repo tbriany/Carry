@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react";
+import { Link } from 'react-router-dom';
 import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
 import GridList from "@material-ui/core/GridList";
@@ -62,7 +62,7 @@ export default function SingleLineGridListItems() {
         {stores.map((store) => (
           <GridListTile key={store.store_id}>
             <img src={store.avatar_url} alt={store.store_name} />
-            <a href ='/checkout'>
+            <Link to='/checkout'>
             <GridListTileBar
               title={store.store_name}
               classes={{
@@ -75,7 +75,7 @@ export default function SingleLineGridListItems() {
                 </IconButton>
               }
             />
-            </a>
+            </Link>
           </GridListTile>
         ))}
       </GridList>

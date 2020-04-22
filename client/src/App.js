@@ -22,7 +22,7 @@ function App() {
           <Route exact path="/checkout" component={Checkout} />
           <Route exact path="/popup" component={ItemPopUp} />
           <Route exact path="/login" component={Login}/>
-          <Route exact path="/categories/:subtype" component={CategoryPage}/>
+          <Route exact path="/categories/:type" component={CategoryPage}/>
         </ItemDetailsContextProvider>
       </Switch>
       </div>
