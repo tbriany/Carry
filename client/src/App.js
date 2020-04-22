@@ -8,19 +8,23 @@ import Checkout from './Components/Checkout';
 import ItemPopUp from './Components/ItemPopUp'
 import CheckoutCart from './Components/CheckoutCart'
 import ItemDetailsContextProvider from './Contexts/ItemDetailsContexts'
+import Login from './Components/Login';
 
 function App() {
   return (
     <div className="App">
       <ItemDetailsContextProvider>
+    
         <Navbar />
       <Switch>
           <Route exact path="/" component={Landing} />
           <Route exact path="/checkout" component={Checkout} />
           <Route exact path="/popup" component={ItemPopUp} />
+          <Route exact path="/login" component={Login}/>
       </Switch>
-      </ItemDetailsContextProvider>
-      </div>
+    
+     </ItemDetailsContextProvider>
+    </div>
       );
     }
     
