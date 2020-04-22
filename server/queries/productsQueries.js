@@ -5,8 +5,8 @@ const getProductImageById = async (id) => {
     const getQuery = `
     SELECT products.product_id, product_image_url, product_name, product_price, product_size, product_description,
     quantity, brand_name, category_name, material_name, color_name, product_type_name
-    FROM productImage_id 
-    JOIN products ON productImage_id.product_id = products.product_id
+    FROM products
+    JOIN  productImage_id  ON productImage_id.product_id = products.product_id
     JOIN brands ON brands.brand_id = products.brand_id
     JOIN categories ON categories.category_id = products.category_id
     JOIN materials ON materials.material_id = products.material_id

@@ -89,6 +89,18 @@ CREATE TABLE productImage_id(
     product_image_url VARCHAR
 );
 
+
+--Checkout Cart
+CREATE TABLE checkoutCart(
+    checkoutCart_id SERIAL PRIMARY KEY,
+    product_id  INT REFERENCES products(product_id),
+    size VARCHAR,
+    quantity INT,
+    totalPrice INT
+
+);
+
+
 -- Orders 
 
 CREATE TABLE orders(
@@ -108,6 +120,7 @@ CREATE TABLE ordersItems(
     order_id INT REFERENCES orders(order_id),
     product_id INT REFERENCES products(product_id)
 );
+
 
 -- Payments
 
@@ -278,3 +291,4 @@ SELECT * FROM ordersItems;
 SELECT * FROM payment_type;
 SELECT * FROM payment;
 SELECT * FROM bankInfo;
+SELECT * FROM checkoutCart;
