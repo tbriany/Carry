@@ -1,17 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
-import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import { Visibility, VisibilityOff } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { checkValidEmail, checkValidPassword } from "./inputHelpers";
+import InputAdornment from '@material-ui/core/InputAdornment';
+import CustomerContext from '../Contexts/CustomerContext';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -33,7 +34,9 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: 'cream'
     },
 }));
+
 const Login = () => {
+    const { customerDetails, logCustomerIn } = useContext(CustomerContext);
     const classes = useStyles();
     const [customerEmail, setCustomerEmail] = useState({
         email: '',
@@ -54,6 +57,17 @@ const Login = () => {
     };
     const handlePasswordError = (bool, str) => {
         setCustomerPassword({ ...customerPassword, error: bool, errorText: str })
+    };
+    const handlePasswordVisibility = () => {
+        setCustomerPassword({ ...customerPassword, showPassword:  !customerPassword.showPassword })
+    };
+    const handleWrongInputs = () => {
+        console.log('Wrong email or password')
+    };
+    const handleNextPage = (customer) => {
+        console.log(customer)
+        logCustomerIn(customer);
+        //error with logCustomerIn => function not working
     }
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -65,9 +79,10 @@ const Login = () => {
         let passwordError = customerPassword.error;
         if (!emailError && !passwordError) {
             try {
-                let loggedInCustomer = await axios.post('auth/login', {email, password})
+                let loggedInCustomer = await axios.post('auth/login', { email, password }).then(res => res.data.payload);
+                !loggedInCustomer ? handleWrongInputs() : handleNextPage(loggedInCustomer);
             }
-            catch(err){
+            catch (err) {
                 console.log(err)
             }
         }
@@ -96,24 +111,29 @@ const Login = () => {
                         onChange={handleInputChange('email')}
                     />
                     <TextField
-                        variant="outlined"
+                        variant='outlined'
                         margin="normal"
                         required
                         fullWidth
                         name="password"
                         label="Password"
-                        type="password"
-                        id="password"
+                        type={customerPassword.showPassword ? 'text' : 'password'}
+                        id="outlined-password"
                         autoComplete="current-password"
                         value={customerPassword.password}
                         error={customerPassword.error}
                         helperText={customerPassword.errorText}
                         onChange={handleInputChange('password')}
+                        InputProps={{
+                            endAdornment: 
+                            <InputAdornment position='end'>
+                                <IconButton
+                                    onClick={handlePasswordVisibility} >
+                                    {customerPassword.showPassword ? <VisibilityOff/> : <Visibility/>}
+                                </IconButton>
+                            </InputAdornment>
+                        }}
                     />
-                    {/* <FormControlLabel
-                        control={<Checkbox value="remember" color="primary" />}
-                        label="Remember me"
-                    /> */}
                     <Button
                         type="submit"
                         fullWidth
