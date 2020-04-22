@@ -40,13 +40,13 @@ const CartPopUp = () => {
             }
 
         } else {
-            try{
-            let cartId = itemExist.checkoutcart_id
-            let prevQty = parseInt(itemExist.cartquantity)
-            let updatedQty = prevQty + parseInt(totalProductQty)
-            await axios.patch(`/checkoutCart/edit/${cartId}`, { checkoutCart_id: cartId, product_id: prodId, size: productSize, quantity: updatedQty, totalPrice: (parseInt(updatedQty) * parseInt(itemExist.product_price)) })
-            }catch(err){
-                console.log("ERROR",err)
+            try {
+                let cartId = itemExist.checkoutcart_id
+                let prevQty = parseInt(itemExist.cartquantity)
+                let updatedQty = prevQty + parseInt(totalProductQty)
+                await axios.patch(`/checkoutCart/edit/${cartId}`, { checkoutCart_id: cartId, product_id: prodId, size: productSize, quantity: updatedQty, totalPrice: (parseInt(updatedQty) * parseInt(itemExist.product_price)) })
+            } catch (err) {
+                console.log("ERROR", err)
             }
         }
         getAllCart()
@@ -116,9 +116,6 @@ const CartPopUp = () => {
                     ></Paper>
                 </Grid>
             </Grid>
-
-
-
 
             <Grid container
                 spacing={4}
