@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Button, InputLabel, MenuItem, Select } from '@material-ui/core';
 import { ItemDetailsContext } from '../Contexts/ItemDetailsContexts';
-import CartPopUp from './CartPopUp';
-import CheckoutCart from './CheckoutCart';
 import axios from 'axios';
 
 //Material UI
@@ -122,15 +120,14 @@ function ItemPopUp() {
                 boxShadow: " 1px 1px 1px white",
                 // borderBottom: "1px solid #eed7c1",
                 height: "200px",
-            }}>>
-            <p>ITEM POP UP</p>
+            }}>
             <div className={classes.root}>
                 <Grid container spacing={2} height="100px">
                     <Grid item xs={5}>
                         <Paper style={{
                             boxShadow: " 1px 1px 1px white",
                         }}
-                            className={classes.paper}>  <img src={itemInfo.product_image_url} height="300px" /></Paper>
+                            className={classes.paper}>  <img src={itemInfo.product_image_url} height="250px" /></Paper>
                     </Grid>
 
                     <Grid item xs={7}
@@ -207,8 +204,6 @@ function ItemPopUp() {
                                 className="ItemInputSubmit" type="submit" value="ADD TO BAG"
                                 onClick={addItemToBag}>ADD TO BAG</Button>
 
-
-
                             <div className="description">
                                 <ExpansionPanel expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
 
@@ -242,8 +237,6 @@ function ItemPopUp() {
                 </Grid>
             </div>
             <br></br>
-            <CartPopUp />
-            <CheckoutCart />
 
         </div>
     )
