@@ -62,7 +62,7 @@ export default function SingleLineGridListItems() {
         {stores.map((store) => (
           <GridListTile key={store.store_id}>
             <img src={store.avatar_url} alt={store.store_name} />
-            <Link to='/checkout'>
+            <Link to={`/store/${store.store_id}`}>
             <GridListTileBar
               title={store.store_name}
               classes={{
