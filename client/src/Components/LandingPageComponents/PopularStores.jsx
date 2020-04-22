@@ -1,5 +1,4 @@
 import React from 'react';
-import {Link} from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
@@ -27,67 +26,48 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.primary.light,
   },
   titleBar: {
-    background:
-      'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
+    background: 'white',
+    textAlign: 'center'
+      // 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
   },
 }));
 
-/**
- * The example data is structured as follows:
- *
- * import image from 'path/to/image.jpg';
- * [etc...]
- *
- * const tileData = [
- *   {
- *     img: image,
- *     title: 'Image',
- *     author: 'author',
- *   },
- *   {
- *     [etc...]
- *   },
- * ];
- */
-export default function SingleLineGridListItems() {
+
+export default function SingleLineGridList() {
   const classes = useStyles();
    const tileData = [
       {
          img: 'https://logoeps.com/wp-content/uploads/2013/05/target-stores-vector-logo.png',
-         title: 'SHOES ',
+         title: 'Store 1 ',
          author: 'author',
        }, 
        {
         img: 'https://cdn.shopify.com/s/files/1/0082/3558/1504/files/pazlogo3_x45@2x.png?v=1555461745',
-        title: 'PURSE',
+        title: 'PAZ Lifestyle',
         author: 'author',
       }, 
       {
-        img: 'https://icons.iconarchive.com/icons/dapino/people/256/orange-boy-icon.png',
-        title: 'BACKBAG',
+        img: '4',
+        title: 'Store 3',
         author: 'author',
       }, 
       {
-        img: 'https://icons.iconarchive.com/icons/dapino/people/256/orange-boy-icon.png',
-        title: 'HEELS',
+        img: '5',
+        title: 'Store 4',
         author: 'author',
       }, 
       {
-        img: 'https://icons.iconarchive.com/icons/dapino/people/256/orange-boy-icon.png',
-        title: 'SANDALS',
+        img: '6',
+        title: 'Store 5',
         author: 'author',
       } 
      ];
-
-     
   return (
     <div className={classes.root}>
       <GridList className={classes.gridList} cols={3.5}>
         {tileData.map((tile) => (
-          
           <GridListTile  key={tile.img}>
-  
-            <img src={tile.img} alt={tile.title} />
+           <img src={tile.img} alt={tile.title} />
             <GridListTileBar
               title={tile.title}
               classes={{
@@ -95,14 +75,12 @@ export default function SingleLineGridListItems() {
                 title: classes.title,
               }}
               actionIcon={
-                <IconButton aria-label={`star ${tile.title}`}>
+                <IconButton aria-label={`Heart ${tile.title}`}>
                   <StarBorderIcon className={classes.title} /> 
                 </IconButton>
               }
-
             />
           </GridListTile> 
-        
         ))}
        
       </GridList>
