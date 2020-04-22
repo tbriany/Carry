@@ -11,6 +11,8 @@ import ItemDetailsContextProvider from './Contexts/ItemDetailsContexts';
 import CustomerContextProvider from './Contexts/CustomerContext';
 import Login from './Components/Login';
 import Signup from './Components/Signup';
+import StorePage from './Components/StorePage/storePage';
+import ProductsPage from './Components/StorePage/productsPage';
 
 function App() {
   return (
@@ -26,7 +28,8 @@ function App() {
           <Route exact path="/login" component={Login}/>
           <Route exact path="/signup" component={Signup}/>
           <Route exact path="/categories/:type" component={CategoryPage}/>
-
+          <Route exact path="/store/:id" component={StorePage} />
+          <Route exact path="/store/:id/products" component={ProductsPage} />
       </Switch>
     
      </CustomerContextProvider>
