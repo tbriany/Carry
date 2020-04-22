@@ -1,6 +1,5 @@
 import React from 'react';
 
-import MultipleSelect from './filterForm';
 import SingleLineGridList from './gridList';
 
 function StorePage() {
