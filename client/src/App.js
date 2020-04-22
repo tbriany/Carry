@@ -14,16 +14,10 @@ function App() {
     <div className="App">
       <ItemDetailsContextProvider>
         <Navbar />
-      {/* </ItemDetailsContextProvider> */}
-
-      {/* <Landing/> */}
-      {/* <p>App.js</p> */}
       <Switch>
-        {/* <ItemDetailsContextProvider> */}
           <Route exact path="/" component={Landing} />
           <Route exact path="/checkout" component={Checkout} />
           <Route exact path="/popup" component={ItemPopUp} />
- 
       </Switch>
       </ItemDetailsContextProvider>
       </div>
