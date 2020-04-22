@@ -32,7 +32,8 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 app.use('/auth', authRouter);
-app.use('/products', loginRequired, productsRouter);
+app.use('/products', productsRouter);
+// loginRequired, productsRouter);
 app.use('/customers', loginRequired,customersRouter);
 app.use('/stores', storesRouter);
 //  loginRequired, storesRouter);
