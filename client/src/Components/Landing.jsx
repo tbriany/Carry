@@ -74,18 +74,18 @@ const LandingPage = () => {
         className="mainContent"
         style={{ marginTop: "50px", marginLeft: "45px", marginRight: "45px" }}
       >
-        <div className="Testing">
+        {/* <div className="Testing">
           <form>
             <input type="button" />
           </form>
-        </div>
+        </div> */}
 
         <div className="zipCode" style={{ textAlign: "center" }}>
           <h1 style={{ fontFamily: "Palatino Linotype" }}>
             {" "}
             Start shopping TODAY{" "}
           </h1>{" "}
-          <form>
+          {/* <form>
             <OutlinedInput label="zipCode" placeholder="Enter zipcode" />
             <Button
               type="submit"
@@ -95,7 +95,7 @@ const LandingPage = () => {
             >
               Enter
             </Button>
-          </form>
+          </form> */}
         </div>
 
         <div className="catergories" style={{ margin: "30px" }}>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
@@ -66,6 +67,7 @@ export default function SingleLineGridList(props) {
       <GridList className={classes.gridList} cols={3} cellHeight={200}>
         {tileData.map((tile) => (
           <GridListTile key={tile.img}>
+            <Link to={`/store/1/products`}>
             <img src={tile.img} alt={tile.title} />
             <GridListTileBar
               title={tile.title}
@@ -79,6 +81,7 @@ export default function SingleLineGridList(props) {
                 </IconButton>
               }
             />
+            </Link>
           </GridListTile>
         ))}
       </GridList>
