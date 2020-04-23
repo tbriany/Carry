@@ -80,8 +80,8 @@ function Navbar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Sign Up</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Log In</MenuItem>
+      <MenuItem onClick={handleMenuClose}><Link to='/signup'>Sign Up</Link></MenuItem>
+      <MenuItem onClick={handleMenuClose}><Link to='/login'>Log In</Link></MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
       <MenuItem onClick={handleMenuClose}>My orders</MenuItem>
     </Menu>
