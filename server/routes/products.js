@@ -58,7 +58,7 @@ router.get("/name/:product_name", async (req, res, next) => {
 
 router.get("/size/:size", async (req, res, next) => {
     try {
-        const size = parseInt(req.params.size)
+        const size = req.params.size
         const productBySize = await productQueries.getProductBySize(size);
         res.status(200).json({
             message: `Products by size: ${size} retrieved.`,
