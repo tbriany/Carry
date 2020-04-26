@@ -7,13 +7,13 @@ CREATE TABLE customers(
     customer_id SERIAL PRIMARY KEY,
     firstname VARCHAR NOT NULL,
     lastname VARCHAR NOT NULL,
-    phone_number VARCHAR UNIQUE NOT NULL,
+    phone_number VARCHAR UNIQUE,
     email VARCHAR UNIQUE NOT NULL,
-    address VARCHAR NOT NULL,
-    city VARCHAR NOT NULL,
-    state VARCHAR NOT NULL,
-    zip_code INT NOT NULL,
-    avatar_url VARCHAR NOT NULL,
+    address VARCHAR,
+    city VARCHAR,
+    state VARCHAR,
+    zip_code INT,
+    avatar_url VARCHAR,
     password VARCHAR NOT NULL
 );
 
