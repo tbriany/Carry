@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const productQueries = require('../queries/productsQueries')
-
+const { handleErrors } = require('../helpers/helpers')
 
 router.get("/:id", async (req, res, next) => {
     try {
@@ -12,7 +12,7 @@ router.get("/:id", async (req, res, next) => {
             payload: productById
         });
     } catch (err) {
-        console.log("ERROR", err)
+        handleErrors(res, err);
     }
 });
 
@@ -25,7 +25,7 @@ router.get("/images/:id", async (req, res, next) => {
             payload: productImageById
         });
     } catch (err) {
-        console.log("ERROR", err)
+        handleErrors(res, err);
     }
 });
 
@@ -39,7 +39,7 @@ router.get("/type/:product_type", async (req, res, next) => {
             payload: productByType
         });
     } catch (err) {
-        console.log("ERROR", err)
+        handleErrors(res, err);
     }
 });
 
@@ -52,7 +52,7 @@ router.get("/name/:product_name", async (req, res, next) => {
             payload: productByName
         });
     } catch (err) {
-        console.log("ERROR", err)
+        handleErrors(res, err);
     }
 });
 
@@ -65,7 +65,7 @@ router.get("/size/:size", async (req, res, next) => {
             payload: productBySize
         });
     } catch (err) {
-        console.log("ERROR", err)
+        handleErrors(res, err);
     }
 });
 
@@ -78,7 +78,7 @@ router.get("/color/:product_color", async (req, res, next) => {
             payload: productByColor
         });
     } catch (err) {
-        console.log("ERROR", err)
+        handleErrors(res, err);
     }
 });
 
@@ -91,7 +91,7 @@ router.get("/brand/:product_brand", async (req, res, next) => {
             payload: productByBrand
         });
     } catch (err) {
-        console.log("ERROR", err)
+        handleErrors(res, err);
     }
 });
 
@@ -104,7 +104,7 @@ router.get("/category/:product_category", async (req, res, next) => {
             payload: productByCategory
         });
     } catch (err) {
-        console.log("ERROR", err)
+        handleErrors(res, err);
     }
 });
 
