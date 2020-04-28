@@ -1,72 +1,35 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link, Route, Switch } from "react-router-dom";
-import { OutlinedInput, Button } from "@material-ui/core";
+
 import SingleLineGridList from "./LandingPageComponents/PopularStores.jsx";
 import SingleLineGridListItems from "./LandingPageComponents/PopularItems";
 import Categories from "./LandingPageComponents/LandingPagecategories";
 
 const LandingPage = () => {
-  // // storing zipCode being entered.
-  // const [zipCode, setZipCode] = useState("");
-  // // when first log in zipcode is not entered.
-  // const [zipCodeEntered, setZipCodeEntered] = useState(false)
-  // // store stores with zipcode entered.
-  // const [stores, setStores] = useState([]);
+  // Checks if Geolocation API is available on browser. This is only available on secure contexts (HTTPS).
+  if ("geolocation" in navigator) {
+    console.log("Landing Page Notification: geolocation is available");
+    // calls function get geolocation of client(user). Needs a call back- async.
+    navigator.geolocation.getCurrentPosition((position) => {
+      //position: a object that is returned with timestamp, lat/long coordinates of the user accessing carry, etc. 
+      //console.log(position)
 
-  // //grab zipcode.
-  // const handleZipCode = (event) => {
-  //   setZipCode(event.target.value);
-  // };
-
-  //
-  // const HandleOnSubmit = (event) => {
-  //   setZipCodeEntered(true);
-  //   event.preventDefault();
-  //     alert("zipcode was entered")
-  //   }
-
-  //   if (zipCodeEntered !== false){ useEffect(() => {
-  //     axios.get(`stores/location/${zipCode}`)
-  //       .then((res) => {
-  //         console.log(res);
-  //         setStores(res.data.playload);
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //       });
-  //   }, [])
-  // }
+      // keys into object position to return latitude value 
+      const lat = position.coords.latitude
+      console.log( "Latitude", position.coords.latitude);
 
 
-  // trying to write function to get geolocation 
-  // function showLocation(position) {
-  //   const latitude = position.coords.latitude;
-  //   const longitude = position.coords.longitude;
-  //   alert("Latitude : " + latitude + " Longitude: " + longitude);
-  // }
+      // keys into object position to return longitude value
+      const lon = position.coords.longitude
+      console.log("Longitude", position.coords.longitude);
 
-  // function errorHandler(err) {
-  //   if (err.code == 1) {
-  //     alert("Error: Access is denied!");
-  //   } else if (err.code == 2) {
-  //     alert("Error: Position is unavailable!");
-  //   }
-  // }
+      const coordinates = {lat, lon}
+      console.log(coordinates)
 
-  // function getLocation() {
-  //   if (navigator.geolocation) {
-  //     // timeout at 60000 milliseconds (60 seconds)
-  //     var options = { timeout: 60000 };
-  //     navigator.geolocation.getCurrentPosition(
-  //       showLocation,
-  //       errorHandler,
-  //       options
-  //     );
-  //   } else {
-  //     alert("Sorry, browser does not support geolocation!");
-  //   }
-  // }
+    });
+  } else {
+    console.log("geolocation IS NOT available");
+  }
 
   return (
     <div className="LandingPage" style={{ marginTop: "30px" }}>
@@ -98,22 +61,12 @@ const LandingPage = () => {
           </form> */}
         </div>
 
-        <div className="catergories" style={{ margin: "30px" }}>
-          <div>
+        <div className="LandingPageRows" style={{ margin: "30px" }}>
+          <div className="Categories">
             <Categories />
           </div>
 
-          {/* <div className="popularStores" style ={{marginTop: '50px'}}>
-            <h3
-              style={{ textAlign: "left", fontSize: "20px", color: "black" }}
-            >
-              {" "}
-              Popular Stores Near you:{" "}
-            </h3>
-            <SingleLineGridList />
-          </div> */}
-
-          <div className="popularItems" style={{ marginTop: "50px" }}>
+          <div className="PopularItems" style={{ marginTop: "50px" }}>
             <h3
               style={{
                 fontFamily: "Palatino Linotype",
@@ -129,7 +82,8 @@ const LandingPage = () => {
           </div>
         </div>
       </div>
-      <div
+
+      {/* <div
         className="footer"
         style={{
           border: "10px",
@@ -147,7 +101,7 @@ const LandingPage = () => {
           {" "}
           SignUp As a Courier
         </Link>
-      </div>
+      </div> */}
     </div>
   );
 };
