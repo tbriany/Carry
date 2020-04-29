@@ -15,9 +15,11 @@ export const checkValidPassword = (input, errorFunction) => {
     }
 };
 
-export const checkEmptyInput = (input) => {
+export const checkEmptyInput = (input, errorFunction, type) => {
     if (input.length === 0) {
-        return 'enter a valid input'
+        errorFunction(true, `Please enter a valid ${type}`, type)
     }
-    return ''
-}
+    else {
+        errorFunction(false, '', type)
+    }
+};
