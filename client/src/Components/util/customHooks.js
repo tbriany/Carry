@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { checkValidEmail, checkValidPassword } from './inputHelpers';
 
 export const useInput = (initalValue) => {
     const [ value, setValue ] = useState(initalValue);
@@ -11,14 +10,3 @@ export const useInput = (initalValue) => {
         onChange: handleChange
     }
 };
-
-export const usePassword = (initalValue) => {
-    const [ password, setPassword ] = useState(initalValue);
-    const handleChange = (key) => (e) => {
-        setPassword({...password, [key]: e.target.value})
-    }
-    return {
-        password,
-        onChange: handleChange,
-    }
-}
