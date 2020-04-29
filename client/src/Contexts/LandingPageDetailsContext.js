@@ -1,19 +1,20 @@
 import React, { createContext, useState } from 'react';
-export const LandingDetailsContext = createContext();
+export const LandingContext = createContext();
 
 
-const LandingDetailsContext = (props) => {
-const [zipCode, SetZipCode] = useState(0)
+const LandingContextProvider = (props) => {
+const [Latitude, SetLatitude] = useState('')
+const [Longitude, SetLongitude] = useState('')
 
 
     return (
         // Provider accepts a value containting state and functions. This allows the components access to the state but it must be descendants of the provider.
-        <LandingDetialsContext.Provider value={{ }}>
+        <LandingContext.Provider value={{ Latitude, Longitude, SetLatitude,SetLongitude }}>
             {props.children}
-        </LandingDetialsContext.Provider>
+        </LandingContext.Provider>
     );
 
 
 }
 
-export default LandingDetailsContext;
+export default LandingContextProvider;
