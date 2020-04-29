@@ -1,11 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
+import {LandingContext} from '../Contexts/LandingPageDetailsContext'
+
 
 import SingleLineGridList from "./LandingPageComponents/PopularStores.jsx";
 import SingleLineGridListItems from "./LandingPageComponents/PopularItems";
 import Categories from "./LandingPageComponents/LandingPagecategories";
 
 const LandingPage = () => {
+const {Latitude, Longitude, SetLatitude, SetLongitude} = useContext(LandingContext )
+
   // Checks if Geolocation API is available on browser. This is only available on secure contexts (HTTPS).
   if ("geolocation" in navigator) {
     console.log("Landing Page Notification: geolocation is available");
@@ -15,17 +19,16 @@ const LandingPage = () => {
       //console.log(position)
 
       // keys into object position to return latitude value 
-      const lat = position.coords.latitude
-      console.log( "Latitude", position.coords.latitude);
-
-
+       console.log( "Latitude", position.coords.latitude);
+  
       // keys into object position to return longitude value
-      const lon = position.coords.longitude
       console.log("Longitude", position.coords.longitude);
 
-      const coordinates = {lat, lon}
-      console.log(coordinates)
 
+      //Storing Latitude and Longitude values in Context.
+       SetLatitude(position.coords.latitude) 
+       SetLongitude(position.coords.longitude)
+   
     });
   } else {
     console.log("geolocation IS NOT available");
