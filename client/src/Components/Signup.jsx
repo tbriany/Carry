@@ -8,7 +8,9 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import { checkValidEmail, checkValidPassword, checkEmptyInput } from './util/inputHelpers';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
+import { InputAdornment, IconButton } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -32,6 +34,16 @@ const useStyles = makeStyles((theme) => ({
 
 const Signup = () => {
     const classes = useStyles();
+    const [newFirstname, setFirstname] = useState({
+        firstname: '',
+        error: false,
+        errorText: ''
+    });
+    const [newLastname, setLastname] = useState({
+        lastname: '',
+        error: false,
+        errorText: ''
+    });;
     const [newCustomerEmail, setNewCustomerEmail] = useState({
         email: '',
         error: false,
@@ -44,7 +56,20 @@ const Signup = () => {
         errorText: ''
     });
     const handleNewCustomerInput = (key) => (e) => {
-        key === 'email' ? setNewCustomerEmail({...newCustomerEmail, [key]: e.target.value}) : setNewCustomerPassword({...newCustomerPassword, [key]: e.target.value});
+        switch (key) {
+            case 'email':
+                setNewCustomerEmail({ ...newCustomerEmail, [key]: e.target.value })
+                break;
+            case 'password':
+                setNewCustomerPassword({ ...newCustomerPassword, [key]: e.target.value })
+                break;
+            case 'firstname':
+                setFirstname({ ...newFirstname, [key]: e.target.value })
+                break;
+            case 'lastname':
+                setLastname({...newLastname, [key]: e.target.value})
+                break;
+        }
     };
     const handleNewEmailError = (bool, str) => {
         setNewCustomerEmail({ ...newCustomerEmail, error: bool, errorText: str })
@@ -52,8 +77,22 @@ const Signup = () => {
     const handleNewPasswordError = (bool, str) => {
         setNewCustomerPassword({ ...newCustomerPassword, error: bool, errorText: str })
     };
+    const handleInputError = (bool, str, input) => {
+        input === 'first name' ? setFirstname({...newFirstname, error: bool, errorText: str}) : setLastname({...newLastname, error: bool, errorText: str})
+    };
     const handleNewPasswordVisibility = () => {
-        setNewCustomerPassword({ ...newCustomerPassword, showPassword:  !newCustomerPassword.showPassword })
+        setNewCustomerPassword({ ...newCustomerPassword, showPassword: !newCustomerPassword.showPassword })
+    };
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        let customerFirstname = newFirstname.firstname;
+        let customerLastname = newLastname.lastname;
+        let customerEmail = newCustomerEmail.email;
+        let customerPassword = newCustomerPassword.password;
+        checkValidEmail(customerEmail, handleNewEmailError);
+        checkValidPassword(customerPassword, handleNewPasswordError);
+        checkEmptyInput(customerFirstname, handleInputError, 'first name');
+        checkEmptyInput(customerLastname, handleInputError, 'last name');
     };
     return (
         <Container component="main" maxWidth="xs">
@@ -62,9 +101,9 @@ const Signup = () => {
                 <Typography component="h1" variant="h5">
                     Sign up
                   </Typography>
-                <form className={classes.form} noValidate>
+                <form className={classes.form} noValidate onSubmit={handleSubmit}>
                     <Grid container spacing={2}>
-                        <Grid item xs={12} sm={6}>
+                        <Grid item xs={12} sm={12}>
                             <TextField
                                 autoComplete="fname"
                                 name="firstName"
@@ -74,9 +113,13 @@ const Signup = () => {
                                 id="firstName"
                                 label="First Name"
                                 autoFocus
+                                value={newFirstname.firstname}
+                                onChange={handleNewCustomerInput('firstname')}
+                                error={newFirstname.error}
+                                helperText={newFirstname.errorText}
                             />
                         </Grid>
-                        <Grid item xs={12} sm={6}>
+                        <Grid item xs={12} sm={12}>
                             <TextField
                                 variant="outlined"
                                 required
@@ -85,6 +128,9 @@ const Signup = () => {
                                 label="Last Name"
                                 name="lastName"
                                 autoComplete="lname"
+                                value={newLastname.lastname}
+                                error={newLastname.error}
+                                helperText={newLastname.errorText}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -98,6 +144,8 @@ const Signup = () => {
                                 autoComplete="email"
                                 value={newCustomerEmail.email}
                                 onChange={handleNewCustomerInput('email')}
+                                error={newCustomerEmail.error}
+                                helperText={newCustomerEmail.errorText}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -112,6 +160,17 @@ const Signup = () => {
                                 autoComplete="current-password"
                                 value={newCustomerPassword.password}
                                 onChange={handleNewCustomerInput('password')}
+                                error={newCustomerPassword.error}
+                                helperText={newCustomerPassword.errorText}
+                                InputProps={{
+                                    endAdornment:
+                                        <InputAdornment position='end'
+                                        >
+                                            <IconButton onClick={handleNewPasswordVisibility}>
+                                                {newCustomerPassword.showPassword ? <Visibility /> : <VisibilityOff />}
+                                            </IconButton>
+                                        </InputAdornment>
+                                }}
                             />
                         </Grid>
                     </Grid>
@@ -121,6 +180,7 @@ const Signup = () => {
                         variant="contained"
                         color="default"
                         className={classes.submit}
+                        onSubmit={handleSubmit}
                     >
                         Sign Up
                     </Button>
