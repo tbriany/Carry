@@ -4,7 +4,7 @@ const db = require('../database/db')
 const getProductImageById = async (id) => {
     const getQuery = `
     SELECT products.product_id, products.product_name, products.product_price, products.product_description, products.quantity, brands.brand_name, categories.category_name, materials.material_name, colors.color_name, product_type.product_type_name, productImage_id.*,
-    array_agg(distinct sizes.product_size) AS productSize
+    array_agg(sizes.product_size) AS productSize
     FROM products 
     JOIN brands ON brands.brand_id = products.brand_id
     JOIN categories ON categories.category_id = products.category_id
@@ -24,7 +24,7 @@ const getProductImageById = async (id) => {
 const getProductById = async (id) => {
     const getQuery = `
     SELECT products.product_id, products.product_name, products.product_price, products.product_description, products.quantity, brands.brand_name, categories.category_name, materials.material_name, colors.color_name, product_type.product_type_name, productImage_id.*,
-    array_agg(distinct sizes.product_size) AS productSize
+    array_agg(sizes.product_size) AS productSize
     FROM products 
     JOIN brands ON brands.brand_id = products.brand_id
     JOIN categories ON categories.category_id = products.category_id
