@@ -134,6 +134,44 @@ const getProductByCategory = async (category) => {
     return await db.any(getQuery, { category });
 }
 
+const getCategories = async () => {
+    const getCategoriesQuery = `
+      SELECT * FROM categories
+      `;
+    return await db.any(getCategoriesQuery);
+};
+  
+const getProductTypes = async () => {
+    const getTypesQuery = `
+      SELECT * FROM product_type
+      `;
+    return await db.any(getTypesQuery);
+};
+  
+const getBrands = async () => {
+    const getBrandsQuery = `
+      SELECT * FROM brands
+      `;
+    return await db.any(getBrandsQuery);
+};
+
+const getColors = async () => {
+    const getColorsQuery = `
+      SELECT * FROM colors
+      `;
+    return await db.any(getColorsQuery);
+};
+
+const getNewArrivals = async (id) => {
+    const getNewArrivalsQuery = `
+    SELECT *
+    FROM products
+    WHERE brand_id = $1
+    ORDER BY product_id DESC LIMIT 4;
+    `;
+    return await db.any(getNewArrivalsQuery, [id])
+}
+
 module.exports = {
     getProductImageById,
     getProductById,
@@ -142,5 +180,10 @@ module.exports = {
     getProductBySize,
     getProductByColor,
     getProductByBrand,
-    getProductByCategory
+    getProductByCategory,
+    getCategories,
+    getProductTypes,
+    getBrands,
+    getColors,
+    getNewArrivals,
 }
