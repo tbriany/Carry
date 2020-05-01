@@ -162,6 +162,15 @@ const getColors = async () => {
     return await db.any(getColorsQuery);
 };
 
+const getSizes = async () => {
+    const getSizesQuery = `
+    SELECT DISTINCT
+     product_size
+    FROM
+     sizes`;
+    return await db.any(getSizesQuery);
+};
+
 const getNewArrivals = async (id) => {
     const getNewArrivalsQuery = `
     SELECT *
@@ -185,5 +194,6 @@ module.exports = {
     getProductTypes,
     getBrands,
     getColors,
+    getSizes,
     getNewArrivals,
 }
