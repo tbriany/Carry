@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect} from "react";
 import axios from "axios";
-import SingleLineGridList from "./gridList";
+import Banner from './storeBanner';
+import CategoriesGridList from "./GridList/categoryGridList";
+import TypesGridList from "./GridList/typesGridList";
 
 function StorePage(props) {
-  const [store, setStore] = useState([]);
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     axios
-      .get(`/stores/${props.match.params.id}`)
+      .get(`/products/categories/all`)
       .then((result) => {
-        console.log(result);
-        setStore(result.data.payload);
+        setCategories(result.data.payload);
       })
       .catch((err) => {
         console.log(err);
@@ -19,41 +20,19 @@ function StorePage(props) {
 
   return (
     <div className="StorePage">
-      <div
-        className="Banner"
-        id="banner"
-        style={{ position: "relative", height: "40vh", width: "100vw" }}
-      >
-        <img
-          alt="clothes"
-          src="https://boutiquestoredesign.com/wp-content/uploads/2018/09/fashion-retail-womens-clothing-stores-design-ideas-layout-6.jpg"
-          style={{ height: "100%", width: "100%" }}
-        ></img>
-        <div
-          className="StoreInfo"
-          id="storeInfo"
-          style={{
-            position: "absolute",
-            top: "30%",
-            width: "30%",
-            backgroundColor: "white",
-          }}
-        >
-          <p>{store.store_name}</p>
-          <p>Description</p>
-          <p>Estimated Delivery time || Delivery fee</p>
-          <p>{store.address}</p>
-        </div>
-      </div>
-      <br></br>
+      <Banner 
+      storeId={props.match.params.id}
+      />
       <div>
-        <SingleLineGridList listTitle="Shop By Category" />
+        <CategoriesGridList 
+        listTitle="Browse Categories"
+        categories={categories} />
       </div>
       <div>
-        <SingleLineGridList listTitle="Shop By Type" />
+        <TypesGridList listTitle="Shop By Type" />
       </div>
       <div>
-        <SingleLineGridList listTitle="New Arrivals" />
+        <CategoriesGridList listTitle="New Arrivals" />
       </div>
     </div>
   );
