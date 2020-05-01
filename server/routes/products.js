@@ -157,6 +157,18 @@ router.get("/colors/all", async(req, res, next) => {
     }
 })
 
+router.get("/sizes/all", async(req, res, next) => {
+    try {
+        const sizes = await productQueries.getSizes();
+        res.status(200).json({
+            message: `All Sizes Retrieved`,
+            payload: sizes
+        });
+    } catch (err) {
+        console.log("ERROR", err)
+    }
+})
+
 router.get("/new_arrivals/:brand_id", async(req, res, next) => {
     try {
         const {brand_id} = req.params
