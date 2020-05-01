@@ -77,10 +77,15 @@ CREATE TABLE products(
     product_price INT,
     material_id INT REFERENCES materials(material_id),
     color_id INT REFERENCES colors(color_id),
-    product_size VARCHAR,
     product_description VARCHAR,
     product_type INT REFERENCES product_type(product_type_id),
     quantity INT
+);
+
+CREATE TABLE sizes(
+    sizes_id SERIAL PRIMARY KEY,
+    product_id INT REFERENCES products(product_id),
+    product_size VARCHAR
 );
 
 CREATE TABLE productImage_id(
@@ -100,9 +105,7 @@ CREATE TABLE checkoutCart(
 
 );
 
-
 -- Orders 
-
 CREATE TABLE orders(
    order_id SERIAL PRIMARY KEY,
    order_status VARCHAR,
@@ -265,16 +268,30 @@ VALUES
 ('Nude');
 
 INSERT INTO products
-(product_name, brand_id, category_id, product_price, material_id, color_id, product_size, product_description, product_type, quantity)
+(product_name, brand_id, category_id, product_price, material_id, color_id, product_description, product_type, quantity)
 VALUES 
-('Milan Leather Backpack', 1, 4, 200.00, 5 , 1, '22cm x 25cm x 10cm', 'Small leather backpack. Made in Peru.', 28, 5  ), 
-('Milan Mini Backpack', 1, 4, 150.00, 5, 13, '17cm x 20cm x 9cm', 'Mini leather backpack. Made in Peru.', 28, 5);
+('Milan Leather Backpack', 1, 4, 200.00, 5 , 1, 'Small leather backpack. Made in Peru.', 28, 5), 
+('Milan Mini Backpack', 1, 4, 150.00, 5, 13, 'Mini leather backpack. Made in Peru.', 28, 5);
+
+
+
+
+INSERT INTO sizes 
+(product_id, product_size) 
+VALUES 
+(1, '22cm x 25cm x 10cm'),
+(2, '17cm x 20cm x 9cm');
 
 
 INSERT INTO productImage_id
 (product_id, product_image_url)
-VALUES(1,'https://cdn.shopify.com/s/files/1/0082/3558/1504/products/lima-sagrada-small-backpack-black_606x606_b48c910d-33ac-46ce-aeb0-8bb3f7b73f7f_1296x.jpg'), 
+VALUES
+(1,'https://cdn.shopify.com/s/files/1/0082/3558/1504/products/lima-sagrada-small-backpack-black_606x606_b48c910d-33ac-46ce-aeb0-8bb3f7b73f7f_1296x.jpg'), 
 (2,'https://cdn.shopify.com/s/files/1/0082/3558/1504/products/Lima-sagrada-milan-mini-soft-pink-19502_1024x1024_2x_89657b17-5194-4bad-adb6-7f66f686e539_1728x.jpg');
+
+
+
+
 
 SELECT * FROM customers;
 SELECT * FROM stores;
@@ -285,6 +302,7 @@ SELECT * FROM materials;
 SELECT * FROM brands;
 SELECT * FROM colors;
 SELECT * FROM products;
+SELECT * FROM sizes;
 SELECT * FROM productImage_id;
 SELECT * FROM orders;
 SELECT * FROM ordersItems;
@@ -292,3 +310,4 @@ SELECT * FROM payment_type;
 SELECT * FROM payment;
 SELECT * FROM bankInfo;
 SELECT * FROM checkoutCart;
+
