@@ -85,26 +85,28 @@ function ItemPopUp() {
 
 
 
-    const { productId, productQty, updateProductQty, addItemToBag, getProductPrice , getProductSize} = useContext(ItemDetailsContext);
-
+    const { updateCurrQty, updateProductQty, checkoutCart, addToCart, productId, productQty, addItemToBag, getProductPrice, getProductSize } = useContext(ItemDetailsContext);
     //Acts like ItemDetailsContext.consumer but allows the entire ItemPopUp.jsx access to the state in Contexts/ItemDeatilsContext.js. 
     // ItemDetailsContext.consumer is found in the return and wraps around all html tags (div, p, h1 etc.) It will only give those specific tags access to the state.
 
 
-    const [itemInfo, setItemInfo] = useState([]) //Recieves all of the product info
+    const [itemInfo, setItemInfo] = useState({}) //Recieves all of the product info
     const [size, setSize] = useState(null)  //Changes based on the size picked by the user
     const [quantity, setQuantity] = useState(0) //Changes based on the quantity the user wants from a specific product
 
     const handleItemInfo = async () => {
         try {
-            const itemInfo = await axios.get(`/products/images/${productId}`)
-            setItemInfo(itemInfo.data.payload)
-            getProductPrice(itemInfo.data.payload.product_price)
+            const productInfo = await axios.get(`/products/${productId}`)
+            let productInfoPayload = productInfo.data.payload
+            getProductPrice(productInfo.data.payload.product_price)
+            setItemInfo(productInfo.data.payload)
+
+            console.log(productInfoPayload.product_size)
+           
 
         } catch (err) {
             console.log("ERROR", err)
         }
-
     }
 
     useEffect(() => {
@@ -174,7 +176,7 @@ function ItemPopUp() {
 
                                     input={<BootstrapInput />}
                                 >
-                                    <option value="default" selected={true} disabled="disabled" >Choose a size</option>
+                                    <option value="default" selected={true} disabled="disabled" >Choose a size</option> 
                                     <option value={itemInfo.product_size} >{itemInfo.product_size} </option>
                                 </NativeSelect>
                             </FormControl>
@@ -183,7 +185,7 @@ function ItemPopUp() {
                                 className="quantityInput"
                                 type="number" placeholder="0"
                                 min="0" max="100"
-                                value={productQty}
+                                // value={productQty}
                                 // onChange={(e) => setQuantity(e.target.value)}
                                 onChange={e => {
                                     updateProductQty(e.target.value)
@@ -202,7 +204,7 @@ function ItemPopUp() {
                                 }}
                                 variant="contained"
                                 className="ItemInputSubmit" type="submit" value="ADD TO BAG"
-                                onClick={addItemToBag}>ADD TO BAG</Button>
+                                onClick={addToCart}>ADD TO BAG</Button>
 
                             <div className="description">
                                 <ExpansionPanel expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
@@ -237,7 +239,7 @@ function ItemPopUp() {
                 </Grid>
             </div>
             <br></br>
-
+            
         </div>
     )
 }
