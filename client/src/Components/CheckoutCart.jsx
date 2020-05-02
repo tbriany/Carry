@@ -22,14 +22,13 @@ const CheckoutCart = () => {
     const classes = useStyles();
 
     const { getCheckout, productId, checkoutCart, productIds, newQty, totalProductQty, productPrice, productSize } = useContext(ItemDetailsContext) //Grab state from context file
-    const [totalPrice, setTotalPrice] = useState(0)
+    // const [totalPrice, setTotalPrice] = useState(0)
     const [updateQty, setUpdateQty] = useState(0)
 
 
     useEffect(() => {
         getCheckout()
-
-    }, [totalProductQty]) //Update the checkout when the totalProductQty is updated. 
+    }, [])
 
 
 
@@ -46,20 +45,18 @@ const CheckoutCart = () => {
     const handleUpdateQty = async (checkoutId, prodId, currQty) => {
 
         try {
-            await axios.patch(`/checkoutCart/edit/${checkoutId}`, { checkoutCart_id: checkoutId, product_id: prodId, size: productSize, quantity: currQty, totalPrice: 100 })
+            await axios.patch(`/checkoutCart/edit/${checkoutId}`, { checkoutCart_id: checkoutId, product_id: prodId, size: productSize, quantity: currQty})
 
         } catch (err) {
             console.log("ERROR", err)
         }
     }
 
-
-
-    const handelGetTotalPrice = (quantity, product_price) => {
-
+    const handleGetProductTotalPrice = (quantity, product_price) => {
         return quantity * product_price
-
     }
+
+
 
     return (
         <div >
@@ -69,24 +66,13 @@ const CheckoutCart = () => {
                 borderBottom: '1px solid black',
                 fontSize: "x-large"
             }}
-
-
             >Shopping Bag</p>
-
-
             {checkoutCart.length > 0 ? (<div>
                 {checkoutCart.map((product) => {
-
                     return (
-
-
                         <div key={product.checkoutcart_id} className={classes.root}>
                             <Grid container spacing={1}>
-
                                 <Grid item xs={9} >
-
-
-
                                     <Paper
                                         style={{
                                             display: "flex",
@@ -97,12 +83,10 @@ const CheckoutCart = () => {
                                             padding: "0px",
                                             marginBottom: "15px",
                                             marginTop: "15px"
-
                                         }}
                                         className={classes.paper}
 
                                     >
-
                                         <Grid container spacing={1}>
                                             <Grid style={{ padding: "0px" }} item xs={4} >
                                                 <Paper
@@ -120,8 +104,6 @@ const CheckoutCart = () => {
                                                 >
 
                                                     <img style={{ height: "100px", margin: "0px" }} src={product.product_image_url} alt={product.product_name} ></img>
-
-
                                                 </Paper>
                                             </Grid>
 
@@ -133,6 +115,7 @@ const CheckoutCart = () => {
                                                         flexDirection: "column",
                                                         alignItems: "flex-start",
                                                         boxShadow: " 1px 1px 1px white",
+                                                        textAlign: "-webkit-left"
                                                     }}
                                                     className={classes.paper}
                                                 >
@@ -141,10 +124,7 @@ const CheckoutCart = () => {
                                                     <p style={{ margin: "0px", fontSize: "small" }}>Size:{product.size}</p>
                                                     <p style={{ margin: "0px", fontSize: "small" }}>Price:${product.product_price}</p>
                                                     <p style={{ margin: "0px", fontSize: "small" }}>QTY:{product.cartquantity}</p>
-
-
-
-                                                    <input
+                                                    {/* <input
                                                         className="updateQtyInput"
                                                         type="number" placeholder="0"
                                                         min="0" max="100"
@@ -153,25 +133,14 @@ const CheckoutCart = () => {
                                                         onChange={e => {
                                                             handleUpdateQty(product.checkoutcart_id, productId, e.target.value)
                                                         }}>
-                                                    </input>
-
-
+                                                    </input> */}
                                                     <button onClick={() => { handleDeleteProduct(product.checkoutcart_id) }}>Delete</button>
                                                 </Paper>
                                             </Grid>
 
                                         </Grid>
-
-
-
-
                                     </Paper>
-
-
-
-
                                 </Grid>
-
 
                                 <Grid item xs={3} >
                                     <Paper
@@ -186,32 +155,27 @@ const CheckoutCart = () => {
                                         }}
                                         className={classes.paper}
                                     >
-                                        <p style={{ margin: "0px", fontSize: "small" }} > ${handelGetTotalPrice(product.cartquantity, product.product_price)} </p>
-
+                                        <p style={{ margin: "0px", fontSize: "small" }} > ${handleGetProductTotalPrice(product.cartquantity, product.product_price)} </p>
                                     </Paper>
                                 </Grid>
 
 
                             </Grid>
 
-
-
-
-
-
-
-
-
-
-
                         </div>
 
                     )
                 })}
+
+
             </div>) : (<div></div>)}
 
-        </div>
 
+
+
+
+
+        </div>
 
 
     )

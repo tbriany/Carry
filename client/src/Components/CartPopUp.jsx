@@ -81,7 +81,7 @@ const CartPopUp = () => {
                                                         padding: "0px",
                                                         marginBottom: "15px",
                                                         marginTop: "15px",
-                                                    
+
                                                     }}
                                                     className={classes.paper}
                                                 >
@@ -109,27 +109,12 @@ const CartPopUp = () => {
                                                     <p style={{ margin: "0px", fontSize: "x-small" }}>Size:{product.size}</p>
                                                     <p style={{ margin: "0px", fontSize: "x-small" }}>Price:${product.product_price}</p>
                                                     <p style={{ margin: "0px", fontSize: "x-small" }}>QTY:{product.cartquantity}</p>
-
-
-
-
-
                                                 </Paper>
                                             </Grid>
 
                                         </Grid>
-
-
-
-
                                     </Paper>
-
-
-
-
                                 </Grid>
-
-
                                 <Grid item xs={3} >
                                     <Paper
                                         style={{
@@ -147,19 +132,7 @@ const CartPopUp = () => {
 
                                     </Paper>
                                 </Grid>
-
-
                             </Grid>
-
-
-
-
-
-
-
-
-
-
 
                         </div>
 

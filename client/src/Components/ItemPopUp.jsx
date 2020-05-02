@@ -85,7 +85,7 @@ function ItemPopUp() {
 
 
 
-    const { updateCurrQty, updateProductQty, checkoutCart, addToCart, productId, productQty, addItemToBag, getProductPrice, getProductSize } = useContext(ItemDetailsContext);
+    const { updateCurrQty, updateProductQty, checkoutCart, addToCart, productId, productQty, addItemToBag, getProductSize } = useContext(ItemDetailsContext);
     //Acts like ItemDetailsContext.consumer but allows the entire ItemPopUp.jsx access to the state in Contexts/ItemDeatilsContext.js. 
     // ItemDetailsContext.consumer is found in the return and wraps around all html tags (div, p, h1 etc.) It will only give those specific tags access to the state.
 
@@ -98,12 +98,7 @@ function ItemPopUp() {
         try {
             const productInfo = await axios.get(`/products/${productId}`)
             let productInfoPayload = productInfo.data.payload
-            getProductPrice(productInfo.data.payload.product_price)
-            setItemInfo(productInfo.data.payload)
-
-            console.log(productInfoPayload.product_size)
-           
-
+            setItemInfo(productInfoPayload)
         } catch (err) {
             console.log("ERROR", err)
         }
@@ -111,7 +106,7 @@ function ItemPopUp() {
 
     useEffect(() => {
         handleItemInfo();
-    }, []) //Act like ComponentDidMount 
+    }, [])
 
     return (
 
@@ -176,7 +171,7 @@ function ItemPopUp() {
 
                                     input={<BootstrapInput />}
                                 >
-                                    <option value="default" selected={true} disabled="disabled" >Choose a size</option> 
+                                    <option value="default" selected={true} disabled="disabled" >Choose a size</option>
                                     <option value={itemInfo.product_size} >{itemInfo.product_size} </option>
                                 </NativeSelect>
                             </FormControl>
@@ -239,7 +234,7 @@ function ItemPopUp() {
                 </Grid>
             </div>
             <br></br>
-            
+
         </div>
     )
 }
