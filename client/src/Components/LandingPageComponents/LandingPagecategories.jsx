@@ -34,7 +34,8 @@ const useStyles = makeStyles((theme) => ({
     height: "100%",
     transform: "translateX(-50%)",
     position: "relative",
-    left: "50%",
+    left: '50px',
+    borderRadius: '50%'
   },
   imgFullWidth: {
     width: "100%",
@@ -99,11 +100,11 @@ export default function Categories() {
 
   return (
     <div className={classes.root}>
-      <GridList className={classes.gridList} cols={3.5}>
-        {categories.map((tile) => (
-          <GridListTile spacing={"100px"} cellHeight={"1px"} key={tile.img}>
+      <GridList className={classes.gridList} cols={3.5} >
+        {categories.map((tile)  => (
+          <GridListTile spacing={"100px"} cellHeight={"1px"} key={tile.img} style={{borderRadius:"50%"}}>
             <img
-              style={{ boderRaduius: "50px" }}
+              
               src={tile.img}
               alt={tile.title}
             />

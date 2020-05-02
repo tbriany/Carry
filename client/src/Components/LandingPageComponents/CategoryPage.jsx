@@ -13,6 +13,7 @@ const [products, setProducts] = useState('')
 setCategory_id(props.matcg.params.type)
 // useeffect to  make a network request to backend to get all stores/ products of that category. 
 
+console.log(category_id)
 useEffect(()=>{
 axios
     .get(`/products/category/${props.match.params.type}`)

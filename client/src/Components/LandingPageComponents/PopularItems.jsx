@@ -25,10 +25,14 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     color: theme.palette.primary.light,
+    display: 'flex',
+    flexWrap: 'wrap'
   },
   titleBar: {
     background: "white",
     textAlign: "center",
+    display: 'flex',
+    flexWrap: 'wrap'
     // 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
   },
 }));

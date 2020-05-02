@@ -93,4 +93,15 @@ router.delete("/delete/:id", async (req, res, next) =>{
         console.log("ERROR deleting store", err)
     }
 })
+
+
+router.post('/GeolocationApi', async(req, res, next) =>{
+    try{
+        console.log('I got a request')
+        console.log(req.body)
+     }catch(err){
+         console.log("ERROR", err);
+     }
+ })
+
 module.exports = router;
