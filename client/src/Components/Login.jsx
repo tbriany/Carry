@@ -1,4 +1,5 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -10,7 +11,7 @@ import IconButton from '@material-ui/core/IconButton';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { checkValidEmail, checkValidPassword } from "./inputHelpers";
+import { checkValidEmail, checkValidPassword } from "./util/inputHelpers";
 import InputAdornment from '@material-ui/core/InputAdornment';
 import CustomerContext from '../Contexts/CustomerContext';
 
@@ -36,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Login = () => {
-    const { customerDetails, logCustomerIn } = useContext(CustomerContext);
+    // const { customerDetails, logCustomerIn } = useContext(CustomerContext);
     const classes = useStyles();
     const [customerEmail, setCustomerEmail] = useState({
         email: '',
@@ -66,8 +67,6 @@ const Login = () => {
     };
     const handleNextPage = (customer) => {
         console.log(customer)
-        logCustomerIn(customer);
-        //error with logCustomerIn => function not working
     }
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -145,7 +144,7 @@ const Login = () => {
                     </Button>
                     <Grid container>
                         <Grid item xs>
-                            <Link href="#" variant="body3">
+                            <Link to='/signup' href='/signup' variant="body3">
                                 {"Don't have an account? Sign Up"}
                             </Link>
                         </Grid>
