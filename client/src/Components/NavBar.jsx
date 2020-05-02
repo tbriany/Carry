@@ -13,8 +13,9 @@ import ExploreIcon from '@material-ui/icons/Explore';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import MoreIcon from '@material-ui/icons/MoreVert';
+import Popover from '@material-ui/core/Popover';
 
-import Checkout from './Checkout'
+import CartPopUp from './CartPopUp'
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
@@ -41,6 +42,12 @@ const useStyles = makeStyles((theme) => ({
       display: 'none',
     },
   },
+  popover: {
+    pointerEvents: 'none',
+  },
+  paper: {
+    padding: theme.spacing(1),
+  },
 }));
 
 
@@ -48,6 +55,7 @@ function Navbar() {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const [popOver, setPopOver] = React.useState(null);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -68,6 +76,18 @@ function Navbar() {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
+
+
+  const handlePopoverOpen = (event) => {
+    setPopOver(event.currentTarget);
+  };
+
+  const handlePopoverClose = () => {
+    setPopOver(null);
+  };
+
+  const open = Boolean(popOver);
+
 
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
@@ -105,6 +125,7 @@ function Navbar() {
         <p>Explore</p>
       </MenuItem>
 
+
       <MenuItem>
         <IconButton color="inherit">
           {/* <Badge badgeContent={11} color="secondary"> */}
@@ -114,6 +135,7 @@ function Navbar() {
 
         <p>Shopping Cart</p>
       </MenuItem>
+
 
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
@@ -153,11 +175,76 @@ function Navbar() {
             >
               <AccountCircle />
             </IconButton>
-            <Link to="/checkout">
-              <IconButton color="inherit">
-                <ShoppingCartIcon />
-              </IconButton>
-            </Link>
+
+
+
+
+
+
+
+            <Typography
+              aria-owns={open ? "mouse-over-popover" : undefined}
+              aria-haspopup="true"
+              onMouseEnter={handlePopoverOpen}
+              onMouseLeave={handlePopoverClose}
+            
+        
+            >
+              <Link to="/checkout">
+                <IconButton color="inherit">
+                  <ShoppingCartIcon />
+                </IconButton>
+              </Link>
+
+            </Typography>
+            <Popover
+              id="mouse-over-popover"
+              className={classes.popover}
+              classes={{
+                paper: classes.paper
+              }}
+              open={open}
+              popOver={popOver}
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "right",
+                marginTop: "5px"
+              }}
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "right"
+              }}
+              onClose={handlePopoverClose}
+              disableRestoreFocus
+              
+            >
+              <Typography>
+                <CartPopUp />
+
+
+              </Typography>
+            </Popover>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
           </div>
           <div className={classes.sectionMobile}>
             <IconButton
