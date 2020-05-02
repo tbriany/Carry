@@ -13,6 +13,8 @@ import Login from './Components/Login';
 import Signup from './Components/Signup';
 import StorePage from './Components/StorePage/storePage';
 import ProductsPage from './Components/ProductPage/productsPage';
+import CheckoutLanding from './Components/CheckoutLanding.jsx'
+
 
 function App() {
   return (
@@ -22,7 +24,7 @@ function App() {
         <Navbar />
       <Switch>
           <Route exact path="/" component={Landing} />
-          <Route exact path="/checkout" component={Checkout} />
+          <Route exact path="/checkout" component={CheckoutLanding} />
           <Route exact path="/popup" component={ItemPopUp} />
           <Route exact path="/login" component={Login}/>
           <Route exact path="/signup" component={Signup}/>

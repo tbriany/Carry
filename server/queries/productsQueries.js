@@ -4,7 +4,7 @@ const db = require('../database/db')
 const getProductImageById = async (id) => {
     const getQuery = `
     SELECT products.product_id, products.product_name, products.product_price, products.product_description, products.quantity, brands.brand_name, categories.category_name, materials.material_name, colors.color_name, product_type.product_type_name, productImage_id.*,
-    array_agg(distinct sizes.product_size) AS productSize
+    array_agg(sizes.product_size) AS product_size
     FROM products 
     JOIN brands ON brands.brand_id = products.brand_id
     JOIN categories ON categories.category_id = products.category_id
@@ -23,8 +23,9 @@ const getProductImageById = async (id) => {
 
 const getProductById = async (id) => {
     const getQuery = `
-    SELECT products.product_id, products.product_name, products.product_price, products.product_description, products.quantity, brands.brand_name, categories.category_name, materials.material_name, colors.color_name, product_type.product_type_name, productImage_id.*,
-    array_agg(distinct sizes.product_size) AS productSize
+    SELECT products.product_id, products.product_name, products.product_price, products.product_description, products.quantity, brands.brand_name, categories.*, materials.material_name, colors.color_name, product_type.product_type_name, 
+    productImage_id.*,
+    array_agg(sizes.product_size) AS product_size
     FROM products 
     JOIN brands ON brands.brand_id = products.brand_id
     JOIN categories ON categories.category_id = products.category_id
@@ -34,7 +35,7 @@ const getProductById = async (id) => {
     JOIN  productImage_id  ON productImage_id.product_id = products.product_id
     JOIN sizes ON sizes.product_id = products.product_id 
     WHERE products.product_id = $/id/
-    GROUP BY products.product_id, brands.brand_id, categories.category_name,materials.material_name,colors.color_name, product_type.product_type_name,
+    GROUP BY products.product_id, brands.brand_id, categories.category_id,materials.material_name,colors.color_name, product_type.product_type_name,
     productimage_id.product_image_id
     `
 

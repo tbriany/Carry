@@ -1,149 +1,171 @@
-
 import React, { useState, useEffect, useContext, useRef } from 'react'
 import { Button, InputLabel, MenuItem, Select } from '@material-ui/core'
 import { ItemDetailsContext } from '../Contexts/ItemDetailsContexts'
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-
 import axios from 'axios'
 
-const useStyles = makeStyles(theme => ({
+
+const useStyles = makeStyles((theme) => ({
     root: {
-        flexGrow: 1
+        flexGrow: 1,
     },
     paper: {
-        padding: theme.spacing(5),
-        textAlign: "center",
-        color: theme.palette.text.secondary
-    }
-}));
+        padding: theme.spacing(1),
+        textAlign: 'center',
+        // color: theme.palette.text.secondary,
 
+    },
+}));
 
 const CartPopUp = () => {
     const classes = useStyles();
-    const { productId, productIds, totalProductQty, productPrice, productSize } = useContext(ItemDetailsContext) //Grab state from context file
-    const [checkoutCart, setCheckoutCart] = useState([]) //holds and object that contains the product info in the cart and its quantity
-    const [totalPrice, setTotalPrice] = useState(0)
+
+    const { getCheckout, productId, checkoutCart } = useContext(ItemDetailsContext) //Grab state from context file
 
 
-    const handleGetItemById = async (prodId) => { //Create a cart in the front end using an object. If item id exists then upload quantity. Else, insert id, product info and total quantity.
-
-        let itemExist = checkoutCart.find(id => parseInt(prodId) === parseInt(id.product_id)) //Check to see if product id exist in checkoutCart
-
-        if (!itemExist) {
-            let totalPricePerQty = parseInt(totalProductQty) * parseInt(productPrice)
-            try {
-                await axios.post('/checkoutCart/add', { product_id: prodId, size: productSize, quantity: totalProductQty, totalPrice: totalPricePerQty })
-            } catch (err) {
-                console.log("ERROR", err)
-            }
-
-        } else {
-            try {
-                let cartId = itemExist.checkoutcart_id
-                let prevQty = parseInt(itemExist.cartquantity)
-                let updatedQty = prevQty + parseInt(totalProductQty)
-                await axios.patch(`/checkoutCart/edit/${cartId}`, { checkoutCart_id: cartId, product_id: prodId, size: productSize, quantity: updatedQty, totalPrice: (parseInt(updatedQty) * parseInt(itemExist.product_price)) })
-            } catch (err) {
-                console.log("ERROR", err)
-            }
-        }
-        getAllCart()
-    }
 
     useEffect(() => {
-        getAllCart()
-        for (let i = 0; i < productIds.length; i++) {
-            handleGetItemById(productIds[i]);
-        }
-    }, [totalProductQty]) //Update the checkout when the totalProductQty is updated. 
+        getCheckout()
 
+    }, []) //Update the checkout when the totalProductQty is updated. 
 
-    const getAllCart = async () => {
-        try {
-            let getCart = await axios.get(`/checkoutCart`)
-            let cartPayload = getCart.data.payload
-            setCheckoutCart(cartPayload)
-
-        } catch (err) {
-            console.log("ERROR", err)
-
-        }
+    const handelGetTotalPrice = (quantity, product_price) => {
+        return quantity * product_price
 
     }
 
-
-
     return (
-        <div style={{
-            margin: "35px",
-            padding: "23px",
-            margin: '32px',
-        }} className={classes.root} >
-            <p>CHECKOUT  </p>
-            <Grid container spacing={4}>
-                <Grid item xs={7} sm={3}>
-                    <Paper className={classes.paper}
-                        style={{
-                            boxShadow: " 1px 1px 1px white",
-                            color: "black",
-                        }}>
-                        {checkoutCart.length > 0 ? (<div>
-                            {checkoutCart.map((item) => {
+        <div >
+            <p style={{
+                display: "flex",
+                justifyContent: "flex-start",
+                borderBottom: '1px solid black',
+                fontSize: "x-large"
+            }}
+            >Shopping Cart</p>
 
-                                return (
+            {checkoutCart.length > 0 ? (<div>
+                {checkoutCart.map((product) => {
+                    return (
+                        <div key={product.checkoutcart_id} className={classes.root}>
+                            <Grid container spacing={0}>
+
+                                <Grid item xs={9} >
+                                    <Paper
+                                        style={{
+                                            display: "flex",
+                                            justifyContent: "flex-start",
+                                            flexDirection: "column",
+                                            alignItems: "flex-start",
+                                            boxShadow: " 1px 1px 1px white",
+                                            padding: "0px",
+                                            marginBottom: "15px",
+                                            marginTop: "15px"
+
+                                        }}
+                                        className={classes.paper}
+
+                                    >
+
+                                        <Grid container spacing={1}>
+                                            <Grid style={{ padding: "0px" }} item xs={4} >
+                                                <Paper
+                                                    style={{
+                                                        display: "flex",
+                                                        justifyContent: "flex-start",
+                                                        flexDirection: "column",
+                                                        alignItems: "flex-start",
+                                                        boxShadow: " 1px 1px 1px white",
+                                                        padding: "0px",
+                                                        marginBottom: "15px",
+                                                        marginTop: "15px",
+                                                    
+                                                    }}
+                                                    className={classes.paper}
+                                                >
+
+                                                    <img style={{ height: "50px", margin: "0px" }} src={product.product_image_url} alt={product.product_name} ></img>
 
 
-                                    <div>
-                                        <img src={item.product_image_url} height="300px" />
-                                        <p> {item.brand_name}</p>
-                                        <p>${item.product_price}</p>
-                                        <p>Qty:{item.cartquantity}</p>
+                                                </Paper>
+                                            </Grid>
 
-                                        <p>{item.totalprice}</p>
-                                    </div>
+                                            <Grid item xs={8} >
+                                                <Paper
+                                                    style={{
+                                                        display: "flex",
+                                                        justifyContent: "flex-start",
+                                                        flexDirection: "column",
+                                                        alignItems: "flex-start",
+                                                        boxShadow: " 1px 1px 1px white",
+                                                        textAlign: "-webkit-left"
+                                                    }}
+                                                    className={classes.paper}
+                                                >
+                                                    <p style={{ margin: "0px", fontSize: "x-small" }}>{product.product_name}</p>
+                                                    <p style={{ margin: "0px", fontSize: "x-small" }}> Color:{product.color_name}</p>
+                                                    <p style={{ margin: "0px", fontSize: "x-small" }}>Size:{product.size}</p>
+                                                    <p style={{ margin: "0px", fontSize: "x-small" }}>Price:${product.product_price}</p>
+                                                    <p style={{ margin: "0px", fontSize: "x-small" }}>QTY:{product.cartquantity}</p>
 
-                                )
-                            })}
-                        </div>) : (<div></div>)}
-                    </Paper>
-                </Grid>
-                <Grid item xs={3} sm={5}>
-                    <Paper className={classes.paper} style={{
-                        boxShadow: " 1px 1px 1px white",
-                    }}
-                    ></Paper>
-                </Grid>
-            </Grid>
 
-            <Grid container
-                spacing={4}
-            >
 
-                <Grid item xs={7} sm={3}>
-                    <Paper className={classes.paper}
-                        style={{
-                            boxShadow: " 1px 1px 1px white",
-                        }}>
-                    </Paper>
-                </Grid>
-                <Grid item xs={3} sm={5}
 
-                >
-                    <Paper className={classes.paper}
-                        style={{
-                            boxShadow: " 1px 1px 1px white",
-                            color: "black",
-                        }} >
-                        {totalPrice !== 0 ? (<div style={{
-                            border: '1px solid #eed7c1',
-                        }}
-                        > <p>TOTAL: {totalPrice}</p></div>) : (<div></div>)}
 
-                    </Paper>
-                </Grid>
-            </Grid>
+                                                </Paper>
+                                            </Grid>
+
+                                        </Grid>
+
+
+
+
+                                    </Paper>
+
+
+
+
+                                </Grid>
+
+
+                                <Grid item xs={3} >
+                                    <Paper
+                                        style={{
+                                            display: "flex",
+                                            justifyContent: "flex-start",
+                                            flexDirection: "column",
+                                            alignItems: "flex-end",
+                                            boxShadow: " 1px 1px 1px white",
+                                            marginBottom: "15px",
+                                            marginTop: "15px"
+                                        }}
+                                        className={classes.paper}
+                                    >
+                                        <p style={{ margin: "0px", fontSize: "x-small" }} > ${handelGetTotalPrice(product.cartquantity, product.product_price)} </p>
+
+                                    </Paper>
+                                </Grid>
+
+
+                            </Grid>
+
+
+
+
+
+
+
+
+
+
+
+                        </div>
+
+                    )
+                })}
+            </div>) : (<div></div>)}
 
         </div>
 
@@ -153,5 +175,6 @@ const CartPopUp = () => {
 }
 
 export default CartPopUp
+
 
 
