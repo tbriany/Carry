@@ -12,15 +12,15 @@ import CustomerContextProvider from './Contexts/CustomerContext';
 import Login from './Components/Login';
 import Signup from './Components/Signup';
 import StorePage from './Components/StorePage/storePage';
-import ProductsPage from './Components/StorePage/productsPage';
+import ProductsPage from './Components/ProductPage/productsPage';
 import CheckoutLanding from './Components/CheckoutLanding.jsx'
+
 
 function App() {
   return (
     <div className="App">
       <ItemDetailsContextProvider>
       <CustomerContextProvider>
-   
         <Navbar />
       <Switch>
           <Route exact path="/" component={Landing} />
@@ -32,7 +32,6 @@ function App() {
           <Route exact path="/store/:id" component={StorePage} />
           <Route exact path="/store/:id/products" component={ProductsPage} />
       </Switch>
-    
      </CustomerContextProvider>
      </ItemDetailsContextProvider>
     </div>

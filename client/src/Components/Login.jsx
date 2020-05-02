@@ -10,7 +10,7 @@ import IconButton from '@material-ui/core/IconButton';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { checkValidEmail, checkValidPassword } from "./inputHelpers";
+// import { checkValidEmail, checkValidPassword } from "./inputHelpers";
 import InputAdornment from '@material-ui/core/InputAdornment';
 import CustomerContext from '../Contexts/CustomerContext';
 
@@ -73,8 +73,8 @@ const Login = () => {
         e.preventDefault();
         let email = customerEmail.email;
         let password = customerPassword.password;
-        checkValidEmail(email, handleEmailError);
-        checkValidPassword(password, handlePasswordError);
+        // checkValidEmail(email, handleEmailError);
+        // checkValidPassword(password, handlePasswordError);
         let emailError = customerEmail.error;
         let passwordError = customerPassword.error;
         if (!emailError && !passwordError) {
