@@ -14,6 +14,7 @@ const storesRouter = require('./routes/stores');
 const couriersRouter = require('./routes/couriers');
 const ordersRouter = require('./routes/orders');
 const checkoutCartRouter = require ('./routes/CheckoutCart')
+const GeolocationApiRouter = require('./routes/api')
 
 const app = express();
 
@@ -40,6 +41,9 @@ app.use('/stores',  storesRouter);
 app.use('/couriers',  couriersRouter);
 app.use('/orders',  ordersRouter);
 app.use('/checkoutCart',checkoutCartRouter)
+app.use('/GeolocationApi', GeolocationApiRouter)
+
+
 
 
 app.use("*", (req, res) => {
