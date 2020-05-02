@@ -1,34 +1,34 @@
 import React, { createContext, useState, useEffect } from 'react';
-import axios from 'axios'
+import axios from 'axios';
 
 export const ItemDetailsContext = createContext();
 
 
 const ItemDetailsContextProvider = (props) => {
 
-    const [productId, setProductId] = useState(1)//Current Product id
-    const [productIds, setproductsIds] = useState([]) //Array contains all ids that was added to the checkout bag.
-    const [productQty, setProductQty] = useState(0)
-    const [totalProductQty, setTotalProductQty] = useState(0) //Total of Product Qty from the itempopup page
-    const [productPrice, setProductPrice] = useState(0)
-    const [productSize, setProductSize] = useState('')
+    const [productId, setProductId] = useState(1);//Current Product id
+    const [productIds, setproductsIds] = useState([]); //Array contains all ids that was added to the checkout bag.
+    const [productQty, setProductQty] = useState(0);
+    const [totalProductQty, setTotalProductQty] = useState(0); //Total of Product Qty from the itempopup page
+    const [productPrice, setProductPrice] = useState(0);
+    const [productSize, setProductSize] = useState('');
 
-    const [checkoutCart, setCheckoutCart] = useState([])
+    const [checkoutCart, setCheckoutCart] = useState([]);
 
 
 
 
     const updateProductQty = (newQty) => {//function the updates the quantity 
         setProductQty(newQty)
-    }
+    };
 
     const getProductPrice = (currProdPrice) => {
         setProductPrice(currProdPrice)
-    }
+    };
 
     const getProductSize = (getProductSize) => {
         setProductSize(getProductSize)
-    }
+    };
 
 
 
@@ -64,7 +64,7 @@ const ItemDetailsContextProvider = (props) => {
         setCheckoutCart(getCart.data.payload)
         console.log(checkoutCart, "checkoutCart")
 
-    }
+    };
 
 
     return (
@@ -75,4 +75,4 @@ const ItemDetailsContextProvider = (props) => {
     );
 }
 
-export default ItemDetailsContextProvider
+export default ItemDetailsContextProvider;
