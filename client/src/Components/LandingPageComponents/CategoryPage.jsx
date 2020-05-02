@@ -6,10 +6,11 @@ import { Link, Route, Switch } from "react-router-dom";
 
 
 const CategoryPage = (props) =>{
-// const [category_id, setCategory_id] = useState('')
-// const [products, setProducts] = useState('')
+ const [category_id, setCategory_id] = useState(0)
 
-console.log('catergory id', props.match.params.type)
+const [products, setProducts] = useState('')
+
+setCategory_id(props.matcg.params.type)
 // useeffect to  make a network request to backend to get all stores/ products of that category. 
 
 useEffect(()=>{
