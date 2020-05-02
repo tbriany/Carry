@@ -107,5 +107,10 @@ const deleteStore = async (id) =>{
 };
 
 module.exports = {
-  getAllStores, getStoreById, addStore, updateStoreInfo, deleteStore, getStoreByZipCode
+  getAllStores, 
+  getStoreById, 
+  addStore, 
+  updateStoreInfo, 
+  deleteStore, 
+  getStoreByZipCode,
 };
