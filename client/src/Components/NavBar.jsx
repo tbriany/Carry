@@ -175,20 +175,11 @@ function Navbar() {
             >
               <AccountCircle />
             </IconButton>
-
-
-
-
-
-
-
             <Typography
               aria-owns={open ? "mouse-over-popover" : undefined}
               aria-haspopup="true"
               onMouseEnter={handlePopoverOpen}
               onMouseLeave={handlePopoverClose}
-            
-        
             >
               <Link to="/checkout">
                 <IconButton color="inherit">
@@ -220,31 +211,8 @@ function Navbar() {
             >
               <Typography>
                 <CartPopUp />
-
-
               </Typography>
             </Popover>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
           </div>
           <div className={classes.sectionMobile}>
             <IconButton
