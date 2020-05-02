@@ -26,7 +26,7 @@ const  CheckoutLanding = () => {
     return (
         <div className={classes.root}>
 
-        <Grid container spacing={3}>
+        <Grid container spacing={1}>
        
         <Grid item xs={8}>
         <Paper className={classes.paper}
@@ -40,7 +40,7 @@ const  CheckoutLanding = () => {
         <Grid style ={{
             
            height: "100%",
-           borderLeft: '1px solid beige'
+           borderLeft: '1px solid  #eed7c1'
         
         }}
         item xs={4}>
