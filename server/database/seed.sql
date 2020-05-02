@@ -100,9 +100,7 @@ CREATE TABLE checkoutCart(
     checkoutCart_id SERIAL PRIMARY KEY,
     product_id  INT REFERENCES products(product_id),
     size VARCHAR,
-    quantity INT,
-    totalPrice INT
-
+    quantity INT
 );
 
 -- Orders 
