@@ -17,7 +17,8 @@ const useStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(4),
         marginLeft: theme.spacing(5),
         marginRight: theme.spacing(5),
-        padding: theme.spacing(3)
+        padding: theme.spacing(3),
+        boxShadow: " 1px 1px 1px white",
     },
     header: {
         textDecoration: 'none',
@@ -101,7 +102,7 @@ const Checkout = () => {
                         </div>
                     </Fragment>
                 </Paper>
-            </main>
+            </main>  
         </Fragment>
     )
 }
