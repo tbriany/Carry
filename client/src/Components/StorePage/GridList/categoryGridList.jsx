@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect} from "react";
+import axios from "axios";
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
@@ -41,33 +42,22 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const tileData = [
-    {
-        img: 'https://www.marni.com/12/12386489MT_13_n_r.jpg',
-        title: 'Womens',
-        author: 'author'
-    }, 
-    {
-        img: 'https://nationalpostcom.files.wordpress.com/2018/07/tee1.jpg?quality=80&strip=all',
-        title: 'Mens',
-        author: 'author'
-    }, 
-    {
-        img: 'https://images.express.com/is/image/expressfashion/0036_05051421_1695?cache=on&wid=361&fmt=jpeg&qlt=75,1&resmode=sharp2&op_usm=1,1,5,0&defaultImage=Photo-Coming-Soon',
-        title: 'Beauty',
-        author: 'author'
-    }, 
-    {
-        img: 'https://nationalpostcom.files.wordpress.com/2018/07/tee1.jpg?quality=80&strip=all',
-        title: 'Accessories',
-        author: 'author'
-    }
-]
-
-
-
 export default function CategoriesGridList(props) {
   const classes = useStyles();
+
+  const [categories, setCategories] = useState([])
+
+  useEffect(async () => {
+  try {
+      const res = await axios.get(`/products/categories/all`)
+      setCategories(res.data.payload);
+  } catch (error) {
+      setCategories([])
+      console.log(error);
+  }
+}, [])
+
+// console.log(categories)
 
   return (
     <div className={classes.root} style={{margin: "20px", padding: "15px"}}>
@@ -75,10 +65,11 @@ export default function CategoriesGridList(props) {
          {props.listTitle}
         </Typography>
       <GridList className={classes.gridList} cols={4} cellHeight={300} spacing={10}>
-        {tileData.map((tile) => (
+        {categories.map((tile) => (
            <GridListTile key={tile.img}>
             <Link to={`/store/1/products`}>
-              <img src={tile.img} alt={tile.title} />
+              {/* <img src={tile.img} alt={tile.title} /> */}
+              <img src={tile.category_logo} alt={tile.category_logo} />
               <span className={classes.imageButton}>
                <Typography
                  component="span"
@@ -86,7 +77,8 @@ export default function CategoriesGridList(props) {
                  color="inherit"
                  className={classes.imageTitle}
                >
-                 {tile.title}
+                 {/* {tile.title} */}
+                 {tile.category_name}
                </Typography>
              </span>
                </Link>
