@@ -174,7 +174,7 @@ router.get("/new_arrivals/:store_id", async(req, res, next) => {
         const {store_id} = req.params
         const newArrivals = await productQueries.getNewArrivals(store_id);
         res.status(200).json({
-            message: `New Arrivals for brand: ${brand_id} retrieved.`,
+            message: `New Arrivals for brand: ${store_id} retrieved.`,
             payload: newArrivals
         });
     } catch (err) {
