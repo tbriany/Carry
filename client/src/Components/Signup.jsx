@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: theme.palette.secondary.main,
     },
     form: {
-        width: '100%', // Fix IE 11 issue.
+        width: '100%',
         marginTop: theme.spacing(3),
     },
     submit: {
@@ -43,7 +43,7 @@ const Signup = () => {
         lastname: '',
         error: false,
         errorText: ''
-    });;
+    });
     const [newCustomerEmail, setNewCustomerEmail] = useState({
         email: '',
         error: false,
@@ -93,6 +93,14 @@ const Signup = () => {
         checkValidPassword(customerPassword, handleNewPasswordError);
         checkEmptyInput(customerFirstname, handleInputError, 'first name');
         checkEmptyInput(customerLastname, handleInputError, 'last name');
+        let firstnameError = newFirstname.error;
+        let lastnameError = newLastname.error;
+        let emailError = newCustomerEmail.error;
+        let passwordError = newCustomerPassword.error;
+            console.log('firstname error: ', firstnameError);
+            console.log('lastname error: ', lastnameError);
+            console.log('email error: ', emailError);
+            console.log('password error: ', passwordError);
     };
     return (
         <Container component="main" maxWidth="xs">
@@ -129,6 +137,7 @@ const Signup = () => {
                                 name="lastName"
                                 autoComplete="lname"
                                 value={newLastname.lastname}
+                                onChange={handleNewCustomerInput('lastname')}
                                 error={newLastname.error}
                                 helperText={newLastname.errorText}
                             />

@@ -1,4 +1,5 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -8,11 +9,12 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, fade } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-// import { checkValidEmail, checkValidPassword } from "./inputHelpers";
+import { checkValidEmail, checkValidPassword } from "./util/inputHelpers";
 import InputAdornment from '@material-ui/core/InputAdornment';
 import CustomerContext from '../Contexts/CustomerContext';
+import customTheme from './styling/customTheme';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -29,14 +31,28 @@ const useStyles = makeStyles((theme) => ({
         width: '100%',
         marginTop: theme.spacing(1),
     },
+    textField: {
+        error: theme.palette.error.dark,
+        '& label.Mui-focused': {
+            color: customTheme.palette.secondary.dark,
+        },
+        '& .MuiOutlinedInput-root': {
+            '&.Mui-focused fieldset': {
+                borderColor: customTheme.palette.secondary.main
+            }
+        }
+    },
     submit: {
         margin: theme.spacing(3, 0, 2),
-        backgroundColor: 'cream'
+        backgroundColor: customTheme.palette.secondary.main,
+        '&:hover': {
+            backgroundColor: customTheme.palette.primary.main
+        }
     },
 }));
 
 const Login = () => {
-    const { customerDetails, logCustomerIn } = useContext(CustomerContext);
+    // const { customerDetails, logCustomerIn } = useContext(CustomerContext);
     const classes = useStyles();
     const [customerEmail, setCustomerEmail] = useState({
         email: '',
@@ -59,22 +75,20 @@ const Login = () => {
         setCustomerPassword({ ...customerPassword, error: bool, errorText: str })
     };
     const handlePasswordVisibility = () => {
-        setCustomerPassword({ ...customerPassword, showPassword:  !customerPassword.showPassword })
+        setCustomerPassword({ ...customerPassword, showPassword: !customerPassword.showPassword })
     };
     const handleWrongInputs = () => {
         console.log('Wrong email or password')
     };
     const handleNextPage = (customer) => {
         console.log(customer)
-        logCustomerIn(customer);
-        //error with logCustomerIn => function not working
     }
     const handleLogin = async (e) => {
         e.preventDefault();
         let email = customerEmail.email;
         let password = customerPassword.password;
-        // checkValidEmail(email, handleEmailError);
-        // checkValidPassword(password, handlePasswordError);
+        checkValidEmail(email, handleEmailError);
+        checkValidPassword(password, handlePasswordError);
         let emailError = customerEmail.error;
         let passwordError = customerPassword.error;
         if (!emailError && !passwordError) {
@@ -96,6 +110,7 @@ const Login = () => {
         </Typography>
                 <form className={classes.form} noValidate onSubmit={handleLogin}>
                     <TextField
+                        className={classes.textField}
                         variant="outlined"
                         margin="normal"
                         required
@@ -111,6 +126,7 @@ const Login = () => {
                         onChange={handleInputChange('email')}
                     />
                     <TextField
+                        className={classes.textField}
                         variant='outlined'
                         margin="normal"
                         required
@@ -125,13 +141,13 @@ const Login = () => {
                         helperText={customerPassword.errorText}
                         onChange={handleInputChange('password')}
                         InputProps={{
-                            endAdornment: 
-                            <InputAdornment position='end'>
-                                <IconButton
-                                    onClick={handlePasswordVisibility} >
-                                    {customerPassword.showPassword ? <VisibilityOff/> : <Visibility/>}
-                                </IconButton>
-                            </InputAdornment>
+                            endAdornment:
+                                <InputAdornment position='end'>
+                                    <IconButton
+                                        onClick={handlePasswordVisibility} >
+                                        {customerPassword.showPassword ? <VisibilityOff /> : <Visibility />}
+                                    </IconButton>
+                                </InputAdornment>
                         }}
                     />
                     <Button
@@ -145,7 +161,7 @@ const Login = () => {
                     </Button>
                     <Grid container>
                         <Grid item xs>
-                            <Link href="#" variant="body3">
+                            <Link to='/signup' href='/signup' variant="body3">
                                 {"Don't have an account? Sign Up"}
                             </Link>
                         </Grid>
