@@ -9,11 +9,12 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, fade } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-// import { checkValidEmail, checkValidPassword } from "./inputHelpers";
+import { checkValidEmail, checkValidPassword } from "./util/inputHelpers";
 import InputAdornment from '@material-ui/core/InputAdornment';
 import CustomerContext from '../Contexts/CustomerContext';
+import customTheme from './styling/customTheme';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -30,9 +31,23 @@ const useStyles = makeStyles((theme) => ({
         width: '100%',
         marginTop: theme.spacing(1),
     },
+    textField: {
+        error: theme.palette.error.dark,
+        '& label.Mui-focused': {
+            color: customTheme.palette.secondary.dark,
+        },
+        '& .MuiOutlinedInput-root': {
+            '&.Mui-focused fieldset': {
+                borderColor: customTheme.palette.secondary.main
+            }
+        }
+    },
     submit: {
         margin: theme.spacing(3, 0, 2),
-        backgroundColor: 'cream'
+        backgroundColor: customTheme.palette.secondary.main,
+        '&:hover': {
+            backgroundColor: customTheme.palette.primary.main
+        }
     },
 }));
 
@@ -60,7 +75,7 @@ const Login = () => {
         setCustomerPassword({ ...customerPassword, error: bool, errorText: str })
     };
     const handlePasswordVisibility = () => {
-        setCustomerPassword({ ...customerPassword, showPassword:  !customerPassword.showPassword })
+        setCustomerPassword({ ...customerPassword, showPassword: !customerPassword.showPassword })
     };
     const handleWrongInputs = () => {
         console.log('Wrong email or password')
@@ -72,8 +87,8 @@ const Login = () => {
         e.preventDefault();
         let email = customerEmail.email;
         let password = customerPassword.password;
-        // checkValidEmail(email, handleEmailError);
-        // checkValidPassword(password, handlePasswordError);
+        checkValidEmail(email, handleEmailError);
+        checkValidPassword(password, handlePasswordError);
         let emailError = customerEmail.error;
         let passwordError = customerPassword.error;
         if (!emailError && !passwordError) {
@@ -95,6 +110,7 @@ const Login = () => {
         </Typography>
                 <form className={classes.form} noValidate onSubmit={handleLogin}>
                     <TextField
+                        className={classes.textField}
                         variant="outlined"
                         margin="normal"
                         required
@@ -110,6 +126,7 @@ const Login = () => {
                         onChange={handleInputChange('email')}
                     />
                     <TextField
+                        className={classes.textField}
                         variant='outlined'
                         margin="normal"
                         required
@@ -124,13 +141,13 @@ const Login = () => {
                         helperText={customerPassword.errorText}
                         onChange={handleInputChange('password')}
                         InputProps={{
-                            endAdornment: 
-                            <InputAdornment position='end'>
-                                <IconButton
-                                    onClick={handlePasswordVisibility} >
-                                    {customerPassword.showPassword ? <VisibilityOff/> : <Visibility/>}
-                                </IconButton>
-                            </InputAdornment>
+                            endAdornment:
+                                <InputAdornment position='end'>
+                                    <IconButton
+                                        onClick={handlePasswordVisibility} >
+                                        {customerPassword.showPassword ? <VisibilityOff /> : <Visibility />}
+                                    </IconButton>
+                                </InputAdornment>
                         }}
                     />
                     <Button
