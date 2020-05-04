@@ -3,20 +3,9 @@ import axios from "axios";
 import Banner from './storeBanner';
 import CategoriesGridList from "./GridList/categoryGridList";
 import TypesGridList from "./GridList/typesGridList";
+import NewArrivalsGridList from "./GridList/newArrivalsGridList";
 
 function StorePage(props) {
-  const [categories, setCategories] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get(`/products/categories/all`)
-      .then((result) => {
-        setCategories(result.data.payload);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
 
   return (
     <div className="StorePage">
@@ -26,13 +15,16 @@ function StorePage(props) {
       <div>
         <CategoriesGridList 
         listTitle="Browse Categories"
-        categories={categories} />
+        />
       </div>
       <div>
         <TypesGridList listTitle="Shop By Type" />
       </div>
       <div>
-        <CategoriesGridList listTitle="New Arrivals" />
+        <NewArrivalsGridList 
+        listTitle="New Arrivals"
+        storeId={props.match.params.id}
+         />
       </div>
     </div>
   );
