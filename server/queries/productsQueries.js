@@ -183,7 +183,8 @@ const getSizes = async () => {
 
 const getNewArrivals = async (id) => {
     const getNewArrivalsQuery = `
-    SELECT products.product_id, products.product_name, products.product_price, products.product_description, products.quantity, brands.brand_name, categories.category_name, materials.material_name, colors.color_name, product_type.product_type_name, productImage_id.*,
+    SELECT products.product_id, products.product_name, products.product_price, products.product_description, products.quantity, products.store_id, 
+    brands.brand_name, categories.category_name, materials.material_name, colors.color_name, product_type.product_type_name, productImage_id.*,
     array_agg(sizes.product_size) AS product_size
     FROM products 
     JOIN brands ON brands.brand_id = products.brand_id
@@ -193,7 +194,7 @@ const getNewArrivals = async (id) => {
     JOIN product_type ON product_type.product_type_id = products.product_type
     JOIN  productImage_id  ON productImage_id.product_id = products.product_id
     JOIN sizes ON sizes.product_id = products.product_id 
-    WHERE brands.brand_id = 1
+    WHERE products.store_id = $1
     GROUP BY products.product_id, brands.brand_id, 
 categories.category_name,materials.material_name,colors.color_name, product_type.product_type_name,
     productimage_id.product_image_id
