@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const productQueries = require('../queries/productsQueries')
-
+const { handleErrors } = require('../helpers/helpers')
 
 router.get("/:id", async (req, res, next) => {
     try {
@@ -12,7 +12,7 @@ router.get("/:id", async (req, res, next) => {
             payload: productById
         });
     } catch (err) {
-        console.log("ERROR", err)
+        handleErrors(res, err);
     }
 });
 
@@ -25,7 +25,7 @@ router.get("/images/:id", async (req, res, next) => {
             payload: productImageById
         });
     } catch (err) {
-        console.log("ERROR", err)
+        handleErrors(res, err);
     }
 });
 
@@ -39,7 +39,7 @@ router.get("/type/:product_type", async (req, res, next) => {
             payload: productByType
         });
     } catch (err) {
-        console.log("ERROR", err)
+        handleErrors(res, err);
     }
 });
 
@@ -52,20 +52,20 @@ router.get("/name/:product_name", async (req, res, next) => {
             payload: productByName
         });
     } catch (err) {
-        console.log("ERROR", err)
+        handleErrors(res, err);
     }
 });
 
 router.get("/size/:size", async (req, res, next) => {
     try {
-        const size = parseInt(req.params.size)
+        const size = req.params.size
         const productBySize = await productQueries.getProductBySize(size);
         res.status(200).json({
             message: `Products by size: ${size} retrieved.`,
             payload: productBySize
         });
     } catch (err) {
-        console.log("ERROR", err)
+        handleErrors(res, err);
     }
 });
 
@@ -78,7 +78,7 @@ router.get("/color/:product_color", async (req, res, next) => {
             payload: productByColor
         });
     } catch (err) {
-        console.log("ERROR", err)
+        handleErrors(res, err);
     }
 });
 
@@ -91,7 +91,7 @@ router.get("/brand/:product_brand", async (req, res, next) => {
             payload: productByBrand
         });
     } catch (err) {
-        console.log("ERROR", err)
+        handleErrors(res, err);
     }
 });
 
@@ -104,8 +104,82 @@ router.get("/category/:product_category", async (req, res, next) => {
             payload: productByCategory
         });
     } catch (err) {
-        console.log("ERROR", err)
+        handleErrors(res, err);
     }
 });
+
+router.get("/categories/all", async (req, res, next) => {
+    try {
+        const categories = await productQueries.getCategories();
+        res.status(200).json({
+            message: `All Categories Retrieved`,
+            payload: categories
+        });
+    } catch (err) {
+        console.log("ERROR", err)
+    }
+})
+
+
+router.get("/product_types/all", async(req, res, next) => {
+    try {
+        const product_types = await productQueries.getProductTypes();
+        res.status(200).json({
+            message: `All Product Types Retrieved`,
+            payload: product_types
+        });
+    } catch (err) {
+        console.log("ERROR", err)
+    }
+})
+
+router.get("/brands/all", async(req, res, next) => {
+    try {
+        const brands = await productQueries.getBrands();
+        res.status(200).json({
+            message: `All Brands Retrieved`,
+            payload: brands
+        });
+    } catch (err) {
+        console.log("ERROR", err)
+    }
+})
+
+router.get("/colors/all", async(req, res, next) => {
+    try {
+        const colors = await productQueries.getColors();
+        res.status(200).json({
+            message: `All Colors Retrieved`,
+            payload: colors
+        });
+    } catch (err) {
+        console.log("ERROR", err)
+    }
+})
+
+router.get("/sizes/all", async(req, res, next) => {
+    try {
+        const sizes = await productQueries.getSizes();
+        res.status(200).json({
+            message: `All Sizes Retrieved`,
+            payload: sizes
+        });
+    } catch (err) {
+        console.log("ERROR", err)
+    }
+})
+
+router.get("/new_arrivals/:brand_id", async(req, res, next) => {
+    try {
+        const {brand_id} = req.params
+        const newArrivals = await productQueries.getNewArrivals(brand_id);
+        res.status(200).json({
+            message: `New Arrivals for brand: ${brand_id} retrieved.`,
+            payload: newArrivals
+        });
+    } catch (err) {
+        console.log("ERROR", err)
+    }
+})
 
 module.exports = router;

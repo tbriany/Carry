@@ -2,7 +2,7 @@ const db = require("../database/db");
 
 const getAllFromCart = async () => {
     const getAllQueries = `
-    SELECT checkoutCart.checkoutcart_id,checkoutCart.size, checkoutCart.product_id , checkoutCart.quantity As cartQuantity, checkoutCart.totalPrice, productImage_id.*,brands.brand_name, products.*, colors.color_name, materials.material_name
+    SELECT checkoutCart.checkoutcart_id,checkoutCart.size, checkoutCart.product_id , checkoutCart.quantity As cartQuantity, productImage_id.*,brands.brand_name, products.*, colors.color_name, materials.material_name
     FROM products
     JOIN checkoutCart ON products.product_id = checkoutCart.product_id 
     JOIN colors ON  products.color_id  = colors.color_id
@@ -15,7 +15,7 @@ const getAllFromCart = async () => {
 
 const getCheckoutCartId = async (id) => {
     const getQuery = `
-    SELECT checkoutCart.checkoutcart_id, checkoutCart.product_id , checkoutCart.size, checkoutCart.quantity As cartQuantity, checkoutCart.totalPrice, productImage_id.*,brands.brand_name, products.*, colors.color_name, materials.material_name
+    SELECT checkoutCart.checkoutcart_id, checkoutCart.product_id , checkoutCart.size, checkoutCart.quantity As cartQuantity,  productImage_id.*,brands.brand_name, products.*, colors.color_name, materials.material_name
     FROM products
     JOIN checkoutCart ON products.product_id = checkoutCart.product_id 
     JOIN colors ON  products.color_id  = colors.color_id
@@ -32,14 +32,12 @@ const addToCart = async (bodyObj) => {
       INSERT INTO checkoutCart (
         product_id ,
         size,
-        quantity,
-        totalPrice
+        quantity
       )
       VALUES (
           $/product_id/,
           $/size/,
-          $/quantity/,
-          $/totalPrice/
+          $/quantity/
     
       )
       RETURNING *
@@ -52,8 +50,7 @@ const updateCheckoutCart = async (updateObj) => {
     UPDATE checkoutCart
     SET product_id = $/product_id/,
     size = $/size/,
-    quantity = $/quantity/,
-    totalPrice = $/totalPrice/
+    quantity = $/quantity/
      RETURNING *
       
   `;

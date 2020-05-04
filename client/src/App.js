@@ -12,18 +12,19 @@ import CustomerContextProvider from './Contexts/CustomerContext';
 import Login from './Components/Login';
 import Signup from './Components/Signup';
 import StorePage from './Components/StorePage/storePage';
-import ProductsPage from './Components/StorePage/productsPage';
+import ProductsPage from './Components/ProductPage/productsPage';
+import CheckoutLanding from './Components/CheckoutLanding.jsx'
+
 
 function App() {
   return (
     <div className="App">
       <ItemDetailsContextProvider>
       <CustomerContextProvider>
-   
         <Navbar />
       <Switch>
           <Route exact path="/" component={Landing} />
-          <Route exact path="/checkout" component={Checkout} />
+          <Route exact path="/checkout" component={CheckoutLanding} />
           <Route exact path="/popup" component={ItemPopUp} />
           <Route exact path="/login" component={Login}/>
           <Route exact path="/signup" component={Signup}/>
@@ -31,7 +32,6 @@ function App() {
           <Route exact path="/store/:id" component={StorePage} />
           <Route exact path="/store/:id/products" component={ProductsPage} />
       </Switch>
-    
      </CustomerContextProvider>
      </ItemDetailsContextProvider>
     </div>
