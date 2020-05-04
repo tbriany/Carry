@@ -74,6 +74,7 @@ CREATE TABLE products(
     product_id SERIAL PRIMARY KEY,
     product_name VARCHAR,
     brand_id INT REFERENCES brands(brand_id),
+    store_id INT REFERENCES stores(store_id),
     category_id INT REFERENCES categories(category_id),
     product_price INT,
     material_id INT REFERENCES materials(material_id),
@@ -269,10 +270,10 @@ VALUES
 ('Nude');
 
 INSERT INTO products
-(product_name, brand_id, category_id, product_price, material_id, color_id, product_description, product_type, quantity)
+(product_name, brand_id, store_id, category_id, product_price, material_id, color_id, product_description, product_type, quantity)
 VALUES 
-('Milan Leather Backpack', 1, 4, 200.00, 5 , 1, 'Small leather backpack. Made in Peru.', 28, 5), 
-('Milan Mini Backpack', 1, 4, 150.00, 5, 13, 'Mini leather backpack. Made in Peru.', 28, 5);
+('Milan Leather Backpack', 1, 1, 4, 200.00, 5 , 1, 'Small leather backpack. Made in Peru.', 28, 5), 
+('Milan Mini Backpack', 1, 1, 4, 150.00, 5, 13, 'Mini leather backpack. Made in Peru.', 28, 5);
 
 
 
