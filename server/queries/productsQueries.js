@@ -16,7 +16,6 @@ const getProductImageById = async (id) => {
     WHERE products.product_id = $/id/
     GROUP BY products.product_id, brands.brand_id, categories.category_name,materials.material_name,colors.color_name, product_type.product_type_name,
     productimage_id.product_image_id
-    
     `
     return await db.one(getQuery, { id });
 }
@@ -172,12 +171,33 @@ const getSizes = async () => {
     return await db.any(getSizesQuery);
 };
 
+// const getNewArrivals = async (id) => {
+//     const getNewArrivalsQuery = `
+//     SELECT *
+//     FROM products
+//     WHERE brand_id = $1
+//     ORDER BY product_id DESC LIMIT 4;
+//     `;
+//     return await db.any(getNewArrivalsQuery, [id])
+// }
+
 const getNewArrivals = async (id) => {
     const getNewArrivalsQuery = `
-    SELECT *
-    FROM products
-    WHERE brand_id = $1
-    ORDER BY product_id DESC LIMIT 4;
+    SELECT products.product_id, products.product_name, products.product_price, products.product_description, products.quantity, brands.brand_name, categories.category_name, materials.material_name, colors.color_name, product_type.product_type_name, productImage_id.*,
+    array_agg(sizes.product_size) AS product_size
+    FROM products 
+    JOIN brands ON brands.brand_id = products.brand_id
+    JOIN categories ON categories.category_id = products.category_id
+    JOIN materials ON materials.material_id = products.material_id
+    JOIN colors ON colors.color_id = products.color_id
+    JOIN product_type ON product_type.product_type_id = products.product_type
+    JOIN  productImage_id  ON productImage_id.product_id = products.product_id
+    JOIN sizes ON sizes.product_id = products.product_id 
+    WHERE brands.brand_id = 1
+    GROUP BY products.product_id, brands.brand_id, 
+categories.category_name,materials.material_name,colors.color_name, product_type.product_type_name,
+    productimage_id.product_image_id
+    ORDER BY products.product_id DESC LIMIT 4
     `;
     return await db.any(getNewArrivalsQuery, [id])
 }
