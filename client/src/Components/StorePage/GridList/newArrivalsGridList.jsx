@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
   imageTitle: {
     position: 'relative',
     padding: `${theme.spacing(2)}px ${theme.spacing(4)}px ${theme.spacing(1) + 6}px`,
-    backgroundColor: 'white',
+    backgroundColor: 'rgba(255, 255, 255, 0.54)',
     fontWeight: 'bold'
   }
 }));
@@ -68,7 +68,7 @@ console.log(newArrivals)
       <GridList className={classes.gridList} cols={4} cellHeight={300} spacing={10}>
         {newArrivals.map((tile) => (
            <GridListTile key={tile.img}>
-            <Link to={`/store/1/products`}>
+            <Link to={`/popup/${tile.product_id}`}>
             <Box display="flex" justifyContent="center">
               <img src={tile.product_image_url} alt={tile.product_name} />
               <span className={classes.imageButton}>
