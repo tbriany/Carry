@@ -17,6 +17,9 @@ import CustomerContext from '../Contexts/CustomerContext';
 import customTheme from './styling/customTheme';
 
 const useStyles = makeStyles((theme) => ({
+    header: {
+        color: customTheme.palette.secondary.dark
+    },
     paper: {
         marginTop: theme.spacing(8),
         display: 'flex',
@@ -32,11 +35,15 @@ const useStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(1),
     },
     textField: {
+        label: customTheme.palette.secondary.dark,
         error: theme.palette.error.dark,
         '& label.Mui-focused': {
             color: customTheme.palette.secondary.dark,
         },
         '& .MuiOutlinedInput-root': {
+            '& fieldset': {
+                borderColor: customTheme.palette.secondary.main
+            },
             '&.Mui-focused fieldset': {
                 borderColor: customTheme.palette.secondary.main
             }
@@ -49,6 +56,9 @@ const useStyles = makeStyles((theme) => ({
             backgroundColor: customTheme.palette.primary.main
         }
     },
+    signupLink: {
+        color: customTheme.palette.secondary.dark
+    }
 }));
 
 const Login = () => {
@@ -105,8 +115,8 @@ const Login = () => {
         <Container component="main" maxWidth="xs">
             <CssBaseline />
             <div className={classes.paper}>
-                <Typography component="h1" variant="h5">
-                    Sign in
+                <Typography component="h1" variant="h5" className={classes.header}>
+                    SIGN IN
         </Typography>
                 <form className={classes.form} noValidate onSubmit={handleLogin}>
                     <TextField
@@ -161,7 +171,7 @@ const Login = () => {
                     </Button>
                     <Grid container>
                         <Grid item xs>
-                            <Link to='/signup' href='/signup' variant="body3">
+                            <Link to='/signup' href='/signup' variant="body3" className={classes.signupLink}>
                                 {"Don't have an account? Sign Up"}
                             </Link>
                         </Grid>
