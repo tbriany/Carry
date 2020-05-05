@@ -43,7 +43,8 @@ CREATE TABLE couriers(
 
 CREATE TABLE categories(
     category_id SERIAL PRIMARY KEY,
-    category_name VARCHAR
+    category_name VARCHAR,
+    category_logo VARCHAR
 );
 
 CREATE TABLE product_type(
@@ -73,6 +74,7 @@ CREATE TABLE products(
     product_id SERIAL PRIMARY KEY,
     product_name VARCHAR,
     brand_id INT REFERENCES brands(brand_id),
+    store_id INT REFERENCES stores(store_id),
     category_id INT REFERENCES categories(category_id),
     product_price INT,
     material_id INT REFERENCES materials(material_id),
@@ -186,12 +188,12 @@ INSERT INTO couriers
 VALUES ('Jacob', 'Smith', '(347)-555-5553', 'Smith@courier.com', 'img', 'jacobsmith', 'bike');
 
 INSERT INTO categories 
-(category_name)
+(category_name, category_logo)
 VALUES 
-('Women''s Clothing'), 
-('Men''s Clothing'), 
-('Beauty'), 
-('Accessories');
+('Women''s', 'https://cdn1.dotesports.com/wp-content/uploads/2018/11/23152339/Hangzhou-Spark1.jpg'), 
+('Men''s', 'https://www.aljazeera.com/mritems/Images/2019/6/13/ce0ece26ee1348f2b1c453f314dc0a6e_18.jpg'), 
+('Beauty', 'https://www.lovearoma.co.uk/blog/wp-content/uploads/2015/05/bg-red-carpet.jpg'), 
+('Accessories', 'https://static.bhphoto.com/images/images500x500/1391171441_1026417.jpg');
 
 INSERT INTO product_type
 (category_id, product_type_name)
@@ -266,10 +268,10 @@ VALUES
 ('Nude');
 
 INSERT INTO products
-(product_name, brand_id, category_id, product_price, material_id, color_id, product_description, product_type, quantity)
+(product_name, brand_id, store_id, category_id, product_price, material_id, color_id, product_description, product_type, quantity)
 VALUES 
-('Milan Leather Backpack', 1, 4, 200.00, 5 , 1, 'Small leather backpack. Made in Peru.', 28, 5), 
-('Milan Mini Backpack', 1, 4, 150.00, 5, 13, 'Mini leather backpack. Made in Peru.', 28, 5);
+('Milan Leather Backpack', 1, 1, 4, 200.00, 5 , 1, 'Small leather backpack. Made in Peru.', 28, 5), 
+('Milan Mini Backpack', 1, 1, 4, 150.00, 5, 13, 'Mini leather backpack. Made in Peru.', 28, 5);
 
 
 

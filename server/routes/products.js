@@ -95,10 +95,10 @@ router.get("/brand/:product_brand", async (req, res, next) => {
     }
 });
 
-router.get("/category/:product_category", async (req, res, next) => {
+router.get("/category/:product_category/:store_id", async (req, res, next) => {
     try {
-        const {product_category} = req.params
-        const productByCategory= await productQueries.getProductByCategory(product_category);
+        const {product_category, store_id} = req.params
+        const productByCategory= await productQueries.getProductByCategory(product_category, store_id);
         res.status(200).json({
             message: `Products by category: ${product_category} retrieved.`,
             payload: productByCategory
@@ -169,12 +169,12 @@ router.get("/sizes/all", async(req, res, next) => {
     }
 })
 
-router.get("/new_arrivals/:brand_id", async(req, res, next) => {
+router.get("/new_arrivals/:store_id", async(req, res, next) => {
     try {
-        const {brand_id} = req.params
-        const newArrivals = await productQueries.getNewArrivals(brand_id);
+        const {store_id} = req.params
+        const newArrivals = await productQueries.getNewArrivals(store_id);
         res.status(200).json({
-            message: `New Arrivals for brand: ${brand_id} retrieved.`,
+            message: `New Arrivals for brand: ${store_id} retrieved.`,
             payload: newArrivals
         });
     } catch (err) {
