@@ -67,8 +67,7 @@ export default function CategoriesGridList(props) {
       <GridList className={classes.gridList} cols={4} cellHeight={300} spacing={10}>
         {categories.map((tile) => (
            <GridListTile key={tile.img}>
-            <Link to={`/store/1/products`}>
-              {/* <img src={tile.img} alt={tile.title} /> */}
+            <Link to={`/store/${props.storeId}/${tile.category_name}`}>
               <img src={tile.category_logo} alt={tile.category_logo} />
               <span className={classes.imageButton}>
                <Typography
@@ -77,7 +76,6 @@ export default function CategoriesGridList(props) {
                  color="inherit"
                  className={classes.imageTitle}
                >
-                 {/* {tile.title} */}
                  {tile.category_name}
                </Typography>
              </span>
