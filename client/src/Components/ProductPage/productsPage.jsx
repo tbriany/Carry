@@ -14,7 +14,10 @@ function ProductsPage(props) {
        />
       <MultipleSelect/>
       <br></br>
-      <ProductsDisplay/>
+      <ProductsDisplay
+      storeId={props.match.params.id}
+      categoryName={props.match.params.category_name}
+      />
     </div>
   );
 }
