@@ -11,8 +11,12 @@ import Container from '@material-ui/core/Container';
 import { checkValidEmail, checkValidPassword, checkEmptyInput } from './util/inputHelpers';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
 import { InputAdornment, IconButton } from '@material-ui/core';
+import customTheme from './styling/customTheme';
 
 const useStyles = makeStyles((theme) => ({
+    header: {
+        color: customTheme.palette.secondary.dark
+    },
     paper: {
         marginTop: theme.spacing(8),
         display: 'flex',
@@ -27,9 +31,31 @@ const useStyles = makeStyles((theme) => ({
         width: '100%',
         marginTop: theme.spacing(3),
     },
+    textField: {
+        label: customTheme.palette.secondary.dark,
+        error: theme.palette.error.dark,
+        '& label.Mui-focused': {
+            color: customTheme.palette.secondary.dark,
+        },
+        '& .MuiOutlinedInput-root': {
+            '& fieldset': {
+                borderColor: customTheme.palette.secondary.main
+            },
+            '&.Mui-focused fieldset': {
+                borderColor: customTheme.palette.secondary.main
+            }
+        }
+    },
     submit: {
         margin: theme.spacing(3, 0, 2),
+        backgroundColor: customTheme.palette.secondary.main,
+        '&:hover': {
+            backgroundColor: customTheme.palette.primary.main
+        }
     },
+    signinLink: {
+        color: customTheme.palette.secondary.dark
+    }
 }));
 
 const Signup = () => {
@@ -67,7 +93,7 @@ const Signup = () => {
                 setFirstname({ ...newFirstname, [key]: e.target.value })
                 break;
             case 'lastname':
-                setLastname({...newLastname, [key]: e.target.value})
+                setLastname({ ...newLastname, [key]: e.target.value })
                 break;
         }
     };
@@ -78,7 +104,7 @@ const Signup = () => {
         setNewCustomerPassword({ ...newCustomerPassword, error: bool, errorText: str })
     };
     const handleInputError = (bool, str, input) => {
-        input === 'first name' ? setFirstname({...newFirstname, error: bool, errorText: str}) : setLastname({...newLastname, error: bool, errorText: str})
+        input === 'first name' ? setFirstname({ ...newFirstname, error: bool, errorText: str }) : setLastname({ ...newLastname, error: bool, errorText: str })
     };
     const handleNewPasswordVisibility = () => {
         setNewCustomerPassword({ ...newCustomerPassword, showPassword: !newCustomerPassword.showPassword })
@@ -97,22 +123,23 @@ const Signup = () => {
         let lastnameError = newLastname.error;
         let emailError = newCustomerEmail.error;
         let passwordError = newCustomerPassword.error;
-            console.log('firstname error: ', firstnameError);
-            console.log('lastname error: ', lastnameError);
-            console.log('email error: ', emailError);
-            console.log('password error: ', passwordError);
+        console.log('firstname error: ', firstnameError);
+        console.log('lastname error: ', lastnameError);
+        console.log('email error: ', emailError);
+        console.log('password error: ', passwordError);
     };
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline />
             <div className={classes.paper}>
-                <Typography component="h1" variant="h5">
-                    Sign up
+                <Typography component="h1" variant="h5" className={classes.header}>
+                    SIGN UP
                   </Typography>
                 <form className={classes.form} noValidate onSubmit={handleSubmit}>
                     <Grid container spacing={2}>
                         <Grid item xs={12} sm={12}>
                             <TextField
+                                className={classes.textField}
                                 autoComplete="fname"
                                 name="firstName"
                                 variant="outlined"
@@ -129,6 +156,7 @@ const Signup = () => {
                         </Grid>
                         <Grid item xs={12} sm={12}>
                             <TextField
+                                className={classes.textField}
                                 variant="outlined"
                                 required
                                 fullWidth
@@ -144,6 +172,7 @@ const Signup = () => {
                         </Grid>
                         <Grid item xs={12}>
                             <TextField
+                                className={classes.textField}
                                 variant="outlined"
                                 required
                                 fullWidth
@@ -159,6 +188,7 @@ const Signup = () => {
                         </Grid>
                         <Grid item xs={12}>
                             <TextField
+                                className={classes.textField}
                                 variant="outlined"
                                 required
                                 fullWidth
@@ -195,7 +225,7 @@ const Signup = () => {
                     </Button>
                     <Grid container justify="flex-end">
                         <Grid item>
-                            <Link href="/login" to='/login' variant="body2">
+                            <Link href="/login" to='/login' variant="body2" className={classes.signinLink}>
                                 Already have an account? Sign in
                         </Link>
                         </Grid>
