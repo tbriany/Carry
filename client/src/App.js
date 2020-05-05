@@ -25,12 +25,12 @@ function App() {
       <Switch>
           <Route exact path="/" component={Landing} />
           <Route exact path="/checkout" component={CheckoutLanding} />
-          <Route exact path="/popup" component={ItemPopUp} />
+          <Route exact path="/popup/:product_id" component={ItemPopUp} />
           <Route exact path="/login" component={Login}/>
           <Route exact path="/signup" component={Signup}/>
           <Route exact path="/categories/:type" component={CategoryPage}/>
           <Route exact path="/store/:id" component={StorePage} />
-          <Route exact path="/store/:id/products" component={ProductsPage} />
+          <Route path="/store/:id/:category_name" component={ProductsPage} />
       </Switch>
      </CustomerContextProvider>
      </ItemDetailsContextProvider>
