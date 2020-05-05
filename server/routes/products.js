@@ -95,10 +95,10 @@ router.get("/brand/:product_brand", async (req, res, next) => {
     }
 });
 
-router.get("/category/:product_category", async (req, res, next) => {
+router.get("/category/:product_category/:store_id", async (req, res, next) => {
     try {
-        const {product_category} = req.params
-        const productByCategory= await productQueries.getProductByCategory(product_category);
+        const {product_category, store_id} = req.params
+        const productByCategory= await productQueries.getProductByCategory(product_category, store_id);
         res.status(200).json({
             message: `Products by category: ${product_category} retrieved.`,
             payload: productByCategory
