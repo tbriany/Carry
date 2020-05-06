@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
@@ -48,42 +48,46 @@ export default function NewArrivalsGridList(props) {
 
   const [newArrivals, setNewArrivals] = useState([])
 
-  useEffect(async () => {
-  try {
-      const res = await axios.get(`/products/new_arrivals/${props.storeId}`)
-      setNewArrivals(res.data.payload);
-  } catch (error) {
-      setNewArrivals([])
-      console.log(error);
-  }
-}, [])
 
-console.log(newArrivals)
+  useEffect(() => {
+    const getProductInfo = async () => {
+      try {
+        const res = await axios.get(`/products/new_arrivals/${props.storeId}`)
+        setNewArrivals(res.data.payload);
+      } catch (error) {
+        setNewArrivals([])
+        console.log(error);
+      }
+    }
+    getProductInfo()
+  }, [])
+
+  console.log(newArrivals)
 
   return (
-    <div className={classes.root} style={{margin: "20px", padding: "15px"}}>
-        <Typography variant='h4' display='block' paragraph='true'>
-         {props.listTitle}
-        </Typography>
+    <div className={classes.root} style={{ margin: "20px", padding: "15px" }}>
+      <Typography variant='h4' display='block' paragraph='true'>
+        {props.listTitle}
+      </Typography>
       <GridList className={classes.gridList} cols={4} cellHeight={300} spacing={10}>
         {newArrivals.map((tile) => (
-           <GridListTile key={tile.img}>
+          <GridListTile key={tile.img}>
             <Link to={`/popup/${tile.product_id}`}>
-            <Box display="flex" justifyContent="center">
-              <img src={tile.product_image_url} alt={tile.product_name} />
-              <span className={classes.imageButton}>
-               <Typography
-                 component="span"
-                 variant="subtitle1"
-                 color="inherit"
-                 className={classes.imageTitle}
-               >
-                 {tile.product_name}
-               </Typography>
-             </span>
-             </Box>
-               </Link>
-             </GridListTile>
+              <Box display="flex" justifyContent="center">
+                <img src={tile.product_image_url} alt={tile.product_name} />
+                <span className={classes.imageButton}>
+                  <Typography
+                    component="span"
+                    variant="subtitle1"
+                    color="inherit"
+                    className={classes.imageTitle}
+                  >
+                    {tile.product_name}
+                  </Typography>
+                </span>
+              </Box>
+            </Link>
+          </GridListTile>
         ))}
       </GridList>
     </div>
