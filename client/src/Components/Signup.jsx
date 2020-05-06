@@ -41,6 +41,9 @@ const useStyles = makeStyles((theme) => ({
             '& fieldset': {
                 borderColor: customTheme.palette.secondary.main
             },
+            '&:hover fieldset': {
+                borderColor: customTheme.palette.secondary.light,
+            },
             '&.Mui-focused fieldset': {
                 borderColor: customTheme.palette.secondary.main
             }
@@ -55,6 +58,12 @@ const useStyles = makeStyles((theme) => ({
     },
     signinLink: {
         color: customTheme.palette.secondary.dark
+    },
+    iconStyle: {
+        color: customTheme.palette.secondary.light,
+        '&:hover': {
+            color: customTheme.palette.secondary.main
+        }
     }
 }));
 
@@ -205,7 +214,7 @@ const Signup = () => {
                                     endAdornment:
                                         <InputAdornment position='end'
                                         >
-                                            <IconButton onClick={handleNewPasswordVisibility}>
+                                            <IconButton onClick={handleNewPasswordVisibility} className={classes.iconStyle}>
                                                 {newCustomerPassword.showPassword ? <Visibility /> : <VisibilityOff />}
                                             </IconButton>
                                         </InputAdornment>
