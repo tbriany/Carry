@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function NewArrivalsGridList(props) {
+export default function NewArrivalsGridList({listTitle, storeId}) {
     const classes = useStyles();
 
     const [newArrivals, setNewArrivals] = useState([])
@@ -51,7 +51,7 @@ export default function NewArrivalsGridList(props) {
     useEffect(() => {
         async function fetchData() {
             try {
-                const res = await axios.get(`/products/new_arrivals/${props.storeId}`)
+                const res = await axios.get(`/products/new_arrivals/${storeId}`)
                 setNewArrivals(res.data.payload);
             } catch (error) {
                 setNewArrivals([])
@@ -59,14 +59,14 @@ export default function NewArrivalsGridList(props) {
             }
         }
         fetchData()
-    }, [])
+    }, [storeId])
 
     // console.log(newArrivals)
 
     return (
         <div className={classes.root} style={{ margin: "20px", padding: "15px" }}>
             <Typography variant='h4' display='block' paragraph='true'>
-                {props.listTitle}
+                {listTitle}
             </Typography>
             <GridList className={classes.gridList} cols={4} cellHeight={300} spacing={10}>
                 {newArrivals.map((tile) => (

@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ProductsDisplay(props) {
+export default function ProductsDisplay({categoryName, storeId}) {
   const classes = useStyles();
 
   const [products, setProducts] = useState([])
@@ -23,7 +23,7 @@ export default function ProductsDisplay(props) {
   useEffect(() => {
     async function fetchData() {
         try {
-            const res = await axios.get(`/products/category/${props.categoryName}/${props.storeId}`)
+            const res = await axios.get(`/products/category/${categoryName}/${storeId}`)
             setProducts(res.data.payload);
         } catch (error) {
             setProducts([])
@@ -31,11 +31,9 @@ export default function ProductsDisplay(props) {
         }
     }
   fetchData()
-}, [])
+}, [categoryName, storeId])
 
-
-
-console.log(products)
+// console.log(products)
 
   return (
     <div className={classes.root} style={{margin: '20px', padding: '15px'}}>
