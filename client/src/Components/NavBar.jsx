@@ -14,11 +14,34 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import Popover from '@material-ui/core/Popover';
+import customTheme from './styling/customTheme';
+import CartPopUp from './CartPopUp';
 
-import CartPopUp from './CartPopUp'
+
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
+    // 'a:-webkit-any-link' : {
+    //   textDecoration: 'none'
+    // }
+  },
+  appBar: {
+    backgroundColor: customTheme.palette.primary.main,
+    '.MuiAppBar-colorPrimary': {
+      color: customTheme.palette.secondary.dark
+    },
+    '.MuiSvgIcon-root': {
+      color: customTheme.palette.secondary.dark
+    },
+  },
+  customerMenu: {
+    color: customTheme.palette.secondary.dark,
+    'a:link': {
+      textDecoration: 'none'
+    }
+  },
+  iconStyling: {
+    color: customTheme.palette.secondary.dark
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -77,7 +100,6 @@ function Navbar() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
-
   const handlePopoverOpen = (event) => {
     setPopOver(event.currentTarget);
   };
@@ -99,11 +121,12 @@ function Navbar() {
       transformOrigin={{ vertical: 'top', horizontal: 'right' }}
       open={isMenuOpen}
       onClose={handleMenuClose}
+      className={classes.iconStyling}
     >
-      <MenuItem onClick={handleMenuClose}><Link to='/signup'>Sign Up</Link></MenuItem>
-      <MenuItem onClick={handleMenuClose}><Link to='/login'>Log In</Link></MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My orders</MenuItem>
+      <MenuItem onClick={handleMenuClose} className={classes.customerMenu}><Link to='/signup' style={{ textDecoration: 'none', color: customTheme.palette.secondary.dark }}>Sign Up</Link></MenuItem>
+      <MenuItem onClick={handleMenuClose} className={classes.customerMenu}><Link to='/login' style={{ textDecoration: 'none', color: customTheme.palette.secondary.dark }}>Log In</Link></MenuItem>
+      <MenuItem onClick={handleMenuClose} className={classes.customerMenu}>My account</MenuItem>
+      <MenuItem onClick={handleMenuClose} className={classes.customerMenu}>My orders</MenuItem>
     </Menu>
   );
 
@@ -119,15 +142,14 @@ function Navbar() {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <IconButton color="inherit">
+        <IconButton className={classes.iconStyling}>
           <ExploreIcon />
         </IconButton>
         <p>Explore</p>
       </MenuItem>
 
-
       <MenuItem>
-        <IconButton color="inherit">
+        <IconButton className={classes.iconStyling} >
           {/* <Badge badgeContent={11} color="secondary"> */}
           <ShoppingCartIcon />
           {/* </Badge> */}
@@ -142,7 +164,7 @@ function Navbar() {
           aria-label="account of current user"
           aria-controls="primary-search-account-menu"
           aria-haspopup="true"
-          color="inherit"
+          className={classes.iconStyling}
         >
           <AccountCircle />
         </IconButton>
@@ -153,16 +175,20 @@ function Navbar() {
 
   return (
     <div className={classes.grow}>
-      <AppBar position="static" color="white">
+      <AppBar position="static" className={classes.appBar}>
         <Toolbar>
-          <Link to='/'>
-            <Typography className={classes.title} variant="h6" noWrap>
+          <Link to='/' 
+          style={{ textDecoration: 'none', color: customTheme.palette.secondary.dark }}>
+            <Typography 
+            className={classes.title} 
+            variant="h6" noWrap >
               CARRY
         </Typography>
           </Link>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <IconButton color="inherit">
+            <IconButton
+              color={customTheme.palette.secondary.main}>
               <ExploreIcon />
             </IconButton>
             <IconButton
@@ -171,7 +197,7 @@ function Navbar() {
               aria-controls={menuId}
               aria-haspopup="true"
               onClick={handleProfileMenuOpen}
-              color="inherit"
+              color={customTheme.palette.secondary.main}
             >
               <AccountCircle />
             </IconButton>
@@ -182,7 +208,7 @@ function Navbar() {
               onMouseLeave={handlePopoverClose}
             >
               <Link to="/checkout">
-                <IconButton color="inherit">
+                <IconButton color={customTheme.palette.secondary.main}>
                   <ShoppingCartIcon />
                 </IconButton>
               </Link>
@@ -207,7 +233,7 @@ function Navbar() {
               }}
               onClose={handlePopoverClose}
               disableRestoreFocus
-              
+
             >
               <Typography>
                 <CartPopUp />
