@@ -6,15 +6,17 @@ function Banner({storeId}) {
   const [store, setStore] = useState([]);
 
   useEffect(() => {
-    axios
-      .get(`/stores/${storeId}`)
-      .then((result) => {
-        setStore(result.data.payload);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+    async function fetchData() {
+        try {
+            const res = await axios.get(`/stores/${storeId}`)
+            setStore(res.data.payload);
+        } catch (error) {
+            setStore([])
+            console.log(error);
+        }
+    }
+  fetchData()
+}, [setStore, storeId])
 
   return (
     <div className="BannerDiv" style={{textAlign: "center"}}>

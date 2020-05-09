@@ -5,39 +5,24 @@ export const CustomerContext = createContext();
 //calls all hooks that set information to empty/null
 
 const CustomerContextProvider = (props) => {
-    const noCustomer = {
-        id: null,
-        firstname: null,
-        lastname: null,
-        phone_number: null,
-        email: null,
-        address: null,
-        city: null,
-        state: null,
-        zip_code: null,
-        avatar_url: null,
-    }
-    const [customerDetails, setCustomerDetails] = useState(noCustomer);
+    const [customerId, setCustomerId] = useState(null);
+    const [customerFirstname, setCustomerFirstname] = useState(null);
+    const [customerLastname, setCustomerLastname] = useState(null);
+    const [customerPhoneNumber, setCustomerPhoneNumber] = useState(null);
+    const [customerEmail, setCustomerEmail] = useState(null);
+    const [customerAddress, setCustomerAddress] = useState(null);
+    const [customerCity, setCustomerCity] = useState(null);
+    const [customerState, setCustomerState] = useState(null);
+    const [customerZip, setCustomerZip] = useState(null);
+    const [customerAvatar, setCustomeAvatar] = useState(null);
+
     const logCustomerIn = (customerObj) => {
-        const {id, firstname, lastname, phone_number, email, address, city, state, zip_code, avatar_url} = customerObj;
-        console.log("LOG CUSTOMER IN WORKING IN CONTEXT FILE")
-        setCustomerDetails({
-            id,
-            firstname,
-            lastname,
-            phone_number,
-            email,
-            address,
-            city,
-            state,
-            zip_code,
-            avatar_url,
-        });
-    } 
-    return(
-        <CustomerContext.Provider value={{customerDetails, logCustomerIn}}>
-            {props.children}
-            </CustomerContext.Provider>
+        console.log("LOG CUSTOMER IN WORKING IN CONTEXT FILE");
+    }
+    return (
+        <CustomerContext.Provider value={{logCustomerIn}}>
+            { props.children }
+            </CustomerContext.Provider >
     ) 
 };
 export default CustomerContextProvider;

@@ -50,7 +50,8 @@ CREATE TABLE categories(
 CREATE TABLE product_type(
     product_type_id SERIAL PRIMARY KEY,
     category_id INT REFERENCES categories(category_id),
-    product_type_name VARCHAR
+    product_type_name VARCHAR,
+    product_type_logo VARCHAR
 );
 
 CREATE TABLE materials(
@@ -196,44 +197,44 @@ VALUES
 ('Accessories', 'https://static.bhphoto.com/images/images500x500/1391171441_1026417.jpg');
 
 INSERT INTO product_type
-(category_id, product_type_name)
+(category_id, product_type_name, product_type_logo)
 VALUES 
-(1, 'Tops'),
-(1, 'Pants'),
-(1, 'Dresses'),
-(1, 'Jackets & Coats'),
-(1, 'Skirts'),
-(1, 'Shorts'),
-(1, 'Shirts & Blouses'),
-(1, 'Jeans'),
-(1, 'Swimwear'),
-(1, 'Hoodies & Sweatshirts'),
-(1, 'Sportswear'),
-(2, 'Tops'),
-(2, 'Pants'),
-(2, 'Jackets & Coats'),
-(2, 'Shorts'),
-(2, 'Shirts & Blouses'),
-(2, 'Jeans'),
-(2, 'Swimwear'),
-(2, 'Hoodies & Sweatshirts'),
-(2, 'Sportswear'),
-(3, 'Face'),
-(3, 'Eyes'),
-(3, 'Lips'),
-(3, 'Nails'),
-(3, 'Bath & Body Care'),
-(3, 'Hair'),
-(3, 'Brushes & Tools'),
-(4, 'Bags'),
-(4, 'Belts'),
-(4, 'Jewelry'),
-(4, 'Hair Accessories'),
-(4, 'Sunglasses'),
-(4, 'Gloves'),
-(4, 'Scarves'),
-(4, 'Hats & Caps'),
-(4, 'Wallets & Coin purses');
+(1, 'Tops', 'https://static.bhphoto.com/images/images500x500/1391171441_1026417.jpg'),
+(1, 'Pants', 'https://www.lovearoma.co.uk/blog/wp-content/uploads/2015/05/bg-red-carpet.jpg'),
+(1, 'Dresses', 'https://www.aljazeera.com/mritems/Images/2019/6/13/ce0ece26ee1348f2b1c453f314dc0a6e_18.jpg'),
+(1, 'Jackets & Coats', 'https://cdn1.dotesports.com/wp-content/uploads/2018/11/23152339/Hangzhou-Spark1.jpg'),
+(1, 'Skirts', 'https://static.bhphoto.com/images/images500x500/1391171441_1026417.jpg'),
+(1, 'Shorts', 'https://www.lovearoma.co.uk/blog/wp-content/uploads/2015/05/bg-red-carpet.jpg'),
+(1, 'Shirts & Blouses', 'https://www.aljazeera.com/mritems/Images/2019/6/13/ce0ece26ee1348f2b1c453f314dc0a6e_18.jpg'),
+(1, 'Jeans', 'https://cdn1.dotesports.com/wp-content/uploads/2018/11/23152339/Hangzhou-Spark1.jpg'),
+(1, 'Swimwear', 'https://static.bhphoto.com/images/images500x500/1391171441_1026417.jpg'),
+(1, 'Hoodies & Sweatshirts', 'https://www.lovearoma.co.uk/blog/wp-content/uploads/2015/05/bg-red-carpet.jpg'),
+(1, 'Sportswear', 'https://www.aljazeera.com/mritems/Images/2019/6/13/ce0ece26ee1348f2b1c453f314dc0a6e_18.jpg'),
+(2, 'Tops', 'https://cdn1.dotesports.com/wp-content/uploads/2018/11/23152339/Hangzhou-Spark1.jpg'),
+(2, 'Pants', 'https://static.bhphoto.com/images/images500x500/1391171441_1026417.jpg'),
+(2, 'Jackets & Coats', 'https://www.lovearoma.co.uk/blog/wp-content/uploads/2015/05/bg-red-carpet.jpg'),
+(2, 'Shorts', 'https://www.aljazeera.com/mritems/Images/2019/6/13/ce0ece26ee1348f2b1c453f314dc0a6e_18.jpg'),
+(2, 'Shirts & Blouses', 'https://cdn1.dotesports.com/wp-content/uploads/2018/11/23152339/Hangzhou-Spark1.jpg'),
+(2, 'Jeans', 'https://static.bhphoto.com/images/images500x500/1391171441_1026417.jpg'),
+(2, 'Swimwear', 'https://www.lovearoma.co.uk/blog/wp-content/uploads/2015/05/bg-red-carpet.jpg'),
+(2, 'Hoodies & Sweatshirts', 'https://www.aljazeera.com/mritems/Images/2019/6/13/ce0ece26ee1348f2b1c453f314dc0a6e_18.jpg'),
+(2, 'Sportswear', 'https://cdn1.dotesports.com/wp-content/uploads/2018/11/23152339/Hangzhou-Spark1.jpg'),
+(3, 'Face', 'https://static.bhphoto.com/images/images500x500/1391171441_1026417.jpg'),
+(3, 'Eyes', 'https://www.lovearoma.co.uk/blog/wp-content/uploads/2015/05/bg-red-carpet.jpg'),
+(3, 'Lips', 'https://www.aljazeera.com/mritems/Images/2019/6/13/ce0ece26ee1348f2b1c453f314dc0a6e_18.jpg'),
+(3, 'Nails', 'https://cdn1.dotesports.com/wp-content/uploads/2018/11/23152339/Hangzhou-Spark1.jpg'),
+(3, 'Bath & Body Care', 'https://static.bhphoto.com/images/images500x500/1391171441_1026417.jpg'),
+(3, 'Hair', 'https://www.lovearoma.co.uk/blog/wp-content/uploads/2015/05/bg-red-carpet.jpg'),
+(3, 'Brushes & Tools', 'https://www.aljazeera.com/mritems/Images/2019/6/13/ce0ece26ee1348f2b1c453f314dc0a6e_18.jpg'),
+(4, 'Bags', 'https://cdn1.dotesports.com/wp-content/uploads/2018/11/23152339/Hangzhou-Spark1.jpg'),
+(4, 'Belts', 'https://static.bhphoto.com/images/images500x500/1391171441_1026417.jpg'),
+(4, 'Jewelry', 'https://www.lovearoma.co.uk/blog/wp-content/uploads/2015/05/bg-red-carpet.jpg'),
+(4, 'Hair Accessories', 'https://www.aljazeera.com/mritems/Images/2019/6/13/ce0ece26ee1348f2b1c453f314dc0a6e_18.jpg'),
+(4, 'Sunglasses', 'https://cdn1.dotesports.com/wp-content/uploads/2018/11/23152339/Hangzhou-Spark1.jpg'),
+(4, 'Gloves', 'https://static.bhphoto.com/images/images500x500/1391171441_1026417.jpg'),
+(4, 'Scarves', 'https://www.lovearoma.co.uk/blog/wp-content/uploads/2015/05/bg-red-carpet.jpg'),
+(4, 'Hats & Caps', 'https://www.aljazeera.com/mritems/Images/2019/6/13/ce0ece26ee1348f2b1c453f314dc0a6e_18.jpg'),
+(4, 'Wallets & Coin purses', 'https://cdn1.dotesports.com/wp-content/uploads/2018/11/23152339/Hangzhou-Spark1.jpg');
 
 INSERT INTO materials
 (material_name)

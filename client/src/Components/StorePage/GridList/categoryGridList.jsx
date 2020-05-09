@@ -42,13 +42,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function CategoriesGridList(props) {
+export default function CategoriesGridList({listTitle, storeId}) {
   const classes = useStyles();
 
   const [categories, setCategories] = useState([])
 
   useEffect(() => {
-    const getAllCategories = async () => {
+    async function fetchData() {
       try {
         const res = await axios.get(`/products/categories/all`)
         setCategories(res.data.payload);
@@ -57,21 +57,20 @@ export default function CategoriesGridList(props) {
         console.log(error);
       }
     }
-    getAllCategories()
+    fetchData()
   }, [])
-
 
   // console.log(categories)
 
   return (
     <div className={classes.root} style={{ margin: "20px", padding: "15px" }}>
       <Typography variant='h4' display='block' paragraph='true'>
-        {props.listTitle}
+        {listTitle}
       </Typography>
       <GridList className={classes.gridList} cols={4} cellHeight={300} spacing={10}>
         {categories.map((tile) => (
           <GridListTile key={tile.img}>
-            <Link to={`/store/${props.storeId}/${tile.category_name}`}>
+            <Link to={`/store/${storeId}/${tile.category_name}`}>
               <img src={tile.category_logo} alt={tile.category_logo} />
               <span className={classes.imageButton}>
                 <Typography

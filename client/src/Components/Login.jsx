@@ -44,6 +44,9 @@ const useStyles = makeStyles((theme) => ({
             '& fieldset': {
                 borderColor: customTheme.palette.secondary.main
             },
+            '&:hover fieldset': {
+                borderColor: customTheme.palette.secondary.light,
+            },
             '&.Mui-focused fieldset': {
                 borderColor: customTheme.palette.secondary.main
             }
@@ -58,11 +61,17 @@ const useStyles = makeStyles((theme) => ({
     },
     signupLink: {
         color: customTheme.palette.secondary.dark
+    },
+    iconStyle: {
+        color: customTheme.palette.secondary.light,
+        '&:hover': {
+            color: customTheme.palette.secondary.main
+        }
     }
 }));
 
 const Login = () => {
-    // const { customerDetails, logCustomerIn } = useContext(CustomerContext);
+    // const { noCustomer } = useContext(CustomerContext);
     const classes = useStyles();
     const [customerEmail, setCustomerEmail] = useState({
         email: '',
@@ -154,7 +163,8 @@ const Login = () => {
                             endAdornment:
                                 <InputAdornment position='end'>
                                     <IconButton
-                                        onClick={handlePasswordVisibility} >
+                                        onClick={handlePasswordVisibility}
+                                        className={classes.iconStyle}>
                                         {customerPassword.showPassword ? <VisibilityOff /> : <Visibility />}
                                     </IconButton>
                                 </InputAdornment>

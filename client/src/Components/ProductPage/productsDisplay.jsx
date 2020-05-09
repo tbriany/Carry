@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
 const sidePopUp = makeStyles({
   list: {
     width:' 400px',
@@ -34,13 +35,10 @@ const sidePopUp = makeStyles({
 
 
 
-
-
-
-export default function ProductsDisplay(props) {
+export default function ProductsDisplay({categoryName, storeId}) {
+  const classes = useStyles();
 
   const [products, setProducts] = useState([])
-  const classes = useStyles();
 
 
   const popUp = sidePopUp();
@@ -65,8 +63,6 @@ export default function ProductsDisplay(props) {
   };
 
 
-
-
   const list = (anchor) => (
     <div
       className={clsx(popUp.list, {
@@ -84,19 +80,22 @@ export default function ProductsDisplay(props) {
 
 
 
-  useEffect(() => {
-    const getProductByCategory = async () => {
-      try {
-        const res = await axios.get(`/products/category/${props.categoryName}/${props.storeId}`)
-        setProducts(res.data.payload);
-      } catch (error) {
-        setProducts([])
-        console.log(error);
-      }
-    }
-    getProductByCategory()
-  }, [])
 
+  useEffect(() => {
+    async function fetchData() {
+        try {
+            const res = await axios.get(`/products/category/${categoryName}/${storeId}`)
+            setProducts(res.data.payload);
+        } catch (error) {
+            setProducts([])
+            console.log(error);
+        }
+    }
+  fetchData()
+}, [categoryName, storeId])
+
+// console.log(products)
+  
   return (
     <div className={classes.root} style={{ margin: '20px', padding: '15px' }}>
       <Grid container className={classes.root} justify='center'>
