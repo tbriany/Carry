@@ -96,7 +96,9 @@ async function getStoresByLocation (user_latitude, user_longitude){
   const getQuery = `
   SELECT  lat,
           lng, 
-          store_name
+          store_name, 
+          avatar_url,
+          store_id
   FROM stores
   WHERE  
   pow(lat - $1,2) + pow((lng - $2) * cos(radians($1)),2) < pow(20 / 110.25, 2);`;
