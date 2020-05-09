@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect} from "react";
+import axios from "axios";
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
@@ -41,54 +42,37 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const tileData = [
-    {
-        img: 'https://www.marni.com/12/12386489MT_13_n_r.jpg',
-        title: 'Tops',
-        author: 'author'
-    }, 
-    {
-        img: 'https://nationalpostcom.files.wordpress.com/2018/07/tee1.jpg?quality=80&strip=all',
-        title: 'Bottoms',
-        author: 'author'
-    }, 
-    {
-        img: 'https://images.express.com/is/image/expressfashion/0036_05051421_1695?cache=on&wid=361&fmt=jpeg&qlt=75,1&resmode=sharp2&op_usm=1,1,5,0&defaultImage=Photo-Coming-Soon',
-        title: 'Dresses',
-        author: 'author'
-    }, 
-    {
-        img: 'https://c.bonfireassets.com/thumb/design-image/1ab7656b-173f-4703-8f12-76329e8d2823/7329f207-b69c-4f7e-8322-9f628fd81358/?size=900',
-        title: 'Outerwear',
-        author: 'author'
-    },
-    {
-        img: 'https://c.bonfireassets.com/thumb/design-image/1ab7656b-173f-4703-8f12-76329e8d2823/7329f207-b69c-4f7e-8322-9f628fd81358/?size=900',
-        title: 'Swimwear',
-        author: 'author'
-    },
-    {
-        img: 'https://www.marni.com/12/12386489MT_13_n_r.jpg',
-        title: 'Sportswear',
-        author: 'author'
-    }
-]
-
-
-
-export default function TypesGridList(props) {
+export default function TypesGridList({listTitle, storeId}) {
   const classes = useStyles();
+
+  const [types, setTypes] = useState([])
+
+  useEffect(() => {
+    async function fetchData() {
+    try {
+        const res = await axios.get(`/products/product_types/all`)
+        setTypes(res.data.payload);
+    } catch (error) {
+        setTypes([])
+        console.log(error);
+    }
+ }
+  fetchData()
+}, [])
+
+// console.log(types)
+
 
   return (
     <div className={classes.root} style={{margin: "20px", padding: "15px"}}>
         <Typography variant='h4' paragraph='true'>
-         {props.listTitle}
+         {listTitle}
         </Typography>
       <GridList className={classes.gridList} cols={5} cellHeight={270} spacing={5}>
-        {tileData.map((tile) => (
+        {types.map((tile) => (
           <GridListTile key={tile.img}>
-            <Link to={`/store/1/products`}>
-           <img src={tile.img} alt={tile.title} />
+            <Link to={`/store/${storeId}/${tile.product_type_name}`}>
+           <img src={tile.product_type_logo} alt={tile.product_type_name} />
            <span className={classes.imageButton}>
             <Typography
               component="span"
@@ -96,7 +80,7 @@ export default function TypesGridList(props) {
               color="inherit"
               className={classes.imageTitle}
             >
-              {tile.title}
+              {tile.product_type_name}
             </Typography>
           </span>
             </Link>

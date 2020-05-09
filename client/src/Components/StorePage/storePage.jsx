@@ -19,7 +19,10 @@ function StorePage(props) {
         />
       </div>
       <div>
-        <TypesGridList listTitle="Shop By Type" />
+        <TypesGridList 
+        listTitle="Shop By Type" 
+        storeId={props.match.params.id}
+        />
       </div>
       <div>
         <NewArrivalsGridList 
