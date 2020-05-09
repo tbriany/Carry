@@ -47,7 +47,7 @@ export default function TypesGridList(props) {
 
   const [types, setTypes] = useState([])
 
-  useEffect(async () => {
+  useEffect(() => {
     async function fetchData() {
     try {
         const res = await axios.get(`/products/product_types/all`)

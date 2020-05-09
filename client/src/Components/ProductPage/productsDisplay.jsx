@@ -20,15 +20,20 @@ export default function ProductsDisplay(props) {
 
   const [products, setProducts] = useState([])
 
-  useEffect(async () => {
-  try {
-      const res = await axios.get(`/products/category/${props.categoryName}/${props.storeId}`)
-      setProducts(res.data.payload);
-  } catch (error) {
-      setProducts([])
-      console.log(error);
-  }
+  useEffect(() => {
+    async function fetchData() {
+        try {
+            const res = await axios.get(`/products/category/${props.categoryName}/${props.storeId}`)
+            setProducts(res.data.payload);
+        } catch (error) {
+            setProducts([])
+            console.log(error);
+        }
+    }
+  fetchData()
 }, [])
+
+
 
 console.log(products)
 
