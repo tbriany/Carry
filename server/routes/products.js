@@ -95,18 +95,40 @@ router.get("/brand/:product_brand", async (req, res, next) => {
     }
 });
 
-router.get("/category/:product_category/:store_id", async (req, res, next) => {
+
+const checkCategories = async (req, res, next) => {
+    const {product_category, store_id} = req.params
+    const categories = ["Women's", "Men's", "Beauty", "Accessories"]
+    try {
+        if (categories.includes(product_category)) {
+            const productByCategory= await productQueries.getProductByCategory(product_category, store_id);
+            res.status(200).json({
+                message: `Products by category: ${product_category} retrieved.`,
+                payload: productByCategory
+            });
+        } else {
+            next();
+        }
+    } catch (err) {
+        handleErrors(res, err);
+    }
+}
+
+const getProductsByType = async (req, res, next) => {
     try {
         const {product_category, store_id} = req.params
-        const productByCategory= await productQueries.getProductByCategory(product_category, store_id);
+        const productByType = await productQueries.getProductByType(product_category, store_id);
         res.status(200).json({
-            message: `Products by category: ${product_category} retrieved.`,
-            payload: productByCategory
+            message: `Products by type: ${product_category} retrieved.`,
+            payload: productByType
         });
     } catch (err) {
         handleErrors(res, err);
     }
-});
+}
+
+router.get("/category/:product_category/:store_id", checkCategories, getProductsByType)
+
 
 router.get("/categories/all", async (req, res, next) => {
     try {
