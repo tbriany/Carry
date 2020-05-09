@@ -18,11 +18,15 @@ const ItemDetailsContextProvider = (props) => {
         setProductQty(newQty)
     };
 
-    const getProductSize = (getProductSize) => {
-        setProductSize(getProductSize)
+    const getProductSize = (prodSize) => {
+        setProductSize(prodSize)
     };
 
+    const getProductId = (newProdId) => {
+        setProductId(newProdId)
+    
 
+    };
     useEffect(() => {
         getCheckout();
     }, [])
@@ -40,28 +44,27 @@ const ItemDetailsContextProvider = (props) => {
                 setproductsIds([...productIds, productId])
             }
             let productExistInCart = checkoutCart.find(cart => parseInt(productId) === parseInt(cart.product_id))
-            if (!productExistInCart) {
-
+            if (!productExistInCart) {         
                 try {
                     await axios.post('/checkoutCart/add', { product_id: productId, size: productSize, quantity: productQty })
+                    getCheckout()
                 } catch (err) {
                     console.log("ERROR", err)
                 }
             } else {
-
                 let prevQty = parseInt(productExistInCart.cartquantity)
                 let current = parseInt(productQty)
                 let totalQty = prevQty + current
 
                 try {
                     await axios.patch(`/checkoutCart/edit/${productExistInCart.checkoutcart_id}`, { checkoutCart_id: productExistInCart.checkoutcart_id, product_id: productId, size: productSize, quantity: totalQty })
-
+                    getCheckout()
                 } catch (err) {
                     console.log("ERROR", err)
                 }
             }
-            setProductQty(0)
-        } else {
+            // setProductQty(0)
+        } else{
             alert("Missing Input")
         }
     }
@@ -70,7 +73,7 @@ const ItemDetailsContextProvider = (props) => {
 
     return (
         // Provider accepts a value containting state and functions. This allows the components access to the state but it must be descendants of the provider.
-        <ItemDetailsContext.Provider value={{ getCheckout, updateProductQty, checkoutCart, productId, productIds, productQty, totalProductQty, getProductSize, productSize, addToCart }}>
+        <ItemDetailsContext.Provider value={{ getProductId, getCheckout, updateProductQty, checkoutCart, productId, productIds, productQty, totalProductQty, getProductSize, productSize, addToCart }}>
             {props.children}
         </ItemDetailsContext.Provider>
     );

@@ -24,29 +24,24 @@ const CartPopUp = () => {
 
     const { getCheckout, productId, checkoutCart } = useContext(ItemDetailsContext) //Grab state from context file
 
-
-
     useEffect(() => {
         getCheckout()
-
-    }, []) //Update the checkout when the totalProductQty is updated. 
+    }, [])
 
     const handelGetTotalPrice = (quantity, product_price) => {
         return quantity * product_price
-
     }
 
     return (
         <div >
-            <p style={{
-                display: "flex",
-                justifyContent: "flex-start",
-                borderBottom: '1px solid black',
-                fontSize: "x-large"
-            }}
-            >Shopping Cart</p>
-
             {checkoutCart.length > 0 ? (<div>
+                <h1 style={{
+                    display: "flex",
+                    justifyContent: "flex-start",
+                    borderBottom: '1px solid black',
+                    fontSize: "x-large"
+                }}
+                >Shopping Cart</h1>
                 {checkoutCart.map((product) => {
                     return (
                         <div key={product.checkoutcart_id} className={classes.root}>

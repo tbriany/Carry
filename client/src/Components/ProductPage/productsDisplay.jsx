@@ -1,9 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import Button from "@material-ui/core/Button";
+import List from '@material-ui/core/List';
+import clsx from 'clsx';
+import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
+import ItemPopUp from '../ItemPopUp'
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -12,14 +18,69 @@ const useStyles = makeStyles((theme) => ({
   image: {
     height: 350,
     width: 300,
+    maxHeight: '100%'
   },
 }));
+
+
+const sidePopUp = makeStyles({
+  list: {
+    width:' 400px',
+  },
+  fullList: {
+    width: "50%"
+  },
+
+});
+
+
 
 export default function ProductsDisplay({categoryName, storeId}) {
   const classes = useStyles();
 
   const [products, setProducts] = useState([])
-  
+
+
+  const popUp = sidePopUp();
+  const [state, setState] = React.useState({
+    right: false
+  });
+
+  const toggleDrawer = (right, open, prodId) => event => {
+    if (
+      event &&
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+      
+    ) {
+      
+    props.getProductId(prodId)
+      return;
+    }
+
+    props.getProductId(prodId)
+    setState({ ...state, right: open });
+  };
+
+
+  const list = (anchor) => (
+    <div
+      className={clsx(popUp.list, {
+        [popUp.fullList]: anchor === 'top' || anchor === 'bottom',
+      })}
+      role="presentation"
+
+      onKeyDown={toggleDrawer(anchor, false)}
+    >
+      <List>
+        <ItemPopUp />
+      </List>
+    </div>
+  );
+
+
+
+
   useEffect(() => {
     async function fetchData() {
         try {
@@ -34,14 +95,16 @@ export default function ProductsDisplay({categoryName, storeId}) {
 }, [categoryName, storeId])
 
 // console.log(products)
-
+  
   return (
     <div className={classes.root} style={{ margin: '20px', padding: '15px' }}>
       <Grid container className={classes.root} justify='center'>
         <Grid item md={10}>
           <Grid container justify="center" spacing={5}>
             {products.map((value) => (
-              <Link to={`/popup/${value.product_id}`}>
+
+              <Button onClick={toggleDrawer("right", true, value.product_id)}>
+
                 <Grid key={value} item>
                   <img alt="backpack" src={value.product_image_url} className={classes.image}></img>
                   <Grid item>
@@ -49,12 +112,20 @@ export default function ProductsDisplay({categoryName, storeId}) {
                     <Typography variant="subtitle1">$ {value.product_price}</Typography>
                   </Grid>
                 </Grid>
-              </Link>
+              </Button>
             ))}
+
+            <SwipeableDrawer
+              anchor={"right"}
+              open={state["right"]}
+              onClose={toggleDrawer("right", false, 0)}
+              onOpen={toggleDrawer("right", true)}  
+            >
+              {list('right')}
+            </SwipeableDrawer>
           </Grid>
         </Grid>
       </Grid>
     </div>
   );
 }
-
