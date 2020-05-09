@@ -42,19 +42,19 @@ const getProductById = async (id) => {
     return await db.one(getQuery, { id });
 }
 
-const getProductByType = async (product_type) => {
-    const getQuery = `
-    SELECT products.product_id, products.product_name, products.product_price, products.product_description, products.quantity, brands.brand_name, categories.category_name, materials.material_name, colors.color_name, product_type.product_type_name
-    FROM products 
-    JOIN brands ON brands.brand_id = products.brand_id
-    JOIN categories ON categories.category_id = products.category_id
-    JOIN materials ON materials.material_id = products.material_id
-    JOIN colors ON colors.color_id = products.color_id
-    JOIN product_type ON product_type.product_type_id = products.product_type
-    WHERE product_type.product_type_name= $/product_type/;
-    `
-    return await db.any(getQuery, { product_type });
-}
+// const getProductByType = async (product_type) => {
+//     const getQuery = `
+//     SELECT products.product_id, products.product_name, products.product_price, products.product_description, products.quantity, brands.brand_name, categories.category_name, materials.material_name, colors.color_name, product_type.product_type_name
+//     FROM products 
+//     JOIN brands ON brands.brand_id = products.brand_id
+//     JOIN categories ON categories.category_id = products.category_id
+//     JOIN materials ON materials.material_id = products.material_id
+//     JOIN colors ON colors.color_id = products.color_id
+//     JOIN product_type ON product_type.product_type_id = products.product_type
+//     WHERE product_type.product_type_name= $/product_type/;
+//     `
+//     return await db.any(getQuery, { product_type });
+// }
 
 
 const getProductByName = async (name) => {
@@ -138,6 +138,26 @@ const getProductByCategory = async (category, store_id) => {
     productimage_id.product_image_id
     `
     return await db.any(getQuery, { category, store_id });
+}
+
+const getProductByType = async (type, store_id) => {
+    const getQuery = `
+    SELECT products.product_id, products.product_name, products.product_price, products.product_description, products.quantity, products.store_id,
+    brands.brand_name, categories.category_name, materials.material_name, colors.color_name, product_type.product_type_name, productImage_id.*,
+    array_agg(sizes.product_size) AS product_size
+    FROM products 
+    JOIN brands ON brands.brand_id = products.brand_id
+    JOIN categories ON categories.category_id = products.category_id
+    JOIN materials ON materials.material_id = products.material_id
+    JOIN colors ON colors.color_id = products.color_id
+    JOIN product_type ON product_type.product_type_id = products.product_type
+    JOIN  productImage_id ON productImage_id.product_id = products.product_id
+    JOIN sizes ON sizes.product_id = products.product_id 
+    WHERE product_type.product_type_name = $/type/ AND products.store_id = $/store_id/
+    GROUP BY products.product_id, brands.brand_id, categories.category_name,materials.material_name,colors.color_name, product_type.product_type_name,
+    productimage_id.product_image_id
+    `
+    return await db.any(getQuery, { type, store_id });
 }
 
 const getCategories = async () => {
