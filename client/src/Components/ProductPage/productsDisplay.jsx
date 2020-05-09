@@ -35,7 +35,7 @@ const sidePopUp = makeStyles({
 
 
 
-export default function ProductsDisplay({categoryName, storeId}) {
+export default function ProductsDisplay({categoryName, storeId, getProductId}) {
   const classes = useStyles();
 
   const [products, setProducts] = useState([])
@@ -54,11 +54,11 @@ export default function ProductsDisplay({categoryName, storeId}) {
       
     ) {
       
-    props.getProductId(prodId)
+   getProductId(prodId)
       return;
     }
 
-    props.getProductId(prodId)
+   getProductId(prodId)
     setState({ ...state, right: open });
   };
 
