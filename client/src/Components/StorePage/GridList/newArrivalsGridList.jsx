@@ -47,7 +47,7 @@ export default function NewArrivalsGridList({listTitle, storeId}) {
     const classes = useStyles();
 
     const [newArrivals, setNewArrivals] = useState([])
-
+    
     useEffect(() => {
         async function fetchData() {
             try {

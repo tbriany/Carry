@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
@@ -19,7 +19,7 @@ export default function ProductsDisplay({categoryName, storeId}) {
   const classes = useStyles();
 
   const [products, setProducts] = useState([])
-
+  
   useEffect(() => {
     async function fetchData() {
         try {
@@ -36,24 +36,24 @@ export default function ProductsDisplay({categoryName, storeId}) {
 // console.log(products)
 
   return (
-    <div className={classes.root} style={{margin: '20px', padding: '15px'}}>
-    <Grid container className={classes.root} justify='center'>
-      <Grid item md={10}>
-        <Grid container justify="center" spacing={5}>
-          {products.map((value) => (
-                <Link to={`/popup/${value.product_id}`}>
+    <div className={classes.root} style={{ margin: '20px', padding: '15px' }}>
+      <Grid container className={classes.root} justify='center'>
+        <Grid item md={10}>
+          <Grid container justify="center" spacing={5}>
+            {products.map((value) => (
+              <Link to={`/popup/${value.product_id}`}>
                 <Grid key={value} item>
-                    <img alt="backpack" src={value.product_image_url} className={classes.image}></img>
-                <Grid item>
+                  <img alt="backpack" src={value.product_image_url} className={classes.image}></img>
+                  <Grid item>
                     <Typography gutterBottom variant="subtitle1">{value.product_name}</Typography>
                     <Typography variant="subtitle1">$ {value.product_price}</Typography>
+                  </Grid>
                 </Grid>
-                </Grid>
-                </Link>
-          ))}
+              </Link>
+            ))}
+          </Grid>
         </Grid>
       </Grid>
-    </Grid>
     </div>
   );
 }
