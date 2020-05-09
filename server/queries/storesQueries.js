@@ -21,25 +21,7 @@ const getStoreById = async (id) => {
       WHERE store_id = $/id/;
     `;
   return await db.one(getQuery, { id });
-}
-
-
-const getStoreByZipCode = async (zipcode) => {
-  const getQuery = `
-  SELECT  store_name,
-          avatar_url,
-          phone_number,
-          email,
-          address,
-          city,
-          state,
-          zip_code
-      FROM stores
-      WHERE zip_code = $/zipcode/;
-    `;
-  return await db.any(getQuery, { zipcode });
-}
-
+};
 
 const addStore = async (bodyObj) => {
   const postQuery = `
@@ -77,7 +59,7 @@ const addStore = async (bodyObj) => {
           zip_code
    `;
   return await db.one(postQuery, bodyObj);
-}
+};
 
 const updateStoreInfo = async (updateObj) => {
   let updateQuery = `
@@ -96,16 +78,47 @@ const updateStoreInfo = async (updateObj) => {
       ;
   `;
   return await db.one(updateQuery, updateObj);
-}
+};
 
-const deleteStore = async (id) =>{
+const deleteStore = async (id) => {
   const deleteQuery = `
   DELETE FROM stores
-  WHERE store_id = $/id/`; 
+  WHERE store_id = $/id/`;
 
-  return await db.none(deleteQuery, {id});
+  return await db.none(deleteQuery, { id });
 };
+
+
+// Not my own query https://jonisalonen.com/2014/computing-distance-between-coordinates-can-be-simple-and-fast/ got from this source. 
+async function getStoresByLocation (user_latitude, user_longitude){
+  console.log(user_latitude, user_longitude);
+
+  const getQuery = `
+  SELECT  lat,
+          lng, 
+          store_name
+  FROM stores
+  WHERE  
+  pow(lat - $1,2) + pow((lng - $2) * cos(radians($1)),2) < pow(20 / 110.25, 2);`;
+
+  return await db.any(getQuery, [user_latitude, user_longitude]);
+};
+
 
 module.exports = {
-  getAllStores, getStoreById, addStore, updateStoreInfo, deleteStore, getStoreByZipCode
+  getAllStores,
+  getStoreById,
+  addStore,
+  updateStoreInfo,
+  deleteStore,
+  getStoresByLocation,
 };
+
+// `
+//   SELECT  lat
+//           lng
+//       FROM stores
+//       WHERE
+//       pow(lat-$/user_latitude/,2) + pow((lng-$/user_longitude/)*cos(radians($/user_latitude/)),2) < pow(10/110.25, 2)`
+
+// (lat - $1) + (lng - $2)  < 5;
