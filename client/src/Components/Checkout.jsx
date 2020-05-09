@@ -74,8 +74,8 @@ const Checkout = () => {
                 </Typography>
                 </Toolbar>
             </AppBar> */}
-            <main className={classes.layout}>
-                <Paper className={classes.paper}>
+            <main className={classes.layout}  style={{padding: "0px", margin : " 0px", width: "100%"}}>
+                <Paper className={classes.paper}  style={{padding: "0px", margin : " 0px"}} >
                     <Stepper activeStep={activeStep} className={classes.stepper} color='grey'>
                         <Step key={steps[0]}>
                             <StepLabel>{steps[0]}</StepLabel>
