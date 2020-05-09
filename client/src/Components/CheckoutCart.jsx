@@ -22,12 +22,14 @@ const CheckoutCart = () => {
     const classes = useStyles();
 
     const { getCheckout, productId, checkoutCart, productIds, newQty, totalProductQty, productPrice, productSize } = useContext(ItemDetailsContext) //Grab state from context file
-    // const [totalPrice, setTotalPrice] = useState(0)
+  
     const [updateQty, setUpdateQty] = useState(0)
+    const [cartTotal, setCartTotal] = useState()
 
 
     useEffect(() => {
         getCheckout()
+        handleCartTotal()
     }, [])
 
 
@@ -36,6 +38,16 @@ const CheckoutCart = () => {
         try {
             await axios.delete(`/checkoutCart/delete/${checkoutId}`)
             getCheckout()
+            handleCartTotal()
+        } catch (err) {
+            console.log("ERROR", err)
+        }
+    }
+
+    const handleCartTotal = async () =>{
+        try {
+          let total =   await axios.get(`/checkoutCart/checkoutTotal`)
+          setCartTotal(total.data.payload.checkouttotal)
 
         } catch (err) {
             console.log("ERROR", err)
@@ -94,7 +106,7 @@ const CheckoutCart = () => {
                                                         display: "flex",
                                                         justifyContent: "flex-start",
                                                         flexDirection: "column",
-                                                        alignItems: "flex-start",
+                                                        alignItems: "center",
                                                         boxShadow: " 1px 1px 1px white",
                                                         padding: "0px",
                                                         marginBottom: "15px",
@@ -103,7 +115,7 @@ const CheckoutCart = () => {
                                                     className={classes.paper}
                                                 >
 
-                                                    <img style={{ height: "100px", margin: "0px" }} src={product.product_image_url} alt={product.product_name} ></img>
+                                                    <img style={{ height: "12vh", margin: "0px" }} src={product.product_image_url} alt={product.product_name} ></img>
                                                 </Paper>
                                             </Grid>
 
@@ -164,9 +176,63 @@ const CheckoutCart = () => {
 
                         </div>
 
+
+
+
+
+
+
+
                     )
                 })}
 
+
+
+
+
+
+
+
+<div className={classes.root}>
+            <Grid container spacing={1}>
+                <Grid item xs={9} >
+                    <Paper
+                        style={{
+                            display: "flex",
+                            justifyContent: "flex-start",
+                            flexDirection: "column",
+                            alignItems: "flex-start",
+                            boxShadow: " 1px 1px 1px white",
+                            padding: "0px",
+                            marginBottom: "15px",
+                            marginTop: "15px"
+                        }}
+                        className={classes.paper}
+                    > Total:
+                    </Paper>
+                </Grid>
+
+                <Grid item xs={3} >
+                    <Paper
+                        style={{
+                            display: "flex",
+                            justifyContent: "flex-start",
+                            flexDirection: "column",
+                            alignItems: "flex-end",
+                            boxShadow: " 1px 1px 1px white",
+                            marginBottom: "15px",
+                            marginTop: "15px"
+                        }}
+                        className={classes.paper}
+                    >
+                        <p style={{ margin: "0px", fontSize: "small" }} > ${cartTotal} </p>
+                    </Paper>
+                </Grid>
+
+
+            </Grid>
+
+        </div>
 
             </div>) : (<div></div>)}
 
