@@ -38,20 +38,13 @@ const ItemDetailsContextProvider = (props) => {
 
 
     const addToCart = async () => {
-
-
-        console.log("productQty", productQty , "productSize", productSize)
         if (productQty !== 0 && productSize !== '') {
             setTotalProductQty(productQty)
             if (!productIds.includes(productId)) {
                 setproductsIds([...productIds, productId])
             }
             let productExistInCart = checkoutCart.find(cart => parseInt(productId) === parseInt(cart.product_id))
-            console.log(checkoutCart, "checkoutCart")
-            if (!productExistInCart) {
-
-                console.log("if")
-         
+            if (!productExistInCart) {         
                 try {
                     await axios.post('/checkoutCart/add', { product_id: productId, size: productSize, quantity: productQty })
                     getCheckout()
@@ -59,8 +52,6 @@ const ItemDetailsContextProvider = (props) => {
                     console.log("ERROR", err)
                 }
             } else {
-                console.log("else", productExistInCart)
-
                 let prevQty = parseInt(productExistInCart.cartquantity)
                 let current = parseInt(productQty)
                 let totalQty = prevQty + current
