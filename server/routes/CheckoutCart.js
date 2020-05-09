@@ -15,6 +15,20 @@ router.get('/', async (req, res, next) => {
     }
 })
 
+
+router.get("/checkoutTotal", async(req,res,next) =>{
+    try {
+        const checkoutTotal = await checkoutQueries.getSumOfCheckout();
+        res.status(200).json({
+            status: "success",
+            message: `Checkout Cart Total retrieved`,
+            payload: checkoutTotal
+        });
+    } catch (err) {
+        console.log("ERROR", err)
+    }
+
+})
 router.get("/:id", async (req, res, next) => {
     try {
         const id = parseInt(req.params.id)
@@ -29,6 +43,8 @@ router.get("/:id", async (req, res, next) => {
         console.log("ERROR", err)
     }
 });
+
+
 
 router.post("/add", async (req, res, next) => {
     try {
