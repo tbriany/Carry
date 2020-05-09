@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import {Link} from 'react-router-dom';
 import { LandingContext } from "../../Contexts/LandingPageDetailsContext";
 import axios from "axios";
 
@@ -58,6 +59,7 @@ export default function SingleLineGridListStores() {
         {stores.map((store) => (
           <GridListTile key={store.store_id}>
             <img src={store.avatar_url} alt={store.title} />
+            <Link to={`/store/${store.store_id}`}>
             <GridListTileBar
               title={store.title}
               classes={{
@@ -70,6 +72,7 @@ export default function SingleLineGridListStores() {
                 </IconButton>
               }
             />
+            </Link>
           </GridListTile>
         ))}
       </GridList>
