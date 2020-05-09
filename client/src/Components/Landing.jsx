@@ -1,34 +1,37 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import {LandingContext} from '../Contexts/LandingPageDetailsContext'
+import { LandingContext } from "../Contexts/LandingPageDetailsContext";
 
-
-import SingleLineGridList from "./LandingPageComponents/PopularStores.jsx";
-import SingleLineGridListItems from "./LandingPageComponents/PopularItems";
+import SingleLineGridListStores from "./LandingPageComponents/PopularStores.jsx";
+import SingleLineGridListItems from "./LandingPageComponents/GeneralStores";
 import Categories from "./LandingPageComponents/LandingPagecategories";
+import ProductsPage from "./StorePage/productsPage";
 
 const LandingPage = () => {
-const {Latitude, Longitude, SetLatitude, SetLongitude} = useContext(LandingContext )
+  const { latitude, longitude, SetLatitude, SetLongitude } = useContext(
+    LandingContext
+  );
+  const [locationStatus, setLocationStatus] = useState(false);
 
   // Checks if Geolocation API is available on browser. This is only available on secure contexts (HTTPS).
   if ("geolocation" in navigator) {
     console.log("Landing Page Notification: geolocation is available");
     // calls function get geolocation of client(user). Needs a call back- async.
     navigator.geolocation.getCurrentPosition((position) => {
-      //position: a object that is returned with timestamp, lat/long coordinates of the user accessing carry, etc. 
+      //position: a object that is returned with timestamp, lat/long coordinates of the user accessing carry, etc.
       //console.log(position)
 
-      // keys into object position to return latitude value 
-       console.log( "Latitude", position.coords.latitude);
-  
+      // keys into object position to return latitude value
+      console.log("Latitude", position.coords.latitude);
+
       // keys into object position to return longitude value
       console.log("Longitude", position.coords.longitude);
 
-
       //Storing Latitude and Longitude values in Context.
-       SetLatitude(position.coords.latitude) 
-       SetLongitude(position.coords.longitude)
-   
+      SetLatitude(position.coords.latitude);
+      SetLongitude(position.coords.longitude);
+
+      setLocationStatus(true);
     });
   } else {
     console.log("geolocation IS NOT available");
@@ -40,28 +43,11 @@ const {Latitude, Longitude, SetLatitude, SetLongitude} = useContext(LandingConte
         className="mainContent"
         style={{ marginTop: "50px", marginLeft: "45px", marginRight: "45px" }}
       >
-        {/* <div className="Testing">
-          <form>
-            <input type="button" />
-          </form>
-        </div> */}
-
         <div className="zipCode" style={{ textAlign: "center" }}>
           <h1 style={{ fontFamily: "Palatino Linotype" }}>
             {" "}
             Start shopping TODAY{" "}
           </h1>{" "}
-          {/* <form>
-            <OutlinedInput label="zipCode" placeholder="Enter zipcode" />
-            <Button
-              type="submit"
-              value="submit"
-              variant="contained"
-              size="large"
-            >
-              Enter
-            </Button>
-          </form> */}
         </div>
 
         <div className="LandingPageRows" style={{ margin: "30px" }}>
@@ -79,34 +65,21 @@ const {Latitude, Longitude, SetLatitude, SetLongitude} = useContext(LandingConte
               }}
             >
               {" "}
-              Check out what these stores Carry:{" "}
+              Popular Stores Near You{" "}
             </h3>
-            <SingleLineGridListItems />
+            {locationStatus ? 
+              <SingleLineGridListStores
+                latitude={latitude}
+                longitude={longitude}
+              />
+             : 
+              <SingleLineGridListItems />
+          }
           </div>
         </div>
       </div>
-
-      {/* <div
-        className="footer"
-        style={{
-          border: "10px",
-          padding: "10px",
-          bottom: "0",
-          position: "fixed",
-          width: "100%",
-          backgroundColor: "#white",
-          color: "white",
-          textAlign: "center",
-          boxShadow: "black",
-        }}
-      >
-        <Link to="/SignUp" style={{ color: "black" }}>
-          {" "}
-          SignUp As a Courier
-        </Link>
-      </div> */}
     </div>
-  );
+  )
 };
 
 export default LandingPage;

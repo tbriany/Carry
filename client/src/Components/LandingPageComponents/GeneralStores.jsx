@@ -46,7 +46,8 @@ export default function SingleLineGridListItems() {
 
   //make network request to retrieve all stores
   useEffect(() => {
-    axios
+  async function getAllStores (){
+ await  axios
       .get("/stores/")
       .then((res) => {
         console.log(res);
@@ -55,6 +56,8 @@ export default function SingleLineGridListItems() {
       .catch((err) => {
         console.log(err);
       });
+    }
+    getAllStores()
   }, []);
 
  

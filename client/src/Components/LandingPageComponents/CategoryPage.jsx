@@ -10,13 +10,14 @@ const CategoryPage = (props) =>{
 
 const [products, setProducts] = useState('')
 
-setCategory_id(props.matcg.params.type)
+setCategory_id(props.match.params.type)
 // useeffect to  make a network request to backend to get all stores/ products of that category. 
 
 console.log(category_id)
 useEffect(()=>{
-axios
-    .get(`/products/category/${props.match.params.type}`)
+ async function GetProducts(){
+  await axios
+    .get(`/products/category/1`)
     .then((res) => {
       console.log('Getting all products of category', res.data.payload);
     
@@ -24,7 +25,11 @@ axios
     .catch((err) => {
       console.log(err, 'unable to get back all products of this catergory');
     });
-}, []);
+  }
+  GetProducts()
+  }, 
+
+[]);
 
 
 

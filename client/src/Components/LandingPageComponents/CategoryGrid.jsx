@@ -64,10 +64,16 @@ export default function CategoryGridList() {
      ];
   return (
     <div className={classes.root}>
-      <GridList className={classes.gridList} cols={3.5}>
+      <GridList className={classes.gridList} cols={3.5}
+        item xs= {12} sm={6} md= {4} lg={3} xl= {2}
+        spacing= {50}
+        alignItems= 'strech'
+    
+      
+      >
         {tileData.map((tile) => (
           <GridListTile  key={tile.img}>
-           <img src={tile.img} alt={tile.title} />
+           <img  src={tile.img} alt={tile.title} />
             <GridListTileBar
               title={tile.title}
               classes={{

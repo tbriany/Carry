@@ -78,21 +78,21 @@ export default function Categories() {
       author: "author",
     },
     {
-      id: 4,
+      id: 5,
       img:
-        "https://www.thestatesman.com/wp-content/uploads/2017/12/accessories.jpg",
+        "https://cb2.scene7.com/is/image/CB2/122919_m_super_decor_accessories?wid=670&qlt=65",
       title: "Home Decor ",
       author: "author",
     },
-    {id: 4,
+    {id: 6,
       img:
-        "https://www.thestatesman.com/wp-content/uploads/2017/12/accessories.jpg",
+        "https://www.verywellfit.com/thmb/GmnKoBE2iH34GJdVk9MsAnjELUE=/4000x3000/smart/filters:no_upscale()/bicycleabexercise-4b65bd8179db4c56b7faddcbd9a5c130.jpg",
       title: "Health & Wellness",
       author: "author",
     },
-    {id: 4,
+    {id: 7,
       img:
-        "https://www.thestatesman.com/wp-content/uploads/2017/12/accessories.jpg",
+        "https://image.cnbcfm.com/api/v1/image/106032900-1563825608021rockets.jpg?v=1563825858&w=678&h=381",
       title: "Kids",
       author: "author",
     }
@@ -100,11 +100,14 @@ export default function Categories() {
 
   return (
     <div className={classes.root}>
-      <GridList className={classes.gridList} cols={3.5} >
+      <GridList className={classes.gridList} cols={3.5} 
+             item xs= {12} sm={6} md= {4} lg={3} xl= {2}
+             spacing= {32} 
+            >
         {categories.map((tile)  => (
           <GridListTile spacing={"100px"} cellHeight={"1px"} key={tile.img} style={{borderRadius:"50%"}}>
             <img
-              
+               style={{borderRadius:'50%'}}
               src={tile.img}
               alt={tile.title}
             />
