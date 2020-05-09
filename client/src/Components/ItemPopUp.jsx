@@ -31,7 +31,7 @@ const BootstrapInput = withStyles((theme) => ({
         backgroundColor: theme.palette.background.paper,
         border: '1px solid #eed7c1',
         fontSize: 16,
-        padding: '10px 26px 10px 12px',
+        padding: '10px 26px 10px 0px',
         transition: theme.transitions.create(['border-color', 'box-shadow']),
 
         fontFamily: [
@@ -70,7 +70,7 @@ const useStyles = makeStyles((theme) => ({
         flexGrow: 1,
     },
     paper: {
-        padding: theme.spacing(2),
+        padding: theme.spacing(0),
         textAlign: 'center',
         color: theme.palette.text.secondary,
     },
@@ -91,8 +91,9 @@ function ItemPopUp() {
 
 
     const [itemInfo, setItemInfo] = useState({}) //Recieves all of the product info
-    const [size, setSize] = useState(null)  //Changes based on the size picked by the user
+    const [size, setSize] = useState('')  //Changes based on the size picked by the user
     const [quantity, setQuantity] = useState(0) //Changes based on the quantity the user wants from a specific product
+
 
     const handleItemInfo = async () => {
         try {
@@ -105,56 +106,54 @@ function ItemPopUp() {
     }
 
     useEffect(() => {
-        handleItemInfo();
-    }, [])
+        if (productId !== 0) {
+            handleItemInfo();
+        }
+
+    }, [productId])
+
+
+
 
     return (
 
-        <div className="ItemPopUp-stage"
-
-            style={{
-                color: "black",
-                boxShadow: " 1px 1px 1px white",
-                // borderBottom: "1px solid #eed7c1",
-                height: "200px",
-            }}>
+        <div className="ItemPopUp-stage">
             <div className={classes.root}>
-                <Grid container spacing={2} height="100px">
-                    <Grid item xs={5}>
-                        <Paper style={{
-                            boxShadow: " 1px 1px 1px white",
-                        }}
-                            className={classes.paper}>  <img src={itemInfo.product_image_url} height="250px" /></Paper>
-                    </Grid>
+                <Grid container spacing={3} height="150px" style={{ justifyContent: "center", marginTop: '12px' }}>
+                    <Paper style={{
+                        boxShadow: " 1px 1px 1px white",
+                        padding: '2px'
+                    }}
+                        className={classes.paper}>  <img src={itemInfo.product_image_url} height="150px" /></Paper>
+                </Grid>
 
-                    <Grid item xs={7}
+                <Grid container spacing={3} height="100px" style={{ justifyContent: "center" }}>
+
+                    <Grid item xs={9}
                         style={{
                             borderBottom: "1px solid #eed7c1",
+                            padding: ' 0px',
+                            paddingBottom: '13px'
                         }}>
                         <Paper className={classes.paper}
                             style={{
                                 color: "black",
                                 boxShadow: " 1px 1px 1px white",
-                                // borderBottom: "1px solid #eed7c1",
-                                height: "200px",
+                                justifyContent: 'center',
+                                display: 'grid'
                             }}>
-
-                            <p className="item-name">{itemInfo.brand_name}'s {itemInfo.product_name}</p>
-                            <p className="item-price">${itemInfo.product_price}</p>
-                            <p className="item-color" >Color: {itemInfo.color_name}</p>
+                            <p style={{ font: '20px "Fira Sans", sans-serif', margin: '0px' }} className="item-name">{itemInfo.brand_name}'s </p>
+                            <p style={{ font: '20px "Fira Sans", sans-serif', margin: '0px' }} className="item-name">{itemInfo.product_name}</p>
+                            <p style={{ font: '15px "Fira Sans", sans-serif', margin: '0px' }} className="item-price">${itemInfo.product_price}</p>
+                            <p style={{ font: '15px "Fira Sans", sans-serif', margin: '0px' }} className="item-color" >Color: {itemInfo.color_name}</p>
                         </Paper>
                     </Grid>
 
-                    <Grid item xs={5}>
-                        <Paper>
-                        </Paper>
-                    </Grid>
-
-
-                    <Grid item xs={7}>
+                    <Grid item xs={9}>
                         <Paper className={classes.paper}
                             style={{
                                 boxShadow: " 1px 1px 1px white",
+                                padding: '2px'
                             }}>
 
                             <FormControl className={classes.margin}>
@@ -164,11 +163,9 @@ function ItemPopUp() {
                                         backgroundColor: "#eed7c1",
                                     }}
                                     id="demo-customized-select-native"
-                                    // value={}
                                     onChange={e => {
                                         getProductSize(e.target.value)
                                     }}
-
                                     input={<BootstrapInput />}
                                 >
                                     <option value="default" selected={true} disabled="disabled" >Choose a size</option>
@@ -181,29 +178,27 @@ function ItemPopUp() {
                                 type="number" placeholder="0"
                                 min="0" max="100"
                                 // value={productQty}
-                                // onChange={(e) => setQuantity(e.target.value)}
+
                                 onChange={e => {
                                     updateProductQty(e.target.value)
                                 }}>
-                                {/* Updates the parent state from the child component */}
                             </input>
                             <br></br>
-
                             <Button
                                 style={{
                                     margin: "10px",
                                     borderRadius: 35,
                                     backgroundColor: "#eed7c1",
-                                    padding: "18px 85px",
+                                    padding: "10px 24px",
                                     fontSize: "14px",
                                 }}
                                 variant="contained"
                                 className="ItemInputSubmit" type="submit" value="ADD TO BAG"
                                 onClick={addToCart}>ADD TO BAG</Button>
 
+
                             <div className="description">
                                 <ExpansionPanel expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
-
                                     <ExpansionPanelSummary
                                         expandIcon={<ExpandMoreIcon />}
                                         aria-controls="panel1bh-content"
@@ -212,11 +207,9 @@ function ItemPopUp() {
                                             border: '1px solid #eed7c1',
                                         }}>
                                         <Typography
-                                            className={classes.heading}>Item Description
+                                            className={classes.heading}>Description
                                             </Typography>
                                     </ExpansionPanelSummary>
-
-
                                     <ExpansionPanelDetails style={{
                                         border: '1px solid #eed7c1',
                                     }}>
@@ -232,6 +225,7 @@ function ItemPopUp() {
                         </Paper>
                     </Grid>
                 </Grid>
+
             </div>
             <br></br>
 
@@ -240,4 +234,7 @@ function ItemPopUp() {
 }
 
 export default ItemPopUp;
+
+
+
 
