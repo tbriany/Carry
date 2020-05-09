@@ -87,7 +87,7 @@ export default function TypesGridList(props) {
       <GridList className={classes.gridList} cols={5} cellHeight={270} spacing={5}>
         {tileData.map((tile) => (
           <GridListTile key={tile.img}>
-            <Link to={`/store/1/products`}>
+            <Link to={`/store/${props.storeId}/products`}>
            <img src={tile.img} alt={tile.title} />
            <span className={classes.imageButton}>
             <Typography
