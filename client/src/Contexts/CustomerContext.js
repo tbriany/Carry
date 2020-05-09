@@ -16,11 +16,12 @@ const CustomerContextProvider = (props) => {
     const [customerZip, setCustomerZip] = useState(null);
     const [customerAvatar, setCustomeAvatar] = useState(null);
 
-    const logCustomerIn = (customerObj) => {
-        console.log("LOG CUSTOMER IN WORKING IN CONTEXT FILE");
-    }
+    const setCustomerContext = async (customerObj) => {
+        const { email } = customerObj;
+        setCustomerEmail(email)
+    };
     return (
-        <CustomerContext.Provider value={{logCustomerIn}}>
+        <CustomerContext.Provider value={{setCustomerContext}}>
             { props.children }
             </CustomerContext.Provider >
     ) 
