@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -118,7 +119,7 @@ const Signup = () => {
     const handleNewPasswordVisibility = () => {
         setNewCustomerPassword({ ...newCustomerPassword, showPassword: !newCustomerPassword.showPassword })
     };
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         let customerFirstname = newFirstname.firstname;
         let customerLastname = newLastname.lastname;
@@ -135,7 +136,14 @@ const Signup = () => {
         console.log('firstname error: ', firstnameError);
         console.log('lastname error: ', lastnameError);
         console.log('email error: ', emailError);
-        console.log('password error: ', passwordError);
+        console.log('password error:', passwordError);
+        try {
+            let newCustomer = await axios.post('/auth/signup', { firstname: customerFirstname, lastname: customerLastname, email: customerEmail, password: customerPassword }).then(res => res.data.payload);
+            console.log(newCustomer)
+        }
+        catch(err){
+            throw err
+        }
     };
     return (
         <Container component="main" maxWidth="xs">
