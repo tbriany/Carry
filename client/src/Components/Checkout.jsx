@@ -1,9 +1,10 @@
-import React, { useState, Fragment } from 'react';
-import { makeStyles, AppBar, Toolbar, Paper, Stepper, Step, StepLabel, Typography, CssBaseline, Button } from '@material-ui/core';
+import React, { useState } from 'react';
+import { Container, makeStyles, Paper, Stepper, Step, StepLabel, Typography, CssBaseline, Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import AddressForm from './checkout-forms/AddressForm';
 import PaymentForm from './checkout-forms/PaymentForm';
 import Review from './checkout-forms/Review';
+import customTheme from './styling/customTheme';
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -11,14 +12,15 @@ const useStyles = makeStyles((theme) => ({
     },
     layout: {
         width: '80%',
-        margin: 'auto'
+        margin: 'auto',
     },
     paper: {
         marginTop: theme.spacing(4),
         marginLeft: theme.spacing(5),
         marginRight: theme.spacing(5),
         padding: theme.spacing(3),
-        boxShadow: " 1px 1px 1px white",
+        boxShadow: " 2px 2px 2px white",
+        height: '75vh'
     },
     header: {
         textDecoration: 'none',
@@ -28,14 +30,22 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(3, 0, 5),
         width: '90%',
         margin: 'auto',
+        '.MuiStepIcon-root.MuiStepIcon-active': {
+            color: customTheme.palette.primary.main
+        },
+    },
+    buttonContainer: {
+        justifyContent: 'baseline'
     },
     buttons: {
         display: 'flex',
+        marginBottom: theme.spacing(1),
+        // marginRight: theme.spacing(2),
         justifyContent: 'flex-end',
     },
     button: {
-        marginTop: theme.spacing(3),
-        marginLeft: theme.spacing(1)
+        marginBottom: theme.spacing(2),
+        marginRight: theme.spacing(2)
     },
 }));
 
@@ -63,20 +73,11 @@ const Checkout = () => {
         setActiveStep(activeStep - 1)
     };
     return (
-        <Fragment>
-            {/* <CssBaseline />
-            <AppBar position='absolute' className={classes.appBar} color='grey'>
-                <Toolbar>
-                    <Typography variant='h6' color='inherit' noWrap>
-                        <Link to='/' className={classes.header}>
-                        Carry - Checkout
-                        </Link>
-                </Typography>
-                </Toolbar>
-            </AppBar> */}
-            <main className={classes.layout}  style={{padding: "0px", margin : " 0px", width: "100%"}}>
-                <Paper className={classes.paper}  style={{padding: "0px", margin : " 0px"}} >
-                    <Stepper activeStep={activeStep} className={classes.stepper} color='grey'>
+        <Container>
+            <CssBaseline />
+            <main className={classes.layout} style={{ padding: "0px", margin: " 0px", width: "100%" }}>
+                <Paper className={classes.paper} style={{ padding: "0px", margin: " 0px" }} >
+                    <Stepper activeStep={activeStep} className={classes.stepper} color={customTheme.palette.secondary.main}>
                         <Step key={steps[0]}>
                             <StepLabel>{steps[0]}</StepLabel>
                         </Step>
@@ -84,26 +85,26 @@ const Checkout = () => {
                             <StepLabel>{steps[1]}</StepLabel>
                         </Step>
                         <Step key={steps[2]}>
-                            <StepLabel>{steps[2]}</StepLabel>
+                            <StepLabel color={customTheme.palette.secondary.main}>{steps[2]}</StepLabel>
                         </Step>
                     </Stepper>
                     {/* creates Stepper Component that holds Step & StepLabel components, each with their value being a certain index from the steps global array */}
-                    <Fragment>
+                    <Container className="formContainer">
                         {getStepComponent(activeStep)}
-                        <div className={classes.buttons}>
+                    </Container>
+                     <div className={classes.buttons}>
                             {activeStep !== 0 && (
                                 <Button onClick={handlePrevStep} className={classes.button}>
                                     Back
                                  </Button>
                             )}
                             <Button onClick={handleNextStep} className={classes.button} variant='contained' color='grey'>
-                                {activeStep === steps.length -1 ? 'Place Order' : 'Next'}
+                                {activeStep === steps.length - 1 ? 'Place Order' : 'Next'}
                             </Button>
                         </div>
-                    </Fragment>
                 </Paper>
-            </main>  
-        </Fragment>
+            </main>
+        </Container>
     )
 }
 
