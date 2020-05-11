@@ -1,10 +1,19 @@
 const db = require('../database/db')
 
 const getCustomerByEmail = async (email) => {
-    const getQuery = `SELECT * FROM customers
+    const getQuery = `
+    SELECT firstname,
+        lastname,
+        phone_number,
+        email_address
+        city,
+        state,
+        zip_code,
+        avatar_url
+        FROM customers
     WHERE email = $/email/;
-    `
-    return await db.one(getQuery, { email });
+    `;
+    return await db.any(getQuery, { email });
 };
 
 const getCustomerById = async (id) => {
@@ -12,7 +21,7 @@ const getCustomerById = async (id) => {
     SELECT  firstname,
             lastname,
             phone_number,
-            email,address,
+            email_address,
             city,
             state,
             zip_code,
