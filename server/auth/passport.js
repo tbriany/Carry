@@ -3,27 +3,27 @@ const LocalStrategy = require('passport-local').Strategy;
 const { comparePassword } = require('./helpers');
 const customerQueries = require('../queries/customersQueries');
 
-passport.use(new LocalStrategy({usernameField: 'email', passwordField : 'password', passReqToCallback: true}, async (request, email, inputPassword, done) => {
-    try {
-        const customer = await customerQueries.getCustomerByEmail(email);
-        if (!customer) {
-            return done(null, false);
-        }
-        const customerPassword = customer.password;
-        const passMatch = await comparePassword(inputPassword, customerPassword);
-        if (!passMatch) {
-            return done(null, false)
-        };
-        delete customerPassword;
-        done(null, customer);
+passport.use(new LocalStrategy({ usernameField: 'email', passwordField: 'password', passReqToCallback: true }, async (request, email, inputPassword, done) => {
+  try {
+    const customer = await customerQueries.getCustomerByEmailAuth(email);
+    if (!customer) {
+      return done(null, false);
     }
-    catch (err) {
-        done(err);
-    }
+    const customerPassword = customer.password;
+    const passMatch = await comparePassword(inputPassword, customerPassword);
+    if (!passMatch) {
+      return done(null, false)
+    };
+    delete customerPassword;
+    done(null, customer);
+  }
+  catch (err) {
+    done(err);
+  }
 }));
 
 passport.serializeUser((user, done) => {
-    done(null, user)
+  done(null, user)
 });
 
 passport.deserializeUser(async (user, done) => {
@@ -32,7 +32,7 @@ passport.deserializeUser(async (user, done) => {
     delete retrievedUser.password;
     done(null, retrievedUser)
   }
-  catch(err){
+  catch (err) {
     done(err, false)
   }
 });
