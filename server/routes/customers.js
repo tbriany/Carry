@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const customerQueries = require('../queries/customersQueries')
 
-
 router.get("/:id", async (req, res, next) => {
     try {
         const customer_id = parseInt(req.params.id);
@@ -14,6 +13,21 @@ router.get("/:id", async (req, res, next) => {
         });
     } catch (err) {
         console.log("ERROR", err)
+    }
+});
+
+router.get('/email/', async (req, res, next) => {
+    try {
+        const customerEmail = req.body.email;
+        let customerInfo = await customerQueries.getCustomerByEmail(customerEmail);
+        res.status(200).json({
+            status: 'success',
+            message: `Customer ${customerEmail} was retrieved.`,
+            payload: customerInfo,
+        })
+    }
+    catch(err) {
+        console.log("EROOR", err)
     }
 });
 
