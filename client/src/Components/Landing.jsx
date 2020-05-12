@@ -56,30 +56,19 @@ const LandingPage = () => {
           </div>
 
           <div className="PopularItems" style={{ marginTop: "50px" }}>
-            <h3
-              style={{
-                fontFamily: "Palatino Linotype",
-                textAlign: "left",
-                fontSize: "20px",
-                color: "black",
-              }}
-            >
-              {" "}
-              Popular Stores Near You{" "}
-            </h3>
-            {locationStatus ? 
+            {locationStatus ? (
               <SingleLineGridListStores
                 latitude={latitude}
                 longitude={longitude}
               />
-             : 
+            ) : (
               <SingleLineGridListItems />
-          }
+            )}
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 };
 
 export default LandingPage;
