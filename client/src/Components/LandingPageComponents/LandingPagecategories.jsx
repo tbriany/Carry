@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import GridList from "@material-ui/core/GridList";
@@ -107,7 +107,7 @@ export default function Categories() {
         {categories.map((tile)  => (
           <GridListTile spacing={"100px"} cellHeight={"1px"} key={tile.img} style={{borderRadius:"50%"}}>
             <img
-               style={{borderRadius:'50%'}}
+              
               src={tile.img}
               alt={tile.title}
             />
