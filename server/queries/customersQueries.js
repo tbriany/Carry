@@ -12,23 +12,25 @@ const getCustomerByEmailAuth = async (email) => {
     `;
     return await db.one(getQuery, { email });
 };
+
 const getCustomerByEmail = async (email) => {
     const getQuery = `
-    SELECT customer_id,
-    firstname,
-    lastname,
-    phone_number,
-    email,
-    city,
-    state,
-    zip_code,
-    avatar_url,
-    password
-    FROM customers
-WHERE email = $/email/;
-    `;
+        SELECT customer_id,
+        firstname,
+        lastname,
+        phone_number,
+        email,
+        address,
+        city,
+        state,
+        zip_code,
+        avatar_url
+        FROM customers
+    WHERE email = $/email/;
+        `;
     return await db.one(getQuery, { email });
-}
+};
+
 const getCustomerById = async (id) => {
     const getQuery = `
     SELECT  firstname,
@@ -43,8 +45,7 @@ const getCustomerById = async (id) => {
         WHERE customer_id = $/id/;
       `;
     return await db.one(getQuery, { id });
-}
-
+};
 
 const addCustomer = async (bodyObj) => {
     const postQuery = `
@@ -85,9 +86,7 @@ const addCustomer = async (bodyObj) => {
             avatar_url
       `;
     return await db.one(postQuery, bodyObj);
-}
-
-
+};
 
 const updateCustomerInfo = async (updateObj) => {
     let updateQuery = `

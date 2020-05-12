@@ -1,5 +1,5 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { Redirect } from 'react-router-dom';
+import React, { useState, useContext} from 'react';
+// import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -9,11 +9,11 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
-import { makeStyles, fade } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { checkValidEmail, checkValidPassword } from "./util/inputHelpers";
 import InputAdornment from '@material-ui/core/InputAdornment';
-import CustomerContext from '../Contexts/CustomerContext';
+import { CustomerContext } from '../Contexts/CustomerContext';
 import customTheme from './styling/customTheme';
 
 const useStyles = makeStyles((theme) => ({
@@ -71,7 +71,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Login = () => {
-    // const { noCustomer } = useContext(CustomerContext);
+    const { setCustomerContext, isLoggedIn, customerFirstname } = useContext(CustomerContext);
     const classes = useStyles();
     const [customerEmail, setCustomerEmail] = useState({
         email: '',
@@ -99,8 +99,11 @@ const Login = () => {
     const handleWrongInputs = () => {
         console.log('Wrong email or password')
     };
-    const handleNextPage = (customer) => {
-        console.log(customer)
+    const handleNextPage = async (customerObj) => {
+        console.log("second customerObj line 103", customerObj)
+        await setCustomerContext(customerObj);
+        console.log(`USER ${customerFirstname} SUCESSFULLY LOGGED IN`)
+        console.log(`User is logged in: ${isLoggedIn}`)
     }
     const handleLogin = async (e) => {
         e.preventDefault();
