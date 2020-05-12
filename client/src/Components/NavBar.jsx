@@ -174,14 +174,14 @@ function Navbar() {
   );
 
   return (
-    <div className={classes.grow}>
+    <div className={classes.grow} >
       <AppBar position="static" className={classes.appBar}>
         <Toolbar>
-          <Link to='/' 
-          style={{ textDecoration: 'none', color: customTheme.palette.secondary.dark }}>
-            <Typography 
-            className={classes.title} 
-            variant="h6" noWrap >
+          <Link to='/'
+            style={{ textDecoration: 'none', color: customTheme.palette.secondary.dark }}>
+            <Typography
+              className={classes.title}
+              variant="h6" noWrap >
               CARRY
         </Typography>
           </Link>
@@ -234,10 +234,9 @@ function Navbar() {
               disableRestoreFocus
 
             >
-              <Typography>
-                <CartPopUp />
-              </Typography>
+              <CartPopUp />
             </Popover>
+
           </div>
           <div className={classes.sectionMobile}>
             <IconButton
