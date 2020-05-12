@@ -1,27 +1,40 @@
 const db = require('../database/db')
 
-const getCustomerByEmail = async (email) => {
+const getCustomerByEmailAuth = async (email) => {
     const getQuery = `
-    SELECT firstname,
+    SELECT customer_id,
+        firstname,
         lastname,
-        phone_number,
-        email_address
-        city,
-        state,
-        zip_code,
-        avatar_url
+        email,
+        password
         FROM customers
     WHERE email = $/email/;
     `;
-    return await db.any(getQuery, { email });
+    return await db.one(getQuery, { email });
 };
-
+const getCustomerByEmail = async (email) => {
+    const getQuery = `
+    SELECT customer_id,
+    firstname,
+    lastname,
+    phone_number,
+    email,
+    city,
+    state,
+    zip_code,
+    avatar_url,
+    password
+    FROM customers
+WHERE email = $/email/;
+    `;
+    return await db.one(getQuery, { email });
+}
 const getCustomerById = async (id) => {
     const getQuery = `
     SELECT  firstname,
             lastname,
             phone_number,
-            email_address,
+            email,
             city,
             state,
             zip_code,
@@ -107,6 +120,7 @@ const deleteCustomer = async (id) => {
 module.exports = {
     addCustomer,
     getCustomerByEmail,
+    getCustomerByEmailAuth,
     getCustomerById,
     updateCustomerInfo,
     deleteCustomer,

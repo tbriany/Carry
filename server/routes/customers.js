@@ -26,7 +26,7 @@ router.get('/email/', async (req, res, next) => {
             payload: customerInfo,
         })
     }
-    catch(err) {
+    catch (err) {
         console.log("EROOR", err)
     }
 });
