@@ -23,13 +23,20 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: "nowrap",
     // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
     transform: "translateZ(0)",
+    spacing: '10px'
   },
   title: {
     color: theme.palette.primary.light,
+    display: "flex",
+    flexWrap: "wrap",
   },
   titleBar: {
-    background:
-      "linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)",
+    background: "white",
+    textAlign: "center",
+    display: "flex",
+    flexWrap: "wrap"
+
+      // "linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)",
   },
 }));
 
@@ -54,21 +61,33 @@ export default function SingleLineGridListStores() {
   }, []);
 
   return (
+<div> 
+    <div>    <h3
+    style={{
+      fontFamily: "Palatino Linotype",
+      textAlign: "left",
+      fontSize: "20px",
+      color: "black",
+    }}
+  >
+    {" "}
+    Popular Stores Near You{" "}
+  </h3></div>
     <div className={classes.root}>
-      <GridList className={classes.gridList} cols={2.5}>
+      <GridList className={classes.gridList} cols={3.5}>
         {stores.map((store) => (
           <GridListTile key={store.store_id}>
             <img src={store.avatar_url} alt={store.title} />
             <Link to={`/store/${store.store_id}`}>
             <GridListTileBar
-              title={store.title}
+              title={store.store_name}
               classes={{
                 root: classes.titleBar,
                 title: classes.title,
               }}
               actionIcon={
-                <IconButton aria-label={`star ${store.title}`}>
-                  <StarBorderIcon className={classes.title} />
+                <IconButton aria-label={`star ${store.store_name}`}>
+                  <StarBorderIcon className={classes.store_name} />
                 </IconButton>
               }
             />
@@ -76,6 +95,7 @@ export default function SingleLineGridListStores() {
           </GridListTile>
         ))}
       </GridList>
+    </div>
     </div>
   );
 }
