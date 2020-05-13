@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext} from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import Button from '@material-ui/core/Button';
@@ -9,70 +9,15 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
-import { makeStyles, fade } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { checkValidEmail, checkValidPassword } from "./util/inputHelpers";
 import InputAdornment from '@material-ui/core/InputAdornment';
-import CustomerContext from '../Contexts/CustomerContext';
-import customTheme from './styling/customTheme';
-
-const useStyles = makeStyles((theme) => ({
-    header: {
-        color: customTheme.palette.secondary.dark
-    },
-    paper: {
-        marginTop: theme.spacing(8),
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-    },
-    avatar: {
-        margin: theme.spacing(1),
-        backgroundColor: theme.palette.secondary.main,
-    },
-    form: {
-        width: '100%',
-        marginTop: theme.spacing(1),
-    },
-    textField: {
-        label: customTheme.palette.secondary.dark,
-        error: theme.palette.error.dark,
-        '& label.Mui-focused': {
-            color: customTheme.palette.secondary.dark,
-        },
-        '& .MuiOutlinedInput-root': {
-            '& fieldset': {
-                borderColor: customTheme.palette.secondary.main
-            },
-            '&:hover fieldset': {
-                borderColor: customTheme.palette.secondary.light,
-            },
-            '&.Mui-focused fieldset': {
-                borderColor: customTheme.palette.secondary.main
-            }
-        }
-    },
-    submit: {
-        margin: theme.spacing(3, 0, 2),
-        backgroundColor: customTheme.palette.secondary.main,
-        '&:hover': {
-            backgroundColor: customTheme.palette.primary.main
-        }
-    },
-    signupLink: {
-        color: customTheme.palette.secondary.dark
-    },
-    iconStyle: {
-        color: customTheme.palette.secondary.light,
-        '&:hover': {
-            color: customTheme.palette.secondary.main
-        }
-    }
-}));
+import { CustomerContext } from '../Contexts/CustomerContext';
+import { loginStyles } from './styling/loginStyles';
 
 const Login = () => {
-    // const { noCustomer } = useContext(CustomerContext);
-    const classes = useStyles();
+    const { setCustomerContext, isLoggedIn, customerFirstname } = useContext(CustomerContext);
+    const classes = loginStyles();
     const [customerEmail, setCustomerEmail] = useState({
         email: '',
         error: false,
@@ -99,8 +44,15 @@ const Login = () => {
     const handleWrongInputs = () => {
         console.log('Wrong email or password')
     };
-    const handleNextPage = (customer) => {
-        console.log(customer)
+    const handleNextPage = async (customerObj) => {
+        await setCustomerContext(customerObj);
+        console.log(`USER ${customerFirstname} SUCESSFULLY LOGGED IN`)
+        console.log(`User is logged in: ${isLoggedIn}`);
+        setTimeout(() => {
+            return (
+            <Redirect to={'/'}/>
+            )
+        }, 3000)
     }
     const handleLogin = async (e) => {
         e.preventDefault();

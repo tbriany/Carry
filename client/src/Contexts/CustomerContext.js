@@ -16,30 +16,52 @@ const CustomerContextProvider = (props) => {
     const [customerCity, setCustomerCity] = useState(null);
     const [customerState, setCustomerState] = useState(null);
     const [customerZip, setCustomerZip] = useState(null);
-    const [customerAvatar, setCustomeAvatar] = useState(null);
+    const [customerAvatar, setCustomerAvatar] = useState(null);
 
-    const logUserIn = () => {
-        setLogIn(true)
+    const logUserIn = (customerObj) => {
+        console.log("customer object in context file", customerObj)
+        const { customer_id, firstname, lastname, phone_number, email, address, city, state, zip_code, avatar_url } = customerObj;
+
+        setLogIn(true);
+        setCustomerId(parseInt(customer_id))
+        setCustomerFirstname(firstname);
+        setCustomerLastname(lastname);
+        setCustomerPhoneNumber(phone_number);
+        setCustomerEmail(email);
+        setCustomerAddress(address);
+        setCustomerCity(city);
+        setCustomerState(state);
+        setCustomerZip(parseInt(zip_code));
+        setCustomerAvatar(avatar_url);
     };
     const logUserOut = () => {
-        setLogIn(false)
+        setLogIn(false);
+        setLogIn(null);
+        setCustomerId(null)
+        setCustomerFirstname(null);
+        setCustomerLastname(null);
+        setCustomerPhoneNumber(null);
+        setCustomerEmail(null);
+        setCustomerAddress(null);
+        setCustomerCity(null);
+        setCustomerState(null);
+        setCustomerZip(null);
+        setCustomerAvatar(null);
     };
     const setCustomerContext = async (customerObj) => {
         const { email } = customerObj;
-        setCustomerEmail(email);
-        try { 
-            let getCustomerInformation = await axios.get(`/customers/email/`, email);
-            console.log("CUSTOMER CONTEXT RETREIEVE CUSTOMER BY EMAIL");
-            console.log(getCustomerInformation)
+        try {
+            let customerContextInfo = await axios.get(`customers/email/${email}`).then(res => res.data.payload);
+            logUserIn(customerContextInfo);
         }
-        catch(err) {
+        catch(err){
             console.log(err)
         }
     };
     return (
-        <CustomerContext.Provider value={{logUserIn, logUserOut, setCustomerContext}}>
-            { props.children }
-            </CustomerContext.Provider >
-    ) 
+        <CustomerContext.Provider value={{ logUserIn, logUserOut, setCustomerContext, isLoggedIn, customerId, customerFirstname, customerLastname, customerPhoneNumber, customerEmail, customerAddress, customerCity, customerState, customerZip, customerAvatar }}>
+            {props.children}
+        </CustomerContext.Provider >
+    )
 };
 export default CustomerContextProvider;
