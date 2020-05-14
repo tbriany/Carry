@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+
+// styling 
 import { makeStyles } from "@material-ui/core/styles";
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
@@ -99,15 +101,18 @@ export default function Categories() {
   ];
 
   return (
+    <div>
+      <div>
+        <h3> Shop By Category</h3>
+      </div>
     <div className={classes.root}>
       <GridList className={classes.gridList} cols={3.5} 
              item xs= {12} sm={6} md= {4} lg={3} xl= {2}
              spacing= {32} 
             >
         {categories.map((tile)  => (
-          <GridListTile spacing={"100px"} cellHeight={"1px"} key={tile.img} style={{borderRadius:"50%"}}>
+          <GridListTile spacing={"100px"} cellHeight={"1px"} key={tile.img} >
             <img
-              
               src={tile.img}
               alt={tile.title}
             />
@@ -119,15 +124,12 @@ export default function Categories() {
                   root: classes.titleBar,
                   title: classes.title,
                 }}
-                // actionIcon={
-                //   <IconButton aria-label={`Heart ${tile.title}`}>
-                //     <StarBorderIcon className={classes.title} />
-                //   </IconButton>}
               />
             </Link>
           </GridListTile>
         ))}
       </GridList>
+    </div>
     </div>
   );
 }
