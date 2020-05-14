@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
-import axios from "axios";
+import React, { useState, useContext } from "react";
 import { LandingContext } from "../Contexts/LandingPageDetailsContext";
 
 import SingleLineGridListStores from "./LandingPageComponents/PopularStores.jsx";
@@ -22,10 +21,10 @@ const LandingPage = () => {
       //console.log(position)
 
       // keys into object position to return latitude value
-      console.log("Latitude", position.coords.latitude);
+      //console.log("Latitude", position.coords.latitude);
 
       // keys into object position to return longitude value
-      console.log("Longitude", position.coords.longitude);
+      //console.log("Longitude", position.coords.longitude);
 
       //Storing Latitude and Longitude values in Context.
       SetLatitude(position.coords.latitude);
@@ -34,7 +33,7 @@ const LandingPage = () => {
       setLocationStatus(true);
     });
   } else {
-    console.log("geolocation IS NOT available");
+    console.log("Geolocation IS NOT available");
   }
 
   return (
@@ -56,6 +55,7 @@ const LandingPage = () => {
           </div>
 
           <div className="PopularItems" style={{ marginTop: "50px" }}>
+           {console.log('landing Page locationStatus', locationStatus)}
             {locationStatus ? (
               <SingleLineGridListStores
                 latitude={latitude}

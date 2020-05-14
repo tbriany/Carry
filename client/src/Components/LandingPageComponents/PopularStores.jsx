@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import {Link} from 'react-router-dom';
+import React, { useState, useEffect, useContext } from "react";
+import { Link } from "react-router-dom";
 import { LandingContext } from "../../Contexts/LandingPageDetailsContext";
 import axios from "axios";
 
@@ -9,7 +9,6 @@ import GridListTile from "@material-ui/core/GridListTile";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
 import IconButton from "@material-ui/core/IconButton";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
-
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: "nowrap",
     // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
     transform: "translateZ(0)",
-    spacing: '10px'
+    spacing: "10px",
   },
   title: {
     color: theme.palette.primary.light,
@@ -34,23 +33,24 @@ const useStyles = makeStyles((theme) => ({
     background: "white",
     textAlign: "center",
     display: "flex",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
 
-      // "linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)",
+    // "linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)",
   },
 }));
 
 export default function SingleLineGridListStores() {
+  const { Latitude, Longitude } = useContext(LandingContext);
   const classes = useStyles();
 
   const [stores, setStores] = useState([]);
-
+  console.log();
   useEffect(() => {
     async function fetchData() {
       axios
-        .get("/stores/location/40.760350/-73.975080")
+        .get(`/stores/location/${Latitude}}/${Longitude}`)
         .then((response) => {
-          console.log(response, 'getting stores by location');
+          console.log(response, "getting stores by location");
           setStores(response.data.payload);
         })
         .catch((err) => {
@@ -61,42 +61,44 @@ export default function SingleLineGridListStores() {
   }, []);
 
   return (
-<div> 
-    <div>    <h3
-    style={{
-      fontFamily: "Palatino Linotype",
-      textAlign: "left",
-      fontSize: "20px",
-      color: "black",
-    }}
-  >
-    {" "}
-    Popular Stores Near You{" "}
-  </h3></div>
-    <div className={classes.root}>
-      <GridList className={classes.gridList} cols={3.5}>
-        {stores.map((store) => (
-          <GridListTile key={store.store_id}>
-            <img src={store.avatar_url} alt={store.title} />
-            <Link to={`/store/${store.store_id}`}>
-            <GridListTileBar
-              title={store.store_name}
-              classes={{
-                root: classes.titleBar,
-                title: classes.title,
-              }}
-              actionIcon={
-                <IconButton aria-label={`star ${store.store_name}`}>
-                  <StarBorderIcon className={classes.store_name} />
-                </IconButton>
-              }
-            />
-            </Link>
-          </GridListTile>
-        ))}
-      </GridList>
-    </div>
+    <div>
+      <div>
+        {" "}
+        <h3
+          style={{
+            fontFamily: "Palatino Linotype",
+            textAlign: "left",
+            fontSize: "20px",
+            color: "black",
+          }}
+        >
+          {" "}
+          Popular Stores Near You{" "}
+        </h3>
+      </div>
+      <div className={classes.root}>
+        <GridList className={classes.gridList} cols={3.5}>
+          {stores.map((store) => (
+            <GridListTile key={store.store_id}>
+              <img src={store.avatar_url} alt={store.title} />
+              <Link to={`/store/${store.store_id}`}>
+                <GridListTileBar
+                  title={store.store_name}
+                  classes={{
+                    root: classes.titleBar,
+                    title: classes.title,
+                  }}
+                  actionIcon={
+                    <IconButton aria-label={`star ${store.store_name}`}>
+                      <StarBorderIcon className={classes.store_name} />
+                    </IconButton>
+                  }
+                />
+              </Link>
+            </GridListTile>
+          ))}
+        </GridList>
+      </div>
     </div>
   );
 }
-
