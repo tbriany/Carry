@@ -35,11 +35,8 @@ const sidePopUp = makeStyles({
 
 
 
-export default function ProductsDisplay({categoryName, storeId, getProductId}) {
+export default function ProductsDisplay({getProductId, products}) {
   const classes = useStyles();
-
-  const [products, setProducts] = useState([])
-
 
   const popUp = sidePopUp();
   const [state, setState] = React.useState({
@@ -78,23 +75,6 @@ export default function ProductsDisplay({categoryName, storeId, getProductId}) {
     </div>
   );
 
-
-
-
-  useEffect(() => {
-    async function fetchData() {
-        try {
-            const res = await axios.get(`/products/category/${categoryName}/${storeId}`)
-            setProducts(res.data.payload);
-        } catch (error) {
-            setProducts([])
-            console.log(error);
-        }
-    }
-  fetchData()
-}, [categoryName, storeId])
-
-// console.log(products)
   
   return (
     <div className={classes.root} style={{ margin: '20px', padding: '15px' }}>

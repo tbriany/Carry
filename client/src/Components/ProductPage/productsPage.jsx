@@ -10,6 +10,24 @@ import ProductsDisplay from '../ProductPage/productsDisplay';
 
 function ProductsPage(props) {
   const { getProductId, productId } = useContext(ItemDetailsContext);
+  const [products, setProducts] = useState([])
+
+  const categoryName = props.match.params.category_name
+  const storeId = props.match.params.id
+
+  useEffect(() => {
+    async function fetchData() {
+        try {
+            const res = await axios.get(`/products/category/${categoryName}/${storeId}`)
+            setProducts(res.data.payload);
+        } catch (error) {
+            setProducts([])
+            console.log(error);
+        }
+    }
+  fetchData()
+}, [categoryName, storeId])
+
   return (
 
     <div className="ProductsPage" style={{ textAlign: "center" }}>
@@ -19,10 +37,9 @@ function ProductsPage(props) {
       <MultipleSelect />
       <br></br>
       <ProductsDisplay
-        storeId={props.match.params.id}
-        categoryName={props.match.params.category_name}
         getProductId={getProductId}
         currentProduId={productId}
+        products={products}
       />
     </div>
   );
