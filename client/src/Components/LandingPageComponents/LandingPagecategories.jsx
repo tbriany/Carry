@@ -49,57 +49,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Categories() {
   const classes = useStyles();
-
-  // const categories = [
-  //   {
-  //     id: 1,
-  //     img:
-  //       "https://cdn2.vectorstock.com/i/1000x1000/90/16/fashion-women-in-checkered-dress-drawing-outline-vector-27759016.jpg",
-  //     title: "Women",
-  //     author: "author",
-  //   },
-  //   {
-  //     id: 2,
-  //     img:
-  //       "https://thumbs.dreamstime.com/b/fashion-man-men-sketches-white-background-autumn-127439059.jpg",
-  //     title: "Men",
-  //     author: "author",
-  //   },
-  //   {
-  //     id: 3,
-  //     img:
-  //       "https://cdn.shopify.com/s/files/1/0580/0721/articles/iStock-1170104811_95fed370-9e0c-4fd8-a668-8d7e806c8f05_grande.jpg?v=1581195777",
-  //     title: "Beauty",
-  //     author: "author",
-  //   },
-  //   {
-  //     id: 4,
-  //     img:
-  //       "https://www.thestatesman.com/wp-content/uploads/2017/12/accessories.jpg",
-  //     title: "Accessories",
-  //     author: "author",
-  //   },
-  //   {
-  //     id: 5,
-  //     img:
-  //       "https://cb2.scene7.com/is/image/CB2/122919_m_super_decor_accessories?wid=670&qlt=65",
-  //     title: "Home Decor ",
-  //     author: "author",
-  //   },
-  //   {id: 6,
-  //     img:
-  //       "https://www.verywellfit.com/thmb/GmnKoBE2iH34GJdVk9MsAnjELUE=/4000x3000/smart/filters:no_upscale()/bicycleabexercise-4b65bd8179db4c56b7faddcbd9a5c130.jpg",
-  //     title: "Health & Wellness",
-  //     author: "author",
-  //   },
-  //   {id: 7,
-  //     img:
-  //       "https://image.cnbcfm.com/api/v1/image/106032900-1563825608021rockets.jpg?v=1563825858&w=678&h=381",
-  //     title: "Kids",
-  //     author: "author",
-  //   }
-  // ];
-
+  
   const [categories, setCategories] = useState([]);
   // make network request to server to get all categories
   useEffect(() => {
