@@ -1,6 +1,7 @@
 import React, { createContext, useState } from 'react';
 export const LandingContext = createContext();
 
+//const LandingContextConsumer = LandingContext.Consumer
 
 const LandingContextProvider = (props) => {
 const [Latitude, SetLatitude] = useState('')
