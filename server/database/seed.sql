@@ -3,17 +3,18 @@ CREATE DATABASE carry;
 
 \c carry
 
+-- users
 CREATE TABLE customers(
     customer_id SERIAL PRIMARY KEY,
     firstname VARCHAR NOT NULL,
     lastname VARCHAR NOT NULL,
-    phone_number VARCHAR UNIQUE NOT NULL,
+    phone_number VARCHAR UNIQUE,
     email VARCHAR UNIQUE NOT NULL,
-    address VARCHAR NOT NULL,
-    city VARCHAR NOT NULL,
-    state VARCHAR NOT NULL,
-    zip_code INT NOT NULL,
-    avatar_url VARCHAR NOT NULL,
+    address VARCHAR,
+    city VARCHAR,
+    state VARCHAR,
+    zip_code INT,
+    avatar_url VARCHAR,
     password VARCHAR NOT NULL
 );
 
@@ -29,7 +30,7 @@ CREATE TABLE stores(
     zip_code INT NOT NULL,
     password VARCHAR NOT NULL, 
     lat FLOAT, 
-    lng FLOAT
+    lng FLOAT 
 );
 
 CREATE TABLE couriers(
@@ -45,13 +46,15 @@ CREATE TABLE couriers(
 
 CREATE TABLE categories(
     category_id SERIAL PRIMARY KEY,
-    category_name VARCHAR
+    category_name VARCHAR,
+    category_logo VARCHAR
 );
 
 CREATE TABLE product_type(
     product_type_id SERIAL PRIMARY KEY,
     category_id INT REFERENCES categories(category_id),
-    product_type_name VARCHAR
+    product_type_name VARCHAR,
+    product_type_logo VARCHAR
 );
 
 CREATE TABLE materials(
@@ -75,14 +78,20 @@ CREATE TABLE products(
     product_id SERIAL PRIMARY KEY,
     product_name VARCHAR,
     brand_id INT REFERENCES brands(brand_id),
+    store_id INT REFERENCES stores(store_id),
     category_id INT REFERENCES categories(category_id),
     product_price INT,
     material_id INT REFERENCES materials(material_id),
     color_id INT REFERENCES colors(color_id),
-    product_size VARCHAR,
     product_description VARCHAR,
     product_type INT REFERENCES product_type(product_type_id),
     quantity INT
+);
+
+CREATE TABLE sizes(
+    sizes_id SERIAL PRIMARY KEY,
+    product_id INT REFERENCES products(product_id),
+    product_size VARCHAR
 );
 
 CREATE TABLE productImage_id(
@@ -98,14 +107,10 @@ CREATE TABLE checkoutCart(
     checkoutCart_id SERIAL PRIMARY KEY,
     product_id  INT REFERENCES products(product_id),
     size VARCHAR,
-    quantity INT,
-    totalPrice INT
-
+    quantity INT
 );
 
-
 -- Orders 
-
 CREATE TABLE orders(
    order_id SERIAL PRIMARY KEY,
    order_status VARCHAR,
@@ -182,58 +187,57 @@ VALUES
 
 ('Dolce & Gabbana', 'https://wallpapercave.com/wp/wp4518095.jpg', '(212)897-9653', 'email10@gmail.com', '717 5th Avenue', 'New York', 'NY', 10022, 'Dolce1', 40.7619195, -73.9740741);
 
-
-
 INSERT INTO couriers
 (firstname, lastname, phone_number, email, avatar_url, password, mode_of_transportation)
 VALUES ('Jacob', 'Smith', '(347)-555-5553', 'Smith@courier.com', 'img', 'jacobsmith', 'bike');
+
 INSERT INTO categories 
-(category_name)
+(category_name, category_logo)
 VALUES 
-('Women''s Clothing'), 
-('Men''s Clothing'), 
-('Beauty'), 
-('Accessories');
+('Women''s', 'https://cdn1.dotesports.com/wp-content/uploads/2018/11/23152339/Hangzhou-Spark1.jpg'), 
+('Men''s', 'https://www.aljazeera.com/mritems/Images/2019/6/13/ce0ece26ee1348f2b1c453f314dc0a6e_18.jpg'), 
+('Beauty', 'https://www.lovearoma.co.uk/blog/wp-content/uploads/2015/05/bg-red-carpet.jpg'), 
+('Accessories', 'https://static.bhphoto.com/images/images500x500/1391171441_1026417.jpg');
 
 INSERT INTO product_type
-(category_id, product_type_name)
+(category_id, product_type_name, product_type_logo)
 VALUES 
-(1, 'Tops'),
-(1, 'Pants'),
-(1, 'Dresses'),
-(1, 'Jackets & Coats'),
-(1, 'Skirts'),
-(1, 'Shorts'),
-(1, 'Shirts & Blouses'),
-(1, 'Jeans'),
-(1, 'Swimwear'),
-(1, 'Hoodies & Sweatshirts'),
-(1, 'Sportswear'),
-(2, 'Tops'),
-(2, 'Pants'),
-(2, 'Jackets & Coats'),
-(2, 'Shorts'),
-(2, 'Shirts & Blouses'),
-(2, 'Jeans'),
-(2, 'Swimwear'),
-(2, 'Hoodies & Sweatshirts'),
-(2, 'Sportswear'),
-(3, 'Face'),
-(3, 'Eyes'),
-(3, 'Lips'),
-(3, 'Nails'),
-(3, 'Bath & Body Care'),
-(3, 'Hair'),
-(3, 'Brushes & Tools'),
-(4, 'Bags'),
-(4, 'Belts'),
-(4, 'Jewelry'),
-(4, 'Hair Accessories'),
-(4, 'Sunglasses'),
-(4, 'Gloves'),
-(4, 'Scarves'),
-(4, 'Hats & Caps'),
-(4, 'Wallets & Coin purses');
+(1, 'Tops', 'https://static.bhphoto.com/images/images500x500/1391171441_1026417.jpg'),
+(1, 'Pants', 'https://www.lovearoma.co.uk/blog/wp-content/uploads/2015/05/bg-red-carpet.jpg'),
+(1, 'Dresses', 'https://www.aljazeera.com/mritems/Images/2019/6/13/ce0ece26ee1348f2b1c453f314dc0a6e_18.jpg'),
+(1, 'Jackets & Coats', 'https://cdn1.dotesports.com/wp-content/uploads/2018/11/23152339/Hangzhou-Spark1.jpg'),
+(1, 'Skirts', 'https://static.bhphoto.com/images/images500x500/1391171441_1026417.jpg'),
+(1, 'Shorts', 'https://www.lovearoma.co.uk/blog/wp-content/uploads/2015/05/bg-red-carpet.jpg'),
+(1, 'Shirts & Blouses', 'https://www.aljazeera.com/mritems/Images/2019/6/13/ce0ece26ee1348f2b1c453f314dc0a6e_18.jpg'),
+(1, 'Jeans', 'https://cdn1.dotesports.com/wp-content/uploads/2018/11/23152339/Hangzhou-Spark1.jpg'),
+(1, 'Swimwear', 'https://static.bhphoto.com/images/images500x500/1391171441_1026417.jpg'),
+(1, 'Hoodies & Sweatshirts', 'https://www.lovearoma.co.uk/blog/wp-content/uploads/2015/05/bg-red-carpet.jpg'),
+(1, 'Sportswear', 'https://www.aljazeera.com/mritems/Images/2019/6/13/ce0ece26ee1348f2b1c453f314dc0a6e_18.jpg'),
+(2, 'Tops', 'https://cdn1.dotesports.com/wp-content/uploads/2018/11/23152339/Hangzhou-Spark1.jpg'),
+(2, 'Pants', 'https://static.bhphoto.com/images/images500x500/1391171441_1026417.jpg'),
+(2, 'Jackets & Coats', 'https://www.lovearoma.co.uk/blog/wp-content/uploads/2015/05/bg-red-carpet.jpg'),
+(2, 'Shorts', 'https://www.aljazeera.com/mritems/Images/2019/6/13/ce0ece26ee1348f2b1c453f314dc0a6e_18.jpg'),
+(2, 'Shirts & Blouses', 'https://cdn1.dotesports.com/wp-content/uploads/2018/11/23152339/Hangzhou-Spark1.jpg'),
+(2, 'Jeans', 'https://static.bhphoto.com/images/images500x500/1391171441_1026417.jpg'),
+(2, 'Swimwear', 'https://www.lovearoma.co.uk/blog/wp-content/uploads/2015/05/bg-red-carpet.jpg'),
+(2, 'Hoodies & Sweatshirts', 'https://www.aljazeera.com/mritems/Images/2019/6/13/ce0ece26ee1348f2b1c453f314dc0a6e_18.jpg'),
+(2, 'Sportswear', 'https://cdn1.dotesports.com/wp-content/uploads/2018/11/23152339/Hangzhou-Spark1.jpg'),
+(3, 'Face', 'https://static.bhphoto.com/images/images500x500/1391171441_1026417.jpg'),
+(3, 'Eyes', 'https://www.lovearoma.co.uk/blog/wp-content/uploads/2015/05/bg-red-carpet.jpg'),
+(3, 'Lips', 'https://www.aljazeera.com/mritems/Images/2019/6/13/ce0ece26ee1348f2b1c453f314dc0a6e_18.jpg'),
+(3, 'Nails', 'https://cdn1.dotesports.com/wp-content/uploads/2018/11/23152339/Hangzhou-Spark1.jpg'),
+(3, 'Bath & Body Care', 'https://static.bhphoto.com/images/images500x500/1391171441_1026417.jpg'),
+(3, 'Hair', 'https://www.lovearoma.co.uk/blog/wp-content/uploads/2015/05/bg-red-carpet.jpg'),
+(3, 'Brushes & Tools', 'https://www.aljazeera.com/mritems/Images/2019/6/13/ce0ece26ee1348f2b1c453f314dc0a6e_18.jpg'),
+(4, 'Bags', 'https://cdn1.dotesports.com/wp-content/uploads/2018/11/23152339/Hangzhou-Spark1.jpg'),
+(4, 'Belts', 'https://static.bhphoto.com/images/images500x500/1391171441_1026417.jpg'),
+(4, 'Jewelry', 'https://www.lovearoma.co.uk/blog/wp-content/uploads/2015/05/bg-red-carpet.jpg'),
+(4, 'Hair Accessories', 'https://www.aljazeera.com/mritems/Images/2019/6/13/ce0ece26ee1348f2b1c453f314dc0a6e_18.jpg'),
+(4, 'Sunglasses', 'https://cdn1.dotesports.com/wp-content/uploads/2018/11/23152339/Hangzhou-Spark1.jpg'),
+(4, 'Gloves', 'https://static.bhphoto.com/images/images500x500/1391171441_1026417.jpg'),
+(4, 'Scarves', 'https://www.lovearoma.co.uk/blog/wp-content/uploads/2015/05/bg-red-carpet.jpg'),
+(4, 'Hats & Caps', 'https://www.aljazeera.com/mritems/Images/2019/6/13/ce0ece26ee1348f2b1c453f314dc0a6e_18.jpg'),
+(4, 'Wallets & Coin purses', 'https://cdn1.dotesports.com/wp-content/uploads/2018/11/23152339/Hangzhou-Spark1.jpg');
 
 INSERT INTO materials
 (material_name)
@@ -268,16 +272,30 @@ VALUES
 ('Nude');
 
 INSERT INTO products
-(product_name, brand_id, category_id, product_price, material_id, color_id, product_size, product_description, product_type, quantity)
+(product_name, brand_id, store_id, category_id, product_price, material_id, color_id, product_description, product_type, quantity)
 VALUES 
-('Milan Leather Backpack', 1, 4, 200.00, 5 , 1, '22cm x 25cm x 10cm', 'Small leather backpack. Made in Peru.', 28, 5  ), 
-('Milan Mini Backpack', 1, 4, 150.00, 5, 13, '17cm x 20cm x 9cm', 'Mini leather backpack. Made in Peru.', 28, 5);
+('Milan Leather Backpack', 1, 1, 4, 200.00, 5 , 1, 'Small leather backpack. Made in Peru.', 28, 5), 
+('Milan Mini Backpack', 1, 1, 4, 150.00, 5, 13, 'Mini leather backpack. Made in Peru.', 28, 5);
+
+
+
+
+INSERT INTO sizes 
+(product_id, product_size) 
+VALUES 
+(1, '22cm x 25cm x 10cm'),
+(2, '17cm x 20cm x 9cm');
 
 
 INSERT INTO productImage_id
 (product_id, product_image_url, category_id)
-VALUES(1,'https://cdn.shopify.com/s/files/1/0082/3558/1504/products/lima-sagrada-small-backpack-black_606x606_b48c910d-33ac-46ce-aeb0-8bb3f7b73f7f_1296x.jpg',4), 
+VALUES
+(1,'https://cdn.shopify.com/s/files/1/0082/3558/1504/products/lima-sagrada-small-backpack-black_606x606_b48c910d-33ac-46ce-aeb0-8bb3f7b73f7f_1296x.jpg', 4), 
 (2,'https://cdn.shopify.com/s/files/1/0082/3558/1504/products/Lima-sagrada-milan-mini-soft-pink-19502_1024x1024_2x_89657b17-5194-4bad-adb6-7f66f686e539_1728x.jpg',4);
+
+
+
+
 
 SELECT * FROM customers;
 SELECT * FROM stores;
@@ -288,6 +306,7 @@ SELECT * FROM materials;
 SELECT * FROM brands;
 SELECT * FROM colors;
 SELECT * FROM products;
+SELECT * FROM sizes;
 SELECT * FROM productImage_id;
 SELECT * FROM orders;
 SELECT * FROM ordersItems;
@@ -295,7 +314,3 @@ SELECT * FROM payment_type;
 SELECT * FROM payment;
 SELECT * FROM bankInfo;
 SELECT * FROM checkoutCart;
-
-
-
-
