@@ -31,20 +31,7 @@ router.get("/:id", async (req, res, next) => {
         }
 });
 
-router.get("/location/:zipcode", async (req, res, next) => {
-    try {
-        const zipcode = parseInt(req.params.zipcode)
-        const storeByZipCode = await storesQueries.getStoreByZipCode(zipcode);
 
-        res.status(200).json({
-            status: "success",
-            message: `Store with zipcodes ${zipcode} retrieved`,
-            payload: storeByZipCode
-        });
-    } catch (err) {
-        console.log("ERROR", err)
-        }
-});
 
 router.post("/register", async (req, res, next) => {
     try {
@@ -93,4 +80,24 @@ router.delete("/delete/:id", async (req, res, next) =>{
         console.log("ERROR deleting store", err)
     }
 })
+
+
+router.get("/location/:latitude/:longitude", async (req, res, next) => {
+    try {
+        const user_latitude = parseFloat(req.params.latitude)
+        const user_longitude = parseFloat(req.params.longitude)
+        const storeByLocation = await storesQueries.getStoresByLocation(user_latitude, user_longitude);
+        res.status(200).json({
+            status: "success",
+            message: `Store within users ${user_latitude}
+            ${user_longitude} retrieved`,
+            payload: storeByLocation
+        });
+    } catch (err) {
+        console.log("ERROR", err)
+        }
+});
+
+
+
 module.exports = router;

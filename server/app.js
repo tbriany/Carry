@@ -15,6 +15,7 @@ const couriersRouter = require('./routes/couriers');
 const ordersRouter = require('./routes/orders');
 const checkoutCartRouter = require ('./routes/CheckoutCart')
 
+
 const app = express();
 
 app.use(logger('dev'));
@@ -40,6 +41,9 @@ app.use('/stores',  storesRouter);
 app.use('/couriers',  couriersRouter);
 app.use('/orders',  ordersRouter);
 app.use('/checkoutCart',checkoutCartRouter)
+
+
+
 
 
 app.use("*", (req, res) => {

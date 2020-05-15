@@ -9,6 +9,7 @@ import CategoryPage from './Components/LandingPageComponents/CategoryPage'
 import CheckoutCart from './Components/CheckoutCart'
 import ItemDetailsContextProvider from './Contexts/ItemDetailsContexts';
 import CustomerContextProvider from './Contexts/CustomerContext';
+import LandingContextProvider from './Contexts/LandingPageDetailsContext'
 import Login from './Components/Login';
 import Signup from './Components/Signup';
 import StorePage from './Components/StorePage/storePage';
@@ -19,6 +20,7 @@ import CheckoutLanding from './Components/CheckoutLanding.jsx'
 function App() {
   return (
     <div className="App">
+      <LandingContextProvider>
       <ItemDetailsContextProvider>
       <CustomerContextProvider>
         <Navbar />
@@ -34,6 +36,7 @@ function App() {
       </Switch>
      </CustomerContextProvider>
      </ItemDetailsContextProvider>
+    </LandingContextProvider>
     </div>
       );
     }
