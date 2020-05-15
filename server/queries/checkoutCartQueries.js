@@ -16,15 +16,27 @@ const getAllFromCart = async () => {
     return await db.any(getAllQueries);
 };
 
-const getSumOfCheckout = async () => { 
-    
-   const getTotalQueries =  `
+
+const getProductIdFromCart = async (product_id) => {
+    const getcartQueriesByProdId = `
+    SELECT products.*, checkoutCart.checkoutCart_id, checkoutCart.size, checkoutCart.quantity AS cartQuantity
+    FROM checkoutCart
+    JOIN products ON  checkoutCart.product_id  = products.product_id 
+    WHERE products.product_id = $/product_id/;
+    `;
+    return await db.one(getcartQueriesByProdId, { product_id });
+}
+
+
+const getSumOfCheckout = async () => {
+    const getTotalQueries = `
    SELECT SUM (checkoutCart.quantity * products.product_price) AS checkoutTotal
    FROM checkoutCart 
    JOIN products ON checkoutCart.product_id =  products.product_id 
    `
-   return await db.one(getTotalQueries)
+    return await db.one(getTotalQueries)
 }
+
 
 const getCheckoutCartId = async (id) => {
     const getQuery = `
@@ -40,6 +52,7 @@ const getCheckoutCartId = async (id) => {
     return await db.one(getQuery, { id });
 }
 
+
 const addToCart = async (bodyObj) => {
     const postQuery = `
       INSERT INTO checkoutCart (
@@ -51,34 +64,36 @@ const addToCart = async (bodyObj) => {
           $/product_id/,
           $/size/,
           $/quantity/
-    
       )
       RETURNING *
    `;
     return await db.one(postQuery, bodyObj);
 }
 
-const updateCheckoutCart = async (updateObj) => {
+const updateCheckoutCart = async (checkoutCart_id) => {
+
     let updateQuery = `
-    UPDATE checkoutCart
-    SET product_id = $/product_id/,
-    size = $/size/,
-    quantity = $/quantity/
-     RETURNING *
-      
-  `;
-    return await db.one(updateQuery, updateObj);
+        UPDATE checkoutCart
+        SET product_id = $/product_id/,
+        size = $/size/,
+        quantity = $/quantity/
+        WHERE checkoutCart_id = $/checkoutCart_id/
+         RETURNING *
+        ;
+    `;
+    return await db.one(updateQuery, checkoutCart_id);
 }
 
 const deleteCheckout = async (id) => {
     const deleteQuery = `
-  DELETE FROM checkoutCart
-  WHERE checkoutCart_id = $/id/`;
+    DELETE FROM checkoutCart
+    WHERE checkoutCart_id = $/id/`;
     return await db.none(deleteQuery, { id });
 };
 
 module.exports = {
     getAllFromCart,
+    getProductIdFromCart,
     getSumOfCheckout,
     getCheckoutCartId,
     addToCart,
