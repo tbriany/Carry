@@ -186,24 +186,7 @@ const CartPopUp = () => {
 
                     </Grid>
 
-                </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                
+                </div>                
             </div>) : (<div></div>)}
 
         </div>
