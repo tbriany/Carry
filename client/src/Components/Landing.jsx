@@ -1,12 +1,13 @@
 import React, { useState, useContext } from "react";
 import { LandingContext } from "../Contexts/LandingPageDetailsContext";
-
+import { landingStyles } from './styling/landingStyles';
 import SingleLineGridListStores from "./LandingPageComponents/PopularStores.jsx";
 import SingleLineGridListItems from "./LandingPageComponents/GeneralStores";
 import Categories from "./LandingPageComponents/LandingPagecategories";
 // import ProductsPage from "./ProductPage/productsPage";
 
 const LandingPage = () => {
+  const classes = landingStyles();
   const { latitude, longitude, SetLatitude, SetLongitude } = useContext(
     LandingContext
   );
@@ -37,24 +38,20 @@ const LandingPage = () => {
   }
 
   return (
-    <div className="LandingPage" style={{ marginTop: "30px" }}>
-      <div
-        className="mainContent"
-        style={{ marginTop: "50px", marginLeft: "45px", marginRight: "45px" }}
-      >
-        <div className="zipCode" style={{ textAlign: "center" }}>
-          <h1 style={{ fontFamily: "Palatino Linotype" }}>
+    <div className={classes.landingPage}>
+      <div className={classes.mainContent}>
+        <div className={classes.headerContainer}>
+          <h2 className={classes.header}>
             {" "}
-            Start shopping TODAY{" "}
-          </h1>{" "}
+            Your favorite brands, delivered by Carry. {" "}
+          </h2>{" "}
         </div>
-
-        <div className="LandingPageRows" style={{ margin: "30px" }}>
+        <div className={classes.landingPageRows}>
           <div className="Categories">
             <Categories />
           </div>
 
-          <div className="PopularItems" style={{ marginTop: "50px" }}>
+          <div className={classes.popularItems}>
            {console.log('landing Page locationStatus', locationStatus)}
             {locationStatus ? (
               <SingleLineGridListStores

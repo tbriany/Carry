@@ -6,6 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
+import customTheme from "../styling/customTheme";
 // import IconButton from "@material-ui/core/IconButton";
 // import StarBorderIcon from "@material-ui/icons/StarBorder";
 
@@ -25,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     spacing: "20px"
   },
   title: {
-    color: '#DEB887',
+    color: customTheme.palette.secondary.dark,
   },
   titleBar: {
     background: "white",
@@ -73,7 +74,7 @@ console.log(categories)
             fontFamily: "Palatino Linotype",
             textAlign: "left",
             fontSize: "20px",
-            color: "black",
+            color: customTheme.palette.secondary.dark,
           }}
         > Shop By Category </h3>
       </div>
