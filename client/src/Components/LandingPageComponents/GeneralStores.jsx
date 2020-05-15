@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import customTheme from '../styling/customTheme';
 import { makeStyles } from "@material-ui/core/styles";
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
@@ -23,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     spacing: "10px",
   },
   title: {
-    color: '#DEB887',
+    color: customTheme.palette.secondary.dark,
     display: "flex",
     flexWrap: "wrap",
   },
@@ -79,7 +80,7 @@ export default function SingleLineGridListItems() {
                 fontFamily: "Palatino Linotype",
                 textAlign: "left",
                 fontSize: "20px",
-                color: "black",
+                color: customTheme.palette.secondary.dark,
               }}
             >
               {" "}
@@ -91,7 +92,7 @@ export default function SingleLineGridListItems() {
       <GridList className={classes.gridList} cols={3.5}>
         {stores.map((store) => (
           <GridListTile key={store.store_id}>
-            <img src={store.avatar_url} alt={store.store_name} />
+            <img src={store.avatar_url} alt={store.store_name}/>
             <Link to={`/store/${store.store_id}`}>
               <GridListTileBar
                 title={store.store_name}
