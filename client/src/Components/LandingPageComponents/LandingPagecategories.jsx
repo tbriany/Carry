@@ -22,10 +22,10 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: "nowrap",
     // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
     transform: "translateZ(0)",
-    spacing: "20px",
+    spacing: "20px"
   },
   title: {
-    color: theme.palette.primary.light,
+    color: '#DEB887',
   },
   titleBar: {
     background: "white",
@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Categories() {
   const classes = useStyles();
-  
+
   const [categories, setCategories] = useState([]);
   // make network request to server to get all categories
   useEffect(() => {
@@ -69,7 +69,13 @@ console.log(categories)
   return (
     <div>
       <div>
-        <h3> Shop By Category</h3>
+        <h3  style={{
+            fontFamily: "Palatino Linotype",
+            textAlign: "left",
+            fontSize: "20px",
+            color: "black",
+          }}
+        > Shop By Category </h3>
       </div>
     <div className={classes.root}>
       <GridList className={classes.gridList} cols={3.5} 
