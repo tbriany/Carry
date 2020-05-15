@@ -115,12 +115,3 @@ module.exports = {
   deleteStore,
   getStoresByLocation,
 };
-
-// `
-//   SELECT  lat
-//           lng
-//       FROM stores
-//       WHERE
-//       pow(lat-$/user_latitude/,2) + pow((lng-$/user_longitude/)*cos(radians($/user_latitude/)),2) < pow(10/110.25, 2)`
-
-// (lat - $1) + (lng - $2)  < 5;

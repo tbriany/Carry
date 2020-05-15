@@ -317,3 +317,4 @@ SELECT * FROM payment_type;
 SELECT * FROM payment;
 SELECT * FROM bankInfo;
 SELECT * FROM checkoutCart;
+

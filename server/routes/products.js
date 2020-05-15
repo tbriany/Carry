@@ -140,7 +140,7 @@ router.get("/categories/all", async (req, res, next) => {
     } catch (err) {
         console.log("ERROR", err)
     }
-})
+});
 
 
 router.get("/product_types/all", async(req, res, next) => {
@@ -153,7 +153,7 @@ router.get("/product_types/all", async(req, res, next) => {
     } catch (err) {
         console.log("ERROR", err)
     }
-})
+});
 
 router.get("/brands/all", async(req, res, next) => {
     try {
@@ -165,7 +165,7 @@ router.get("/brands/all", async(req, res, next) => {
     } catch (err) {
         console.log("ERROR", err)
     }
-})
+});
 
 router.get("/colors/all", async(req, res, next) => {
     try {
@@ -177,7 +177,7 @@ router.get("/colors/all", async(req, res, next) => {
     } catch (err) {
         console.log("ERROR", err)
     }
-})
+});
 
 router.get("/sizes/all", async(req, res, next) => {
     try {
@@ -189,7 +189,7 @@ router.get("/sizes/all", async(req, res, next) => {
     } catch (err) {
         console.log("ERROR", err)
     }
-})
+});
 
 router.get("/new_arrivals/:store_id", async(req, res, next) => {
     try {
@@ -202,7 +202,7 @@ router.get("/new_arrivals/:store_id", async(req, res, next) => {
     } catch (err) {
         console.log("ERROR", err)
     }
-})
+});
 
 router.get('/category/:category_name', async (req, res, next) =>{
     try {
@@ -212,10 +212,9 @@ router.get('/category/:category_name', async (req, res, next) =>{
             message: 'All Products of specific category retrieved.',
             payload: products
         });
-    }catch (error){
+    } catch (error){
         console.log('ERROR, unable to get all products for specific category', error)
     }
-})
-
+});
 
 module.exports = router;
