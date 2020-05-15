@@ -16,7 +16,6 @@ function StorePage(props) {
       />
       <div>
         <CategoriesGridList 
-        listTitle="Browse Categories"
         storeId={props.match.params.id}
         />
       </div>
@@ -28,7 +27,6 @@ function StorePage(props) {
       </div>
       <div>
         <NewArrivalsGridList 
-        listTitle="New Arrivals"
         storeId={props.match.params.id}
         getProductId={getProductId}
         currentProdId={productId}
