@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, Route, Switch } from "react-router-dom";
 import CategoryGridList from "./CategoryGrid";
-import MultilineTextFields from './CategorySearchBar'
+import MultilineTextFields from './CategorySearchBar';
+import customTheme from '../styling/customTheme';
 // styling 
 import { CheckBoxOutlineBlankOutlined } from "@material-ui/icons";
 
@@ -36,11 +37,11 @@ const CategoryPage = (props) => {
   return (
     <div className="CategoryPage">
       <div style ={{ display: 'flex', justifyContent: 'space-evenly'}}>
-        <h1  style={{
+        <h1 style={{
             fontFamily: "Palatino Linotype",
             textAlign: "left",
-            color: "black",
-          }}> {category_name}</h1>
+            color: customTheme.palette.secondary.dark,
+          }}>{category_name}</h1>
         <div className="SearchBar">
           {" "}
           <MultilineTextFields/>

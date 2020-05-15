@@ -1,4 +1,4 @@
-import React, { useState, useContext} from 'react';
+import React, { useState, useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import Button from '@material-ui/core/Button';
@@ -41,18 +41,21 @@ const Login = () => {
     const handlePasswordVisibility = () => {
         setCustomerPassword({ ...customerPassword, showPassword: !customerPassword.showPassword })
     };
-    const handleWrongInputs = () => {
-        console.log('Wrong email or password')
+    const handleWrongInputs = (err) => {
+        handleEmailError(true, 'Wrong email or password.');
+        handlePasswordError(true, 'Wrong email or password.')
     };
     const handleNextPage = async (customerObj) => {
         await setCustomerContext(customerObj);
         console.log(`USER ${customerFirstname} SUCESSFULLY LOGGED IN`)
         console.log(`User is logged in: ${isLoggedIn}`);
-        setTimeout(() => {
-            return (
-            <Redirect to={'/'}/>
-            )
-        }, 3000)
+        handleEmailError(false, '');
+        handlePasswordError(false, '');
+        // setTimeout(() => {
+        //     return (
+        //     <Redirect to={'/'}/>
+        //     )
+        // }, 3000)
     }
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -65,10 +68,10 @@ const Login = () => {
         if (!emailError && !passwordError) {
             try {
                 let loggedInCustomer = await axios.post('auth/login', { email, password }).then(res => res.data.payload);
-                !loggedInCustomer ? handleWrongInputs() : handleNextPage(loggedInCustomer);
+                handleNextPage(loggedInCustomer);
             }
             catch (err) {
-                console.log(err)
+                handleWrongInputs(err)
             }
         }
     };

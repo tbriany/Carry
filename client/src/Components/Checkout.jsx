@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Container, makeStyles, Paper, Stepper, Step, StepLabel, Typography, CssBaseline, Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import AddressForm from './checkout-forms/AddressForm';
-import PaymentForm from './checkout-forms/PaymentForm';
-import Review from './checkout-forms/Review';
+import AddressForm from './CheckoutForms/AddressForm';
+import PaymentForm from './CheckoutForms/PaymentForm';
+import Review from './CheckoutForms/Review';
 import customTheme from './styling/customTheme';
 
 const useStyles = makeStyles((theme) => ({

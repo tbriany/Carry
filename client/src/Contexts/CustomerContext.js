@@ -52,7 +52,7 @@ const CustomerContextProvider = (props) => {
         const { email } = customerObj;
         try {
             let customerContextInfo = await axios.get(`customers/email/${email}`).then(res => res.data.payload);
-            logUserIn(customerContextInfo);
+            await logUserIn(customerContextInfo);
         }
         catch(err){
             console.log(err)
