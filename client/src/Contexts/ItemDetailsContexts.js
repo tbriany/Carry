@@ -10,7 +10,7 @@ const ItemDetailsContextProvider = (props) => {
     const [productIds, setproductsIds] = useState([]); //Array contains all ids that was added to the checkout bag.
     const [productQty, setProductQty] = useState(0);
     const [totalProductQty, setTotalProductQty] = useState(0); //Total of Product Qty from the itempopup page
-    const [productSize, setProductSize] = useState('');
+    const [productSize, setProductSize] = useState('default');
     const [checkoutCart, setCheckoutCart] = useState([]);
 
     const updateProductQty = (newQty) => {
@@ -33,12 +33,11 @@ const ItemDetailsContextProvider = (props) => {
     const getCheckout = async () => {
         let getCart = await axios.get(`/checkoutCart`)
         setCheckoutCart(getCart.data.payload)
-
     };
 
 
     const addToCart = async () => {
-        if (productQty !== 0 && productSize !== '') {
+        if (productQty !== 0 && productSize !== 'default') {
             setTotalProductQty(productQty)
 
             if (!productIds.includes(productId)) {
@@ -61,6 +60,7 @@ const ItemDetailsContextProvider = (props) => {
                 }
             }
             setProductQty(0)
+            setProductSize('default')
         } else {
             alert("Missing Input")
         }

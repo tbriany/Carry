@@ -8,7 +8,6 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { useStyles, BootstrapInput } from './styling/popupTheme'
 import "./ItemPopUp.css";
 
-
 function ItemPopUp() {
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
@@ -17,20 +16,14 @@ function ItemPopUp() {
         setExpanded(isExpanded ? panel : false);
     };
 
-
-    const { updateCurrQty, getProductPrice, productSize, updateProductQty, checkoutCart, addToCart, productId, productQty, addItemToBag, getProductSize } = useContext(ItemDetailsContext);
-
-
-    const [itemInfo, setItemInfo] = useState({})
-    const [size, setSize] = useState('')
-
+    const { updateCurrQty, updateProductQty, checkoutCart, addToCart, producstSize, productId, productQty, addItemToBag, productSize, getProductSize } = useContext(ItemDetailsContext);
+    const [itemInfo, setItemInfo] = useState({}) //Recieves all of the product info
 
     const handleItemInfo = async () => {
         try {
             const productInfo = await axios.get(`/products/${productId}`)
             let productInfoPayload = productInfo.data.payload
             setItemInfo(productInfoPayload)
-            getProductPrice(productInfoPayload.product_price)
         } catch (err) {
             console.log("ERROR", err)
         }
@@ -41,9 +34,6 @@ function ItemPopUp() {
             handleItemInfo();
         }
     }, [productId])
-
-
-
 
 
     return (
@@ -64,7 +54,6 @@ function ItemPopUp() {
                         style={{
                             borderBottom: "1px solid #eed7c1",
                             padding: '2px 2px 30px',
-                          
                         }}>
                         <Paper className={classes.paper}
                             style={{
@@ -165,6 +154,9 @@ function ItemPopUp() {
 }
 
 export default ItemPopUp;
+
+
+
 
 
 
