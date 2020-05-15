@@ -8,14 +8,9 @@
     border-bottom: 1px solid lightgray;
 }
 
-
-
 .makeStyles-paper-4 {
     color: black;
 }
-
-
-
 
 .MuiExpansionPanelSummary-root {
     margin: 16px;
@@ -46,13 +41,20 @@
 
 }
 
-
-
-
 .item-name, .item-color, .item-price {
-    font-size: 20px;
     display: flex;
     justify-content: flex-start;
+    margin: 4px;
+    text-align: start;
 }
+
+.item-name {
+    font: 25px Fira Sans sans-serif;
+}
+
+.item-color, .item-price {
+    font: 20px Fira Sans sans-serif;
+}
+
 
 

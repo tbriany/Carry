@@ -25,10 +25,15 @@ const useStyles = makeStyles((theme) => ({
 
 const sidePopUp = makeStyles({
   list: {
-    width:' 400px',
+    width:'100%',
   },
   fullList: {
-    width: "50%"
+    width: "50%",
+  },
+  paperAnchorRight:{
+    width: "45%",
+    display: 'flex',
+    alignItems: 'center',
   },
 
 });
@@ -100,6 +105,7 @@ export default function ProductsDisplay({getProductId, products}) {
               open={state["right"]}
               onClose={toggleDrawer("right", false, 0)}
               onOpen={toggleDrawer("right", true)}  
+              classes={{paperAnchorRight : popUp.paperAnchorRight}}
             >
               {list('right')}
             </SwipeableDrawer>

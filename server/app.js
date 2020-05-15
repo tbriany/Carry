@@ -13,6 +13,7 @@ const customersRouter = require('./routes/customers');
 const storesRouter = require('./routes/stores');
 const couriersRouter = require('./routes/couriers');
 const ordersRouter = require('./routes/orders');
+const receiptsRouter = require('./routes/receipts');
 const checkoutCartRouter = require ('./routes/CheckoutCart')
 
 
@@ -40,6 +41,7 @@ app.use('/customers', customersRouter);
 app.use('/stores',  storesRouter);
 app.use('/couriers',  couriersRouter);
 app.use('/orders',  ordersRouter);
+app.use('/receipts', receiptsRouter)
 app.use('/checkoutCart',checkoutCartRouter)
 
 
