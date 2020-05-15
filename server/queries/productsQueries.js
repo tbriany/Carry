@@ -140,7 +140,7 @@ const getProductByCategory = async (category, store_id) => {
     return await db.any(getQuery, { category, store_id });
 }
 
-const getAllProductsByCategory = async (category_id) =>{
+const getAllProductsByCategory = async (category_name) =>{
     const getQuery = `SELECT products.product_id, products.product_name, products.product_price, products.product_description, products.quantity, products.store_id,
     brands.brand_name, categories.category_name, materials.material_name, colors.color_name, 
     stores.store_name,product_type.product_type_name, productImage_id.*,
@@ -154,11 +154,11 @@ const getAllProductsByCategory = async (category_id) =>{
     JOIN  productImage_id  ON productImage_id.product_id = products.product_id
     JOIN sizes ON sizes.product_id = products.product_id 
     JOIN stores ON stores.store_id = products.store_id
-    WHERE categories.category_id = $/category_id/
+    WHERE categories.category_name = $/category_name/
     GROUP BY products.product_id, brands.brand_id, categories.category_name,materials.material_name,colors.color_name, stores.store_name,product_type.product_type_name,
     productimage_id.product_image_id;`
 
-    return await db.any(getQuery, {category_id});
+    return await db.any(getQuery, {category_name});
 }
 
 
