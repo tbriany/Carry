@@ -1,98 +1,28 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Button, InputLabel, MenuItem, Select } from '@material-ui/core';
 import { ItemDetailsContext } from '../Contexts/ItemDetailsContexts';
 import axios from 'axios';
 
 //Material UI
-import { makeStyles, withStyles } from '@material-ui/core/styles';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import Typography from '@material-ui/core/Typography';
+import { ExpansionPanel, ExpansionPanelDetails, ExpansionPanelSummary, Button, InputLabel, MenuItem, Select, Typography, Paper, Grid, FormControl, NativeSelect } from '@material-ui/core'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import FormControl from '@material-ui/core/FormControl';
-import NativeSelect from '@material-ui/core/NativeSelect';
-import InputBase from '@material-ui/core/InputBase';
-
+import { useStyles, BootstrapInput } from './styling/popupTheme'
 import "./ItemPopUp.css";
 
 
-const BootstrapInput = withStyles((theme) => ({
-    root: {
-        'label + &': {
-            marginTop: theme.spacing(3),
-        },
-    },
-    input: {
-        borderRadius: 4,
-        position: 'relative',
-        backgroundColor: theme.palette.background.paper,
-        border: '1px solid #eed7c1',
-        fontSize: 16,
-        padding: '10px 26px 10px 0px',
-        transition: theme.transitions.create(['border-color', 'box-shadow']),
-
-        fontFamily: [
-            '-apple-system',
-            'BlinkMacSystemFont',
-            '"Segoe UI"',
-            'Roboto',
-            '"Helvetica Neue"',
-            'Arial',
-            'sans-serif',
-            '"Apple Color Emoji"',
-            '"Segoe UI Emoji"',
-            '"Segoe UI Symbol"',
-        ].join(','),
-        '&:focus': {
-            borderRadius: 4,
-            borderColor: '#80bdff',
-            boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
-        },
-    },
-}))(InputBase);
-
-const useStyles = makeStyles((theme) => ({
-    root: {
-        width: '100%',
-    },
-    heading: {
-        fontSize: theme.typography.pxToRem(15),
-        flexShrink: 0,
-    },
-    secondaryHeading: {
-        fontSize: theme.typography.pxToRem(15),
-        color: theme.palette.text.secondary,
-    },
-    root: {
-        flexGrow: 1,
-    },
-    paper: {
-        padding: theme.spacing(0),
-        textAlign: 'center',
-        color: theme.palette.text.secondary,
-    },
-}));
 function ItemPopUp() {
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
 
     const handleChange = (panel) => (event, isExpanded) => {
         setExpanded(isExpanded ? panel : false);
-    }; //Expnds ItemDescription
+    };
 
 
-
-    const { updateCurrQty, updateProductQty, checkoutCart, addToCart, productId, productQty, addItemToBag, getProductSize } = useContext(ItemDetailsContext);
-    //Acts like ItemDetailsContext.consumer but allows the entire ItemPopUp.jsx access to the state in Contexts/ItemDeatilsContext.js. 
-    // ItemDetailsContext.consumer is found in the return and wraps around all html tags (div, p, h1 etc.) It will only give those specific tags access to the state.
+    const { updateCurrQty, getProductPrice, productSize, updateProductQty, checkoutCart, addToCart, productId, productQty, addItemToBag, getProductSize } = useContext(ItemDetailsContext);
 
 
-    const [itemInfo, setItemInfo] = useState({}) //Recieves all of the product info
-    const [size, setSize] = useState('')  //Changes based on the size picked by the user
-    const [quantity, setQuantity] = useState(0) //Changes based on the quantity the user wants from a specific product
+    const [itemInfo, setItemInfo] = useState({})
+    const [size, setSize] = useState('')
 
 
     const handleItemInfo = async () => {
@@ -100,6 +30,7 @@ function ItemPopUp() {
             const productInfo = await axios.get(`/products/${productId}`)
             let productInfoPayload = productInfo.data.payload
             setItemInfo(productInfoPayload)
+            getProductPrice(productInfoPayload.product_price)
         } catch (err) {
             console.log("ERROR", err)
         }
@@ -109,8 +40,8 @@ function ItemPopUp() {
         if (productId !== 0) {
             handleItemInfo();
         }
-
     }, [productId])
+
 
 
 
@@ -119,21 +50,21 @@ function ItemPopUp() {
 
         <div className="ItemPopUp-stage">
             <div className={classes.root}>
-                <Grid container spacing={3} height="150px" style={{ justifyContent: "center", marginTop: '12px' }}>
+                <Grid container spacing={3} height="150px" style={{ justifyContent: "center", marginTop: '12px', padding: '10px' }}>
                     <Paper style={{
                         boxShadow: " 1px 1px 1px white",
                         padding: '2px'
                     }}
-                        className={classes.paper}>  <img src={itemInfo.product_image_url} height="150px" /></Paper>
+                        className={classes.paper}>  <img src={itemInfo.product_image_url} height="200px" /></Paper>
                 </Grid>
 
-                <Grid container spacing={3} height="100px" style={{ justifyContent: "center" }}>
+                <Grid container spacing={3} height="100px" style={{ justifyContent: "center", padding: '6px' }}>
 
                     <Grid item xs={9}
                         style={{
                             borderBottom: "1px solid #eed7c1",
-                            padding: ' 0px',
-                            paddingBottom: '13px'
+                            padding: '2px 2px 30px',
+                          
                         }}>
                         <Paper className={classes.paper}
                             style={{
@@ -142,10 +73,10 @@ function ItemPopUp() {
                                 justifyContent: 'center',
                                 display: 'grid'
                             }}>
-                            <p style={{ font: '20px "Fira Sans", sans-serif', margin: '0px' }} className="item-name">{itemInfo.brand_name}'s </p>
-                            <p style={{ font: '20px "Fira Sans", sans-serif', margin: '0px' }} className="item-name">{itemInfo.product_name}</p>
-                            <p style={{ font: '15px "Fira Sans", sans-serif', margin: '0px' }} className="item-price">${itemInfo.product_price}</p>
-                            <p style={{ font: '15px "Fira Sans", sans-serif', margin: '0px' }} className="item-color" >Color: {itemInfo.color_name}</p>
+                            <p className="item-name">{itemInfo.brand_name}'s </p>
+                            <p className="item-name">{itemInfo.product_name}</p>
+                            <p className="item-price">${itemInfo.product_price}</p>
+                            <p className="item-color" >Color: {itemInfo.color_name}</p>
                         </Paper>
                     </Grid>
 
@@ -163,12 +94,13 @@ function ItemPopUp() {
                                         backgroundColor: "#eed7c1",
                                     }}
                                     id="demo-customized-select-native"
+                                    value={productSize}
                                     onChange={e => {
                                         getProductSize(e.target.value)
                                     }}
                                     input={<BootstrapInput />}
                                 >
-                                    <option value="default" selected={true} disabled="disabled" >Choose a size</option>
+                                    <option value="default" autoFocus disabled>Choose a size</option>
                                     <option value={itemInfo.product_size} >{itemInfo.product_size} </option>
                                 </NativeSelect>
                             </FormControl>
@@ -177,8 +109,7 @@ function ItemPopUp() {
                                 className="quantityInput"
                                 type="number" placeholder="0"
                                 min="0" max="100"
-                                // value={productQty}
-
+                                value={productQty}
                                 onChange={e => {
                                     updateProductQty(e.target.value)
                                 }}>
