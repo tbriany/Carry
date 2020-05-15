@@ -56,7 +56,7 @@ const sidePopUp = makeStyles({
     },
 });
 
-export default function NewArrivalsGridList({ listTitle, storeId , getProductId}) {
+export default function NewArrivalsGridList({storeId , getProductId}) {
     const classes = useStyles();
 
     const [newArrivals, setNewArrivals] = useState([])
@@ -116,9 +116,17 @@ export default function NewArrivalsGridList({ listTitle, storeId , getProductId}
 
     return (
         <div className={classes.root} style={{ margin: "20px", padding: "15px" }}>
-            <Typography variant='h4' display='block' paragraph='true'>
-                {listTitle}
-            </Typography>
+            <h3
+              style={{
+                fontFamily: "Palatino Linotype",
+                textAlign: "left",
+                fontSize: "20px",
+                color: "black",
+              }}
+            >
+              {" "}
+              {"New Arrivals"}{" "}
+            </h3>
             <GridList className={classes.gridList} cols={4} cellHeight={300} spacing={10}>
                 {newArrivals.map((tile) => (
                     <GridListTile key={tile.img}>
