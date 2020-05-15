@@ -208,12 +208,13 @@ VALUES ('Jacob', 'Smith', '(347)-555-5553', 'Smith@courier.com', 'img', 'jacobsm
 INSERT INTO categories 
 (category_name, category_Landing_Logo, category_logo)
 VALUES 
-('Women''s', 'https://imageproxy.viewbook.com/80941/b3458b281396eddd7ea1370e84434090_hd.jpg','https://cdn1.dotesports.com/wp-content/uploads/2018/11/23152339/Hangzhou-Spark1.jpg'), 
-('Men''s','https://thumbs.dreamstime.com/b/fashion-man-men-sketches-white-background-autumn-127439059.jpg', 'https://www.aljazeera.com/mritems/Images/2019/6/13/ce0ece26ee1348f2b1c453f314dc0a6e_18.jpg'), 
-('Beauty','https://cdn.shopify.com/s/files/1/0580/0721/articles/iStock-1170104811_95fed370-9e0c-4fd8-a668-8d7e806c8f05_grande.jpg', 'https://www.lovearoma.co.uk/blog/wp-content/uploads/2015/05/bg-red-carpet.jpg'), 
-('Accessories', 'https://www.thestatesman.com/wp-content/uploads/2017/12/accessories.jpg','https://static.bhphoto.com/images/images500x500/1391171441_1026417.jpg'),
-('Home Decor', 'https://cb2.scene7.com/is/image/CB2/122919_m_super_decor_accessories?wid=670&qlt=65', 'https://static.bhphoto.com/images/images500x500/1391171441_1026417.jpg'),
-('Kids', 'https://image.cnbcfm.com/api/v1/image/106032900-1563825608021rockets.jpg?v=1563825858&w=678&h=381','https://cdn1.dotesports.com/wp-content/uploads/2018/11/23152339/Hangzhou-Spark1.jpg');
+('Women''s', 'https://imageproxy.viewbook.com/80941/b3458b281396eddd7ea1370e84434090_hd.jpg','https://www.voguehk.com/media/2019/10/00001PFW_DAY7_Vogueint_30sep19_credit_Jonathan-Daniel-Pryce_23-1280x853.jpg'), 
+('Men''s','https://thumbs.dreamstime.com/b/fashion-man-men-sketches-white-background-autumn-127439059.jpg', 'https://content.api.news/v3/images/bin/f5e805f5912487f926d29b853ff76709'), 
+('Beauty','https://cdn.shopify.com/s/files/1/0580/0721/articles/iStock-1170104811_95fed370-9e0c-4fd8-a668-8d7e806c8f05_grande.jpg', 'https://edited.beautybay.com/wp-content/uploads/2019/04/edited_april19_revolution_skincare_landscape.jpg'), 
+('Accessories', 'https://www.thestatesman.com/wp-content/uploads/2017/12/accessories.jpg','https://cdn.shopify.com/s/files/1/0298/0353/products/0_c278b29e-51ba-42b3-a300-c8c87b32ac86_1024x1024.jpg?v=1571317845'),
+('Home Decor', 'https://cb2.scene7.com/is/image/CB2/122919_m_super_decor_accessories?wid=670&qlt=65', 'https://guinwa.com/wp-content/uploads/2019/01/Screen-Shot-2019-01-29-at-11.15.35-AM-1160x770.png'),
+('Kids', 'https://image.cnbcfm.com/api/v1/image/106032900-1563825608021rockets.jpg?v=1563825858&w=678&h=381','https://cdn.shopify.com/s/files/1/0053/7113/4055/articles/Susukoshi-gender-neutral-baby-clothes-babydonkie_1600x.jpg?v=1558919508');
+
 
 INSERT INTO product_type
 (category_id, product_type_name, product_type_logo)
