@@ -99,6 +99,8 @@ CREATE TABLE productImage_id(
 
 
 --Checkout Cart
+
+
 CREATE TABLE checkoutCart(
     checkoutCart_id SERIAL PRIMARY KEY,
     product_id  INT REFERENCES products(product_id),
@@ -106,12 +108,26 @@ CREATE TABLE checkoutCart(
     quantity INT
 );
 
+CREATE TABLE checkouts (
+     checkout_id SERIAL PRIMARY KEY,
+     session_id VARCHAR,
+     cart VARCHAR
+);
+
 -- Orders 
+
+CREATE TABLE receipts(
+    receipt_id SERIAL PRIMARY KEY,
+    customer_id INT REFERENCES customers(customer_id),
+    reciept VARCHAR 
+);
+
 CREATE TABLE orders(
    order_id SERIAL PRIMARY KEY,
-   order_status VARCHAR,
+   order_status VARCHAR ,
    required_date DATE,
    time_ordered TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
+   receipt_id INT REFERENCES receipts(receipt_id),
    customer_id INT REFERENCES customers(customer_id),
    store_id INT REFERENCES stores(store_id),
    courier_id INT REFERENCES couriers(courier_id),
@@ -119,11 +135,7 @@ CREATE TABLE orders(
    total INT
 );
 
-CREATE TABLE ordersItems(
-    ordersItems_id SERIAL PRIMARY KEY,
-    order_id INT REFERENCES orders(order_id),
-    product_id INT REFERENCES products(product_id)
-);
+
 
 
 -- Payments
@@ -310,5 +322,6 @@ SELECT * FROM ordersItems;
 SELECT * FROM payment_type;
 SELECT * FROM payment;
 SELECT * FROM bankInfo;
+SELECT * FROM receipts;
 SELECT * FROM checkoutCart;
 
