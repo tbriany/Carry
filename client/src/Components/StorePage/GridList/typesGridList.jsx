@@ -65,17 +65,15 @@ export default function TypesGridList({storeId}) {
 
   return (
     <div className={classes.root} style={{margin: "20px", padding: "15px"}}>
-        <h3
+        <h2
               style={{
                 fontFamily: "Palatino Linotype",
                 textAlign: "left",
-                fontSize: "20px",
                 color: "black",
               }}
             >
-              {" "}
-              {"Shop By Type"}{" "}
-            </h3>
+              Shop By Type
+            </h2>
       <GridList className={classes.gridList} cols={5} cellHeight={270} spacing={5}>
         {types.map((tile) => (
           <GridListTile key={tile.img}>
