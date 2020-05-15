@@ -4,7 +4,7 @@ import { LandingContext } from "../Contexts/LandingPageDetailsContext";
 import SingleLineGridListStores from "./LandingPageComponents/PopularStores.jsx";
 import SingleLineGridListItems from "./LandingPageComponents/GeneralStores";
 import Categories from "./LandingPageComponents/LandingPagecategories";
-import ProductsPage from "./StorePage/productsPage";
+import ProductsPage from "./ProductPage/productsPage";
 
 const LandingPage = () => {
   const { latitude, longitude, SetLatitude, SetLongitude } = useContext(
