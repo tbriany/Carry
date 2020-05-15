@@ -63,25 +63,23 @@ export default function CategoriesGridList({storeId}) {
   // console.log(categories)
 
   return (
-    <div className={classes.root} style={{ margin: "20px", padding: "15px" }}>
+    <div className={classes.root} style={{ margin: "20px", padding: "15px"}}>
       <div> 
-       <h3
+       <h2
               style={{
                 fontFamily: "Palatino Linotype",
                 textAlign: "left",
-                fontSize: "20px",
                 color: "black",
               }}
             >
-              {" "}
-              {"Browse Categories"}{" "}
-            </h3>
+              Browse Categories
+            </h2>
     </div>
-      <GridList className={classes.gridList} cols={4} cellHeight={300} spacing={10}>
+      <GridList className={classes.gridList} cols={3} cellHeight={350} spacing={13} >
         {categories.map((tile) => (
           <GridListTile key={tile.img}>
             <Link to={`/store/${storeId}/${tile.category_name}`}>
-              <img src={tile.category_logo} alt={tile.category_logo} />
+              <img src={tile.category_logo} alt={tile.category_logo} style={{ width: '100%' , height: '100%'}}/>
               <span className={classes.imageButton}>
                 <Typography
                   component="span"
