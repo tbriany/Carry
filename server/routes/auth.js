@@ -15,7 +15,7 @@ router.post('/login', passport.authenticate('local'), (req, res, next) => {
     })
   }
   catch(err){
-    handleErrors(res, err);
+    throw err
   }
 });
 
