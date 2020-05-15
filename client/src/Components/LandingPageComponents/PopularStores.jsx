@@ -8,7 +8,8 @@ import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
 import IconButton from "@material-ui/core/IconButton";
-import StarBorderIcon from "@material-ui/icons/StarBorder";
+
+// import StarBorderIcon from "@material-ui/icons/StarBorder";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,18 +23,29 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: "nowrap",
     // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
     transform: "translateZ(0)",
-    spacing: "10px",
+    spacing: "20px",
   },
   title: {
-    color: theme.palette.primary.light,
-    display: "flex",
-    flexWrap: "wrap",
+    color: '#DEB887',
   },
   titleBar: {
     background: "white",
     textAlign: "center",
     display: "flex",
-    flexWrap: "wrap",
+    flexWrap: "wrap"
+  },
+  imgFullHeight: {
+    height: "100%",
+    transform: "translateX(-50%)",
+    position: "relative",
+    left: '50px',
+    borderRadius: '50%'
+  },
+  imgFullWidth: {
+    width: "100%",
+    position: "relative",
+    transform: "translateY(-50%)",
+    top: "50%",
 
     // "linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)",
   },
@@ -90,7 +102,6 @@ export default function SingleLineGridListStores() {
                   }}
                   actionIcon={
                     <IconButton aria-label={`star ${store.store_name}`}>
-                      <StarBorderIcon className={classes.store_name} />
                     </IconButton>
                   }
                 />
