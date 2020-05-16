@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { Link, Route, Switch } from "react-router-dom";
 import CategoryGridList from "./CategoryGrid";
 import MultilineTextFields from './CategorySearchBar';
+import { ItemDetailsContext } from '../../Contexts/ItemDetailsContexts';
 import customTheme from '../styling/customTheme';
 // styling 
 import { CheckBoxOutlineBlankOutlined } from "@material-ui/icons";
 
 const CategoryPage = (props) => {
+  const { getProductId } = useContext(ItemDetailsContext);
   const [products, setProducts] = useState([]);
 
   // Ask team was unable to store category_id using hooks.
@@ -55,6 +57,7 @@ const CategoryPage = (props) => {
             categoryId={props.categoryId}
             product_name={products.product_name}
             products={products}
+            getProductId={getProductId}
           />
         </div>
       </div>
