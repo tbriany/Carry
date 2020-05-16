@@ -16,7 +16,6 @@ import StorePage from './Components/StorePage/storePage';
 import ProductsPage from './Components/ProductPage/productsPage';
 import CheckoutLanding from './Components/CheckoutLanding.jsx'
 
-
 function App() {
   return (
     <div className="App">
@@ -27,6 +26,7 @@ function App() {
       <Switch>
           <Route exact path="/" component={Landing} />
           <Route exact path="/checkout" component={CheckoutLanding} />
+          <Route exact path="/checkout" component={Checkout} />
           <Route exact path="/popup/:product_id" component={ItemPopUp} />
           <Route exact path="/login" component={Login}/>
           <Route exact path="/signup" component={Signup}/>
