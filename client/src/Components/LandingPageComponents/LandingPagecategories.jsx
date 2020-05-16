@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import axios from 'axios'
+import { LandingContext } from "../../Contexts/LandingPageDetailsContext"
 // styling 
 import { makeStyles } from "@material-ui/core/styles";
 import GridList from "@material-ui/core/GridList";
@@ -50,8 +51,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Categories() {
   const classes = useStyles();
-
-  const [categories, setCategories] = useState([]);
+  const { categories, setCategories } = useContext(	 LandingContext)
+  
   // make network request to server to get all categories
   useEffect(() => {
      async function fetchCategories() {
@@ -91,7 +92,7 @@ console.log(categories)
           cellHeight={"1px"} 
           key={tile.category_id} >
             <img
-              src={tile.category_landing_logo}
+              src={tile.category_logo}
               alt={tile.title}
               borderRadius = '50%'
             />
