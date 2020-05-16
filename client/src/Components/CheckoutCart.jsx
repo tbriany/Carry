@@ -25,7 +25,6 @@ const CheckoutCart = () => {
 
 
     useEffect(() => {
-        console.log("update")
         getCheckout()
         handleCartTotal()
     }, [changeinQty])
