@@ -6,6 +6,7 @@ import CategoryGridList from "./CategoryGrid";
 // styling 
 import MultilineTextFields from './CategorySearchBar';
 import CheckboxesTags from '../LandingPageComponents/CategoryFilterBar'
+import Playground from './CategoryFilterForm'
 import customTheme from "../styling/customTheme";
 import { CheckBoxOutlineBlankOutlined } from "@material-ui/icons";
 
@@ -23,7 +24,7 @@ const CategoryPage = (props) => {
   const category_name = props.match.params.type;
   console.log("categoryPage category_name", category_name);
 
-  // useeffect to  make a network request to backend to get all stores/ products of that category.
+  // useeffect to  make a network request to backend to get all products for specific category.
   // Ask Adam or team why this is being rendered twice.
   useEffect(() => {
     async function fetchData() {
@@ -70,10 +71,12 @@ const CategoryPage = (props) => {
       <div className="Content">
       <div className ='sidebar'
       style={{margin:'25px', float: 'left'}}>
-      <CheckboxesTags
-      products ={products}/>
+      {/* <CheckboxesTags
+      products ={products}/> */}
+      <Playground/>
       </div>
-        <div style ={{marginLeft: '20px', float:'right'}}>
+        <div style ={{ float:'right', width: '70%', 
+      paddingTop:'20px'}}>
           <CategoryGridList
             categoryId={props.categoryId}
             product_name={products.product_name}

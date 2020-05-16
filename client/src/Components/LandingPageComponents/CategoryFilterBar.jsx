@@ -7,13 +7,10 @@ import CheckBoxIcon from '@material-ui/icons/CheckBox';
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
-import loginStyles from '../../Components/'
 export default function CheckboxesTags({products}) {
 
 
 
-
-  console.log(prod)
   return (
       <div> 
     <Autocomplete
