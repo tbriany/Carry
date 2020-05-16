@@ -70,9 +70,7 @@ export default function CategoryGrid({ product_name, getProductId, products }) {
 
   return (
     <div>
-      <div className={classes.root} 
-      // style={{ margin: "20px", padding: "15px" }}
-      >
+      <div className={classes.root} style={{ margin: "20px", padding: "15px" }}>
         <Grid container className={classes.root} justify="center">
           <Grid item md={10}>
             <Grid container justify="center" spacing={5}>
