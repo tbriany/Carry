@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function TypesGridList({listTitle, storeId}) {
+export default function TypesGridList({storeId}) {
   const classes = useStyles();
 
   const [types, setTypes] = useState([])
@@ -65,10 +65,16 @@ export default function TypesGridList({listTitle, storeId}) {
 
   return (
     <div className={classes.root} style={{margin: "20px", padding: "15px"}}>
-        <Typography variant='h4' paragraph='true'>
-         {listTitle}
-        </Typography>
-      <GridList className={classes.gridList} cols={5} cellHeight={270} spacing={5}>
+        <h2
+              style={{
+                fontFamily: "Palatino Linotype",
+                textAlign: "left",
+                color: "black",
+              }}
+            >
+              Shop By Type
+            </h2>
+      <GridList className={classes.gridList} cols={4} cellHeight={285} spacing={7}>
         {types.map((tile) => (
           <GridListTile key={tile.img}>
             <Link to={`/store/${storeId}/${tile.product_type_name}`}>
