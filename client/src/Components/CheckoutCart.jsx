@@ -133,6 +133,7 @@ const CheckoutCart = () => {
                             </Grid>
                             </Grid>
                         </div>
+            )
                 })}
                 <div className={classes.root}>
                 <Grid container spacing={1}>
