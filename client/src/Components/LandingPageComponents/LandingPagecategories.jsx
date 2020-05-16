@@ -88,12 +88,18 @@ console.log('LandingPageCategories',categories)
       <GridList className={classes.gridList} cols={3.5} 
              item xs= {12} sm={6} md= {4} lg={3} xl= {2}
              spacing= {32} 
+             cellHeight = {250}
             >
         {categories.map((tile)  => (
-          <GridListTile spacing={"100px"} cellHeight={"1px"} key={tile.category_id} >
+          <GridListTile 
+          
+          spacing={"100px"} 
+          cellHeight={"1px"} 
+          key={tile.category_id} >
             <img
               src={tile.category_logo}
               alt={tile.title}
+              borderRadius = '50%'
             />
             <Link to={`/categories/${tile.category_name}`}>
               <GridListTileBar

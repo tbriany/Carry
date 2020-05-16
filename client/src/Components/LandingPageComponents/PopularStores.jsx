@@ -89,10 +89,12 @@ export default function SingleLineGridListStores() {
         </h3>
       </div>
       <div className={classes.root}>
-        <GridList className={classes.gridList} cols={3.5}>
+        <GridList className={classes.gridList} 
+        cellHeight= {200} 
+        cols={3.5}>
           {stores.map((store) => (
             <GridListTile key={store.store_id}>
-              <img src={store.avatar_url} alt={store.title} />
+              <img src={store.avatar_url} alt={store.title} style={{height:'310px'}}/>
               <Link to={`/store/${store.store_id}`}>
                 <GridListTileBar
                   title={store.store_name}
