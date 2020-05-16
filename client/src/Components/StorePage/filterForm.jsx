@@ -8,11 +8,10 @@ import FormControl from '@material-ui/core/FormControl';
 import ListItemText from '@material-ui/core/ListItemText';
 import Select from '@material-ui/core/Select';
 import Checkbox from '@material-ui/core/Checkbox';
-
 import Icon from '@material-ui/core/Icon';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import Typography from '@material-ui/core/Typography';
-
+import customTheme from '../styling/customTheme';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -23,6 +22,27 @@ const useStyles = makeStyles((theme) => ({
   noLabel: {
     marginTop: theme.spacing(3),
   },
+  select: {
+    label: customTheme.palette.secondary.dark,
+    error: theme.palette.error.dark,
+    '& label.Mui-focused': {
+        color: customTheme.palette.secondary.dark,
+    },
+    '& .MuiOutlinedInput-root': {
+        '& fieldset': {
+            borderColor: customTheme.palette.secondary.main
+        },
+        '&.Mui-focused fieldset': {
+            borderColor: customTheme.palette.secondary.main
+        },
+        '.Mui-focused': {
+          borderColor: customTheme.palette.secondary.main
+        },
+        '.MuiInput-underline': {
+          borderBottom: '2px solid black'
+      }
+    }
+  }
 }));
 
 const ITEM_HEIGHT = 48;
@@ -150,6 +170,7 @@ export default function MultipleSelect() {
           onChange={handleChange}
           input={<Input />}
           MenuProps={MenuProps}
+          className="select"
         >
           {categories.map((name) => (
             <MenuItem key={name.category_name} value={name.category_name} style={getStyles(name, filter, theme)}>
