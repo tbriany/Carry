@@ -10,7 +10,7 @@ const getAllFromCart = async () => {
     JOIN materials ON products.material_id= materials.material_id
     JOIN brands ON products.brand_id = brands.brand_id 
     JOIN  productImage_id  ON  products.product_id = productImage_id.product_id 
-    GROUP BY checkoutcart.checkoutcart_id, productimage_id.product_image_id, brands.brand_name, products.product_id, colors.color_name, materials.material_name
+    GROUP BY checkoutCart.checkoutcart_id, productimage_id.product_image_id, brands.brand_name, products.product_id, colors.color_name, materials.material_name
     ORDER BY checkoutcart_id ASC
     `;
     return await db.any(getAllQueries);
