@@ -27,7 +27,7 @@ const CheckoutCart = () => {
     useEffect(() => {
         getCheckout()
         handleCartTotal()
-    }, [changeinQty])
+    }, [changeinQty, shippingOption])
 
 
 
@@ -43,10 +43,12 @@ const CheckoutCart = () => {
 
     const handleCartTotal = async () => {
         try {
+
             let total = await axios.get(`/checkoutCart/checkoutTotal`)
             let checkoutTotal = total.data.payload.checkouttotal
             let cartTotal = parseInt(checkoutTotal) +  parseInt(shippingOption)
             setCartTotal(cartTotal)
+
         } catch (err) {
             console.log("ERROR", err)
         }
