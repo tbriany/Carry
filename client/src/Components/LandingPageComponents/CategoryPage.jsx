@@ -1,18 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { Link, Route, Switch } from "react-router-dom";
+import { LandingContext } from "../../Contexts/LandingPageDetailsContext"
 import CategoryGridList from "./CategoryGrid";
 import MultilineTextFields from './CategorySearchBar';
 import customTheme from '../styling/customTheme';
 // styling 
 import { CheckBoxOutlineBlankOutlined } from "@material-ui/icons";
+import Playground from './CategoryFilterForm'	// styling 
+
+
 
 const CategoryPage = (props) => {
   const [products, setProducts] = useState([]);
+  const { categories } = useContext(	
+    LandingContext	
+  );	
+  console.log('category Page categories' , categories)
 
-  // Ask team was unable to store category_id using hooks.
-  // const [category_id, setCategory_id] =useState(0)
-  // setCategory_id(props.match.params.type)
 
   const category_name = props.match.params.type;
   console.log("categoryPage category_name", category_name);
@@ -36,6 +41,20 @@ const CategoryPage = (props) => {
   console.log("products on Category Page", products);
   return (
     <div className="CategoryPage">
+     <div className ='CategoryNav'
+     style= {{
+       marginTop: '20px',
+       display:'flex', 
+       justifyContent: 'space-evenly', 
+       marginLeft:'20px', 
+       marginRight: '30px'
+     }}>
+       {categories.map((value) => (<Link to = {`/categories/${value.category_name}`}>  {value.category_name}
+       </Link>))}
+
+
+     </div>
+     
       <div style ={{ display: 'flex', justifyContent: 'space-evenly'}}>
         <h1 style={{
             fontFamily: "Palatino Linotype",
@@ -50,7 +69,12 @@ const CategoryPage = (props) => {
       </div>
 
       <div className="Content">
-        <div>
+        <div className ='Filter_sideBar'
+        style ={{margin: '25px', float:'left'}}> 
+<Playground/>
+        </div>
+        <div
+        style ={{float:'right', width:'70%', paddingTop:'20px'}}>
           <CategoryGridList
             categoryId={props.categoryId}
             product_name={products.product_name}
