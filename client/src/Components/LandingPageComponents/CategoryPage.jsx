@@ -57,16 +57,16 @@ const CategoryPage = (props) => {
 
       >  {value.category_name}
        </Link>))}
-
-
      </div>
      
-      <div style ={{ display: 'flex', justifyContent: 'space-evenly'}}>
+      <div style ={{ display: 'flex', justifyContent: 'space-evenly', padding: '25px'}}>
+       
         <h1 style={{
             fontFamily: "Palatino Linotype",
             textAlign: "left",
             color: customTheme.palette.secondary.dark,
           }}>{category_name}</h1>
+       
         <div className="SearchBar">
           {" "}
           <MultilineTextFields/>
@@ -74,9 +74,10 @@ const CategoryPage = (props) => {
         </div>
       </div>
 
-      <div className="Content">
+      <div className="Content" style={{marginTop:'20px'}}
+      >
         <div className ='Filter_sideBar'
-        style ={{margin: '25px', float:'left'}}> 
+        style ={{margin: '25px', float:'left', padding: '20px'}}> 
 <Playground/>
         </div>
         <div
