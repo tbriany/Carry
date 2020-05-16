@@ -246,7 +246,7 @@ VALUES
 (3, 'Bath & Body Care', 'https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F35%2F2018%2F04%2F16191317%2Fbath-products.jpg'),
 (3, 'Hair', 'https://images.squarespace-cdn.com/content/v1/58b8a781414fb5d3c07cfd6f/1565796454352-IMC75EC48HT7OGUPMH9K/ke17ZwdGBToddI8pDm48kMry8TfhVOJMIx1LwIT5QW5Zw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpyf_tFFvKg23Qgez2EHHODw4hBIXXUq5Dn4J4H5_UCccd_oiNU7b3jsSYpkujNi5Sw/Screen+Shot+2019-08-14+at+11.25.13+AM.png'),
 (3, 'Brushes & Tools', 'https://previews.123rf.com/images/didecs/didecs1709/didecs170900003/87244794-hairdressing-tools-and-various-hairbrushes-on-white-background-top-view.jpg'),
--- (4, 'Bags', 'https://www.westelm.com/weimgs/rk/images/wcm/products/202014/0325/west-elm-backpacks-o.jpg'),
+(4, 'Bags', 'https://cdn.shopify.com/s/files/1/2523/1254/products/PU_Leather_Circle_Round_Purses_Crossbody_Bags_For_Summer_18_59d7c67f-c83c-495f-bb7a-3416b8954448_500x.jpg?v=1587659834'),
 -- (4, 'Belts', 'https://www.dhresource.com/0x0/f2/albu/g9/M01/BE/F4/rBVaWFyx8dqAQ-UOAAB_BJv67_Y835.jpg'),
 -- (4, 'Jewelry', 'https://cdn.shopify.com/s/files/1/0015/3849/0427/products/SU19-PRopt-GS-195-114-G_1_1000x.jpg?v=1580853869'),
 -- (4, 'Hair Accessories', 'https://static1.squarespace.com/static/5bd915b9aa49a1d21e9245e0/5beba4e240ec9acd7f8ae225/5d5bee6f60a4d60001f4a9e6/1580447535645/Screenshot_20190603-094533_3.png?format=1000w'),
@@ -291,10 +291,8 @@ VALUES
 INSERT INTO products
 (product_name, brand_id, store_id, category_id, product_price, material_id, color_id, product_description, product_type, quantity)
 VALUES 
-('Milan Leather Backpack', 1, 1, 4, 200.00, 5 , 1, 'Small leather backpack. Made in Peru.', 28, 5), 
-('Milan Mini Backpack', 1, 1, 4, 150.00, 5, 13, 'Mini leather backpack. Made in Peru.', 28, 5);
-
-
+('Milan Leather Backpack', 1, 1, 4, 200.00, 5 , 1, 'Small leather backpack. Made in Peru.', 18, 5), 
+('Milan Mini Backpack', 1, 1, 4, 150.00, 5, 13, 'Mini leather backpack. Made in Peru.', 18, 5);
 
 
 INSERT INTO sizes 
@@ -314,22 +312,22 @@ VALUES
 
 
 
-SELECT * FROM customers;
-SELECT * FROM stores;
-SELECT * FROM couriers;
-SELECT * FROM categories;
-SELECT * FROM product_type;
-SELECT * FROM materials;
-SELECT * FROM brands;
-SELECT * FROM colors;
-SELECT * FROM products;
-SELECT * FROM sizes;
-SELECT * FROM productImage_id;
-SELECT * FROM orders;
-SELECT * FROM ordersItems;
-SELECT * FROM payment_type;
-SELECT * FROM payment;
-SELECT * FROM bankInfo;
-SELECT * FROM receipts;
-SELECT * FROM checkoutCart;
+-- SELECT * FROM customers;
+-- SELECT * FROM stores;
+-- SELECT * FROM couriers;
+-- SELECT * FROM categories;
+-- SELECT * FROM product_type;
+-- SELECT * FROM materials;
+-- SELECT * FROM brands;
+-- SELECT * FROM colors;
+-- SELECT * FROM products;
+-- SELECT * FROM sizes;
+-- SELECT * FROM productImage_id;
+-- SELECT * FROM orders;
+-- SELECT * FROM ordersItems;
+-- SELECT * FROM payment_type;
+-- SELECT * FROM payment;
+-- SELECT * FROM bankInfo;
+-- SELECT * FROM receipts;
+-- SELECT * FROM checkoutCart;
 
