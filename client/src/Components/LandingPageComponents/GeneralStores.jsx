@@ -75,17 +75,17 @@ export default function SingleLineGridListItems() {
 
 <div>
     <div> 
-       <h3
+       <h2
               style={{
                 fontFamily: "Palatino Linotype",
                 textAlign: "left",
-                fontSize: "20px",
+                // fontSize: "20px",
                 color: customTheme.palette.secondary.dark,
               }}
             >
               {" "}
               Check Out What These Stores Carry{" "}
-            </h3>
+            </h2>
     </div>
     <div className={classes.root}>
          
