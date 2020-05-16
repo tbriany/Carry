@@ -10,6 +10,7 @@ const getAllStores = async () => {
 const getStoreById = async (id) => {
   const getQuery = `
   SELECT  store_name,
+          store_logo,
           avatar_url,
           phone_number,
           email,

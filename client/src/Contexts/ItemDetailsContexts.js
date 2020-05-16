@@ -10,11 +10,10 @@ const ItemDetailsContextProvider = (props) => {
     const [productIds, setproductsIds] = useState([]); //Array contains all ids that was added to the checkout bag.
     const [productQty, setProductQty] = useState(0);
     const [totalProductQty, setTotalProductQty] = useState(0); //Total of Product Qty from the itempopup page
-    const [productSize, setProductSize] = useState('');
+    const [productSize, setProductSize] = useState('default');
     const [checkoutCart, setCheckoutCart] = useState([]);
 
-
-    const updateProductQty = (newQty) => {//function the updates the quantity 
+    const updateProductQty = (newQty) => {
         setProductQty(newQty)
     };
 
@@ -24,9 +23,9 @@ const ItemDetailsContextProvider = (props) => {
 
     const getProductId = (newProdId) => {
         setProductId(newProdId)
-    
-
     };
+
+
     useEffect(() => {
         getCheckout();
     }, [])
@@ -38,13 +37,11 @@ const ItemDetailsContextProvider = (props) => {
 
 
     const addToCart = async () => {
-        if (productQty !== 0 && productSize !== '') {
+        if (productQty !== 0 && productSize !== 'default') {
             setTotalProductQty(productQty)
+
             if (!productIds.includes(productId)) {
                 setproductsIds([...productIds, productId])
-            }
-            let productExistInCart = checkoutCart.find(cart => parseInt(productId) === parseInt(cart.product_id))
-            if (!productExistInCart) {         
                 try {
                     await axios.post('/checkoutCart/add', { product_id: productId, size: productSize, quantity: productQty })
                     getCheckout()
@@ -52,24 +49,31 @@ const ItemDetailsContextProvider = (props) => {
                     console.log("ERROR", err)
                 }
             } else {
-                let prevQty = parseInt(productExistInCart.cartquantity)
-                let current = parseInt(productQty)
-                let totalQty = prevQty + current
-
                 try {
-                    await axios.patch(`/checkoutCart/edit/${productExistInCart.checkoutcart_id}`, { checkoutCart_id: productExistInCart.checkoutcart_id, product_id: productId, size: productSize, quantity: totalQty })
+                    let productInCart = await axios.get(`/checkoutCart/productId/${productId}`)
+                    let productPayload = productInCart.data.payload
+                    let totalQty = parseInt(productPayload.cartquantity) + parseInt(productQty)
+                    handleUpdateQuantity(productPayload.checkoutcart_id, productId, productSize, totalQty)
                     getCheckout()
                 } catch (err) {
                     console.log("ERROR", err)
                 }
             }
-            // setProductQty(0)
-        } else{
+            setProductQty(0)
+            setProductSize('default')
+        } else {
             alert("Missing Input")
         }
     }
 
 
+    const handleUpdateQuantity = async (checkoutId, currProductId, currSize, updatedQty) => {
+        try {
+            await axios.patch(`/checkoutCart/edit/${checkoutId}`, { checkoutCart_id: checkoutId, product_id: currProductId, size: currSize, quantity: updatedQty })
+        } catch (err) {
+            console.log("ERROR", err)
+        }
+    }
 
     return (
         // Provider accepts a value containting state and functions. This allows the components access to the state but it must be descendants of the provider.

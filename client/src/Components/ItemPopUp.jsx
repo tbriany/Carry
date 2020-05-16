@@ -8,7 +8,6 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { useStyles, BootstrapInput } from './styling/popupTheme'
 import "./ItemPopUp.css";
 
-
 function ItemPopUp() {
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
@@ -17,20 +16,14 @@ function ItemPopUp() {
         setExpanded(isExpanded ? panel : false);
     };
 
-
-    const { updateCurrQty, getProductPrice, productSize, updateProductQty, checkoutCart, addToCart, productId, productQty, addItemToBag, getProductSize } = useContext(ItemDetailsContext);
-
-
-    const [itemInfo, setItemInfo] = useState({})
-    const [size, setSize] = useState('')
-
+    const { updateCurrQty, updateProductQty, checkoutCart, addToCart, producstSize, productId, productQty, addItemToBag, productSize, getProductSize } = useContext(ItemDetailsContext);
+    const [itemInfo, setItemInfo] = useState({}) //Recieves all of the product info
 
     const handleItemInfo = async () => {
         try {
             const productInfo = await axios.get(`/products/${productId}`)
             let productInfoPayload = productInfo.data.payload
             setItemInfo(productInfoPayload)
-            getProductPrice(productInfoPayload.product_price)
         } catch (err) {
             console.log("ERROR", err)
         }
@@ -41,9 +34,6 @@ function ItemPopUp() {
             handleItemInfo();
         }
     }, [productId])
-
-
-
 
 
     return (
@@ -64,14 +54,9 @@ function ItemPopUp() {
                         style={{
                             borderBottom: "1px solid #eed7c1",
                             padding: '2px 2px 30px',
-                          
                         }}>
                         <Paper className={classes.paper}
-                            style={{
-                                color: "black",
-                                boxShadow: " 1px 1px 1px white",
-                                justifyContent: 'center',
-                                display: 'grid'
+                            style={{ color: "black", boxShadow: " 1px 1px 1px white", justifyContent: 'center', display: 'grid'
                             }}>
                             <p className="item-name">{itemInfo.brand_name}'s </p>
                             <p className="item-name">{itemInfo.product_name}</p>
@@ -82,9 +67,7 @@ function ItemPopUp() {
 
                     <Grid item xs={9}>
                         <Paper className={classes.paper}
-                            style={{
-                                boxShadow: " 1px 1px 1px white",
-                                padding: '2px'
+                            style={{ boxShadow: " 1px 1px 1px white", padding: '2px'
                             }}>
 
                             <FormControl className={classes.margin}>
@@ -116,17 +99,11 @@ function ItemPopUp() {
                             </input>
                             <br></br>
                             <Button
-                                style={{
-                                    margin: "10px",
-                                    borderRadius: 35,
-                                    backgroundColor: "#eed7c1",
-                                    padding: "10px 24px",
-                                    fontSize: "14px",
+                                style={{ margin: "10px", borderRadius: 35, backgroundColor: "#eed7c1", padding: "10px 24px", fontSize: "14px",
                                 }}
                                 variant="contained"
                                 className="ItemInputSubmit" type="submit" value="ADD TO BAG"
                                 onClick={addToCart}>ADD TO BAG</Button>
-
 
                             <div className="description">
                                 <ExpansionPanel expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
@@ -156,15 +133,16 @@ function ItemPopUp() {
                         </Paper>
                     </Grid>
                 </Grid>
-
             </div>
             <br></br>
 
         </div>
     )
 }
-
 export default ItemPopUp;
+
+
+
 
 
 
