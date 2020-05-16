@@ -74,7 +74,7 @@ export default function TypesGridList({storeId}) {
             >
               Shop By Type
             </h2>
-      <GridList className={classes.gridList} cols={5} cellHeight={270} spacing={5}>
+      <GridList className={classes.gridList} cols={4} cellHeight={285} spacing={7}>
         {types.map((tile) => (
           <GridListTile key={tile.img}>
             <Link to={`/store/${storeId}/${tile.product_type_name}`}>
