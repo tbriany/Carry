@@ -3,7 +3,6 @@ import React, { useState, Fragment } from 'react';
 
 const Review = () => {
     return (
-
         <div >
             <div className='shipping' style={{ display: 'flex', justifyContent: 'flex-start' }}>
                 <input type="radio" className='rush' name='shipping'>
@@ -12,7 +11,6 @@ const Review = () => {
                 <p>Recieve Items in less than 3 hours</p>
                 </label>
             </div>
-
             <div className='shipping' style={{ display: 'flex', justifyContent: 'flex-start' }}>
                 <input type="radio" className='standard' name='shipping'>
                 </input>
@@ -28,11 +26,6 @@ const Review = () => {
                 <p>Recieve items tomorrow</p>
                 </label>
             </div>
-
-
-
-
-
         </div>
 
     )
