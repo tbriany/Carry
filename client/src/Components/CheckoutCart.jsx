@@ -51,7 +51,6 @@ const CheckoutCart = () => {
     }
 
     const handleIncrementQty = async (checkoutId, prodId, prodSize, currQty) => {
-
         try {
             changeinQty ? setchangeinQty(false) : setchangeinQty(true)
             let updateQty = parseInt(currQty) + 1
@@ -63,14 +62,15 @@ const CheckoutCart = () => {
     }
 
     const handleDecrementQty = async (checkoutId, prodId, prodSize, currQty) => {
-
-        try {
-            changeinQty ? setchangeinQty(false) : setchangeinQty(true)
-            let updateQty = parseInt(currQty) - 1
-            await axios.patch(`/checkoutCart/edit/${checkoutId}`, { checkoutCart_id: checkoutId, product_id: prodId, size: prodSize, quantity: updateQty })
-
-        } catch (err) {
-            console.log("ERROR", err)
+        let updateQty = parseInt(currQty) - 1
+        if (updateQty > 0) {
+            try {
+                changeinQty ? setchangeinQty(false) : setchangeinQty(true)
+                let updateQty = parseInt(currQty) - 1
+                await axios.patch(`/checkoutCart/edit/${checkoutId}`, { checkoutCart_id: checkoutId, product_id: prodId, size: prodSize, quantity: updateQty })
+            } catch (err) {
+                console.log("ERROR", err)
+            }
         }
 
     }
@@ -113,49 +113,50 @@ const CheckoutCart = () => {
                                                                 handleDecrementQty(product.checkoutcart_id, product.product_id, product.size, product.cartquantity)
                                                             }} >-</button>
                                                         <span style={{ marginLeft: '10px', marginRight: '10px', }}>{product.cartquantity} </span>
-                                                        <button style={{ border: ' 1px solid #eed7c1', borderRadius: '50%', margin: '2px', fontSize: 'small' }} 
-                                                        onClick={() => {handleIncrementQty(product.checkoutcart_id, product.product_id, product.size, product.cartquantity)
-                                                        }} >+</button>
+                                                        <button style={{ border: ' 1px solid #eed7c1', borderRadius: '50%', margin: '2px', fontSize: 'small' }}
+                                                            onClick={() => {
+                                                                handleIncrementQty(product.checkoutcart_id, product.product_id, product.size, product.cartquantity)
+                                                            }} >+</button>
                                                     </div>
-                                                    <button style={{display: 'flex',     alignSelf: 'flex-end', border: ' 1px solid #eed7c1', borderRadius: '25px'}}
-                                                    onClick={() => { handleDeleteProduct(product.checkoutcart_id) }}>Delete</button>
+                                                    <button style={{ display: 'flex', alignSelf: 'flex-end', border: ' 1px solid #eed7c1', borderRadius: '25px' }}
+                                                        onClick={() => { handleDeleteProduct(product.checkoutcart_id) }}>Delete</button>
                                                 </Paper>
-                                        </Grid>
+                                            </Grid>
                                         </Grid>
                                     </Paper>
-                            </Grid>
-                            <Grid item xs={3} >
-                                <Paper
-                                    style={{ display: "flex", justifyContent: "flex-start", flexDirection: "column", alignItems: "flex-end", boxShadow: " 1px 1px 1px white", marginBottom: "15px", marginTop: "15px" }}
-                                    className={classes.paper}>
-                                    <p style={{ margin: "0px", fontSize: "small" }} > ${product.producttotal} </p>
-                                </Paper>
-                            </Grid>
+                                </Grid>
+                                <Grid item xs={3} >
+                                    <Paper
+                                        style={{ display: "flex", justifyContent: "flex-start", flexDirection: "column", alignItems: "flex-end", boxShadow: " 1px 1px 1px white", marginBottom: "15px", marginTop: "15px" }}
+                                        className={classes.paper}>
+                                        <p style={{ margin: "0px", fontSize: "small" }} > ${product.producttotal} </p>
+                                    </Paper>
+                                </Grid>
                             </Grid>
                         </div>
-            )
+                    )
                 })}
                 <div className={classes.root}>
-                <Grid container spacing={1}>
-                    <Grid item xs={9} >
-                        <Paper
-                            style={{ display: "flex", justifyContent: "flex-start", flexDirection: "column", alignItems: "flex-start", boxShadow: " 1px 1px 1px white", marginBottom: "15px", marginTop: "15px" }}
-                            className={classes.paper}
-                        > Total:
+                    <Grid container spacing={1}>
+                        <Grid item xs={9} >
+                            <Paper
+                                style={{ display: "flex", justifyContent: "flex-start", flexDirection: "column", alignItems: "flex-start", boxShadow: " 1px 1px 1px white", marginBottom: "15px", marginTop: "15px" }}
+                                className={classes.paper}
+                            > Total:
                              </Paper>
+                        </Grid>
+                        <Grid item xs={3} >
+                            <Paper
+                                style={{ display: "flex", justifyContent: "flex-start", flexDirection: "column", alignItems: "flex-end", boxShadow: " 1px 1px 1px white", marginBottom: "15px", marginTop: "15px" }}
+                                className={classes.paper}
+                            >
+                                <p style={{ margin: "0px", fontSize: "small" }} > ${cartTotal} </p>
+                            </Paper>
+                        </Grid>
                     </Grid>
-                    <Grid item xs={3} >
-                        <Paper
-                            style={{ display: "flex", justifyContent: "flex-start", flexDirection: "column", alignItems: "flex-end", boxShadow: " 1px 1px 1px white", marginBottom: "15px", marginTop: "15px" }}
-                            className={classes.paper}
-                        >
-                            <p style={{ margin: "0px", fontSize: "small" }} > ${cartTotal} </p>
-                        </Paper>
-                    </Grid>
-                </Grid>
-            </div>
-        </div>) : (<div></div>)
-}
+                </div>
+            </div>) : (<div></div>)
+            }
         </div >
     )
 }
