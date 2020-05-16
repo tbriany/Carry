@@ -4,8 +4,7 @@ CREATE DATABASE carry;
 \c carry
 
 -- users
-CREATE TABLE customers
-(
+CREATE TABLE customers(
     customer_id SERIAL PRIMARY KEY,
     firstname VARCHAR NOT NULL,
     lastname VARCHAR NOT NULL,
@@ -19,8 +18,7 @@ CREATE TABLE customers
     password VARCHAR NOT NULL
 );
 
-CREATE TABLE stores
-(
+CREATE TABLE stores(
     store_id SERIAL PRIMARY KEY,
     store_name VARCHAR NOT NULL,
     store_logo VARCHAR NOT NULL,
@@ -31,13 +29,12 @@ CREATE TABLE stores
     city VARCHAR NOT NULL,
     state VARCHAR NOT NULL,
     zip_code INT NOT NULL,
-    password VARCHAR NOT NULL,
-    lat FLOAT,
-    lng FLOAT
+    password VARCHAR NOT NULL, 
+    lat FLOAT, 
+    lng FLOAT 
 );
 
-CREATE TABLE couriers
-(
+CREATE TABLE couriers(
     courier_id SERIAL PRIMARY KEY,
     firstname VARCHAR NOT NULL,
     lastname VARCHAR NOT NULL,
@@ -48,44 +45,38 @@ CREATE TABLE couriers
     mode_of_transportation VARCHAR NOT NULL
 );
 
-CREATE TABLE categories
-(
+CREATE TABLE categories(
     category_id SERIAL PRIMARY KEY,
     category_name VARCHAR,
     category_Landing_Logo VARCHAR,
     category_logo VARCHAR
 );
 
-CREATE TABLE product_type
-(
+CREATE TABLE product_type(
     product_type_id SERIAL PRIMARY KEY,
     category_id INT REFERENCES categories(category_id),
     product_type_name VARCHAR,
     product_type_logo VARCHAR
 );
 
-CREATE TABLE materials
-(
+CREATE TABLE materials(
     material_id SERIAL PRIMARY KEY,
     material_name VARCHAR
 );
 
-CREATE TABLE brands
-(
+CREATE TABLE brands(
     brand_id SERIAL PRIMARY KEY,
     brand_name VARCHAR,
     brand_description VARCHAR,
     store_id INT REFERENCES stores(store_id)
 );
 
-CREATE TABLE colors
-(
+CREATE TABLE colors(
     color_id SERIAL PRIMARY KEY,
     color_name VARCHAR NOT NULL
 );
 
-CREATE TABLE products
-(
+CREATE TABLE products(
     product_id SERIAL PRIMARY KEY,
     product_name VARCHAR,
     brand_id INT REFERENCES brands(brand_id),
@@ -99,15 +90,13 @@ CREATE TABLE products
     quantity INT
 );
 
-CREATE TABLE sizes
-(
+CREATE TABLE sizes(
     sizes_id SERIAL PRIMARY KEY,
     product_id INT REFERENCES products(product_id),
     product_size VARCHAR
 );
 
-CREATE TABLE productImage_id
-(
+CREATE TABLE productImage_id(
     product_image_id SERIAL PRIMARY KEY,
     product_id INT REFERENCES products(product_id),
     product_image_url VARCHAR,
@@ -118,42 +107,38 @@ CREATE TABLE productImage_id
 --Checkout Cart
 
 
-CREATE TABLE checkoutCart
-(
+CREATE TABLE checkoutCart(
     checkoutCart_id SERIAL PRIMARY KEY,
-    product_id INT REFERENCES products(product_id),
+    product_id  INT REFERENCES products(product_id),
     size VARCHAR,
     quantity INT
 );
 
-CREATE TABLE checkouts
-(
-    checkout_id SERIAL PRIMARY KEY,
-    session_id VARCHAR,
-    cart VARCHAR
+CREATE TABLE checkouts (
+     checkout_id SERIAL PRIMARY KEY,
+     session_id VARCHAR,
+     cart VARCHAR
 );
 
 -- Orders 
 
-CREATE TABLE receipts
-(
+CREATE TABLE receipts(
     receipt_id SERIAL PRIMARY KEY,
     customer_id INT REFERENCES customers(customer_id),
-    reciept VARCHAR
+    reciept VARCHAR 
 );
 
-CREATE TABLE orders
-(
-    order_id SERIAL PRIMARY KEY,
-    order_status VARCHAR ,
-    required_date DATE,
-    time_ordered TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    receipt_id INT REFERENCES receipts(receipt_id),
-    customer_id INT REFERENCES customers(customer_id),
-    store_id INT REFERENCES stores(store_id),
-    courier_id INT REFERENCES couriers(courier_id),
-    delivery_fee INT,
-    total INT
+CREATE TABLE orders(
+   order_id SERIAL PRIMARY KEY,
+   order_status VARCHAR ,
+   required_date DATE,
+   time_ordered TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
+   receipt_id INT REFERENCES receipts(receipt_id),
+   customer_id INT REFERENCES customers(customer_id),
+   store_id INT REFERENCES stores(store_id),
+   courier_id INT REFERENCES couriers(courier_id),
+   delivery_fee INT,
+   total INT
 );
 
 
@@ -161,24 +146,21 @@ CREATE TABLE orders
 
 -- Payments
 
-CREATE TABLE payment_type
-(
+CREATE TABLE payment_type(
     payment_type_id SERIAL PRIMARY KEY,
     payment_type_name VARCHAR
 );
 
-CREATE TABLE payment
-(
+CREATE TABLE payment(
     payment_id SERIAL PRIMARY KEY,
     customer_id INT REFERENCES customers(customer_id),
     payment_type_id INT REFERENCES payment_type(payment_type_id),
     card_number INT,
-    exp_date INT,
+    exp_date INT, 
     cvv INT
 );
 
-CREATE TABLE bankInfo
-(
+CREATE TABLE bankInfo(
     bankInfo_id SERIAL PRIMARY KEY,
     courier_id INT REFERENCES couriers(courier_id),
     account_number INT,
@@ -186,9 +168,8 @@ CREATE TABLE bankInfo
 );
 
 INSERT INTO customers
-    (firstname, lastname, phone_number, email, address, city, state, zip_code, avatar_url, password)
-VALUES
-    ('Ana', 'Gomez', '(347)-555-5551', 'Ana@pursuit.org', '47-10 Austell Pl 2nd floor', 'Long Island City', 'NY', 11101, 'img' , 'ana');
+(firstname, lastname, phone_number, email, address, city, state, zip_code, avatar_url, password)
+VALUES ('Ana', 'Gomez', '(347)-555-5551', 'Ana@pursuit.org', '47-10 Austell Pl 2nd floor', 'Long Island City', 'NY', 11101, 'img' , 'ana'); 
 
 INSERT INTO stores
 (store_name, store_logo, avatar_url, phone_number, email, address, city, state, zip_code, password, lat, lng)
@@ -274,39 +255,37 @@ VALUES
 -- (4, 'Hats & Caps', 'https://cdn.shopify.com/s/files/1/0824/1887/products/Winter_Hat_Grey_1600x.jpg?v=1536600015'),
 (4, 'Wallets & Coin purses', 'https://sc02.alicdn.com/kf/HTB1AY6JaojrK1RkHFNRq6ySvpXaJ/Guangzhou-genuine-leather-small-women-purse-wallet.jpg_350x350.jpg');
 
-
 INSERT INTO materials
-    (material_name)
-VALUES
-    ('Organic Cotton'),
-    ('Organic Linen'),
-    ('Hemp'),
-    ('Suede'),
-    ('Leather'),
-    ('Polyester');
+(material_name)
+VALUES 
+('Organic Cotton'),
+('Organic Linen'),
+('Hemp'),
+('Suede'),
+('Leather'),
+('Polyester');
 
 INSERT INTO brands
-    (brand_name, brand_description,store_id)
-VALUES
-    ('Lima Sagrada', 'Lima Sagrada is the name of a project that gives shape to raw materials such as leather in its most basic pure form, resulting in a modern and contemporary design founded by Vanessa Vila. Vanessa Vila is an architect, art director, and a stylist in Lima, Peru.', 1), 
-    ('Ayni', ' A brand created out of a common love for high-quality products, nature''s finest materials, and strong economic and environmental engagement.',1);
+(brand_name, brand_description)
+VALUES 
+('Lima Sagrada', 'Lima Sagrada is the name of a project that gives shape to raw materials such as leather in its most basic pure form, resulting in a modern and contemporary design founded by Vanessa Vila. Vanessa Vila is an architect, art director, and a stylist in Lima, Peru.');
 
 INSERT INTO colors
-    (color_name)
-VALUES
-    ('Black'),
-    ('White'),
-    ('Green'),
-    ('Red'),
-    ('Yellow'),
-    ('Purple'),
-    ('Pink'),
-    ('Gray'),
-    ('Brown'),
-    ('Orange'),
-    ('Blue'),
-    ('Pink'),
-    ('Nude');
+(color_name)
+VALUES 
+('Black'),
+('White'),
+('Green'),
+('Red'),
+('Yellow'),
+('Purple'),
+('Pink'),
+('Gray'),
+('Brown'),
+('Orange'),
+('Blue'),
+('Pink'), 
+('Nude');
 
 INSERT INTO products
     (product_name, brand_id, store_id, category_id, product_price, material_id, color_id, product_description, product_type, quantity)
@@ -327,12 +306,11 @@ VALUES
 
 
 INSERT INTO productImage_id
-    (product_id, product_image_url, category_id)
+(product_id, product_image_url, category_id)
 VALUES
     (1, 'https://cdn.shopify.com/s/files/1/0082/3558/1504/products/lima-sagrada-small-backpack-black_606x606_b48c910d-33ac-46ce-aeb0-8bb3f7b73f7f_1296x.jpg', 4),
     (2, 'https://cdn.shopify.com/s/files/1/0082/3558/1504/products/Lima-sagrada-milan-mini-soft-pink-19502_1024x1024_2x_89657b17-5194-4bad-adb6-7f66f686e539_1728x.jpg', 4),
     (3, 'https://cdn.shopify.com/s/files/1/0082/3558/1504/products/lima-sagrada-urban-fanny-pack-front_606x606_2d57ea5f-8afc-4301-a3cf-03bfd70c3fdd_1296x.jpg', 4), 
-
     (4, 'https://cdn.shopify.com/s/files/1/0082/3558/1504/products/Lima-sagrada-plastic-bag-brown-19424_1296x.jpg?', 1);
 
 
@@ -372,4 +350,5 @@ VALUES
 -- FROM receipts;
 -- SELECT *
 -- FROM checkoutCart;
+
 
