@@ -15,6 +15,7 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 import Popover from '@material-ui/core/Popover';
 import customTheme from './styling/customTheme';
 import CartPopUp from './CartPopUp';
+import { CustomerContext } from '../Contexts/CustomerContext';
 
 
 const useStyles = makeStyles((theme) => ({

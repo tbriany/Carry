@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Container, makeStyles, Paper, Stepper, Step, StepLabel, Typography, CssBaseline, Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import AddressForm from './CheckoutForms/AddressForm';
 import PaymentForm from './CheckoutForms/PaymentForm';
 import Review from './CheckoutForms/Review';
+import PlaceOrder from './CheckoutForms/PlaceOrder';
 import customTheme from './styling/customTheme';
+import CustomerContext from '../Contexts/CustomerContext';
+
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -30,9 +33,11 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(3, 0, 5),
         width: '90%',
         margin: 'auto',
-        '.MuiStepIcon-root.MuiStepIcon-active': {
-            color: customTheme.palette.primary.main
-        },
+    },
+    'MuiStep': {
+    '.MuiStep-completed': {
+        backgroundColor: customTheme.palette.secondary.dark,
+      },
     },
     buttonContainer: {
         justifyContent: 'baseline'
@@ -48,8 +53,7 @@ const useStyles = makeStyles((theme) => ({
         marginRight: theme.spacing(2)
     },
 }));
-
-const steps = ['Delivery address', 'Payment method', 'Review & Place Order'];
+const steps = ['Delivery address', 'Payment method', 'Delivery Terms'];
 const getStepComponent = (step) => {
     switch (step) {
         case 0:
@@ -59,11 +63,15 @@ const getStepComponent = (step) => {
         case 2:
             return <Review />
         default:
-            throw new Error('Step does not exist.')
+            return <PlaceOrder />
     }
 };
 //getStepComponent takes in a step from the activeStep state and based on it's value, displays a certain component
 const Checkout = () => {
+    // const { logUserOut, setCustomerContext, isLoggedIn, customerId, customerFirstname, customerLastname, customerPhoneNumber, customerEmail, customerAddress, customerCity, customerState, customerZip, customerAvatar } = useContext(CustomerContext);
+    // contextObj = {
+    //     logUserOut, setCustomerContext, isLoggedIn, customerId, customerFirstname, customerLastname, customerPhoneNumber, customerEmail, customerAddress, customerCity, customerState, customerZip, customerAvatar
+    // };
     const classes = useStyles();
     const [activeStep, setActiveStep] = useState(0);
     const handleNextStep = () => {
@@ -92,16 +100,16 @@ const Checkout = () => {
                     <Container className="formContainer">
                         {getStepComponent(activeStep)}
                     </Container>
-                     <div className={classes.buttons}>
-                            {activeStep !== 0 && (
-                                <Button onClick={handlePrevStep} className={classes.button}>
-                                    Back
+                    <div className={classes.buttons}>
+                        {activeStep !== 0 && (
+                            <Button onClick={handlePrevStep} className={classes.button}>
+                                Back
                                  </Button>
-                            )}
-                            <Button onClick={handleNextStep} className={classes.button} variant='contained' color='grey'>
-                                {activeStep === steps.length - 1 ? 'Place Order' : 'Next'}
-                            </Button>
-                        </div>
+                        )}
+                        <Button onClick={handleNextStep} className={classes.button} variant='contained' color='grey'>
+                            {activeStep === steps.length - 1 ? 'Place Order' : 'Next'}
+                        </Button>
+                    </div>
                 </Paper>
             </main>
         </Container>
