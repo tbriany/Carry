@@ -9,6 +9,9 @@ import List from "@material-ui/core/List";
 import clsx from "clsx";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import ItemPopUp from "../ItemPopUp";
+import {sidePopUp} from '../styling/sidePopTheme'
+
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,14 +24,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const sidePopUp = makeStyles({
-  list: {
-    width: " 400px",
-  },
-  fullList: {
-    width: "50%",
-  },
-});
 
 export default function CategoryGrid({ product_name, getProductId, products }) {
   const classes = useStyles();
@@ -104,6 +99,7 @@ export default function CategoryGrid({ product_name, getProductId, products }) {
                 open={state["right"]}
                 onClose={toggleDrawer("right", false, 0)}
                 onOpen={toggleDrawer("right", true)}
+                classes={{paperAnchorRight : popUp.paperAnchorRight}}
               >
                 {list("right")}
               </SwipeableDrawer>

@@ -4,6 +4,7 @@ import { Link, Route, Switch } from "react-router-dom";
 import { LandingContext } from "../../Contexts/LandingPageDetailsContext"
 import CategoryGridList from "./CategoryGrid";
 import MultilineTextFields from './CategorySearchBar';
+import { ItemDetailsContext } from '../../Contexts/ItemDetailsContexts';
 import customTheme from '../styling/customTheme';
 // styling 
 import { CheckBoxOutlineBlankOutlined } from "@material-ui/icons";
@@ -12,6 +13,7 @@ import Playground from './CategoryFilterForm'	// styling
 
 
 const CategoryPage = (props) => {
+  const { getProductId } = useContext(ItemDetailsContext);
   const [products, setProducts] = useState([]);
   const { categories } = useContext(	
     LandingContext	
@@ -79,6 +81,7 @@ const CategoryPage = (props) => {
             categoryId={props.categoryId}
             product_name={products.product_name}
             products={products}
+            getProductId={getProductId}
           />
         </div>
       </div>
