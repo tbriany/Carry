@@ -77,7 +77,7 @@ router.post("/add", async (req, res, next) => {
 
 router.patch("/edit/:checkoutCart_id", async (req, res, next) => {
     try {
-        const checkoutCart_id = req.params.checkoutCart_id;
+        const checkoutCart_id = parseInt(req.params.checkoutCart_id)
         const { product_id, size, quantity } = req.body
         const updatedCart = await checkoutQueries.updateCheckoutCart({ product_id, size, quantity, checkoutCart_id });
 
