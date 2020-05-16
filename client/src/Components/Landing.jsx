@@ -41,10 +41,11 @@ const LandingPage = () => {
     <div className={classes.landingPage}>
       <div className={classes.mainContent}>
         <div className={classes.headerContainer}>
-          <h2 className={classes.header}>
+          <h1 className={classes.header}>
             {" "}
             Your favorite brands, delivered by Carry. {" "}
-          </h2>{" "}
+          </h1>{" "}
+          <br></br>
         </div>
         <div className={classes.landingPageRows}>
           <div className="Categories">

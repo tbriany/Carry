@@ -71,19 +71,19 @@ console.log(categories)
   return (
     <div>
       <div>
-        <h3  style={{
+        <h2  style={{
             fontFamily: "Palatino Linotype",
             textAlign: "left",
-            fontSize: "20px",
+            // fontSize: "20px",
             color: customTheme.palette.secondary.dark,
           }}
-        > Shop By Category </h3>
+        > Shop By Category </h2>
       </div>
     <div className={classes.root}>
       <GridList className={classes.gridList} cols={3.5} 
              item xs= {12} sm={6} md= {4} lg={3} xl= {2}
              spacing= {32} 
-             cellHeight = {250}
+             cellHeight = {300}
             >
         {categories.map((tile)  => (
           <GridListTile 
@@ -94,7 +94,7 @@ console.log(categories)
             <img
               src={tile.category_logo}
               alt={tile.title}
-              borderRadius = '50%'
+              style={{height:"310px"}}
             />
             <Link to={`/categories/${tile.category_name}`}>
               <GridListTileBar

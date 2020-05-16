@@ -76,17 +76,17 @@ export default function SingleLineGridListStores() {
     <div>
       <div>
         {" "}
-        <h3
+        <h2
           style={{
             fontFamily: "Palatino Linotype",
             textAlign: "left",
-            fontSize: "20px",
+            // fontSize: "20px",
             color: customTheme.palette.secondary.dark,
           }}
         >
           {" "}
           Popular Stores Near You{" "}
-        </h3>
+        </h2>
       </div>
       <div className={classes.root}>
         <GridList className={classes.gridList} 
