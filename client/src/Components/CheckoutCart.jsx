@@ -19,14 +19,16 @@ const useStyles = makeStyles((theme) => ({
 
 const CheckoutCart = () => {
     const classes = useStyles();
-    const { getCheckout, productId, checkoutCart, productIds,  } = useContext(ItemDetailsContext) //Grab state from context file
+    const { getCheckout, productId, checkoutCart, productIds, } = useContext(ItemDetailsContext) //Grab state from context file
     const [cartTotal, setCartTotal] = useState()
+    const [changeinQty, setchangeinQty]  = useState(false)
 
 
     useEffect(() => {
+        console.log("update")
         getCheckout()
         handleCartTotal()
-    }, [])
+    }, [changeinQty])
 
 
 
@@ -50,15 +52,16 @@ const CheckoutCart = () => {
     }
 
     const handleUpdateQty = async (checkoutId, prodId, prodSize, currQty) => {
-        console.log("checkoutId, prodId, prodSize, currQty", checkoutId, prodId, prodSize, currQty)
-        let updateQty = parseInt(currQty) + 1
+     
         try {
+            changeinQty ?  setchangeinQty(false) :  setchangeinQty(true) 
+            let updateQty = parseInt(currQty) + 1
             await axios.patch(`/checkoutCart/edit/${checkoutId}`, { checkoutCart_id: checkoutId, product_id: prodId, size: prodSize, quantity: updateQty })
 
         } catch (err) {
             console.log("ERROR", err)
         }
-        getCheckout()
+
     }
 
 
@@ -80,14 +83,14 @@ const CheckoutCart = () => {
                                         <Grid container spacing={1}>
                                             <Grid style={{ padding: "0px" }} item xs={4} >
                                                 <Paper
-                                                    style={{display: "flex", justifyContent: "flex-start", flexDirection: "column", alignItems: "center", boxShadow: " 1px 1px 1px white", padding: "0px", marginBottom: "15px", marginTop: "15px"}}
+                                                    style={{ display: "flex", justifyContent: "flex-start", flexDirection: "column", alignItems: "center", boxShadow: " 1px 1px 1px white", padding: "0px", marginBottom: "15px", marginTop: "15px" }}
                                                     className={classes.paper}>
                                                     <img style={{ height: "12vh", margin: "0px" }} src={product.product_image_url} alt={product.product_name} ></img>
                                                 </Paper>
                                             </Grid>
                                             <Grid item xs={8} >
                                                 <Paper
-                                                    style={{display: "flex", justifyContent: "flex-start", flexDirection: "column", alignItems: "flex-start", boxShadow: " 1px 1px 1px white", textAlign: "-webkit-left"}}
+                                                    style={{ display: "flex", justifyContent: "flex-start", flexDirection: "column", alignItems: "flex-start", boxShadow: " 1px 1px 1px white", textAlign: "-webkit-left" }}
                                                     className={classes.paper}>
                                                     <p style={{ margin: "0px", fontSize: "small" }}>{product.product_name}</p>
                                                     <p style={{ margin: "0px", fontSize: "small" }}> Color:{product.color_name}</p>
@@ -99,10 +102,12 @@ const CheckoutCart = () => {
                                                             className="updateQtyInput"
                                                             type="number" placeholder="0"
                                                             min="0" max="100"
-                                                            style={{ border:' 1px solid #eed7c1', padding: '1px'}}
+                                                            style={{ border: ' 1px solid #eed7c1', padding: '1px' }}
                                                             value={product.cartquantity}
                                                             onClick={() => {
-                                                                handleUpdateQty(product.checkoutcart_id, product.product_id, product.size, product.cartquantity)}}>
+                                                                
+                                                                handleUpdateQty(product.checkoutcart_id, product.product_id, product.size, product.cartquantity)
+                                                            }}>
                                                         </input>
                                                     </div>
                                                     <button style={{ display: 'flex', alignSelf: 'flex-end' }} onClick={() => { handleDeleteProduct(product.checkoutcart_id) }}>Delete</button>
@@ -113,14 +118,15 @@ const CheckoutCart = () => {
                                 </Grid>
                                 <Grid item xs={3} >
                                     <Paper
-                                        style={{display: "flex", justifyContent: "flex-start", flexDirection: "column", alignItems: "flex-end", boxShadow: " 1px 1px 1px white", marginBottom: "15px", marginTop: "15px"}}
+                                        style={{ display: "flex", justifyContent: "flex-start", flexDirection: "column", alignItems: "flex-end", boxShadow: " 1px 1px 1px white", marginBottom: "15px", marginTop: "15px" }}
                                         className={classes.paper}>
                                         <p style={{ margin: "0px", fontSize: "small" }} > {product.producttotal} </p>
                                     </Paper>
                                 </Grid>
                             </Grid>
                         </div>
-                    )})}
+                    )
+                })}
                 <div className={classes.root}>
                     <Grid container spacing={1}>
                         <Grid item xs={9} >
