@@ -9,6 +9,8 @@ import List from '@material-ui/core/List';
 import clsx from 'clsx';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import ItemPopUp from '../ItemPopUp'
+import {sidePopUp} from '../styling/sidePopTheme'
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -21,22 +23,6 @@ const useStyles = makeStyles((theme) => ({
     maxHeight: '100%'
   },
 }));
-
-
-const sidePopUp = makeStyles({
-  list: {
-    width:'100%',
-  },
-  fullList: {
-    width: "50%",
-  },
-  paperAnchorRight:{
-    width: "45%",
-    display: 'flex',
-    alignItems: 'center',
-  },
-
-});
 
 
 
