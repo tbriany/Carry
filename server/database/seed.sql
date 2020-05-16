@@ -174,12 +174,11 @@ VALUES ('Ana', 'Gomez', '(347)-555-5551', 'Ana@pursuit.org', '47-10 Austell Pl 2
 INSERT INTO stores
 (store_name, store_logo, avatar_url, phone_number, email, address, city, state, zip_code, password, lat, lng)
 VALUES 
-('PazLifestyle', 'https://cdn.shopify.com/s/files/1/0082/3558/1504/files/Aube1_2_2048x.jpg?v=1583910819','https://cdn.shopify.com/s/files/1/0082/3558/1504/files/pazlogo3_x45@2x.png', '(347)-555-5552', 'info@pazlifestyle.com', 'address', 'city', 'state', 00000, 'lifestyle', 40.312321, -73.12112),
+('PazLifestyle', 'https://cdn.shopify.com/s/files/1/0082/3558/1504/files/Aube1_2_2048x.jpg?v=1583910819','https://cdn.shopify.com/s/files/1/0082/3558/1504/files/pazlogo3_x45@2x.png', '(347)-555-5552', 'info@pazlifestyle.com', '123 Paz Street', 'New York', 'NY', 10031, 'lifestyle', 40.760350, -73.12112),
 
-('Louis Vuitton', 'https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-find-a-store-us-louis-vuitton-denver-cherry-creek-curbside-pickup-only--StFi_Louis_Vuitton_Denver_CherryCreek_DI3_1.jpg', 'https://i.pinimg.com/originals/ce/6d/3e/ce6d3ed43b69df168ca4ce8a5e602759.jpg', '(212)758-8877)', 'cannotfindemail@gmail.com', '1 East 57 St', 'New York', 'NY', 10022, 'Vuitton', 40.760350, -73.975080),
+('Louis Vuitton', 'https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-find-a-store-us-louis-vuitton-denver-cherry-creek-curbside-pickup-only--StFi_Louis_Vuitton_Denver_CherryCreek_DI3_1.jpg', 'https://i.pinimg.com/originals/ce/6d/3e/ce6d3ed43b69df168ca4ce8a5e602759.jpg', '(212)758-8877)', 'cannotfindemail@gmail.com', '1 East 57 St', 'New York', 'NY', 10022, 'Vuitton', 40.760350,
 
-('Prada', 'https://i.pinimg.com/originals/ee/09/6d/ee096de9605daa58fd9c4df25b11fe5b.jpg', 'https://cdn.shopify.com/s/files/1/0049/8489/7625/products/Prada_580x.jpg', '(212)-327-4200', 'client.service.americas@prada.com','841 Madison Avenue', 'New York', 'NY',10021, 'Prada1', 40.770260,
--73.966320),
+('Prada', 'https://i.pinimg.com/originals/ee/09/6d/ee096de9605daa58fd9c4df25b11fe5b.jpg', 'https://cdn.shopify.com/s/files/1/0049/8489/7625/products/Prada_580x.jpg', '(212)-327-4200', 'client.service.americas@prada.com','841 Madison Avenue', 'New York', 'NY',10021, 'Prada1', 40.770260, -73.966320),
 
 ('Chanel', 'https://i2.wp.com/thecurrentdaily.com/wp-content/uploads/2018/02/chanel-storeofthefuture.jpg?fit=1400%2C600&ssl=1', 'https://www.agneseangelini.com/wp-content/uploads/2019/04/coco.jpg', '(212)355-5050', 'email@gmail.com','15 East 57th Street','New York', 'NY', 10022,'Chanel1', 40.762730, -73.972730),
 
@@ -289,45 +288,67 @@ VALUES
 ('Nude');
 
 INSERT INTO products
-(product_name, brand_id, store_id, category_id, product_price, material_id, color_id, product_description, product_type, quantity)
+    (product_name, brand_id, store_id, category_id, product_price, material_id, color_id, product_description, product_type, quantity)
 VALUES 
 ('Milan Leather Backpack', 1, 1, 4, 200.00, 5 , 1, 'Small leather backpack. Made in Peru.', 18, 5), 
-('Milan Mini Backpack', 1, 1, 4, 150.00, 5, 13, 'Mini leather backpack. Made in Peru.', 18, 5);
+('Milan Mini Backpack', 1, 1, 4, 150.00, 5, 13, 'Mini leather backpack. Made in Peru.', 18, 5),
+('Fanny Belt Bag', 1, 1, 4, 295.00, 5, 1, 'Fanny belt bag made for a traveler.', 18, 6),
+('Leather Handbag', 1, 1, 4, 200.00, 5, 9, 'A bag perfect for everything', 18, 7);
 
 
-INSERT INTO sizes 
-(product_id, product_size) 
-VALUES 
-(1, '22cm x 25cm x 10cm'),
-(2, '17cm x 20cm x 9cm');
+INSERT INTO sizes
+    (product_id, product_size)
+VALUES
+    (1, '22cm x 25cm x 10cm'),
+    (2, '17cm x 20cm x 9cm'),
+    (3, '37cm x 64cm'),
+    (4, '37cm x 64cm' );
 
 
 INSERT INTO productImage_id
 (product_id, product_image_url, category_id)
 VALUES
-(1,'https://cdn.shopify.com/s/files/1/0082/3558/1504/products/lima-sagrada-small-backpack-black_606x606_b48c910d-33ac-46ce-aeb0-8bb3f7b73f7f_1296x.jpg', 4), 
-(2,'https://cdn.shopify.com/s/files/1/0082/3558/1504/products/Lima-sagrada-milan-mini-soft-pink-19502_1024x1024_2x_89657b17-5194-4bad-adb6-7f66f686e539_1728x.jpg',4);
+    (1, 'https://cdn.shopify.com/s/files/1/0082/3558/1504/products/lima-sagrada-small-backpack-black_606x606_b48c910d-33ac-46ce-aeb0-8bb3f7b73f7f_1296x.jpg', 4),
+    (2, 'https://cdn.shopify.com/s/files/1/0082/3558/1504/products/Lima-sagrada-milan-mini-soft-pink-19502_1024x1024_2x_89657b17-5194-4bad-adb6-7f66f686e539_1728x.jpg', 4),
+    (3, 'https://cdn.shopify.com/s/files/1/0082/3558/1504/products/lima-sagrada-urban-fanny-pack-front_606x606_2d57ea5f-8afc-4301-a3cf-03bfd70c3fdd_1296x.jpg', 4), 
+    (4, 'https://cdn.shopify.com/s/files/1/0082/3558/1504/products/Lima-sagrada-plastic-bag-brown-19424_1296x.jpg?', 1);
 
 
+-- SELECT *
+-- FROM customers;
+-- SELECT *
+-- FROM stores;
+-- SELECT *
+-- FROM couriers;
+-- SELECT *
+-- FROM categories;
+-- SELECT *
+-- FROM product_type;
+-- SELECT *
+-- FROM materials;
+-- SELECT *
+-- FROM brands;
+-- SELECT *
+-- FROM colors;
+-- SELECT *
+-- FROM products;
+-- SELECT *
+-- FROM sizes;
+-- SELECT *
+-- FROM productImage_id;
+-- SELECT *
+-- FROM orders;
+-- SELECT *
+-- FROM ordersItems;
+-- SELECT *
+-- FROM payment_type;
+-- SELECT *
+-- FROM payment;
+-- SELECT *
+-- FROM bankInfo;
+-- SELECT *
+-- FROM receipts;
+-- SELECT *
+-- FROM checkoutCart;
 
-
-
--- SELECT * FROM customers;
--- SELECT * FROM stores;
--- SELECT * FROM couriers;
--- SELECT * FROM categories;
--- SELECT * FROM product_type;
--- SELECT * FROM materials;
--- SELECT * FROM brands;
--- SELECT * FROM colors;
--- SELECT * FROM products;
--- SELECT * FROM sizes;
--- SELECT * FROM productImage_id;
--- SELECT * FROM orders;
--- SELECT * FROM ordersItems;
--- SELECT * FROM payment_type;
--- SELECT * FROM payment;
--- SELECT * FROM bankInfo;
--- SELECT * FROM receipts;
--- SELECT * FROM checkoutCart;
 
