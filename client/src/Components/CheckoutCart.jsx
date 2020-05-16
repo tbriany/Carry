@@ -21,7 +21,7 @@ const CheckoutCart = () => {
     const classes = useStyles();
     const { getCheckout, productId, checkoutCart, productIds, } = useContext(ItemDetailsContext) //Grab state from context file
     const [cartTotal, setCartTotal] = useState()
-    const [changeinQty, setchangeinQty]  = useState(false)
+    const [changeinQty, setchangeinQty] = useState(false)
 
 
     useEffect(() => {
@@ -50,11 +50,23 @@ const CheckoutCart = () => {
         }
     }
 
-    const handleUpdateQty = async (checkoutId, prodId, prodSize, currQty) => {
-     
+    const handleIncrementQty = async (checkoutId, prodId, prodSize, currQty) => {
+
         try {
-            changeinQty ?  setchangeinQty(false) :  setchangeinQty(true) 
+            changeinQty ? setchangeinQty(false) : setchangeinQty(true)
             let updateQty = parseInt(currQty) + 1
+            await axios.patch(`/checkoutCart/edit/${checkoutId}`, { checkoutCart_id: checkoutId, product_id: prodId, size: prodSize, quantity: updateQty })
+
+        } catch (err) {
+            console.log("ERROR", err)
+        }
+    }
+
+    const handleDecrementQty = async (checkoutId, prodId, prodSize, currQty) => {
+
+        try {
+            changeinQty ? setchangeinQty(false) : setchangeinQty(true)
+            let updateQty = parseInt(currQty) - 1
             await axios.patch(`/checkoutCart/edit/${checkoutId}`, { checkoutCart_id: checkoutId, product_id: prodId, size: prodSize, quantity: updateQty })
 
         } catch (err) {
@@ -95,58 +107,56 @@ const CheckoutCart = () => {
                                                     <p style={{ margin: "0px", fontSize: "small" }}> Color:{product.color_name}</p>
                                                     <p style={{ margin: "0px", fontSize: "small" }}>Size:{product.size}</p>
                                                     <p style={{ margin: "0px", fontSize: "small" }}>Price:${product.product_price}</p>
-                                                    <div>
-                                                        <label htmlFor="updateQtyInput" style={{ marginRight: "6px" }}>QTY:</label>
-                                                        <input
-                                                            className="updateQtyInput"
-                                                            type="number" placeholder="0"
-                                                            min="0" max="100"
-                                                            style={{ border: ' 1px solid #eed7c1', padding: '1px' }}
-                                                            value={product.cartquantity}
+                                                    <div style={{ display: 'flex' }}>
+                                                        <button style={{ display: 'flex', alignSelf: 'flex-end', border: ' 1px solid #eed7c1', borderRadius: '50%', margin: '2px', fontSize: 'small' }}
                                                             onClick={() => {
-                                                                
-                                                                handleUpdateQty(product.checkoutcart_id, product.product_id, product.size, product.cartquantity)
-                                                            }}>
-                                                        </input>
+                                                                handleDecrementQty(product.checkoutcart_id, product.product_id, product.size, product.cartquantity)
+                                                            }} >-</button>
+                                                        <span style={{ marginLeft: '10px', marginRight: '10px', }}>{product.cartquantity} </span>
+                                                        <button style={{ border: ' 1px solid #eed7c1', borderRadius: '50%', margin: '2px', fontSize: 'small' }} 
+                                                        onClick={() => {handleIncrementQty(product.checkoutcart_id, product.product_id, product.size, product.cartquantity)
+                                                        }} >+</button>
                                                     </div>
-                                                    <button style={{ display: 'flex', alignSelf: 'flex-end' }} onClick={() => { handleDeleteProduct(product.checkoutcart_id) }}>Delete</button>
+                                                    <button style={{display: 'flex',     alignSelf: 'flex-end', border: ' 1px solid #eed7c1', borderRadius: '25px'}}
+                                                    onClick={() => { handleDeleteProduct(product.checkoutcart_id) }}>Delete</button>
                                                 </Paper>
-                                            </Grid>
+                                        </Grid>
                                         </Grid>
                                     </Paper>
-                                </Grid>
-                                <Grid item xs={3} >
-                                    <Paper
-                                        style={{ display: "flex", justifyContent: "flex-start", flexDirection: "column", alignItems: "flex-end", boxShadow: " 1px 1px 1px white", marginBottom: "15px", marginTop: "15px" }}
-                                        className={classes.paper}>
-                                        <p style={{ margin: "0px", fontSize: "small" }} > {product.producttotal} </p>
-                                    </Paper>
-                                </Grid>
+                            </Grid>
+                            <Grid item xs={3} >
+                                <Paper
+                                    style={{ display: "flex", justifyContent: "flex-start", flexDirection: "column", alignItems: "flex-end", boxShadow: " 1px 1px 1px white", marginBottom: "15px", marginTop: "15px" }}
+                                    className={classes.paper}>
+                                    <p style={{ margin: "0px", fontSize: "small" }} > ${product.producttotal} </p>
+                                </Paper>
+                            </Grid>
                             </Grid>
                         </div>
-                    )
+            )
                 })}
                 <div className={classes.root}>
-                    <Grid container spacing={1}>
-                        <Grid item xs={9} >
-                            <Paper
-                                style={{ display: "flex", justifyContent: "flex-start", flexDirection: "column", alignItems: "flex-start", boxShadow: " 1px 1px 1px white", marginBottom: "15px", marginTop: "15px" }}
-                                className={classes.paper}
-                            > Total:
+                <Grid container spacing={1}>
+                    <Grid item xs={9} >
+                        <Paper
+                            style={{ display: "flex", justifyContent: "flex-start", flexDirection: "column", alignItems: "flex-start", boxShadow: " 1px 1px 1px white", marginBottom: "15px", marginTop: "15px" }}
+                            className={classes.paper}
+                        > Total:
                              </Paper>
-                        </Grid>
-                        <Grid item xs={3} >
-                            <Paper
-                                style={{ display: "flex", justifyContent: "flex-start", flexDirection: "column", alignItems: "flex-end", boxShadow: " 1px 1px 1px white", marginBottom: "15px", marginTop: "15px" }}
-                                className={classes.paper}
-                            >
-                                <p style={{ margin: "0px", fontSize: "small" }} > ${cartTotal} </p>
-                            </Paper>
-                        </Grid>
                     </Grid>
-                </div>
-            </div>) : (<div></div>)}
-        </div>
+                    <Grid item xs={3} >
+                        <Paper
+                            style={{ display: "flex", justifyContent: "flex-start", flexDirection: "column", alignItems: "flex-end", boxShadow: " 1px 1px 1px white", marginBottom: "15px", marginTop: "15px" }}
+                            className={classes.paper}
+                        >
+                            <p style={{ margin: "0px", fontSize: "small" }} > ${cartTotal} </p>
+                        </Paper>
+                    </Grid>
+                </Grid>
+            </div>
+        </div>) : (<div></div>)
+}
+        </div >
     )
 }
 
