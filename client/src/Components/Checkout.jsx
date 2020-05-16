@@ -54,20 +54,24 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 const steps = ['Delivery address', 'Payment method', 'Delivery Terms'];
-const getStepComponent = (step) => {
+const getStepComponent = (step, props)  => {
     switch (step) {
         case 0:
             return <AddressForm />
         case 1:
             return <PaymentForm />
         case 2:
-            return <Review />
+            return <Review  
+            getShipping={props.getShipping}
+            shippingOption={props.shippingOption}
+           
+            />
         default:
             return <PlaceOrder />
     }
 };
 //getStepComponent takes in a step from the activeStep state and based on it's value, displays a certain component
-const Checkout = () => {
+const Checkout = (props) => {
     // const { logUserOut, setCustomerContext, isLoggedIn, customerId, customerFirstname, customerLastname, customerPhoneNumber, customerEmail, customerAddress, customerCity, customerState, customerZip, customerAvatar } = useContext(CustomerContext);
     // contextObj = {
     //     logUserOut, setCustomerContext, isLoggedIn, customerId, customerFirstname, customerLastname, customerPhoneNumber, customerEmail, customerAddress, customerCity, customerState, customerZip, customerAvatar
@@ -92,13 +96,14 @@ const Checkout = () => {
                         <Step key={steps[1]}>
                             <StepLabel>{steps[1]}</StepLabel>
                         </Step>
-                        <Step key={steps[2]}>
+                        <Step key={steps[2]} 
+                         >
                             <StepLabel color={customTheme.palette.secondary.main}>{steps[2]}</StepLabel>
                         </Step>
                     </Stepper>
                     {/* creates Stepper Component that holds Step & StepLabel components, each with their value being a certain index from the steps global array */}
                     <Container className="formContainer">
-                        {getStepComponent(activeStep)}
+                        {getStepComponent(activeStep, props)}
                     </Container>
                     <div className={classes.buttons}>
                         {activeStep !== 0 && (

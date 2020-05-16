@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
 
 const CheckoutCart = () => {
     const classes = useStyles();
-    const { getCheckout, productId, checkoutCart, productIds, } = useContext(ItemDetailsContext) //Grab state from context file
+    const { getCheckout, productId, checkoutCart, productIds, shippingOption } = useContext(ItemDetailsContext) //Grab state from context file
     const [cartTotal, setCartTotal] = useState()
     const [changeinQty, setchangeinQty] = useState(false)
 
@@ -44,7 +44,9 @@ const CheckoutCart = () => {
     const handleCartTotal = async () => {
         try {
             let total = await axios.get(`/checkoutCart/checkoutTotal`)
-            setCartTotal(total.data.payload.checkouttotal)
+            let checkoutTotal = total.data.payload.checkouttotal
+            let cartTotal = parseInt(checkoutTotal) +  parseInt(shippingOption)
+            setCartTotal(cartTotal)
         } catch (err) {
             console.log("ERROR", err)
         }
@@ -136,6 +138,39 @@ const CheckoutCart = () => {
                         </div>
                     )
                 })}
+
+
+
+                <div className={classes.root}>
+                    <Grid container spacing={1}>
+                        <Grid item xs={9} >
+                            <Paper
+                                style={{ display: "flex", justifyContent: "flex-start", flexDirection: "column", alignItems: "flex-start", boxShadow: " 1px 1px 1px white", marginBottom: "15px", marginTop: "15px" }}
+                                className={classes.paper}
+                            > Shipping:
+                             </Paper>
+                        </Grid>
+                        <Grid item xs={3} >
+                            <Paper
+                                style={{ display: "flex", justifyContent: "flex-start", flexDirection: "column", alignItems: "flex-end", boxShadow: " 1px 1px 1px white", marginBottom: "15px", marginTop: "15px" }}
+                                className={classes.paper}
+                            >
+                                <p style={{ margin: "0px", fontSize: "small" }} > ${shippingOption} </p>
+                            </Paper>
+                        </Grid>
+                    </Grid>
+                </div>
+
+
+
+
+
+
+
+
+
+
+
                 <div className={classes.root}>
                     <Grid container spacing={1}>
                         <Grid item xs={9} >
