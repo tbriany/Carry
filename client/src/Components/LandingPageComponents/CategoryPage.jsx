@@ -69,10 +69,11 @@ const CategoryPage = (props) => {
 
       <div className="Content">
       <div className ='sidebar'
-      style={{margin:'25px'}}>
-      <CheckboxesTags/>
+      style={{margin:'25px', float: 'left'}}>
+      <CheckboxesTags
+      products ={products}/>
       </div>
-        <div >
+        <div style ={{marginLeft: '20px', float:'right'}}>
           <CategoryGridList
             categoryId={props.categoryId}
             product_name={products.product_name}
