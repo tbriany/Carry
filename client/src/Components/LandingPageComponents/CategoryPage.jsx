@@ -1,14 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { Link, Route, Switch } from "react-router-dom";
+import { LandingContext } from "../../Contexts/LandingPageDetailsContext"
 import CategoryGridList from "./CategoryGrid";
-import MultilineTextFields from './CategorySearchBar';
-import customTheme from '../styling/customTheme';
 // styling 
+import MultilineTextFields from './CategorySearchBar';
+import CheckboxesTags from '../LandingPageComponents/CategoryFilterBar'
+import customTheme from "../styling/customTheme";
 import { CheckBoxOutlineBlankOutlined } from "@material-ui/icons";
 
 const CategoryPage = (props) => {
   const [products, setProducts] = useState([]);
+  const { categories } = useContext(
+    LandingContext
+  );
+  console.log('category Page categories' , categories)
 
   // Ask team was unable to store category_id using hooks.
   // const [category_id, setCategory_id] =useState(0)
@@ -36,11 +42,22 @@ const CategoryPage = (props) => {
   console.log("products on Category Page", products);
   return (
     <div className="CategoryPage">
-      <div style ={{ display: 'flex', justifyContent: 'space-evenly'}}>
+      <div className='CategoryNav'
+      style ={{marginTop: '20px', display:'flex', justifyContent:'space-evenly', marginLeft:'20px', marginRight:'30px'}}>
+      {categories.map((value) => ( <Link to = {`/categories/${value.category_name}`} 
+      
+      style ={{textDecoration:'none', color: '#CD853F', active:'#FAEBD7'}}
+      
+      > {value.category_name} </Link>
+ ))} 
+        
+      </div>
+      <div style ={{ display: 'flex', justifyContent: 'space-between'}}>
         <h1 style={{
             fontFamily: "Palatino Linotype",
             textAlign: "left",
             color: customTheme.palette.secondary.dark,
+            marginLeft: '25px'
           }}>{category_name}</h1>
         <div className="SearchBar">
           {" "}
@@ -48,9 +65,14 @@ const CategoryPage = (props) => {
           {" "}
         </div>
       </div>
+     
 
       <div className="Content">
-        <div>
+      <div className ='sidebar'
+      style={{margin:'25px'}}>
+      <CheckboxesTags/>
+      </div>
+        <div >
           <CategoryGridList
             categoryId={props.categoryId}
             product_name={products.product_name}

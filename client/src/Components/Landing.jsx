@@ -4,11 +4,7 @@ import { landingStyles } from './styling/landingStyles';
 import SingleLineGridListStores from "./LandingPageComponents/PopularStores.jsx";
 import SingleLineGridListItems from "./LandingPageComponents/GeneralStores";
 import Categories from "./LandingPageComponents/LandingPagecategories";
-<<<<<<< HEAD
-import ProductsPage from "./ProductPage/productsPage";
-=======
 // import ProductsPage from "./ProductPage/productsPage";
->>>>>>> 24866dd40d6d999cbbdf948ac39bbe31459a18b3
 
 const LandingPage = () => {
   const classes = landingStyles();
