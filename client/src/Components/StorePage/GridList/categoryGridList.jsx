@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function CategoriesGridList({listTitle, storeId}) {
+export default function CategoriesGridList({storeId}) {
   const classes = useStyles();
 
   const [categories, setCategories] = useState([])
@@ -63,15 +63,23 @@ export default function CategoriesGridList({listTitle, storeId}) {
   // console.log(categories)
 
   return (
-    <div className={classes.root} style={{ margin: "20px", padding: "15px" }}>
-      <Typography variant='h4' display='block' paragraph='true'>
-        {listTitle}
-      </Typography>
-      <GridList className={classes.gridList} cols={4} cellHeight={300} spacing={10}>
+    <div className={classes.root} style={{ margin: "20px", padding: "15px"}}>
+      <div> 
+       <h2
+              style={{
+                fontFamily: "Palatino Linotype",
+                textAlign: "left",
+                color: "black",
+              }}
+            >
+              Browse Categories
+            </h2>
+    </div>
+      <GridList className={classes.gridList} cols={3} cellHeight={350} spacing={13} >
         {categories.map((tile) => (
           <GridListTile key={tile.img}>
             <Link to={`/store/${storeId}/${tile.category_name}`}>
-              <img src={tile.category_logo} alt={tile.category_logo} />
+              <img src={tile.category_logo} alt={tile.category_logo} style={{ width: '100%' , height: '100%'}}/>
               <span className={classes.imageButton}>
                 <Typography
                   component="span"

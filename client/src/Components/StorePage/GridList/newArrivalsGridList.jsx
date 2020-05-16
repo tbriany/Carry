@@ -56,7 +56,7 @@ const sidePopUp = makeStyles({
     },
 });
 
-export default function NewArrivalsGridList({ listTitle, storeId , getProductId}) {
+export default function NewArrivalsGridList({ storeId, getProductId }) {
     const classes = useStyles();
 
     const [newArrivals, setNewArrivals] = useState([])
@@ -116,17 +116,23 @@ export default function NewArrivalsGridList({ listTitle, storeId , getProductId}
 
     return (
         <div className={classes.root} style={{ margin: "20px", padding: "15px" }}>
-            <Typography variant='h4' display='block' paragraph='true'>
-                {listTitle}
-            </Typography>
+            <h2
+                style={{
+                    fontFamily: "Palatino Linotype",
+                    textAlign: "left",
+                    color: "black",
+                }}
+            >
+                New Arrivals
+            </h2>
             <GridList className={classes.gridList} cols={4} cellHeight={300} spacing={10}>
                 {newArrivals.map((tile) => (
                     <GridListTile key={tile.img}>
-                     <Button onClick={toggleDrawer("right", true, tile.product_id)}>
+                        <Button onClick={toggleDrawer("right", true, tile.product_id)}>
                             <Box display="flex" justifyContent="center">
-                                <img src={tile.product_image_url} alt={tile.product_name} 
-                                style={{ width: '100%' , height: '310px'}}
-                                 />
+                                <img src={tile.product_image_url} alt={tile.product_name}
+                                    style={{ width: '100%', height: '310px' }}
+                                />
                                 <span className={classes.imageButton}>
                                     <Typography
                                         component="span"
@@ -138,7 +144,7 @@ export default function NewArrivalsGridList({ listTitle, storeId , getProductId}
                                     </Typography>
                                 </span>
                             </Box>
-                            </Button>
+                        </Button>
                     </GridListTile>
                 ))}
                 <SwipeableDrawer
