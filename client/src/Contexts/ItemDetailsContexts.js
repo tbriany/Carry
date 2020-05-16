@@ -12,6 +12,7 @@ const ItemDetailsContextProvider = (props) => {
     const [totalProductQty, setTotalProductQty] = useState(0); //Total of Product Qty from the itempopup page
     const [productSize, setProductSize] = useState('default');
     const [checkoutCart, setCheckoutCart] = useState([]);
+    const [shippingOption, setShippingOption] = useState(15)
 
     const updateProductQty = (newQty) => {
         setProductQty(newQty)
@@ -24,7 +25,9 @@ const ItemDetailsContextProvider = (props) => {
     const getProductId = (newProdId) => {
         setProductId(newProdId)
     };
-
+    const getShipping = (option) =>{
+        setShippingOption(option)
+    }
 
     useEffect(() => {
         getCheckout();
@@ -67,7 +70,7 @@ const ItemDetailsContextProvider = (props) => {
     }
 
 
-    const handleUpdateQuantity = async (checkoutId, currProductId, currSize, updatedQty) => {
+    const handleUpdateQuantity = async (shippingOption, getShipping, checkoutId, currProductId, currSize, updatedQty) => {
         try {
             await axios.patch(`/checkoutCart/edit/${checkoutId}`, { checkoutCart_id: checkoutId, product_id: currProductId, size: currSize, quantity: updatedQty })
         } catch (err) {
@@ -77,7 +80,7 @@ const ItemDetailsContextProvider = (props) => {
 
     return (
         // Provider accepts a value containting state and functions. This allows the components access to the state but it must be descendants of the provider.
-        <ItemDetailsContext.Provider value={{ getProductId, getCheckout, updateProductQty, checkoutCart, productId, productIds, productQty, totalProductQty, getProductSize, productSize, addToCart }}>
+        <ItemDetailsContext.Provider value={{ shippingOption, getShipping, getProductId, getCheckout, updateProductQty, checkoutCart, productId, productIds, productQty, totalProductQty, getProductSize, productSize, addToCart }}>
             {props.children}
         </ItemDetailsContext.Provider>
     );
