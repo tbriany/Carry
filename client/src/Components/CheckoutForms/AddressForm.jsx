@@ -1,7 +1,9 @@
 import React, { useState, Fragment, useContext } from 'react';
 import { TextField } from '@material-ui/core';
+import { checkoutFormStyles } from '../styling/checkoutFormStyles'
 
 const AddressForm = () => {
+    const classes = checkoutFormStyles();
     const customerObj = {
         title: 'Miss.',
         firstName: 'Audrey',
@@ -20,10 +22,29 @@ const AddressForm = () => {
     console.log(customerObj)
     return (
         <Fragment>
-            <TextField required variant='standard' label='Address Line 1' value={customerObj.address}></TextField><br />
-            <TextField variant='standard' label='Address Line 2' value={customerObj.address2}></TextField><br />
-            <TextField required variant='standard' label='City' value={customerObj.city} ></TextField><br />
-            <TextField required variant='standard' label='Zip Code' value={customerObj.zipCode}></TextField>
+            <TextField
+                required
+                variant='standard'
+                label='Address Line 1'
+                value={customerObj.address}
+                className={classes.textField}></TextField><br />
+            <TextField
+                variant='standard'
+                label='Address Line 2'
+                value={customerObj.address2}
+                className={classes.textField}></TextField><br />
+            <TextField
+                required
+                variant='standard'
+                label='City'
+                value={customerObj.city}
+                className={classes.textField}></TextField><br />
+            <TextField
+                required
+                variant='standard'
+                label='Zip Code'
+                value={customerObj.zipCode}
+                className={classes.textField}></TextField>
         </Fragment>
     )
 };
