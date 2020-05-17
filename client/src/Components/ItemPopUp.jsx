@@ -18,12 +18,16 @@ function ItemPopUp() {
 
     const { updateCurrQty, updateProductQty, checkoutCart, addToCart, producstSize, productId, productQty, addItemToBag, productSize, getProductSize } = useContext(ItemDetailsContext);
     const [itemInfo, setItemInfo] = useState({}) //Recieves all of the product info
+    const [allSizes, setAllSizes] = useState([])
 
     const handleItemInfo = async () => {
         try {
             const productInfo = await axios.get(`/products/${productId}`)
             let productInfoPayload = productInfo.data.payload
             setItemInfo(productInfoPayload)
+            setAllSizes(productInfoPayload.product_size)
+
+
         } catch (err) {
             console.log("ERROR", err)
         }
@@ -32,8 +36,10 @@ function ItemPopUp() {
     useEffect(() => {
         if (productId !== 0) {
             handleItemInfo();
+
         }
     }, [productId])
+
 
 
     return (
@@ -56,8 +62,7 @@ function ItemPopUp() {
                             padding: '2px 2px 30px',
                         }}>
                         <Paper className={classes.paper}
-                            style={{ color: "black", boxShadow: " 1px 1px 1px white", justifyContent: 'center', display: 'grid'
-                            }}>
+                            style={{ color: "black", boxShadow: " 1px 1px 1px white", justifyContent: 'center', display: 'grid' }}>
                             <p className="item-name">{itemInfo.brand_name}'s </p>
                             <p className="item-name">{itemInfo.product_name}</p>
                             <p className="item-price">${itemInfo.product_price}</p>
@@ -66,16 +71,12 @@ function ItemPopUp() {
                     </Grid>
 
                     <Grid item xs={9}>
-                        <Paper className={classes.paper}
-                            style={{ boxShadow: " 1px 1px 1px white", padding: '2px'
-                            }}>
+                        <Paper className={classes.paper} style={{ boxShadow: " 1px 1px 1px white", padding: '2px' }}>
 
                             <FormControl className={classes.margin}>
                                 <InputLabel htmlFor="demo-customized-select-native">Size</InputLabel>
                                 <NativeSelect
-                                    style={{
-                                        backgroundColor: "#eed7c1",
-                                    }}
+                                    style={{ backgroundColor: "#eed7c1", }}
                                     id="demo-customized-select-native"
                                     value={productSize}
                                     onChange={e => {
@@ -83,8 +84,13 @@ function ItemPopUp() {
                                     }}
                                     input={<BootstrapInput />}
                                 >
-                                    <option value="default" autoFocus disabled>Choose a size</option>
-                                    <option value={itemInfo.product_size} >{itemInfo.product_size} </option>
+                                  <option value="default" autoFocus disabled>Choose a size</option> 
+                                    {allSizes.map(function (size, i) {
+                                        return (
+                                            <option value={size} >{size} </option>
+                                        )
+                                    })}
+
                                 </NativeSelect>
                             </FormControl>
 
@@ -99,7 +105,8 @@ function ItemPopUp() {
                             </input>
                             <br></br>
                             <Button
-                                style={{ margin: "10px", borderRadius: 35, backgroundColor: "#eed7c1", padding: "10px 24px", fontSize: "14px",
+                                style={{
+                                    margin: "10px", borderRadius: 35, backgroundColor: "#eed7c1", padding: "10px 24px", fontSize: "14px",
                                 }}
                                 variant="contained"
                                 className="ItemInputSubmit" type="submit" value="ADD TO BAG"
@@ -125,6 +132,7 @@ function ItemPopUp() {
                                             Materials: {itemInfo.material_name}
                                             <br></br>
                                             Description: {itemInfo.product_description}
+
                                         </Typography>
                                     </ExpansionPanelDetails>
 
