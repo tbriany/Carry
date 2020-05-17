@@ -263,12 +263,16 @@ VALUES
 ('Hemp'),
 ('Suede'),
 ('Leather'),
-('Polyester');
+('Polyester'), 
+('Wool'), 
+('Alpaca');
 
 INSERT INTO brands
 (brand_name, brand_description)
 VALUES 
-('Lima Sagrada', 'Lima Sagrada is the name of a project that gives shape to raw materials such as leather in its most basic pure form, resulting in a modern and contemporary design founded by Vanessa Vila. Vanessa Vila is an architect, art director, and a stylist in Lima, Peru.');
+('Lima Sagrada', 'Lima Sagrada is the name of a project that gives shape to raw materials such as leather in its most basic pure form, resulting in a modern and contemporary design founded by Vanessa Vila. Vanessa Vila is an architect, art director, and a stylist in Lima, Peru.'), 
+('Aynx', 'A brand created out of a common love for high-quality products, nature''s finest materials, and strong economic and environmental engagement. '),
+('Nutu', 'A regenerative business based on sustainable agroforestry.');
 
 INSERT INTO colors
 (color_name)
@@ -285,15 +289,40 @@ VALUES
 ('Orange'),
 ('Blue'),
 ('Pink'), 
-('Nude');
+('Nude'), 
+('Ivory');
 
 INSERT INTO products
     (product_name, brand_id, store_id, category_id, product_price, material_id, color_id, product_description, product_type, quantity)
 VALUES 
-('Milan Leather Backpack', 1, 1, 4, 200.00, 5 , 1, 'Small leather backpack. Made in Peru.', 18, 5), 
+('Milan Leather Backpack', 1, 1, 4, 200.00, 5 , 1, 'Small leather backpack. Made in Peru.', 18, 5),
+
 ('Milan Mini Backpack', 1, 1, 4, 150.00, 5, 13, 'Mini leather backpack. Made in Peru.', 18, 5),
+
 ('Fanny Belt Bag', 1, 1, 4, 295.00, 5, 1, 'Fanny belt bag made for a traveler.', 18, 6),
-('Leather Handbag', 1, 1, 4, 200.00, 5, 9, 'A bag perfect for everything', 18, 7);
+
+('Leather Handbag', 1, 1, 4, 200.00, 5, 9, 'A bag perfect for everything', 18, 7),
+
+('Joaquina Top', 2, 1 , 1 , 225.00, 7, 4, 'High neck with ribbon neck detail, ideal to wear with jeans and skirts for a sophisticated but casual look', 9, 10),
+
+('Zena Top', 2, 1 , 1, 265.00, 8, 7, 'Hand-loomed long sleeve asymmetrical sweater knit', 9, 9),
+
+('Onyx Dress', 2, 1, 1, 300.00, 8, 4, 'A perfect classic go-to dress for the transitional weather', 3, 10), 
+
+('Moringa Face Oil', 3, 1, 3, 32.95, 1, 1, 'Reduces visible signs of aging, acne scars, psoriasis, and eczema', 13, 4 ),
+
+('Moringa Rose Cream', 3, 1, 3, 39.95, 1, 1, 'This formula offers rich hydration and intensive skin regeneration', 13, 4), 
+
+('Roama Skirt', 2, 1, 1, 130.00, 8, 14, 'Classic go-to pencil mid-length skirt with double slits', 5, 5 ), 
+
+('Bucket Bag', null, 3, 4, 2000.00, 5, 1, 'Bucket bag with large woven motif', 18, 7), 
+
+('Light Sable Printed Dress', null, 3, 1, 3300.00, 6, 11, 'Light sable printed dress with collar.', 3, 3 ), 
+
+('Pascua Skirt', 2, 1,1, 280.00, 8, 1, 'Long skirt, double slit, hand-loom Alpaca skirt.', 5, 5);
+
+
+
 
 
 INSERT INTO sizes
@@ -302,7 +331,15 @@ VALUES
     (1, '22cm x 25cm x 10cm'),
     (2, '17cm x 20cm x 9cm'),
     (3, '37cm x 64cm'),
-    (4, '37cm x 64cm' );
+    (4, '37cm x 64cm' ), 
+    (5, 'Medium'),
+    (6, 'Small'),
+    (7, 'Small'), 
+    (10, 'Medium'), 
+    (11, '23cm x 14cm x 17.5'), 
+    (11, 'Medium'), 
+    (12, 'Small'),
+    (13, 'Medium');
 
 
 INSERT INTO productImage_id
@@ -311,7 +348,23 @@ VALUES
     (1, 'https://cdn.shopify.com/s/files/1/0082/3558/1504/products/lima-sagrada-small-backpack-black_606x606_b48c910d-33ac-46ce-aeb0-8bb3f7b73f7f_1296x.jpg', 4),
     (2, 'https://cdn.shopify.com/s/files/1/0082/3558/1504/products/Lima-sagrada-milan-mini-soft-pink-19502_1024x1024_2x_89657b17-5194-4bad-adb6-7f66f686e539_1728x.jpg', 4),
     (3, 'https://cdn.shopify.com/s/files/1/0082/3558/1504/products/lima-sagrada-urban-fanny-pack-front_606x606_2d57ea5f-8afc-4301-a3cf-03bfd70c3fdd_1296x.jpg', 4), 
-    (4, 'https://cdn.shopify.com/s/files/1/0082/3558/1504/products/Lima-sagrada-plastic-bag-brown-19424_1296x.jpg?', 1);
+    (4, 'https://cdn.shopify.com/s/files/1/0082/3558/1504/products/Lima-sagrada-plastic-bag-brown-19424_1296x.jpg?', 4), 
+    (5, 'https://cdn.shopify.com/s/files/1/0082/3558/1504/products/JOAQUINA-TOP_-NOAH-PANT_FRONT_1_2_720x.jpg', 1), 
+    (6,'https://cdn.shopify.com/s/files/1/0082/3558/1504/products/ZENA-SWEATER_LEE-SKIRT_FRONT_1_1_1080x.jpg?', 1 ), 
+    (7, 'https://cdn.shopify.com/s/files/1/0082/3558/1504/products/AYNI_FALL_WAINTER_1713299_-_ONYX_900x.jpg?v=1585956025', 1), 
+
+    (8, 'https://cdn.shopify.com/s/files/1/0082/3558/1504/products/IMG_5934-Edit_copy_8e3b2ce4-5c6e-4a04-b910-d3c69e728b3b_1296x.jpg', 3), 
+
+    (9, 'https://cdn.shopify.com/s/files/1/0082/3558/1504/products/IMG_7209-Edit_1296x.jpg', 3), 
+
+    (10, 'https://cdn.shopify.com/s/files/1/0082/3558/1504/products/ROAMA_SKIRT_460x.jpg?v=1585956029', 1), 
+
+    (11, 'https://www.prada.com/content/dam/prada_products/1/1BE/1BE049/2DI4F0002/1BE049_2DI4_F0002_V_OOO_SLR.png/_jcr_content/renditions/cq5dam.web.white.2560x2560.jpeg', 4), 
+
+    (12, 'https://www.prada.com/content/dam/prada_products/P/P3A/P3A78/1WWSF0216/P3A78_1WWS_F0216_S_201_MDF.png/_jcr_content/renditions/cq5dam.web.white.2560x2560.jpeg', 1), 
+
+    (13, 'https://cdn.shopify.com/s/files/1/0082/3558/1504/products/MEJIA_TOP_PASCUA_PANT_FRONT_540x.jpg?v=1585956028', 1);
+
 
 
 -- SELECT *
