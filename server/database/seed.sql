@@ -209,7 +209,8 @@ INSERT INTO categories
 VALUES 
 ('Women''s', 'https://imageproxy.viewbook.com/80941/b3458b281396eddd7ea1370e84434090_hd.jpg','https://www.voguehk.com/media/2019/10/00001PFW_DAY7_Vogueint_30sep19_credit_Jonathan-Daniel-Pryce_23-1280x853.jpg'), 
 ('Men''s','https://thumbs.dreamstime.com/b/fashion-man-men-sketches-white-background-autumn-127439059.jpg', 'https://content.api.news/v3/images/bin/f5e805f5912487f926d29b853ff76709'), 
-('Beauty','https://cdn.shopify.com/s/files/1/0580/0721/articles/iStock-1170104811_95fed370-9e0c-4fd8-a668-8d7e806c8f05_grande.jpg', 'https://edited.beautybay.com/wp-content/uploads/2019/04/edited_april19_revolution_skincare_landscape.jpg'), 
+-- ('Beauty','https://cdn.shopify.com/s/files/1/0580/0721/articles/iStock-1170104811_95fed370-9e0c-4fd8-a668-8d7e806c8f05_grande.jpg', 'https://edited.beautybay.com/wp-content/uploads/2019/04/edited_april19_revolution_skincare_landscape.jpg'), 
+('Beauty','https://cdn.shopify.com/s/files/1/0580/0721/articles/iStock-1170104811_95fed370-9e0c-4fd8-a668-8d7e806c8f05_grande.jpg', 'https://s3.ap-south-1.amazonaws.com/hsdreams1/pins/2019/04/big/2865c49675193db171dfa50162fbb4f1.jpeg'), 
 ('Accessories', 'https://www.thestatesman.com/wp-content/uploads/2017/12/accessories.jpg','https://cdn.shopify.com/s/files/1/0298/0353/products/0_c278b29e-51ba-42b3-a300-c8c87b32ac86_1024x1024.jpg?v=1571317845'),
 ('Home Decor', 'https://cb2.scene7.com/is/image/CB2/122919_m_super_decor_accessories?wid=670&qlt=65', 'https://guinwa.com/wp-content/uploads/2019/01/Screen-Shot-2019-01-29-at-11.15.35-AM-1160x770.png'),
 ('Kids', 'https://image.cnbcfm.com/api/v1/image/106032900-1563825608021rockets.jpg?v=1563825858&w=678&h=381','https://cdn.shopify.com/s/files/1/0053/7113/4055/articles/Susukoshi-gender-neutral-baby-clothes-babydonkie_1600x.jpg?v=1558919508');
@@ -226,33 +227,33 @@ VALUES
 (1, 'Shorts', 'https://target.scene7.com/is/image/Target/GUEST_cabe96d5-3340-408b-a70c-756f24c6eaa5?hei=300&qlt=80&fmt=pjpeg'),
 (1, 'Shirts & Blouses', 'https://images.takeluckhome.com/images/392x588/201611/J/women-s-summer-blouses-v-neck-cuffed-sleeve-blouse-shirts-tops_1479382392925.jpg'),
 (1, 'Jeans', 'https://i.insider.com/5dcd5e913afd371aa87d4ce5?width=500&format=jpeg&auto=webp'),
--- (1, 'Swimwear', 'https://www.wigglestatic.com/product-media/104427157/Nike-Women-s-Hydrastrong-Solid-Fastback-One-Piece-Swims-One-Piece-Swimsuits-Midnight-Navy-SS20.jpg'),
--- (1, 'Hoodies & Sweatshirts', 'https://www.gelsonoma.com/images/large/products/Asics%20Womens%20Hoodies%20-%20Select%20Asics%20Sweat%20Full%20Zip%20Hoodie%20Womens%20Clothing%20-%20Stone%20Grey%20Heather%20Asics%20Hoodies%20Womens%20S87a3417_LRG.jpg'),
--- (1, 'Sportswear', 'https://cdn.shopify.com/s/files/1/2664/1900/products/MFSpiriSW0017_9_413x@3x.progressive.jpg'),
-(2, 'Tops', 'https://img.xshoppy.shop/uploader/3bbc549867aaf0181b24acd39ff77f4432dc91bf.jpg'),
+(1, 'Swimwear', 'https://images-na.ssl-images-amazon.com/images/I/51aBQQcqxrL._AC_UX385_.jpg'),
+(1, 'Hoodies & Sweatshirts', 'https://i.pinimg.com/originals/76/60/43/766043b32e2d7b8845571625be402e27.jpg'),
+(1, 'Sportswear', 'https://lh3.googleusercontent.com/proxy/5cMe6sI2UZoqwT259QbiOk-fHhJ0mCj9cTBLrCiB375YXoomU0xkSDSExvxqodMegFZqFJKOBQkaN3IUQt7zoLYcvVajvFJmO3lbzBLWMDBjyuNBz1MF9oevGoecvIuM2n0wy-Qr3Q'),
+(2, 'Tops', 'https://slimages.macysassets.com/is/image/MCY/products/1/optimized/9220501_fpx.tif?op_sharpen=1&wid=500&hei=613&fit=fit,1&$filtersm$'),
 (2, 'Pants', 'https://images.timberland.com/is/image/timberland/A1OF4590-HERO?$PDP-FULL-IMAGE$'),
 (2, 'Jackets & Coats', 'https://dtpmhvbsmffsz.cloudfront.net/posts/2017/05/23/592446f5b4188ec1d9003e58/m_592446f5b4188ec1d9003e59.jpg'),
--- (2, 'Shorts', 'https://www.toadandco.com/product_images/T2312912-Iron%20Throne%20Vintage%20Wash-1-P-10in.jpg?resizeid=3&resizeh=900&resizew=1800'),
--- (2, 'Shirts', 'https://d4zpg1jklewne.cloudfront.net/steak/spree-variant/black-buttondown-3/mens-classic-button-down-shirt-in-black-product.jpg?1546446855'),
--- (2, 'Jeans', 'https://d4zpg1jklewne.cloudfront.net/steak/spree-variant/sks-006-lbl-3-1-1549923414810/mens-skinny-slim-jeans-in-light-wash-product.jpg?1549923415'),
--- (2, 'Swimwear', 'https://images-na.ssl-images-amazon.com/images/I/51OsObwjDiL._AC_UX679_.jpg'),
--- (2, 'Hoodies & Sweatshirts', 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSZRABcw2haYLPOAC13jA2JG8zISyU1ya3dfaeInOUkmRiL6LXR&usqp=CAU'),
+(2, 'Shorts', 'https://images.nike.com/is/image/DotCom/BV2770_293?$NIKE_PWP_GRAY$&wid=420&hei=420'),
+(2, 'Shirts', 'https://slimages.macysassets.com/is/image/MCY/products/6/optimized/9591496_fpx.tif?op_sharpen=1&wid=500&hei=613&fit=fit,1&$filtersm$'),
+(2, 'Jeans', 'https://target.scene7.com/is/image/Target/GUEST_9129f49e-9e2a-4d43-b5da-cb990507b177?wid=488&hei=488&fmt=pjpeg'),
+(2, 'Swimwear', 'https://slimages.macysassets.com/is/image/MCY/products/9/optimized/2740499_fpx.tif?op_sharpen=1&wid=500&hei=613&fit=fit,1&$filtersm$'),
+(2, 'Hoodies & Sweatshirts', 'https://ak1.ostkcdn.com/images/products/is/images/direct/55809b1df3bf7dc47a53e0c8b52e0776b0e09532/Under-Armour-Mens-Sweater-Black-Size-XL-Textured-Pullover-Hooded.jpg?imwidth=400&impolicy=medium'),
 (2, 'Sportswear', 'https://slimages.macysassets.com/is/image/MCY/products/8/optimized/15655508_fpx.tif?op_sharpen=1&wid=500&hei=613&fit=fit,1&$filtersm$'),
-(3, 'Face', 'https://cdn2.stylecraze.com/wp-content/uploads/2013/03/1290-Best-Face-Makeup-Products-Available-In-India-%E2%80%93-Our-Top-10-iStock-510481420-624x702.jpg'),
--- (3, 'Eyes', 'https://www.lifelovelemons.com/wp-content/uploads/2019/03/Feature.jpg'),
-(3, 'Lips', 'https://pmcspy.files.wordpress.com/2018/07/shutterstock_772817047.jpg?w=1000'),
--- (3, 'Nails', 'https://cdn.shopify.com/s/files/1/2665/7478/products/OJ_Polish_0301194495_R1_345x345@2x.jpg?v=1584730830'),
-(3, 'Bath & Body Care', 'https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F35%2F2018%2F04%2F16191317%2Fbath-products.jpg'),
-(3, 'Hair', 'https://images.squarespace-cdn.com/content/v1/58b8a781414fb5d3c07cfd6f/1565796454352-IMC75EC48HT7OGUPMH9K/ke17ZwdGBToddI8pDm48kMry8TfhVOJMIx1LwIT5QW5Zw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpyf_tFFvKg23Qgez2EHHODw4hBIXXUq5Dn4J4H5_UCccd_oiNU7b3jsSYpkujNi5Sw/Screen+Shot+2019-08-14+at+11.25.13+AM.png'),
-(3, 'Brushes & Tools', 'https://previews.123rf.com/images/didecs/didecs1709/didecs170900003/87244794-hairdressing-tools-and-various-hairbrushes-on-white-background-top-view.jpg'),
+(3, 'Face', 'https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fcdn-img.instyle.com%2Fsites%2Fdefault%2Ffiles%2Fstyles%2F684xflex%2Fpublic%2Fimages%2F2018%2F04%2F042318-foundation-lead.jpg%3Fitok%3DA0rU78H2&w=450&c=sc&poi=face&q=85'),
+(3, 'Eyes', 'https://www.narscosmetics.com/dw/image/v2/BBSK_PRD/on/demandware.static/-/Sites-itemmaster_NARS/default/dwfc56d65a/hi-res/0607845013556.jpg?sw=375&sh=375&sm=fit'),
+(3, 'Lips', 'https://ysms.akamaized.net/Assets/18/376/l_p0108837618.jpg'),
+(3, 'Nails', 'https://target.scene7.com/is/image/Target/GUEST_117b1f4d-758d-411a-8e9d-ef3e435bc5d2'),
+(3, 'Bath & Body Care', 'https://cdn.accentuate.io/76171461/10644515291171/Beekman_1802_banner_mobile-004-v1569113362496.jpg?500x293'),
+(3, 'Hair', 'https://s1.thcdn.com/widgets/95-en/18/Hair-Care-05-032518.jpg'),
+(3, 'Brushes & Tools', 'https://cdn.shopify.com/s/files/1/1067/9720/products/best_hair_brush_set_marble_rose_gold_paddle_hairbrush_barrel_brush_gift_box_1000_new_1200x630.jpg?v=1580466777'),
 (4, 'Bags', 'https://cdn.shopify.com/s/files/1/2523/1254/products/PU_Leather_Circle_Round_Purses_Crossbody_Bags_For_Summer_18_59d7c67f-c83c-495f-bb7a-3416b8954448_500x.jpg?v=1587659834'),
--- (4, 'Belts', 'https://www.dhresource.com/0x0/f2/albu/g9/M01/BE/F4/rBVaWFyx8dqAQ-UOAAB_BJv67_Y835.jpg'),
--- (4, 'Jewelry', 'https://cdn.shopify.com/s/files/1/0015/3849/0427/products/SU19-PRopt-GS-195-114-G_1_1000x.jpg?v=1580853869'),
--- (4, 'Hair Accessories', 'https://static1.squarespace.com/static/5bd915b9aa49a1d21e9245e0/5beba4e240ec9acd7f8ae225/5d5bee6f60a4d60001f4a9e6/1580447535645/Screenshot_20190603-094533_3.png?format=1000w'),
--- (4, 'Sunglasses', 'https://www.vintandyork.com/content/wp-content/uploads/2017/09/latest-sunglasses-trends-2017-2018-1568x1046.jpg'),
--- (4, 'Gloves', 'https://cdn.shopify.com/s/files/1/2563/1782/products/winter-plush-gloves-plush-winter-gloves-1_700x700.jpg?v=1561674787'),
--- (4, 'Scarves', 'https://www.rlmedia.io/is/image/PoloGSI/s7-1352500_lifestyle?$CMPDP$'),
--- (4, 'Hats & Caps', 'https://cdn.shopify.com/s/files/1/0824/1887/products/Winter_Hat_Grey_1600x.jpg?v=1536600015'),
+(4, 'Belts', 'https://sewguide.com/wp-content/uploads/2018/08/belt-123.jpg'),
+(4, 'Jewelry', 'https://i.pinimg.com/originals/de/b6/dc/deb6dc27899d59a7ceff27371ee11280.jpg'),
+(4, 'Hair Accessories', 'https://img1.cfcdn.club/a7/c7/a7ce5fd395fc7af6f299836c6fb591c7_350x350.jpg'),
+(4, 'Sunglasses', 'https://www.chloe.com/46/46689674KX_17_f.jpg'),
+(4, 'Gloves', 'https://cdn11.bigcommerce.com/s-sn4d4efuta/images/stencil/337x337/products/25927/136500/40-Winter-Gloves-Faux-Suede-Full-Finger-Gloves-Women-Thicken-Warm-Mittens-Female-Elegant-Wrist__49173.1574214557.jpg?c=1'),
+(4, 'Scarves', 'https://avvenice.com/51775-large_default/hermes-vintage-memoire-d-hermes-silk-scarf-white-multi-silk-foulard-luxury-high-quality.jpg'),
+(4, 'Hats & Caps', 'https://i2.wp.com/ae01.alicdn.com/kf/HTB1vyvMDQyWBuNjy0Fpq6yssXXad/SUOGRY-Wide-Brim-Autumn-Female-font-b-Fashion-b-font-Top-Jazz-Cap-Winter-font-b.jpg?h=300&quality=70'),
 (4, 'Wallets & Coin purses', 'https://sc02.alicdn.com/kf/HTB1AY6JaojrK1RkHFNRq6ySvpXaJ/Guangzhou-genuine-leather-small-women-purse-wallet.jpg_350x350.jpg');
 
 INSERT INTO materials
@@ -263,12 +264,16 @@ VALUES
 ('Hemp'),
 ('Suede'),
 ('Leather'),
-('Polyester');
+('Polyester'), 
+('Wool'), 
+('Alpaca');
 
 INSERT INTO brands
 (brand_name, brand_description)
 VALUES 
-('Lima Sagrada', 'Lima Sagrada is the name of a project that gives shape to raw materials such as leather in its most basic pure form, resulting in a modern and contemporary design founded by Vanessa Vila. Vanessa Vila is an architect, art director, and a stylist in Lima, Peru.');
+('Lima Sagrada', 'Lima Sagrada is the name of a project that gives shape to raw materials such as leather in its most basic pure form, resulting in a modern and contemporary design founded by Vanessa Vila. Vanessa Vila is an architect, art director, and a stylist in Lima, Peru.'), 
+('Aynx', 'A brand created out of a common love for high-quality products, nature''s finest materials, and strong economic and environmental engagement. '),
+('Nutu', 'A regenerative business based on sustainable agroforestry.');
 
 INSERT INTO colors
 (color_name)
@@ -285,15 +290,40 @@ VALUES
 ('Orange'),
 ('Blue'),
 ('Pink'), 
-('Nude');
+('Nude'), 
+('Ivory');
 
 INSERT INTO products
     (product_name, brand_id, store_id, category_id, product_price, material_id, color_id, product_description, product_type, quantity)
 VALUES 
-('Milan Leather Backpack', 1, 1, 4, 200.00, 5 , 1, 'Small leather backpack. Made in Peru.', 18, 5), 
-('Milan Mini Backpack', 1, 1, 4, 150.00, 5, 13, 'Mini leather backpack. Made in Peru.', 18, 5),
-('Fanny Belt Bag', 1, 1, 4, 295.00, 5, 1, 'Fanny belt bag made for a traveler.', 18, 6),
-('Leather Handbag', 1, 1, 4, 200.00, 5, 9, 'A bag perfect for everything', 18, 7);
+('Milan Leather Backpack', 1, 1, 4, 200.00, 5 , 1, 'Small leather backpack. Made in Peru.', 28, 5),
+
+('Milan Mini Backpack', 1, 1, 4, 150.00, 5, 13, 'Mini leather backpack. Made in Peru.', 28, 5),
+
+('Fanny Belt Bag', 1, 1, 4, 295.00, 5, 1, 'Fanny belt bag made for a traveler.', 28, 6),
+
+('Leather Handbag', 1, 1, 4, 200.00, 5, 9, 'A bag perfect for everything', 28, 7),
+
+('Joaquina Top', 2, 1 , 1 , 225.00, 7, 4, 'High neck with ribbon neck detail, ideal to wear with jeans and skirts for a sophisticated but casual look', 1, 10),
+
+('Zena Top', 2, 1 , 1, 265.00, 8, 7, 'Hand-loomed long sleeve asymmetrical sweater knit', 1, 9),
+
+('Onyx Dress', 2, 1, 1, 300.00, 8, 4, 'A perfect classic go-to dress for the transitional weather', 3, 10), 
+
+('Moringa Face Oil', 3, 1, 3, 32.95, 1, 1, 'Reduces visible signs of aging, acne scars, psoriasis, and eczema', 21, 4 ),
+
+('Moringa Rose Cream', 3, 1, 3, 39.95, 1, 1, 'This formula offers rich hydration and intensive skin regeneration', 21, 4), 
+
+('Roama Skirt', 2, 1, 1, 130.00, 8, 14, 'Classic go-to pencil mid-length skirt with double slits', 5, 5 ), 
+
+('Bucket Bag', null, 3, 4, 2000.00, 5, 1, 'Bucket bag with large woven motif', 28, 7), 
+
+('Light Sable Printed Dress', null, 3, 1, 3300.00, 6, 11, 'Light sable printed dress with collar.', 3, 3 ), 
+
+('Pascua Skirt', 2, 1,1, 280.00, 8, 1, 'Long skirt, double slit, hand-loom Alpaca skirt.', 5, 5);
+
+
+
 
 
 INSERT INTO sizes
@@ -302,7 +332,17 @@ VALUES
     (1, '22cm x 25cm x 10cm'),
     (2, '17cm x 20cm x 9cm'),
     (3, '37cm x 64cm'),
-    (4, '37cm x 64cm' );
+    (4, '37cm x 64cm' ), 
+    (5, 'Medium'),
+    (6, 'Small'),
+    (7, 'Small'), 
+    (8, 'One Size'),
+    (9, 'One size'),
+    (10, 'Medium'), 
+    (11, '23cm x 14cm x 17.5'), 
+    (11, 'Medium'), 
+    (12, 'Small'),
+    (13, 'Medium');
 
 
 INSERT INTO productImage_id
@@ -311,7 +351,23 @@ VALUES
     (1, 'https://cdn.shopify.com/s/files/1/0082/3558/1504/products/lima-sagrada-small-backpack-black_606x606_b48c910d-33ac-46ce-aeb0-8bb3f7b73f7f_1296x.jpg', 4),
     (2, 'https://cdn.shopify.com/s/files/1/0082/3558/1504/products/Lima-sagrada-milan-mini-soft-pink-19502_1024x1024_2x_89657b17-5194-4bad-adb6-7f66f686e539_1728x.jpg', 4),
     (3, 'https://cdn.shopify.com/s/files/1/0082/3558/1504/products/lima-sagrada-urban-fanny-pack-front_606x606_2d57ea5f-8afc-4301-a3cf-03bfd70c3fdd_1296x.jpg', 4), 
-    (4, 'https://cdn.shopify.com/s/files/1/0082/3558/1504/products/Lima-sagrada-plastic-bag-brown-19424_1296x.jpg?', 1);
+    (4, 'https://cdn.shopify.com/s/files/1/0082/3558/1504/products/Lima-sagrada-plastic-bag-brown-19424_1296x.jpg?', 4), 
+    (5, 'https://cdn.shopify.com/s/files/1/0082/3558/1504/products/JOAQUINA-TOP_-NOAH-PANT_FRONT_1_2_720x.jpg', 1), 
+    (6,'https://cdn.shopify.com/s/files/1/0082/3558/1504/products/ZENA-SWEATER_LEE-SKIRT_FRONT_1_1_1080x.jpg?', 1 ), 
+    (7, 'https://cdn.shopify.com/s/files/1/0082/3558/1504/products/AYNI_FALL_WAINTER_1713299_-_ONYX_900x.jpg?v=1585956025', 1), 
+
+    (8, 'https://cdn.shopify.com/s/files/1/0082/3558/1504/products/IMG_5934-Edit_copy_8e3b2ce4-5c6e-4a04-b910-d3c69e728b3b_1296x.jpg', 3), 
+
+    (9, 'https://cdn.shopify.com/s/files/1/0082/3558/1504/products/IMG_7209-Edit_1296x.jpg', 3), 
+
+    (10, 'https://cdn.shopify.com/s/files/1/0082/3558/1504/products/ROAMA_SKIRT_460x.jpg?v=1585956029', 1), 
+
+    (11, 'https://www.prada.com/content/dam/prada_products/1/1BE/1BE049/2DI4F0002/1BE049_2DI4_F0002_V_OOO_SLR.png/_jcr_content/renditions/cq5dam.web.white.2560x2560.jpeg', 4), 
+
+    (12, 'https://www.prada.com/content/dam/prada_products/P/P3A/P3A78/1WWSF0216/P3A78_1WWS_F0216_S_201_MDF.png/_jcr_content/renditions/cq5dam.web.white.2560x2560.jpeg', 1), 
+
+    (13, 'https://cdn.shopify.com/s/files/1/0082/3558/1504/products/MEJIA_TOP_PASCUA_PANT_FRONT_540x.jpg?v=1585956028', 1);
+
 
 
 -- SELECT *

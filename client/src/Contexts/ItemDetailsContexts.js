@@ -25,7 +25,7 @@ const ItemDetailsContextProvider = (props) => {
     const getProductId = (newProdId) => {
         setProductId(newProdId)
     };
-    const getShipping = (option) =>{
+    const getShipping = (option) => {
         setShippingOption(option)
     }
 
@@ -35,16 +35,23 @@ const ItemDetailsContextProvider = (props) => {
 
     const getCheckout = async () => {
         let getCart = await axios.get(`/checkoutCart`)
-        setCheckoutCart(getCart.data.payload)
+        let getCartPayload = getCart.data.payload
+
+        setCheckoutCart(getCartPayload)
+
+        let getAllProductIdFromCart = getCartPayload.map(el => {
+            return el.product_id
+        })
+        setproductsIds(getAllProductIdFromCart)
     };
+
+
 
 
     const addToCart = async () => {
         if (productQty !== 0 && productSize !== 'default') {
             setTotalProductQty(productQty)
-
             if (!productIds.includes(productId)) {
-                setproductsIds([...productIds, productId])
                 try {
                     await axios.post('/checkoutCart/add', { product_id: productId, size: productSize, quantity: productQty })
                     getCheckout()
@@ -70,7 +77,8 @@ const ItemDetailsContextProvider = (props) => {
     }
 
 
-    const handleUpdateQuantity = async (shippingOption, getShipping, checkoutId, currProductId, currSize, updatedQty) => {
+    const handleUpdateQuantity = async (checkoutId, currProductId, currSize, updatedQty) => {
+        console.log('checkoutId', checkoutId)
         try {
             await axios.patch(`/checkoutCart/edit/${checkoutId}`, { checkoutCart_id: checkoutId, product_id: currProductId, size: currSize, quantity: updatedQty })
         } catch (err) {
