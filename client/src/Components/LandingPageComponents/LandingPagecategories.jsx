@@ -82,19 +82,16 @@ console.log(categories)
     <div className={classes.root}>
       <GridList className={classes.gridList} cols={3.5} 
              item xs= {12} sm={6} md= {4} lg={3} xl= {2}
-             spacing= {32} 
-             cellHeight = {300}
+             spacing= {25} 
+             cellHeight = {350}
             >
         {categories.map((tile)  => (
-          <GridListTile 
-          
-          spacing={"100px"} 
-          cellHeight={"1px"} 
+          <GridListTile  
           key={tile.category_id} >
             <img
               src={tile.category_logo}
               alt={tile.title}
-              style={{height:"310px"}}
+              // style={{height:"310px"}}
             />
             <Link to={`/categories/${tile.category_name}`}>
               <GridListTileBar
