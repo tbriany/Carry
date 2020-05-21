@@ -229,7 +229,7 @@ VALUES
 (1, 'Jeans', 'https://i.insider.com/5dcd5e913afd371aa87d4ce5?width=500&format=jpeg&auto=webp'),
 (1, 'Swimwear', 'https://images-na.ssl-images-amazon.com/images/I/51aBQQcqxrL._AC_UX385_.jpg'),
 (1, 'Hoodies & Sweatshirts', 'https://i.pinimg.com/originals/76/60/43/766043b32e2d7b8845571625be402e27.jpg'),
-(1, 'Sportswear', 'https://lh3.googleusercontent.com/proxy/5cMe6sI2UZoqwT259QbiOk-fHhJ0mCj9cTBLrCiB375YXoomU0xkSDSExvxqodMegFZqFJKOBQkaN3IUQt7zoLYcvVajvFJmO3lbzBLWMDBjyuNBz1MF9oevGoecvIuM2n0wy-Qr3Q'),
+(1, 'Sportswear', 'https://im01.itaiwantrade.com/2190bacc-80e8-4892-8690-565b80c7a024/5433-2-480x480.png'),
 (2, 'Tops', 'https://slimages.macysassets.com/is/image/MCY/products/1/optimized/9220501_fpx.tif?op_sharpen=1&wid=500&hei=613&fit=fit,1&$filtersm$'),
 (2, 'Pants', 'https://images.timberland.com/is/image/timberland/A1OF4590-HERO?$PDP-FULL-IMAGE$'),
 (2, 'Jackets & Coats', 'https://dtpmhvbsmffsz.cloudfront.net/posts/2017/05/23/592446f5b4188ec1d9003e58/m_592446f5b4188ec1d9003e59.jpg'),
