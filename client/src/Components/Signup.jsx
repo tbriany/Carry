@@ -141,7 +141,7 @@ const Signup = () => {
             let newCustomer = await axios.post('/auth/signup', { firstname: customerFirstname, lastname: customerLastname, email: customerEmail, password: customerPassword }).then(res => res.data.payload);
             console.log(newCustomer)
         }
-        catch(err){
+        catch (err) {
             throw err
         }
     };
