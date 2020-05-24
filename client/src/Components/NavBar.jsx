@@ -170,7 +170,15 @@ function Navbar() {
   );
 
   return (
-    <div className={classes.grow} >
+    <div className={classes.grow} style={{
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      zIndex: 9999,
+      width: '100%',
+      height: '50px',
+
+    }} >
       <AppBar position="static" className={classes.appBar}>
         <Toolbar>
           <Link to='/'
