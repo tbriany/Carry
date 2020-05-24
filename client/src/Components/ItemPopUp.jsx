@@ -53,7 +53,7 @@ function ItemPopUp() {
                         <Grid className='product-info' item sm={5}   >
                             <Paper style={{ height: '100%', color: 'black', boxShadow: " 1px 1px 1px white", paddingTop: '10px' }} className={classes.paper}>
                                 <div>
-                                    <Link to={`/store/${curreBrandId}`} style={{ textDecoration: 'none', color: 'black' }}>
+                                    <Link to={`/store/${1}`} style={{ textDecoration: 'none', color: 'black' }}>
                                         <p className="item-brand">{itemInfo.brand_name}'s</p>
                                     </Link>
                                     <p className="item-name">{itemInfo.product_name}</p>
