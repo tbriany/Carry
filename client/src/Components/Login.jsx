@@ -46,7 +46,8 @@ const Login = () => {
         handlePasswordError(true, 'Wrong email or password.')
     };
     const handleNextPage = async (customerObj) => {
-        await setCustomerContext(customerObj);
+        await setCustomerContext(customerObj)
+        // .then;
         console.log(`USER ${customerFirstname} SUCESSFULLY LOGGED IN`)
         console.log(`User is logged in: ${isLoggedIn}`);
         handleEmailError(false, '');

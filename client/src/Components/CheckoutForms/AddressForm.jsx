@@ -1,6 +1,7 @@
 import React, { useState, Fragment, useContext } from 'react';
 import { TextField } from '@material-ui/core';
-import { checkoutFormStyles } from '../styling/checkoutFormStyles'
+import { checkoutFormStyles } from '../styling/checkoutFormStyles';
+
 
 const AddressForm = () => {
     const classes = checkoutFormStyles();
