@@ -46,12 +46,12 @@ function ItemPopUp() {
                     <Grid container justify="center" spacing={3} style={{ width: '100%' }} >
 
                         <Grid className='itemPopUp-image' item xs={6} style={{ height: '90vh', width: '100%' }} >
-                            <Paper style={{ boxShadow: " 1px 1px 1px white", height: '100%', paddingTop: '10px' }} className={classes.paper}>
-                                <img src={itemInfo.product_image_url} height='100%' paddingTop='35%' width='100%' />
+                            <Paper style={{ boxShadow: " 1px 1px 1px white", height: '100%', paddingtop: '10px' }} className={classes.paper}>
+                                <img src={itemInfo.product_image_url} height='100%' paddingtop='35%' width='100%' />
                             </Paper>
                         </Grid>
                         <Grid className='product-info' item sm={5}   >
-                            <Paper style={{ height: '100%', color: 'black', boxShadow: " 1px 1px 1px white", paddingTop: '10px' }} className={classes.paper}>
+                            <Paper style={{ height: '100%', color: 'black', boxShadow: " 1px 1px 1px white", paddingtop: '10px' }} className={classes.paper}>
                                 <div>
                                     <Link to={`/store/${1}`} style={{ textDecoration: 'none', color: 'black' }}>
                                         <p className="item-brand">{itemInfo.brand_name}'s</p>
@@ -76,7 +76,7 @@ function ItemPopUp() {
                                             <option value="default" autoFocus disabled>Choose a size</option>
                                             {allSizes.map(function (size, i) {
                                                 return (
-                                                    <option value={size}
+                                                    <option key = {i} value={size}
                                                     >{size} </option>
                                                 )
                                             })}

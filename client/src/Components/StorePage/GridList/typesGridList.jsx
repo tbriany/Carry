@@ -76,7 +76,7 @@ export default function TypesGridList({storeId}) {
             </h2>
       <GridList className={classes.gridList} cols={4} cellHeight={285} spacing={7}>
         {types.map((tile) => (
-          <GridListTile key={tile.img}>
+          <GridListTile key={tile.product_type_id}>
             <Link to={`/store/${storeId}/${tile.product_type_name}`}>
            <img src={tile.product_type_logo} alt={tile.product_type_name} />
            <span className={classes.imageButton}>

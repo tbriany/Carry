@@ -225,6 +225,7 @@ function Navbar() {
                 paper: classes.paper
               }}
               open={open}
+              anchorEl={popOver}
               anchorOrigin={{
                 vertical: "top",
                 horizontal: "right",

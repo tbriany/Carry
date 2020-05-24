@@ -1,4 +1,4 @@
-import React, { useState, useEffect,useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
@@ -10,7 +10,7 @@ import Button from "@material-ui/core/Button";
 import List from '@material-ui/core/List';
 import clsx from 'clsx';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
-import {sidePopUp} from '../../styling/sidePopTheme'
+import { sidePopUp } from '../../styling/sidePopTheme'
 import ItemPopUp from '../../ItemPopUp'
 
 
@@ -73,14 +73,6 @@ export default function NewArrivalsGridList({ storeId, getProductId }) {
     };
 
 
-    const list = (right) => (
-        <div className={clsx(popUp.list)} role="presentation" onKeyDown={toggleDrawer(right, false)}
-        >
-            <List>
-                <ItemPopUp />
-            </List>
-        </div>
-    );
 
 
     useEffect(() => {
@@ -111,8 +103,8 @@ export default function NewArrivalsGridList({ storeId, getProductId }) {
             </h2>
             <GridList className={classes.gridList} cols={4} cellHeight={300} spacing={10}>
                 {newArrivals.map((tile) => (
-                    <GridListTile key={tile.img}>
-                        <Button className = 'button' onClick={toggleDrawer("right", true, tile.product_id)}>
+                    <GridListTile key={tile.product_id}>
+                        <Button key={tile.product_id} className='button' onClick={toggleDrawer("right", true, tile.product_id)}>
                             <Box display="flex" justifyContent="center">
                                 <img src={tile.product_image_url} alt={tile.product_name}
                                     style={{ width: '100%', height: '310px' }}
@@ -139,10 +131,17 @@ export default function NewArrivalsGridList({ storeId, getProductId }) {
                     open={open.right}
                     onClose={toggleDrawer(open.right, false, 0)}
                     onOpen={toggleDrawer(open.right, true)}
-                    classes={{paperAnchorRight : popUp.paperAnchorRight}}
-                   
+                    classes={{ paperAnchorRight: popUp.paperAnchorRight }}
+
                 >
-                    {list('right')}
+
+                    <div className={clsx(popUp.list)} role="presentation" onKeyDown={toggleDrawer(open.right, false)}
+                    >
+                        <List>
+                            <ItemPopUp />
+                        </List>
+                    </div>
+
                 </SwipeableDrawer>
             </GridList>
         </div >

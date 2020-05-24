@@ -72,7 +72,7 @@ export default function CategoryGrid({ product_name, getProductId, products }) {
           <Grid item md={25} spacing={50}>
             <Grid container justify="center" spacing={50}>
               {products.map((value) => (
-                <Button onClick={toggleDrawer("right", true, value.product_id)}>
+                <Button  key = {value.product_id} onClick={toggleDrawer("right", true, value.product_id)}>
                   <Grid key={value.product_id} item>
                     <img
                       alt="backpack"
