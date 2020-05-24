@@ -59,9 +59,12 @@ export const useStyles = makeStyles((theme) => ({
       textAlign: 'center',
       color: theme.palette.text.secondary,
   },
+  control: {
+    padding: theme.spacing(2),
+  },
   'spacing-xs-3': {
       margin: '0px',
 
-  }
+  }, 
   
 }));

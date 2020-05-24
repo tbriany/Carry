@@ -8,9 +8,13 @@ export  const sidePopUp = makeStyles({
       width: "50%",
     },
     paperAnchorRight:{
-      width: "45%",
+      width: "55%",
       display: 'flex',
       alignItems: 'center',
+      bottom: 'inherit',
+      top: 'auto',
+      height: '92vh',
+
     },
   
   });
