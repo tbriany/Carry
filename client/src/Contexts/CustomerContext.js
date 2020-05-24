@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
 export const CustomerContext = createContext();
 
@@ -54,12 +54,29 @@ const CustomerContextProvider = (props) => {
             let customerContextInfo = await axios.get(`customers/email/${email}`).then(res => res.data.payload);
             await logUserIn(customerContextInfo);
         }
-        catch(err){
+        catch (err) {
             console.log(err)
         }
     };
+    useEffect(() => {
+        //add function that will change context in realtime
+    })
     return (
-        <CustomerContext.Provider value={{ logUserIn, logUserOut, setCustomerContext, isLoggedIn, customerId, customerFirstname, customerLastname, customerPhoneNumber, customerEmail, customerAddress, customerCity, customerState, customerZip, customerAvatar }}>
+        <CustomerContext.Provider value={{
+            logUserIn,
+            logUserOut,
+            setCustomerContext,
+            isLoggedIn, customerId,
+            customerFirstname,
+            customerLastname,
+            customerPhoneNumber,
+            customerEmail,
+            customerAddress,
+            customerCity,
+            customerState,
+            customerZip,
+            customerAvatar
+        }}>
             {props.children}
         </CustomerContext.Provider >
     )
