@@ -5,7 +5,8 @@ export const ItemDetailsContext = createContext();
 
 
 const ItemDetailsContextProvider = (props) => {
-
+    const [brandIdInCart, setBrandIdInCart] = useState(0);
+    const [brandId, setBrandId] = useState (0);
     const [productId, setProductId] = useState(1);//Current Product id
     const [productIds, setproductsIds] = useState([]); //Array contains all ids that was added to the checkout bag.
     const [productQty, setProductQty] = useState(0);
@@ -13,7 +14,7 @@ const ItemDetailsContextProvider = (props) => {
     const [productSize, setProductSize] = useState('default');
     const [checkoutCart, setCheckoutCart] = useState([]);
     const [shippingOption, setShippingOption] = useState(15)
-
+    
     const updateProductQty = (newQty) => {
         setProductQty(newQty)
     };
@@ -31,12 +32,12 @@ const ItemDetailsContextProvider = (props) => {
 
     useEffect(() => {
         getCheckout();
+
     }, [])
 
     const getCheckout = async () => {
         let getCart = await axios.get(`/checkoutCart`)
         let getCartPayload = getCart.data.payload
-
         setCheckoutCart(getCartPayload)
 
         let getAllProductIdFromCart = getCartPayload.map(el => {
@@ -70,10 +71,8 @@ const ItemDetailsContextProvider = (props) => {
                 }
             }
             setProductQty(0)
-            setProductSize('default')
-        } else {
-            alert("Missing Input")
-        }
+            setProductSize('default')  
+        } 
     }
 
 
