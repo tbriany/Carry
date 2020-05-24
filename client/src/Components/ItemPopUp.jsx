@@ -61,7 +61,7 @@ function ItemPopUp() {
                                     <p className="item-color" >Color: {itemInfo.color_name}</p>
                                 </div>
 
-                                <div className='productQxwtySize'>
+                                <div className='productQtySize'>
                                     <FormControl className={classes.margin}>
                                         <InputLabel htmlFor="demo-customized-select-native">Size</InputLabel>
                                         <NativeSelect
