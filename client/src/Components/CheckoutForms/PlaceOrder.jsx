@@ -23,7 +23,7 @@ const PlaceOrder = () => {
         <CssBaseline>
             <Container className={classes.container}>
                 <Typography className={classes.typography} variant='h5'>
-                    Your order number <b></b>=
+                    Your order number: <b></b> 
             </Typography>
                 <Container className={classes.innerContainer}>
                     <Typography className={classes.typography} variant='subtitle2'>
