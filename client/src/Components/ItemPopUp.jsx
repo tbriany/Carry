@@ -37,13 +37,11 @@ function ItemPopUp() {
         }
     }, [productId])
 
-
-
     return (
         <div className="ItemPopUp-stage"  >
             <Grid container className={classes.root} spacing={2} style={{ width: '100%' }}>
                 <Grid item xs={12} style={{ padding: '0px' }}>
-                    <Grid container justify="center" spacing={3} style={{ width: '100%' }} >
+                    <Grid container justify="center" spacing={3} style={{ width: '100%', margin: '0px' }} >
 
                         <Grid className='itemPopUp-image' item xs={6} style={{ height: '90vh', width: '100%' }} >
                             <Paper style={{ boxShadow: " 1px 1px 1px white", height: '100%', paddingtop: '10px' }} className={classes.paper}>
@@ -76,7 +74,7 @@ function ItemPopUp() {
                                             <option value="default" autoFocus disabled>Choose a size</option>
                                             {allSizes.map(function (size, i) {
                                                 return (
-                                                    <option key = {i} value={size}
+                                                    <option key={i} value={size}
                                                     >{size} </option>
                                                 )
                                             })}
