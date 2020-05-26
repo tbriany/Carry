@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 //Material UI
 import { ExpansionPanel, ExpansionPanelDetails, ExpansionPanelSummary, Button, InputLabel, MenuItem, Select, Typography, Paper, Grid, FormControl, NativeSelect } from '@material-ui/core'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { useStyles, BootstrapInput } from './styling/popupTheme'
+import { useStyles, BootstrapInput } from './styling/popoverTheme'
 import "./ItemPopUp.css";
 
 function ItemPopUp() {
@@ -43,8 +43,8 @@ function ItemPopUp() {
                 <Grid item xs={12} style={{ padding: '0px' }}>
                     <Grid container justify="center" spacing={3} style={{ width: '100%', margin: '0px' }} >
 
-                        <Grid className='itemPopUp-image' item xs={6} style={{ height: '90vh', width: '100%' }} >
-                            <Paper style={{ boxShadow: " 1px 1px 1px white", height: '100%', paddingtop: '10px' }} className={classes.paper}>
+                        <Grid className='itemPopUp-image' item xs={6} style={{  width: '100%' }} >
+                            <Paper style={{ boxShadow: " 1px 1px 1px white", height: '75%', paddingtop: '10px' }} className={classes.paper}>
                                 <img src={itemInfo.product_image_url} height='100%' paddingtop='35%' width='100%' />
                             </Paper>
                         </Grid>
@@ -102,20 +102,20 @@ function ItemPopUp() {
                                 </div>
 
 
-                                <div style={{
-                                    display: 'flex', textAlign: 'left', flexDirection: 'column',
-                                }}>
+    <div style={{
+                display: 'flex', textAlign: 'left', flexDirection: 'column',
+            }}>
 
-                                    <p className='itemPopup-materials'>
-                                        Materials: {itemInfo.material_name}
-                                    </p>
-                                    <p className='itemPopup-descript' >
-                                        Description: {itemInfo.product_description}
-                                    </p>
-                                </div>
-                            </Paper>
-                        </Grid>
-                    </Grid>
+                <p className='itemPopup-materials'>
+                    Materials: {itemInfo.material_name}
+                </p>
+                <p className='itemPopup-descript' >
+                    Description: {itemInfo.product_description}
+                </p>
+            </div>
+    </Paper>
+</Grid>
+</Grid>
                 </Grid>
 
             </Grid>
