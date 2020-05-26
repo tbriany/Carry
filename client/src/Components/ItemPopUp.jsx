@@ -1,24 +1,23 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { ItemDetailsContext } from '../Contexts/ItemDetailsContexts';
+import { CheckoutCartContext } from '../Contexts/CheckoutCartContext';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 //Material UI
 import { ExpansionPanel, ExpansionPanelDetails, ExpansionPanelSummary, Button, InputLabel, MenuItem, Select, Typography, Paper, Grid, FormControl, NativeSelect } from '@material-ui/core'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { useStyles, BootstrapInput } from './styling/popupTheme'
+import { useStyles, BootstrapInput } from './styling/popoverTheme'
 import "./ItemPopUp.css";
 
 function ItemPopUp() {
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
 
-    const handleChange = (panel) => (event, isExpanded) => {
-        setExpanded(isExpanded ? panel : false);
-    };
 
-    const { updateCurrQty, updateProductQty, checkoutCart, addToCart, producstSize, productId, productQty, addItemToBag, productSize, getProductSize } = useContext(ItemDetailsContext);
+    const { updateCurrQty, updateProductQty, checkoutCart, addToCart, producstSize, productId, productQty, addItemToBag, productSize, getProductSize } = useContext(CheckoutCartContext);
     const [itemInfo, setItemInfo] = useState({}) //Recieves all of the product info
     const [allSizes, setAllSizes] = useState([])
+    const [curreBrandId, setCurrBrandId] = useState(0)
 
     const handleItemInfo = async () => {
         try {
@@ -26,8 +25,7 @@ function ItemPopUp() {
             let productInfoPayload = productInfo.data.payload
             setItemInfo(productInfoPayload)
             setAllSizes(productInfoPayload.product_size)
-
-
+            setCurrBrandId(productInfoPayload.store_id)
         } catch (err) {
             console.log("ERROR", err)
         }
@@ -36,115 +34,92 @@ function ItemPopUp() {
     useEffect(() => {
         if (productId !== 0) {
             handleItemInfo();
-
         }
     }, [productId])
 
-
-
     return (
+        <div className="ItemPopUp-stage"  >
+            <Grid container className={classes.root} spacing={2} style={{ width: '100%' }}>
+                <Grid item xs={12} style={{ padding: '0px' }}>
+                    <Grid container justify="center" spacing={3} style={{ width: '100%', margin: '0px' }} >
 
-        <div className="ItemPopUp-stage">
-            <div className={classes.root}>
-                <Grid container spacing={3} height="150px" style={{ justifyContent: "center", marginTop: '12px', padding: '10px' }}>
-                    <Paper style={{
-                        boxShadow: " 1px 1px 1px white",
-                        padding: '2px'
-                    }}
-                        className={classes.paper}>  <img src={itemInfo.product_image_url} height="200px" /></Paper>
-                </Grid>
+                        <Grid className='itemPopUp-image' item xs={6} style={{  width: '100%' }} >
+                            <Paper style={{ boxShadow: " 1px 1px 1px white", height: '75%', paddingtop: '10px' }} className={classes.paper}>
+                                <img src={itemInfo.product_image_url} height='100%' paddingtop='35%' width='100%' />
+                            </Paper>
+                        </Grid>
+                        <Grid className='product-info' item sm={5}   >
+                            <Paper style={{ height: '100%', color: 'black', boxShadow: " 1px 1px 1px white", paddingtop: '10px' }} className={classes.paper}>
+                                <div>
+                                    <Link to={`/store/${1}`} style={{ textDecoration: 'none', color: 'black' }}>
+                                        <p className="item-brand">{itemInfo.brand_name}'s</p>
+                                    </Link>
+                                    <p className="item-name">{itemInfo.product_name}</p>
+                                    <p className="item-price">${itemInfo.product_price}</p>
+                                    <p className="item-color" >Color: {itemInfo.color_name}</p>
+                                </div>
 
-                <Grid container spacing={3} height="100px" style={{ justifyContent: "center", padding: '6px' }}>
+                                <div className='productQtySize'>
+                                    <FormControl className={classes.margin}>
+                                        <InputLabel htmlFor="demo-customized-select-native">Size</InputLabel>
+                                        <NativeSelect
+                                            style={{ backgroundColor: "#eed7c1", }}
+                                            id="demo-customized-select-native"
+                                            value={productSize}
+                                            onChange={e => {
+                                                getProductSize(e.target.value)
+                                            }}
+                                            input={<BootstrapInput />}
+                                        >
+                                            <option value="default" autoFocus disabled>Choose a size</option>
+                                            {allSizes.map(function (size, i) {
+                                                return (
+                                                    <option key={i} value={size}
+                                                    >{size} </option>
+                                                )
+                                            })}
+                                        </NativeSelect>
+                                    </FormControl>
 
-                    <Grid item xs={9}
-                        style={{
-                            borderBottom: "1px solid #eed7c1",
-                            padding: '2px 2px 30px',
-                        }}>
-                        <Paper className={classes.paper}
-                            style={{ color: "black", boxShadow: " 1px 1px 1px white", justifyContent: 'center', display: 'grid' }}>
-                            <p className="item-name">{itemInfo.brand_name}'s </p>
-                            <p className="item-name">{itemInfo.product_name}</p>
-                            <p className="item-price">${itemInfo.product_price}</p>
-                            <p className="item-color" >Color: {itemInfo.color_name}</p>
-                        </Paper>
-                    </Grid>
-
-                    <Grid item xs={9}>
-                        <Paper className={classes.paper} style={{ boxShadow: " 1px 1px 1px white", padding: '2px' }}>
-
-                            <FormControl className={classes.margin}>
-                                <InputLabel htmlFor="demo-customized-select-native">Size</InputLabel>
-                                <NativeSelect
-                                    style={{ backgroundColor: "#eed7c1", }}
-                                    id="demo-customized-select-native"
-                                    value={productSize}
-                                    onChange={e => {
-                                        getProductSize(e.target.value)
-                                    }}
-                                    input={<BootstrapInput />}
-                                >
-                                  <option value="default" autoFocus disabled>Choose a size</option> 
-                                    {allSizes.map(function (size, i) {
-                                        return (
-                                            <option value={size} >{size} </option>
-                                        )
-                                    })}
-
-                                </NativeSelect>
-                            </FormControl>
-
-                            <input
-                                className="quantityInput"
-                                type="number" placeholder="0"
-                                min="0" max="100"
-                                value={productQty}
-                                onChange={e => {
-                                    updateProductQty(e.target.value)
-                                }}>
-                            </input>
-                            <br></br>
-                            <Button
-                                style={{
-                                    margin: "10px", borderRadius: 35, backgroundColor: "#eed7c1", padding: "10px 24px", fontSize: "14px",
-                                }}
-                                variant="contained"
-                                className="ItemInputSubmit" type="submit" value="ADD TO BAG"
-                                onClick={addToCart}>ADD TO BAG</Button>
-
-                            <div className="description">
-                                <ExpansionPanel expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
-                                    <ExpansionPanelSummary
-                                        expandIcon={<ExpandMoreIcon />}
-                                        aria-controls="panel1bh-content"
-                                        id="panel1bh-header"
-                                        style={{
-                                            border: '1px solid #eed7c1',
+                                    <input
+                                        className="quantityInput"
+                                        type="number" placeholder="0"
+                                        min="0" max="100"
+                                        value={productQty}
+                                        onChange={e => {
+                                            updateProductQty(e.target.value)
                                         }}>
-                                        <Typography
-                                            className={classes.heading}>Description
-                                            </Typography>
-                                    </ExpansionPanelSummary>
-                                    <ExpansionPanelDetails style={{
-                                        border: '1px solid #eed7c1',
-                                    }}>
-                                        <Typography>
-                                            Materials: {itemInfo.material_name}
-                                            <br></br>
-                                            Description: {itemInfo.product_description}
+                                    </input>
+                                </div>
+                                <div className='submitButton'>
 
-                                        </Typography>
-                                    </ExpansionPanelDetails>
+                                    <Button
+                                        style={{ margin: "10px", borderRadius: 35, backgroundColor: "#eed7c1", padding: "10px 24px", fontSize: "14px" }}
+                                        variant="contained"
+                                        className="ItemInputSubmit" type="submit" value="ADD TO BAG"
+                                        disabled={!productSize || !productQty || !productSize && productQty}
+                                        onClick={addToCart}>ADD TO BAG</Button>
+                                </div>
 
-                                </ExpansionPanel>
-                            </div>
-                        </Paper>
-                    </Grid>
-                </Grid>
+
+    <div style={{
+                display: 'flex', textAlign: 'left', flexDirection: 'column',
+            }}>
+
+                <p className='itemPopup-materials'>
+                    Materials: {itemInfo.material_name}
+                </p>
+                <p className='itemPopup-descript' >
+                    Description: {itemInfo.product_description}
+                </p>
             </div>
-            <br></br>
+    </Paper>
+</Grid>
+</Grid>
+                </Grid>
 
-        </div>
+            </Grid>
+        </div >
     )
 }
 export default ItemPopUp;

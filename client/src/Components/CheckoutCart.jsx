@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext, useRef } from 'react'
 import { Button, InputLabel, MenuItem, Select } from '@material-ui/core'
-import { ItemDetailsContext } from '../Contexts/ItemDetailsContexts'
+import { CheckoutCartContext } from '../Contexts/CheckoutCartContext'
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
 
 const CheckoutCart = () => {
     const classes = useStyles();
-    const { getCheckout, productId, checkoutCart, productIds, shippingOption } = useContext(ItemDetailsContext) //Grab state from context file
+    const { getCheckout, productId, checkoutCart, productIds, shippingOption } = useContext(CheckoutCartContext) //Grab state from context file
     const [cartTotal, setCartTotal] = useState()
     const [changeinQty, setchangeinQty] = useState(false)
 
@@ -46,7 +46,7 @@ const CheckoutCart = () => {
 
             let total = await axios.get(`/checkoutCart/checkoutTotal`)
             let checkoutTotal = total.data.payload.checkouttotal
-            let cartTotal = parseInt(checkoutTotal) +  parseInt(shippingOption)
+            let cartTotal = parseInt(checkoutTotal) + parseInt(shippingOption)
             setCartTotal(cartTotal)
 
         } catch (err) {

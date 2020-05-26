@@ -24,7 +24,7 @@ const Review = ({ getShipping, shippingOption }) => {
                     }}>
                 </input>
                 <label htmlFor="standard">End of Day Delivery: $10
-                <p>Recieve Items by the 9pm</p>
+                <p>Recieve Items by 9pm</p>
                 </label>
             </div>
 
