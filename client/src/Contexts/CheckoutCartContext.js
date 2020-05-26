@@ -1,12 +1,12 @@
 import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
 
-export const ItemDetailsContext = createContext();
+export const CheckoutCartContext = createContext();
 
 
-const ItemDetailsContextProvider = (props) => {
+const CheckoutCartContextProvider = (props) => {
     const [brandIdInCart, setBrandIdInCart] = useState(0);
-    const [brandId, setBrandId] = useState (0);
+    const [brandId, setBrandId] = useState(0);
     const [productId, setProductId] = useState(1);//Current Product id
     const [productIds, setproductsIds] = useState([]); //Array contains all ids that was added to the checkout bag.
     const [productQty, setProductQty] = useState(0);
@@ -14,7 +14,7 @@ const ItemDetailsContextProvider = (props) => {
     const [productSize, setProductSize] = useState('default');
     const [checkoutCart, setCheckoutCart] = useState([]);
     const [shippingOption, setShippingOption] = useState(15)
-    
+
     const updateProductQty = (newQty) => {
         setProductQty(newQty)
     };
@@ -71,8 +71,8 @@ const ItemDetailsContextProvider = (props) => {
                 }
             }
             setProductQty(0)
-            setProductSize('default')  
-        } 
+            setProductSize('default')
+        }
     }
 
 
@@ -87,10 +87,10 @@ const ItemDetailsContextProvider = (props) => {
 
     return (
         // Provider accepts a value containting state and functions. This allows the components access to the state but it must be descendants of the provider.
-        <ItemDetailsContext.Provider value={{ shippingOption, getShipping, getProductId, getCheckout, updateProductQty, checkoutCart, productId, productIds, productQty, totalProductQty, getProductSize, productSize, addToCart }}>
+        <CheckoutCartContext.Provider value={{ shippingOption, getShipping, getProductId, getCheckout, updateProductQty, checkoutCart, productId, productIds, productQty, totalProductQty, getProductSize, productSize, addToCart }}>
             {props.children}
-        </ItemDetailsContext.Provider>
+        </CheckoutCartContext.Provider>
     );
 }
 
-export default ItemDetailsContextProvider;
+export default CheckoutCartContextProvider;

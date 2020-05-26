@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext, useRef } from 'react'
 import { Button, InputLabel, MenuItem, Select } from '@material-ui/core'
-import { ItemDetailsContext } from '../Contexts/ItemDetailsContexts'
+import { CheckoutCartContext } from '../Contexts/CheckoutCartContext'
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
 const CartPopUp = () => {
     const classes = useStyles();
 
-    const { getCheckout, productId, checkoutCart } = useContext(ItemDetailsContext) //Grab state from context file
+    const { getCheckout, productId, checkoutCart } = useContext(CheckoutCartContext) //Grab state from context file
     const [cartTotal, setCartTotal] = useState()
 
     useEffect(() => {

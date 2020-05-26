@@ -4,7 +4,7 @@ import { Link, Route, Switch } from "react-router-dom";
 import { LandingContext } from "../../Contexts/LandingPageDetailsContext"
 import CategoryGridList from "./CategoryGrid";
 import MultilineTextFields from './CategorySearchBar';
-import { ItemDetailsContext } from '../../Contexts/ItemDetailsContexts';
+import { CheckoutCartContext } from '../../Contexts/CheckoutCartContext';
 import customTheme from '../styling/customTheme';
 // styling 
 import { CheckBoxOutlineBlankOutlined } from "@material-ui/icons";
@@ -13,12 +13,12 @@ import Playground from './CategoryFilterForm'	// styling
 
 
 const CategoryPage = (props) => {
-  const { getProductId } = useContext(ItemDetailsContext);
+  const { getProductId } = useContext(CheckoutCartContext);
   const [products, setProducts] = useState([]);
-  const { categories } = useContext(	
-    LandingContext	
-  );	
-  console.log('category Page categories' , categories)
+  const { categories } = useContext(
+    LandingContext
+  );
+  console.log('category Page categories', categories)
 
 
   const category_name = props.match.params.type;
@@ -43,45 +43,45 @@ const CategoryPage = (props) => {
   console.log("products on Category Page", products);
   return (
     <div className="CategoryPage">
-     <div className ='CategoryNav'
-     style= {{
-       marginTop: '20px',
-       display:'flex', 
-       justifyContent: 'space-evenly', 
-       marginLeft:'20px', 
-       marginRight: '30px'
-     }}>
-       {categories.map((value) => (<Link to = {`/categories/${value.category_name}`}
-       
-       style ={{textDecoration:'none', color: '#CD853F', active:'#FAEBD7'}}
+      <div className='CategoryNav'
+        style={{
+          marginTop: '20px',
+          display: 'flex',
+          justifyContent: 'space-evenly',
+          marginLeft: '20px',
+          marginRight: '30px'
+        }}>
+        {categories.map((value) => (<Link to={`/categories/${value.category_name}`}
 
-      >  {value.category_name}
-       </Link>))}
-     </div>
-     
-      <div style ={{ display: 'flex', justifyContent: 'space-evenly', padding: '25px'}}>
-       
+          style={{ textDecoration: 'none', color: '#CD853F', active: '#FAEBD7' }}
+
+        >  {value.category_name}
+        </Link>))}
+      </div>
+
+      <div style={{ display: 'flex', justifyContent: 'space-evenly', padding: '25px' }}>
+
         <h1 style={{
-            fontFamily: "Palatino Linotype",
-            textAlign: "left",
-            color: customTheme.palette.secondary.dark,
-          }}>{category_name}</h1>
-       
+          fontFamily: "Palatino Linotype",
+          textAlign: "left",
+          color: customTheme.palette.secondary.dark,
+        }}>{category_name}</h1>
+
         <div className="SearchBar">
           {" "}
-          <MultilineTextFields/>
+          <MultilineTextFields />
           {" "}
         </div>
       </div>
 
-      <div className="Content" style={{marginTop:'20px'}}
+      <div className="Content" style={{ marginTop: '20px' }}
       >
-        <div className ='Filter_sideBar'
-        style ={{margin: '25px', float:'left', padding: '20px'}}> 
-<Playground/>
+        <div className='Filter_sideBar'
+          style={{ margin: '25px', float: 'left', padding: '20px' }}>
+          <Playground />
         </div>
         <div
-        style ={{float:'right', width:'70%', paddingTop:'20px'}}>
+          style={{ float: 'right', width: '70%', paddingTop: '20px' }}>
           <CategoryGridList
             categoryId={props.categoryId}
             product_name={products.product_name}

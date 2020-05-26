@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, InputLabel, MenuItem, Select } from '@material-ui/core';
-import { ItemDetailsContext } from '../../Contexts/ItemDetailsContexts';
+import { CheckoutCartContext } from '../../Contexts/CheckoutCartContext';
 import axios from 'axios';
 import Banner from '../StorePage/storeBanner';
 import MultipleSelect from '../StorePage/filterForm';
@@ -10,7 +10,7 @@ import ProductsDisplay from '../ProductPage/productsDisplay';
 
 
 function ProductsPage(props) {
-  const { getProductId, productId } = useContext(ItemDetailsContext);
+  const { getProductId, productId } = useContext(CheckoutCartContext);
   const [products, setProducts] = useState([])
   const [categories, setCategories] = useState([]);
 

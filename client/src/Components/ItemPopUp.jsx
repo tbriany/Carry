@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { ItemDetailsContext } from '../Contexts/ItemDetailsContexts';
+import { CheckoutCartContext } from '../Contexts/CheckoutCartContext';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
@@ -14,7 +14,7 @@ function ItemPopUp() {
     const [expanded, setExpanded] = React.useState(false);
 
 
-    const { updateCurrQty, updateProductQty, checkoutCart, addToCart, producstSize, productId, productQty, addItemToBag, productSize, getProductSize } = useContext(ItemDetailsContext);
+    const { updateCurrQty, updateProductQty, checkoutCart, addToCart, producstSize, productId, productQty, addItemToBag, productSize, getProductSize } = useContext(CheckoutCartContext);
     const [itemInfo, setItemInfo] = useState({}) //Recieves all of the product info
     const [allSizes, setAllSizes] = useState([])
     const [curreBrandId, setCurrBrandId] = useState(0)
