@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import Button from '@material-ui/core/Button';
@@ -12,11 +12,12 @@ import { Visibility, VisibilityOff } from '@material-ui/icons';
 import Container from '@material-ui/core/Container';
 import { checkValidEmail, checkValidPassword } from "./util/inputHelpers";
 import InputAdornment from '@material-ui/core/InputAdornment';
-import { CustomerContext } from '../Contexts/CustomerContext';
+import {Context} from '../Contexts/CustomerContext';
 import { loginStyles } from './styling/loginStyles';
 
 const Login = () => {
-    const { setCustomerContext, isLoggedIn, customerFirstname } = useContext(CustomerContext);
+    const [state, dispatch] = useContext(Context);
+
     const classes = loginStyles();
     const [customerEmail, setCustomerEmail] = useState({
         email: '',
@@ -29,6 +30,10 @@ const Login = () => {
         error: false,
         errorText: ''
     });
+
+    //||||||||||||||||||
+    // input handlers 
+    //||||||||||||||||||
     const handleInputChange = (key) => (e) => {
         key === 'email' ? setCustomerEmail({ ...customerEmail, [key]: e.target.value }) : setCustomerPassword({ ...customerPassword, [key]: e.target.value })
     };
@@ -45,37 +50,28 @@ const Login = () => {
         handleEmailError(true, 'Wrong email or password.');
         handlePasswordError(true, 'Wrong email or password.')
     };
-    const handleNextPage = async (customerObj) => {
-        await setCustomerContext(customerObj)
-        // .then;
-        console.log(`USER ${customerFirstname} SUCESSFULLY LOGGED IN`)
-        console.log(`User is logged in: ${isLoggedIn}`);
-        handleEmailError(false, '');
-        handlePasswordError(false, '');
-        // setTimeout(() => {
-        //     return (
-        //     <Redirect to={'/'}/>
-        //     )
-        // }, 3000)
-    }
-    const handleLogin = async (e) => {
-        e.preventDefault();
+
+
+    const handleLogin = () => {
         let email = customerEmail.email;
         let password = customerPassword.password;
         checkValidEmail(email, handleEmailError);
         checkValidPassword(password, handlePasswordError);
         let emailError = customerEmail.error;
         let passwordError = customerPassword.error;
-        if (!emailError && !passwordError) {
-            try {
-                let loggedInCustomer = await axios.post('auth/login', { email, password }).then(res => res.data.payload);
-                handleNextPage(loggedInCustomer);
-            }
-            catch (err) {
-                handleWrongInputs(err)
-            }
+        if(!emailError && !passwordError) {
+                axios.post('auth/login', {
+                    email, password
+                }).then(res => {
+                    const user = res.data;
+                    dispatch({type: 'USER_CLICKED_LOGIN', payload: user});
+                    window.localStorage.setItem('customer', JSON.stringify(user.payload));
+                })
+                .catch(err => handleWrongInputs(err)
+                )
         }
-    };
+    } 
+
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline />
@@ -83,7 +79,10 @@ const Login = () => {
                 <Typography component="h1" variant="h5" className={classes.header}>
                     SIGN IN
         </Typography>
-                <form className={classes.form} noValidate onSubmit={handleLogin}>
+                <form className={classes.form} noValidate onSubmit={e => {
+                    e.preventDefault();
+                    handleLogin();
+                }}>
                     <TextField
                         className={classes.textField}
                         variant="outlined"

@@ -8,7 +8,7 @@ import ItemPopUp from './Components/ItemPopUp'
 import CategoryPage from './Components/LandingPageComponents/CategoryPage'
 import CheckoutCart from './Components/CheckoutCart'
 import ItemDetailsContextProvider from './Contexts/ItemDetailsContexts';
-import CustomerContextProvider from './Contexts/CustomerContext';
+import { Store } from './Contexts/CustomerContext';
 import LandingContextProvider from './Contexts/LandingPageDetailsContext'
 import Login from './Components/Login';
 import Signup from './Components/Signup';
@@ -21,7 +21,7 @@ function App() {
     <div className="App">
       <LandingContextProvider>
       <ItemDetailsContextProvider>
-      <CustomerContextProvider>
+      <Store>
         <Navbar />
       <Switch>
           <Route exact path="/" component={Landing} />
@@ -34,7 +34,7 @@ function App() {
           <Route exact path="/store/:id" component={StorePage} />
           <Route path="/store/:id/:category_name" component={ProductsPage} />
       </Switch>
-     </CustomerContextProvider>
+     </Store>
      </ItemDetailsContextProvider>
     </LandingContextProvider>
     </div>
