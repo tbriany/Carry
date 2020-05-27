@@ -89,12 +89,15 @@ export default function SingleLineGridListItems() {
     </div>
     <div className={classes.root}>
          
-      <GridList className={classes.gridList} cols={3.5}>
+      <GridList className={classes.gridList} 
+          cellHeight= {290} 
+          spacing= {25} 
+          cols={3.5}>
         {stores.map((store) => (
           <GridListTile key={store.store_id}>
-            <img src={store.avatar_url} alt={store.store_name}/>
             <Link to={`/store/${store.store_id}`}>
-              <GridListTileBar
+            <img src={store.avatar_url} alt={store.store_name} style={{width: '90%' , height: '80%'}}/>
+              {/* <GridListTileBar
                 title={store.store_name}
                 classes={{
                   root: classes.titleBar,
@@ -104,7 +107,7 @@ export default function SingleLineGridListItems() {
                   <IconButton aria-label={`star ${store.store_name}`}>
                   </IconButton>
                 }
-              />
+              /> */}
             </Link>
           </GridListTile>
         ))}
