@@ -1,10 +1,12 @@
 import React, { useState, Fragment, useContext } from 'react';
 import { TextField } from '@material-ui/core';
 import { checkoutFormStyles } from '../styling/checkoutFormStyles';
+// import { CustomerContext } from '../../Contexts/CustomerContext';
 
 
 const AddressForm = () => {
     const classes = checkoutFormStyles();
+    // const { isLoggedIn, logCustomerIn } = useContext(CustomerContext);
     return (
         <Fragment>
             <TextField
