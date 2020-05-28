@@ -24,7 +24,8 @@ const getCustomerByEmail = async (email) => {
         city,
         state,
         zip_code,
-        avatar_url
+        avatar_url,
+        password
         FROM customers
     WHERE email = $/email/;
         `;
