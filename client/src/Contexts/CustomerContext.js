@@ -1,30 +1,34 @@
-import React, { createContext,useReducer, useEffect } from 'react';
+import React, { createContext, useReducer, useEffect } from 'react';
 import { LoginReducer } from '../Components/Reducers/reducers';
 
-//reset-remove user for logout route
-//calls all hooks that set information to empty/null
+//listener function checks browser localStorage to see if the key 'customer' exists
+//if it does, it will take the string thats saved under customer, turn it into a JSON object and return that object
+//if not, it will return an empty object that we will use when we modify the state in the store
 const listener = () => {
-    if(window.localStorage.getItem('customer') !== null) {
+    if (window.localStorage.getItem('customer') !== null) {
         return JSON.parse(
             window.localStorage.getItem('customer')
         )
     }
     return {}
-}
-
+};
+//we initalize the beginning state for our context file/ hook which is an empty object
 const initialState = {
     user: {}
-}
+};
 export const Context = createContext(initialState);
-
-export const Store = ({children}) => {
+//Store function declares the state (that will be shared amongst components) and the dispatch function (that is able to modify the state with an action and object)\
+//is is made using the react hook useReducer, which takes in two arguments 
+//-- a reducer, imported from another file 
+//-- and an initalState, which is declared previously
+export const Store = ({ children }) => {
     const [state, dispatch] = useReducer(LoginReducer, initialState);
-     
-    useEffect(() => { 
+//the useEEffect hook here takes an object from the listener function that can be either a user that is stored in the LocalStorage or an empty object, meaning there is no user stored / logged in and they are anonymous
+    useEffect(() => {
         let data = listener();
-        dispatch({type: 'USER_CLICKED_LOGIN', payload: data});
-    },[])
-
+        dispatch({ type: 'USER_CLICKED_LOGIN', payload: data });
+    }, []);
+//every time the store mounts (since it is a context wrapper, it will mount across our app) the useEffect hook will read the localStorage to see if there is a user logged it or not. it will then modify our state in the store with the action USER_CLICKED_LOGIN and the objet containing user info or empty object
     return (
         <Context.Provider value={[state, dispatch]}>
             {children}
@@ -33,87 +37,6 @@ export const Store = ({children}) => {
 };
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-// const initalState = ({
-//     isLoggedIn: false,
-//     customerId: null,
-//     customerFirstname: null,
-//     customerLastname: null,
-//     customerPhoneNumber: null,
-//     customerEmail: null,
-//     customerAddress: null,
-//     customerCity: null,
-//     customerState: null,
-//     customerZip: null,
-//     customerAvatar: null
-// });
-
-
-// const CustomerContextProvider = (props) => {
-//     const [logCustomerIn, setLogCustomerIn] = useState(initalState)
-
-//     const logUserIn = (customerObj) => {
-//         const { 
-//             customer_id, 
-//             firstname, 
-//             lastname, 
-//             phone_number, 
-//             email, 
-//             address, 
-//             city, 
-//             state, 
-//             zip_code, 
-//             avatar_url 
-//         } = customerObj;
-
-//         setLogCustomerIn({
-//             isLoggedIn: true,
-//             customerId: customer_id,
-//             customerFirstname: firstname,
-//             customerLastname: lastname,
-//             customerPhoneNumber: phone_number,
-//             customerEmail: email,
-//             customerAddress: address,
-//             customerCity: city,
-//             customerZip: zip_code,
-//             customerState: state,
-//             customerAvatar: avatar_url
-//         });
-//         console.log('working in context file line 39', logCustomerIn)
-//     };
-
-//     const logUserOut = () => {
-//         setLogCustomerIn(initalState)
-//     };
-//     const setCustomerContext = async (customerObj) => {
-//         const { email } = customerObj;
-//         try {
-//              await axios.get(`customers/email/${email}`)
-//              .then((res) => logUserIn(res.data.payload));
-//         }
-//         catch (err) {
-//             console.log(err)
-//         }
-//     };
-//     return (
-//         <CustomerContext.Provider value={{
-//             setCustomerContext,
-//             logCustomerIn,
-//             logUserOut
-//         }}>
-//             {props.children}
-//         </CustomerContext.Provider >
-//     )
-// };
-//export default CustomerContextProvider;
+//To-do:
+//reset-remove user for logout route
+//calls all hooks that set information to empty/null
