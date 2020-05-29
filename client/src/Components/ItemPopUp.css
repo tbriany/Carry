@@ -1,32 +1,3 @@
-
-
-.MuiExpansionPanel-rounded {
-    width:50%;
-}
-
-.MuiExpansionPanelSummary-root.Mui-expanded {
-    border-bottom: 1px solid lightgray;
-}
-
-.makeStyles-paper-4 {
-    color: black;
-}
-
-.MuiExpansionPanelSummary-root {
-    margin: 16px;
-}
-
-
-.MuiExpansionPanelSummary-root {
-    margin-top: 15px;
-}
-
-
-
-.MuiButton-contained {
-    background-color:#caa887;
-}
-
 .quantityInput{
     padding: 13px;
     margin-top: 24px;
@@ -37,24 +8,59 @@
 .description{
     display: flex;
     justify-content: flex-end;
-   
-
 }
 
-.item-name, .item-color, .item-price {
+.item-brand,.item-name, .item-color, .item-price {
     display: flex;
     justify-content: flex-start;
     margin: 4px;
     text-align: start;
+    padding-top: 10px;
 }
 
+.item-brand{
+    font: 35px Fira Sans sans-serif;
+    margin: 0px;
+}
 .item-name {
     font: 25px Fira Sans sans-serif;
 }
 
 .item-color, .item-price {
-    font: 20px Fira Sans sans-serif;
+    font: 18px Fira Sans sans-serif;
+}
+.item-color{
+    margin-bottom: 25px;
+}
+
+.product-info{
+    height: '85vh'; width: '100% ';
+    display: flex;
+}
+
+.productQtySize{
+    border-top: 1px solid #eed7c1;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: flex;
+}
+
+.submitButton{
+    padding-top: '20px';
+    display: flex;
+}
+.itemPopup-descript, .itemPopup-materials{
+    padding-top: 5px;
+    font: 18px Fira Sans sans-serif;
+    margin: 5px;
 }
 
 
+@media only screen and (max-width: 700px) {
+    .MuiGrid-grid-sm-9 {
+    flex-grow: 0;
+     max-width: 66.666667%;
+     flex-basis: 66.666667%;
+    }
+}
 

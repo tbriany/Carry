@@ -64,19 +64,22 @@ const useStyles = makeStyles((theme) => ({
       display: 'none',
     },
   },
-  popover: {
-    pointerEvents: 'none',
-  },
-  paper: {
-    padding: theme.spacing(1),
-  },
+}));
+
+const popoverTheme = makeStyles((theme) => ({
+    popover: {
+        pointerEvents: 'none',
+    },
+    paper: {
+        padding: theme.spacing(1),
+    },
 }));
 
 
-function Navbar(props) {
-  const classes = useStyles();
+function Navbar() {
   const [state] = useContext(Context);
-
+  const classes = useStyles();
+  const popoverClasses = popoverTheme()
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const [popOver, setPopOver] = React.useState(null);
@@ -200,7 +203,15 @@ function Navbar(props) {
   );
   console.log('state', state)
   return (
-    <div className={classes.grow} >
+    <div className={classes.grow} 
+    style={{
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      zIndex: 9000,
+      width: '100%'
+    }}
+     >
       <AppBar position="static" className={classes.appBar}>
         <Toolbar>
           <Link to='/'
@@ -242,23 +253,27 @@ function Navbar(props) {
             </Typography>
             <Popover
               id="mouse-over-popover"
-              className={classes.popover}
+              className={popoverClasses.popover}
               classes={{
-                paper: classes.paper
+                paper: popoverClasses.paper
               }}
               open={open}
+              anchorEl={popOver}
               anchorOrigin={{
                 vertical: "top",
                 horizontal: "right",
-                marginTop: "5px"
+               
               }}
               transformOrigin={{
                 vertical: "top",
                 horizontal: "right"
+                
               }}
               onClose={handlePopoverClose}
               disableRestoreFocus
-
+              style={{
+                zIndex: 9001, 
+              }}
             >
               <CartPopUp />
             </Popover>

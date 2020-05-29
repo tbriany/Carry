@@ -9,6 +9,7 @@ import CategoryPage from './Components/LandingPageComponents/CategoryPage'
 import CheckoutCart from './Components/CheckoutCart'
 import ItemDetailsContextProvider from './Contexts/ItemDetailsContexts';
 import { Store } from './Contexts/CustomerContext';
+import CheckoutCartContextProvider from './Contexts/CheckoutCartContext';
 import LandingContextProvider from './Contexts/LandingPageDetailsContext'
 import Login from './Components/Login';
 import Signup from './Components/Signup';
@@ -23,6 +24,7 @@ function App() {
       <LandingContextProvider>
       <ItemDetailsContextProvider>
       <Store>
+      <CheckoutCartContextProvider>
         <Navbar />
       <Switch>
           <Route exact path="/" component={Landing} />
@@ -37,6 +39,7 @@ function App() {
           <Route exact path="/store/:id" component={StorePage} />
           <Route path="/store/:id/:category_name" component={ProductsPage} />
       </Switch>
+     </CheckoutCartContextProvider>
      </Store>
      </ItemDetailsContextProvider>
     </LandingContextProvider>

@@ -74,7 +74,7 @@ export default function ProductsDisplay({getProductId, products}) {
           <Grid container justify="center" spacing={5}>
             {products.map((value) => (
 
-              <Button onClick={toggleDrawer("right", true, value.product_id)}>
+              <Button key = {value.product_id} onClick={toggleDrawer("right", true, value.product_id)}>
 
                 <Grid key={value} item>
                   <img alt="backpack" src={value.product_image_url} className={classes.image}></img>
