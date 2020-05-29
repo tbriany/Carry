@@ -15,6 +15,7 @@ import Signup from './Components/Signup';
 import StorePage from './Components/StorePage/storePage';
 import ProductsPage from './Components/ProductPage/productsPage';
 import CheckoutLanding from './Components/CheckoutLanding.jsx'
+import ProtectedRoute from './Components/util/ProtectedRoute';
 
 function App() {
   return (
@@ -25,6 +26,8 @@ function App() {
         <Navbar />
       <Switch>
           <Route exact path="/" component={Landing} />
+          {/* <ProtectedRoute exact path='/checkout' component={Checkout} /> */}
+          {/* <ProtectedRoute exact path='/checkout' component={CheckoutLanding} /> */}
           <Route exact path="/checkout" component={CheckoutLanding} />
           <Route exact path="/checkout" component={Checkout} />
           <Route exact path="/popup/:product_id" component={ItemPopUp} />
@@ -42,3 +45,5 @@ function App() {
     }
     
 export default App;
+
+//merge both checkout components 
