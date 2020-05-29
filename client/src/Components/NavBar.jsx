@@ -15,8 +15,9 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 import Popover from '@material-ui/core/Popover';
 import customTheme from './styling/customTheme';
 import CartPopUp from './CartPopUp';
-import { Context } from '../Contexts/CustomerContext';
+import { Context, Store } from '../Contexts/CustomerContext';
 import ProductsPage from './ProductPage/productsPage';
+import { useRadioGroup } from '@material-ui/core';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -72,8 +73,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-function Navbar() {
+function Navbar(props) {
   const classes = useStyles();
+  const [state] = useContext(Context);
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const [popOver, setPopOver] = React.useState(null);
@@ -120,7 +123,7 @@ function Navbar() {
       onClose={handleMenuClose}
       className={classes.iconStyling}
       >
-      {/* {props ? 
+      {!state.user.isAnon ? 
       <div> <MenuItem onClick={handleMenuClose} className={classes.customerMenu}>
         <Link to='/orders' style={{ textDecoration: 'none', color: customTheme.palette.secondary.dark }}>
           My Orders
@@ -143,7 +146,7 @@ function Navbar() {
             Sign Up
           </Link>
         </MenuItem>
-      </div>} */}
+      </div>}
       </Menu>
 
 
@@ -195,6 +198,7 @@ function Navbar() {
       </MenuItem>
     </Menu>
   );
+  console.log('state', state)
   return (
     <div className={classes.grow} >
       <AppBar position="static" className={classes.appBar}>
