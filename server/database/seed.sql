@@ -110,18 +110,18 @@ CREATE TABLE productImage_id(
 
 --checkouts
 CREATE TABLE checkout_cart  (
-     checkout_id SERIAL PRIMARY KEY,
+     checkout_cart_id SERIAL PRIMARY KEY,
      session_id VARCHAR,
      store_id INT REFERENCES stores(store_id)
 );
 
 --checkoutcart
 CREATE TABLE checkout_items(
-    checkoutCart_id SERIAL PRIMARY KEY,
+    checkout_items_id SERIAL PRIMARY KEY,
     product_id  INT REFERENCES products(product_id),
     size VARCHAR,
     quantity INT,
-    checkout_id INT REFERENCES checkout_cart(checkout_id) 
+    checkout_cart_id INT REFERENCES checkout_cart(checkout_cart_id) 
 );
 
 -- Orders 
