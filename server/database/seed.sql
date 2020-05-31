@@ -107,17 +107,21 @@ CREATE TABLE productImage_id(
 --Checkout Cart
 
 
-CREATE TABLE checkoutCart(
+
+--checkouts
+CREATE TABLE checkout_cart  (
+     checkout_id SERIAL PRIMARY KEY,
+     session_id VARCHAR,
+     store_id INT REFERENCES stores(store_id)
+);
+
+--checkoutcart
+CREATE TABLE checkout_items(
     checkoutCart_id SERIAL PRIMARY KEY,
     product_id  INT REFERENCES products(product_id),
     size VARCHAR,
-    quantity INT
-);
-
-CREATE TABLE checkouts (
-     checkout_id SERIAL PRIMARY KEY,
-     session_id VARCHAR,
-     cart VARCHAR
+    quantity INT,
+    checkout_id INT REFERENCES checkout_cart(checkout_id) 
 );
 
 -- Orders 
@@ -125,7 +129,7 @@ CREATE TABLE checkouts (
 CREATE TABLE receipts(
     receipt_id SERIAL PRIMARY KEY,
     customer_id INT REFERENCES customers(customer_id),
-    reciept VARCHAR 
+    reciept JSON 
 );
 
 CREATE TABLE orders(
@@ -405,6 +409,8 @@ VALUES
 -- SELECT *
 -- FROM receipts;
 -- SELECT *
--- FROM checkoutCart;
+-- FROM checkout_cart;
+-- SELECT * FROM 
+-- checkout_items;
 
 
