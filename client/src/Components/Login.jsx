@@ -16,9 +16,12 @@ import {Context} from '../Contexts/CustomerContext';
 import { loginStyles } from './styling/loginStyles';
 
 const Login = () => {
+    //imports the globla state and dispatch to modify global state 
+    //dispatch is a function that takes in an Action and object to add to the state
     const [state, dispatch] = useContext(Context);
-
+    //imports styling for components
     const classes = loginStyles();
+    //declaring hooks that hold values for inputs as object keys
     const [customerEmail, setCustomerEmail] = useState({
         email: '',
         error: false,
@@ -30,10 +33,7 @@ const Login = () => {
         error: false,
         errorText: ''
     });
-
-    //||||||||||||||||||
-    // input handlers 
-    //||||||||||||||||||
+//input handlers that modify input hooks through keys & events
     const handleInputChange = (key) => (e) => {
         key === 'email' ? setCustomerEmail({ ...customerEmail, [key]: e.target.value }) : setCustomerPassword({ ...customerPassword, [key]: e.target.value })
     };
@@ -50,8 +50,7 @@ const Login = () => {
         handleEmailError(true, 'Wrong email or password.');
         handlePasswordError(true, 'Wrong email or password.')
     };
-
-
+//login function that fires off authentication post and dispatch reducer 
     const handleLogin = () => {
         let email = customerEmail.email;
         let password = customerPassword.password;
