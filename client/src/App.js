@@ -3,10 +3,8 @@ import "./App.css";
 import { Switch, Route, withRouter, Redirect } from 'react-router-dom'
 import Landing from "./Components/Landing";
 import Navbar from './Components/NavBar';
-import Checkout from './Components/Checkout';
 import ItemPopUp from './Components/ItemPopUp'
 import CategoryPage from './Components/LandingPageComponents/CategoryPage'
-import CheckoutCart from './Components/CheckoutCart'
 import CheckoutCartContextProvider from './Contexts/CheckoutCartContext';
 import CustomerContextProvider from './Contexts/CustomerContext';
 import LandingContextProvider from './Contexts/LandingPageDetailsContext'
@@ -26,7 +24,6 @@ function App() {
       <Switch>
           <Route exact path="/" component={Landing} />
           <Route exact path="/checkout" component={CheckoutLanding} />
-          <Route exact path="/checkout" component={Checkout} />
           <Route exact path="/popup/:product_id" component={ItemPopUp} />
           <Route exact path="/login" component={Login}/>
           <Route exact path="/signup" component={Signup}/>
