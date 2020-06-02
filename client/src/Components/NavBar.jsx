@@ -56,7 +56,7 @@ function Navbar() {
   const open = Boolean(popOver);
   const menuId = 'primary-search-account-menu';
   const logUserOut = () => {
-    dispatch({type:'USER_CLICKED_LOGOUT', payload: {}});
+    dispatch({ type: 'USER_CLICKED_LOGOUT', payload: {} });
     window.localStorage.setItem('customer', JSON.stringify({}));
   }
   const renderMenu = (
@@ -70,35 +70,34 @@ function Navbar() {
       onClose={handleMenuClose}
       className={classes.iconStyling}
     >
-      {!state.user.isAnon ?
-        <div> 
-          <MenuItem onClick={handleMenuClose} className={classes.customerMenu}>
-            <Link to='/orders' style={{ textDecoration: 'none', color: customTheme.palette.secondary.dark }}>
-            My Orders
-            </Link>
-        </MenuItem>
-        <MenuItem onClick={handleMenuClose} className={classes.customerMenu}>
-            <Link to='/account' style={{ textDecoration: 'none', color: customTheme.palette.secondary.dark }}>
-              My Account
-            </Link>
-        </MenuItem>
-        <MenuItem onClick={handleMenuClose} className={classes.customerMenu}>
-            <Link to='/' style={{ textDecoration: 'none', color: customTheme.palette.secondary.dark }} onClick={logUserOut}>
-              Logout
-             </Link>
-        </MenuItem>
-        </div>
-        :
+      {state.user.isAnon ?
         <div>
           <MenuItem onClick={handleMenuClose} className={classes.customerMenu}>
             <Link to='/login' style={{ textDecoration: 'none', color: customTheme.palette.secondary.dark }}>
               Login
-        </Link>
+            </Link>
           </MenuItem>
           <MenuItem onClick={handleMenuClose} className={classes.customerMenu}>
             <Link to='/signup' style={{ textDecoration: 'none', color: customTheme.palette.secondary.dark }}>
               Sign Up
+            </Link>
+          </MenuItem>
+        </div>
+        : <div>
+          <MenuItem onClick={handleMenuClose} className={classes.customerMenu}>
+            <Link to='/orders' style={{ textDecoration: 'none', color: customTheme.palette.secondary.dark }}>
+              My Orders
           </Link>
+          </MenuItem>
+          <MenuItem onClick={handleMenuClose} className={classes.customerMenu}>
+            <Link to='/account' style={{ textDecoration: 'none', color: customTheme.palette.secondary.dark }}>
+              My Account
+          </Link>
+          </MenuItem>
+          <MenuItem onClick={handleMenuClose} className={classes.customerMenu}>
+            <Link to='/' style={{ textDecoration: 'none', color: customTheme.palette.secondary.dark }} onClick={logUserOut}>
+              Logout
+           </Link>
           </MenuItem>
         </div>
       }
