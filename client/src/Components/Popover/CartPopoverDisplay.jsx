@@ -39,7 +39,7 @@ const CartPopoverDisplay = ({ cartTotal, checkoutCart }) => {
                                 <Grid container spacing={1} >
                                     <Grid style={{ padding: "0px" }} item xs={4} >
                                         <Paper
-                                            style={{ display: "flex", justifyContent: "flex-start", flexDirection: "column", alignItems: "flex-start", boxShadow: " 1px 1px 1px white", margin: "0px", }}
+                                            style={{ display: "flex", justifyContent: "flex-start", flexDirection: "column", alignItems: "flex-start", boxShadow: " 1px 1px 1px white", padding: "0px",  }}
                                             className={classes.paper}
                                         >
                                             <img style={{ height: "50px", margin: "0px" }} src={product.product_image_url} alt={product.product_name} ></img>
@@ -70,7 +70,7 @@ const CartPopoverDisplay = ({ cartTotal, checkoutCart }) => {
                                 }}
                                 className={classes.paper}
                             >
-                                <p style={{ margin: "0px", fontSize: "x-small" }} > ${product.cartquantity} </p>
+                                <p style={{ margin: "0px", fontSize: "x-small" }} > ${product.producttotal} </p>
                             </Paper>
                         </Grid>
                     </Grid>
