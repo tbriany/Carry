@@ -3,11 +3,8 @@ import "./App.css";
 import { Switch, Route, withRouter, Redirect } from 'react-router-dom'
 import Landing from "./Components/Landing";
 import Navbar from './Components/NavBar';
-import Checkout from './Components/Checkout';
 import ItemPopUp from './Components/ItemPopUp'
 import CategoryPage from './Components/LandingPageComponents/CategoryPage'
-import CheckoutCart from './Components/CheckoutCart'
-import ItemDetailsContextProvider from './Contexts/ItemDetailsContexts';
 import { Store } from './Contexts/CustomerContext';
 import CheckoutCartContextProvider from './Contexts/CheckoutCartContext';
 import LandingContextProvider from './Contexts/LandingPageDetailsContext'
@@ -22,7 +19,7 @@ function App() {
   return (
     <div className="App">
       <LandingContextProvider>
-      <ItemDetailsContextProvider>
+   
       <Store>
       <CheckoutCartContextProvider>
         <Navbar />
@@ -31,7 +28,6 @@ function App() {
           {/* <ProtectedRoute exact path='/checkout' component={Checkout} /> */}
           {/* <ProtectedRoute exact path='/checkout' component={CheckoutLanding} /> */}
           <Route exact path="/checkout" component={CheckoutLanding} />
-          <Route exact path="/checkout" component={Checkout} />
           <Route exact path="/popup/:product_id" component={ItemPopUp} />
           <Route exact path="/login" component={Login}/>
           <Route exact path="/signup" component={Signup}/>
@@ -41,7 +37,7 @@ function App() {
       </Switch>
      </CheckoutCartContextProvider>
      </Store>
-     </ItemDetailsContextProvider>
+
     </LandingContextProvider>
     </div>
       );

@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const checkoutQueries = require('../queries/checkoutCartQueries')
+const receiptsQueries = require('../queries/receiptsQueries')
 const { handleErrors } = require('../helpers/helpers')
 
 router.get('/', async (req, res, next) => {
@@ -16,13 +17,37 @@ router.get('/', async (req, res, next) => {
     }
 })
 
-router.get("/productId/:productId", async (req, res, next) => {
+
+router.get('/session/', async (req, res, next) => {
+    const sessionId = req.session.id
     try {
-        const productId = parseInt(req.params.productId)
-        const checkoutCartByProdId = await checkoutQueries.getProductIdFromCart(productId);
+        let allCheckoutCart = await checkoutQueries.getAllFromCartSession(sessionId)
         res.status(200).json({
             status: "success",
-            message: `Checkout Cart ${checkoutCartByProdId.checkoutcart_id} retrieved`,
+            message: 'All checkout cart recieved',
+            payload: allCheckoutCart
+        })
+    } catch (err) {
+        handleErrors(res, err);
+    }
+})
+
+
+router.get("/items/productId/:productId/:size", async (req, res, next) => {
+
+    try {
+        const sessionId = req.session.id
+        const { productId, size } = req.params
+        const productFromCart = {
+            product_id: parseInt(productId),
+            size: size,
+        }
+        const getStoreId = await checkoutQueries.getStoreIdByProdId(parseInt(productId))
+
+        const checkoutCartByProdId = await checkoutQueries.getProductFromCartSession(productFromCart, sessionId, getStoreId);
+        res.status(200).json({
+            status: "success",
+            // message: `Checkout Cart ${checkoutId.checkout_cart_id} retrieved`,
             payload: checkoutCartByProdId
         });
     } catch (err) {
@@ -30,44 +55,39 @@ router.get("/productId/:productId", async (req, res, next) => {
     }
 });
 
-router.get("/checkoutTotal", async (req, res, next) => {
+
+router.get("/items/checkoutTotal", async (req, res, next) => {
+    const sessionId = req.session.id
     try {
-        const checkoutTotal = await checkoutQueries.getSumOfCheckout();
+        let checkout = await receiptsQueries.getCheckoutCartBySessionId(sessionId)
+        const checkoutTotalBySession = await checkoutQueries.getSumOfCheckout( checkout.checkout_cart_id);
         res.status(200).json({
             status: "success",
             message: `Checkout Cart Total retrieved`,
-            payload: checkoutTotal
+            payload: checkoutTotalBySession
         });
     } catch (err) {
         handleErrors(res, err);
     }
 })
 
-router.get("/:id", async (req, res, next) => {
-    try {
-        const id = parseInt(req.params.id)
-        const checkoutCartById = await checkoutQueries.getCheckoutCartId(id);
-
-        res.status(200).json({
-            status: "success",
-            message: `Checkout Cart ${checkoutCartById} retrieved`,
-            payload: checkoutCartById
-        });
-    } catch (err) {
-        handleErrors(t, err);
-    }
-});
 
 
-
-router.post("/add", async (req, res, next) => {
+router.post("/items/add", async (req, res, next) => {
     try {
         const { product_id, size, quantity } = req.body;
-        const response = await checkoutQueries.addToCart({ product_id, size, quantity });
-
+        const sessionId = req.session.id
+        const checkoutCart = {
+            product_id: parseInt(product_id),
+            size: size,
+            quantity: parseInt(quantity),
+            sessionId: req.session.id
+        }
+        const getStoreId = await checkoutQueries.getStoreIdByProdId(parseInt(product_id))
+        const response = await checkoutQueries.addToCart(checkoutCart, sessionId, getStoreId.product_id);
         res.status(200).json({
             status: "success",
-            message: `Checkout cart ${response.checkoutCart_id} successfully added`,
+            message: `Checkout cart ${response.checkout_items_id} successfully added`,
             payload: response
         });
     } catch (err) {
@@ -75,15 +95,26 @@ router.post("/add", async (req, res, next) => {
     }
 });
 
-router.patch("/edit/:checkoutCart_id", async (req, res, next) => {
+
+
+router.patch("/items/edit", async (req, res, next) => {
     try {
-        const checkoutCart_id = parseInt(req.params.checkoutCart_id)
+        const sessionId = req.session.id
+        const checkoutItemsId = parseInt(req.params.checkoutItemsId)
         const { product_id, size, quantity } = req.body
-        const updatedCart = await checkoutQueries.updateCheckoutCart({ product_id, size, quantity, checkoutCart_id });
+
+        let checkout = await receiptsQueries.getCheckoutCartBySessionId(sessionId)
+        let cartItems = {
+            product_id: parseInt(product_id),
+            size: size,
+            quantity: parseInt(quantity),
+            checkout_cart_id: checkout.checkout_cart_id
+        }
+        const updatedCart = await checkoutQueries.updatecheckoutItems(cartItems);
 
         res.status(200).json({
             status: "success",
-            message: `Checkout ${checkoutCart_id} was edited`,
+            message: `Checkout ${checkoutItemsId} was edited`,
             payload: updatedCart
         });
     } catch (err) {
@@ -91,10 +122,11 @@ router.patch("/edit/:checkoutCart_id", async (req, res, next) => {
     }
 });
 
-router.delete("/delete/:id", async (req, res, next) => {
+
+router.delete("/items/delete/:id", async (req, res, next) => {
     try {
         const checkoutCart_id = parseInt(req.params.id)
-        const deletedCart = await checkoutQueries.deleteCheckout(checkoutCart_id)
+        const deletedCart = await checkoutQueries.deleteCheckoutItems(checkoutCart_id)
 
         res.status(200).json({
             status: 'success',

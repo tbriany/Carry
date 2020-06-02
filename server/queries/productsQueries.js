@@ -3,9 +3,9 @@ const db = require('../database/db')
 
 const getProductImageById = async (id) => {
     const getQuery = `
-    SELECT products.product_id, products.product_name, products.product_price, products.product_description, products.quantity, 
+    SELECT products.product_id, products.product_name, products.product_price, products.product_description,  
     products.store_id, brands.*, categories.category_name, materials.material_name, colors.color_name, product_type.product_type_name, productImage_id.*,
-    array_agg(sizes.product_size) AS product_size
+    array_agg(product_inventory.product_size) AS product_size
     FROM products 
     JOIN brands ON brands.brand_id = products.brand_id
     JOIN categories ON categories.category_id = products.category_id
@@ -13,7 +13,7 @@ const getProductImageById = async (id) => {
     JOIN colors ON colors.color_id = products.color_id
     JOIN product_type ON product_type.product_type_id = products.product_type
     JOIN  productImage_id  ON productImage_id.product_id = products.product_id
-    JOIN sizes ON sizes.product_id = products.product_id 
+    JOIN product_inventory ON product_inventory.product_id = products.product_id 
     WHERE products.product_id = $/id/
     GROUP BY products.product_id, brands.brand_id, categories.category_name,materials.material_name,colors.color_name, product_type.product_type_name,
     productimage_id.product_image_id
@@ -23,9 +23,9 @@ const getProductImageById = async (id) => {
 
 const getProductById = async (id) => {
     const getQuery = `
-    SELECT products.product_id, products.product_name, products.product_price, products.product_description, products.quantity, brands.*, categories.*, materials.material_name, colors.color_name, product_type.product_type_name, 
-    productImage_id.*,
-    array_agg(sizes.product_size) AS product_size
+    SELECT products.product_id, products.product_name, products.product_price, products.product_description,  brands.*, categories.*, materials.material_name, colors.color_name, product_type.product_type_name, 
+    productImage_id.*, 
+    array_agg(product_inventory.product_size) AS product_size
     FROM products 
     JOIN brands ON brands.brand_id = products.brand_id
     JOIN categories ON categories.category_id = products.category_id
@@ -33,19 +33,17 @@ const getProductById = async (id) => {
     JOIN colors ON colors.color_id = products.color_id
     JOIN product_type ON product_type.product_type_id = products.product_type
     JOIN  productImage_id  ON productImage_id.product_id = products.product_id
-    JOIN sizes ON sizes.product_id = products.product_id 
-
+    JOIN product_inventory ON product_inventory.product_id = products.product_id 
     WHERE products.product_id = $/id/
     GROUP BY products.product_id, brands.brand_id, categories.category_id,materials.material_name,colors.color_name, product_type.product_type_name,
     productimage_id.product_image_id
     `
-
     return await db.one(getQuery, { id });
 }
 
 // const getProductByType = async (product_type) => {
 //     const getQuery = `
-//     SELECT products.product_id, products.product_name, products.product_price, products.product_description, products.quantity, brands.brand_name, categories.category_name, materials.material_name, colors.color_name, product_type.product_type_name
+//     SELECT products.product_id, products.product_name, products.product_price, products.product_description, brands.brand_name, categories.category_name, materials.material_name, colors.color_name, product_type.product_type_name
 //     FROM products 
 //     JOIN brands ON brands.brand_id = products.brand_id
 //     JOIN categories ON categories.category_id = products.category_id
@@ -74,15 +72,15 @@ const getProductByName = async (name) => {
 
 const getProductBySize = async (size) => {
     const getQuery = `
-    SELECT products.product_id, product_name, product_price, product_description, quantity, brand_name, category_name, material_name, color_name, product_type_name, sizes.*
+    SELECT products.product_id, product_name, product_price, product_description, quantity, brand_name, category_name, material_name, color_name, product_type_name, product_inventory.*
     FROM products 
     JOIN brands ON brands.brand_id = products.brand_id
     JOIN categories ON categories.category_id = products.category_id
     JOIN materials ON materials.material_id = products.material_id
     JOIN colors ON colors.color_id = products.color_id
     JOIN product_type ON product_type.product_type_id = products.product_type
-    JOIN sizes ON sizes.product_id = products.product_id 
-    WHERE sizes.product_size = $/size/;
+    JOIN product_inventory ON product_inventory.product_id = products.product_id 
+    WHERE product_inventory.product_size = $/size/;
     `
     return await db.any(getQuery, { size });
 //     return await db.any(getQuery, { name });
@@ -102,8 +100,8 @@ const getProductByColor = async (color) => {
     WHERE colors.color_name= $/color/;
     `
     return await db.any(getQuery, { color });
-//     JOIN sizes ON sizes.product_id = products.product_id 
-//     WHERE sizes.product_size = $/size/;
+//     JOIN product_inventory ON product_inventory.product_id = products.product_id 
+//     WHERE product_inventory.product_size = $/size/;
 //     `
 //     return await db.any(getQuery, { size });
 }
@@ -126,9 +124,9 @@ const getProductByBrand = async (brand) => {
 
 const getProductByCategory = async (category, store_id) => {
     const getQuery = `
-    SELECT products.product_id, products.product_name, products.product_price, products.product_description, products.quantity, products.store_id,
+    SELECT products.product_id, products.product_name, products.product_price, products.product_description,  products.store_id,
     brands.brand_name, categories.category_name, materials.material_name, colors.color_name, product_type.product_type_name, productImage_id.*,
-    array_agg(sizes.product_size) AS product_size
+    array_agg(product_inventory.product_size) AS product_size
     FROM products 
     JOIN brands ON brands.brand_id = products.brand_id
     JOIN categories ON categories.category_id = products.category_id
@@ -136,7 +134,7 @@ const getProductByCategory = async (category, store_id) => {
     JOIN colors ON colors.color_id = products.color_id
     JOIN product_type ON product_type.product_type_id = products.product_type
     JOIN  productImage_id  ON productImage_id.product_id = products.product_id
-    JOIN sizes ON sizes.product_id = products.product_id 
+    JOIN product_inventory ON product_inventory.product_id = products.product_id 
     WHERE categories.category_name = $/category/ AND products.store_id = $/store_id/
     GROUP BY products.product_id, brands.brand_id, categories.category_name,materials.material_name,colors.color_name, product_type.product_type_name,
     productimage_id.product_image_id
@@ -145,10 +143,10 @@ const getProductByCategory = async (category, store_id) => {
 }
 
 const getAllProductsByCategory = async (category_name) =>{
-    const getQuery = `SELECT products.product_id, products.product_name, products.product_price, products.product_description, products.quantity, products.store_id,
+    const getQuery = `SELECT products.product_id, products.product_name, products.product_price, products.product_description,  products.store_id,
     brands.brand_name, categories.category_name, materials.material_name, colors.color_name, 
     stores.store_name,product_type.product_type_name, productImage_id.*,
-    array_agg(sizes.product_size) AS product_size
+    array_agg(product_inventory.product_size) AS product_size
     FROM products 
     JOIN brands ON brands.brand_id = products.brand_id
     JOIN categories ON categories.category_id = products.category_id
@@ -156,7 +154,7 @@ const getAllProductsByCategory = async (category_name) =>{
     JOIN colors ON colors.color_id = products.color_id
     JOIN product_type ON product_type.product_type_id = products.product_type
     JOIN  productImage_id  ON productImage_id.product_id = products.product_id
-    JOIN sizes ON sizes.product_id = products.product_id 
+    JOIN product_inventory ON product_inventory.product_id = products.product_id 
     JOIN stores ON stores.store_id = products.store_id
     WHERE categories.category_name = $/category_name/
     GROUP BY products.product_id, brands.brand_id, categories.category_name,materials.material_name,colors.color_name, stores.store_name,product_type.product_type_name,
@@ -167,9 +165,9 @@ const getAllProductsByCategory = async (category_name) =>{
 
 const getProductByType = async (type, store_id) => {
     const getQuery = `
-    SELECT products.product_id, products.product_name, products.product_price, products.product_description, products.quantity, products.store_id,
+    SELECT products.product_id, products.product_name, products.product_price, products.product_description,  products.store_id,
     brands.brand_name, categories.category_name, materials.material_name, colors.color_name, product_type.product_type_name, productImage_id.*,
-    array_agg(sizes.product_size) AS product_size
+    array_agg(product_inventory.product_size) AS product_size
     FROM products 
     JOIN brands ON brands.brand_id = products.brand_id
     JOIN categories ON categories.category_id = products.category_id
@@ -177,7 +175,7 @@ const getProductByType = async (type, store_id) => {
     JOIN colors ON colors.color_id = products.color_id
     JOIN product_type ON product_type.product_type_id = products.product_type
     JOIN productImage_id ON productImage_id.product_id = products.product_id
-    JOIN sizes ON sizes.product_id = products.product_id 
+    JOIN product_inventory ON product_inventory.product_id = products.product_id 
     WHERE product_type.product_type_name = $/type/ AND products.store_id = $/store_id/
     GROUP BY products.product_id, brands.brand_id, categories.category_name,materials.material_name,colors.color_name, product_type.product_type_name,
     productimage_id.product_image_id
@@ -217,7 +215,7 @@ const getSizes = async () => {
     SELECT DISTINCT
      product_size
     FROM
-     sizes`;
+    product_inventory`;
     return await db.any(getSizesQuery);
 };
 
@@ -232,9 +230,9 @@ const getSizes = async () => {
 // }
 const getNewArrivals = async (id) => {
     const getNewArrivalsQuery = `
-    SELECT products.product_id, products.product_name, products.product_price, products.product_description, products.quantity, products.store_id, 
+    SELECT products.product_id, products.product_name, products.product_price, products.product_description,  products.store_id, 
     brands.brand_name, categories.category_name, materials.material_name, colors.color_name, product_type.product_type_name, productImage_id.*,
-    array_agg(sizes.product_size) AS product_size
+    array_agg(product_inventory.product_size) AS product_size
     FROM products 
     JOIN brands ON brands.brand_id = products.brand_id
     JOIN categories ON categories.category_id = products.category_id
@@ -242,7 +240,7 @@ const getNewArrivals = async (id) => {
     JOIN colors ON colors.color_id = products.color_id
     JOIN product_type ON product_type.product_type_id = products.product_type
     JOIN  productImage_id  ON productImage_id.product_id = products.product_id
-    JOIN sizes ON sizes.product_id = products.product_id 
+    JOIN product_inventory ON product_inventory.product_id = products.product_id 
     WHERE products.store_id = $1
     GROUP BY products.product_id, brands.brand_id, 
 categories.category_name,materials.material_name,colors.color_name, product_type.product_type_name,

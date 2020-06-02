@@ -3,7 +3,7 @@ import { makeStyles, AppBar, Toolbar, Paper, Stepper, Step, StepLabel, Typograph
 import { Link } from 'react-router-dom';
 import { CheckoutCartContext } from '../Contexts/CheckoutCartContext';
 import Checkout from './Checkout'
-import CheckoutCart from './CheckoutCart'
+import CheckoutCart from './CheckoutCart/CheckoutCartPage'
 import Grid from '@material-ui/core/Grid';
 
 
