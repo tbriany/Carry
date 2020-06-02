@@ -13,7 +13,7 @@ const CheckoutCart = () => {
 
     useEffect(() => {
         getCheckout()
-        if(checkoutCart.length !== 0){
+        if (checkoutCart.length > 0) {
             handleCartTotal()
         }
     }, [changeinQty, shippingOption])
