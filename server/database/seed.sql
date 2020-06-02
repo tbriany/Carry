@@ -285,7 +285,6 @@ VALUES
 ('Red'),
 ('Yellow'),
 ('Purple'),
-('Pink'),
 ('Gray'),
 ('Brown'),
 ('Orange'),
@@ -299,11 +298,11 @@ INSERT INTO products
 VALUES 
 ('Milan Leather Backpack', 1, 1, 4, 200.00, 5 , 1, 'Small leather backpack. Made in Peru.', 28),
 
-('Milan Mini Backpack', 1, 1, 4, 150.00, 5, 13, 'Mini leather backpack. Made in Peru.', 28),
+('Milan Mini Backpack', 1, 1, 4, 150.00, 5, 12, 'Mini leather backpack. Made in Peru.', 28),
 
 ('Fanny Belt Bag', 1, 1, 4, 295.00, 5, 1, 'Fanny belt bag made for a traveler.', 28),
 
-('Leather Handbag', 1, 1, 4, 200.00, 5, 9, 'A bag perfect for everything', 28),
+('Leather Handbag', 1, 1, 4, 200.00, 5, 8, 'A bag perfect for everything', 28),
 
 ('Joaquina Top', 2, 1 , 1 , 225.00, 7, 4, 'High neck with ribbon neck detail, ideal to wear with jeans and skirts for a sophisticated but casual look', 1),
 
@@ -315,11 +314,11 @@ VALUES
 
 ('Moringa Rose Cream', 3, 1, 3, 39.95, 1, 1, 'This formula offers rich hydration and intensive skin regeneration', 21), 
 
-('Roama Skirt', 2, 1, 1, 130.00, 8, 14, 'Classic go-to pencil mid-length skirt with double slits', 5 ), 
+('Roama Skirt', 2, 1, 1, 130.00, 8, 13, 'Classic go-to pencil mid-length skirt with double slits', 5 ), 
 
 ('Bucket Bag', null, 3, 4, 2000.00, 5, 1, 'Bucket bag with large woven motif', 28), 
 
-('Light Sable Printed Dress', null, 3, 1, 3300.00, 6, 11, 'Light sable printed dress with collar.', 3 ), 
+('Light Sable Printed Dress', null, 3, 1, 3300.00, 6, 10, 'Light sable printed dress with collar.', 3 ), 
 
 ('Pascua Skirt', 2, 1,1, 280.00, 8, 1, 'Long skirt, double slit, hand-loom Alpaca skirt.', 5);
 
