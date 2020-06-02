@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
 
 const CheckoutCartDisplay = ({ cartTotal, checkoutCart, shippingOption, handleDeleteProduct, handleIncrementQty, handleDecrementQty }) => {
     const classes = useStyles();
+
     return (
         <div >
             {checkoutCart.map((product) => {
@@ -32,23 +33,23 @@ const CheckoutCartDisplay = ({ cartTotal, checkoutCart, shippingOption, handleDe
                         <Grid container spacing={2}>
                             <Grid item xs={9} >
                                 <Paper
-                                    style={{ alignItems: "flex-start", padding: "0px" ,  }}
+                                    style={{ alignItems: "flex-start", padding: "0px", }}
                                     className={classes.paper} >
                                     <Grid container spacing={1} style={{ margin: '0px', width: '100%' }}>
                                         <Grid style={{ padding: "0px" }} item xs={4} >
                                             <Paper
-                                                style={{ alignItems: "center", padding: "0px", margin: '0px' , height: '100%'}}
+                                                style={{ alignItems: "center", padding: "0px", margin: '0px', height: '100%' }}
                                                 className={classes.paper}>
                                                 <img className="product_img" src={product.product_image_url} alt={product.product_name} ></img>
                                             </Paper>
                                         </Grid>
-                                    
+
 
                                         <Grid item xs={8} style={{ padding: "0px" }}>
                                             <Paper
-                                                style={{ alignItems: "flex-start", textAlign: "-webkit-left", margin: '0px', padding: "0px", height: '100%' }}
+                                                style={{ alignItems: "flex-start", textAlign: "-webkit-left", margin: '0px', padding: "0px", height: '100%', paddingLeft: "10%" }}
                                                 className={classes.paper}>
-                                                <p className="checkoutCart_product">{product.product_name}</p>
+                                                <h1 className="checkoutCart_product">{product.product_name}</h1>
                                                 <p className="checkoutCart_product"> Color:{product.color_name}</p>
                                                 <p className="checkoutCart_product" >Size:{product.size}</p>
                                                 <p className="checkoutCart_product" >Price:${product.product_price}</p>
@@ -71,7 +72,7 @@ const CheckoutCartDisplay = ({ cartTotal, checkoutCart, shippingOption, handleDe
                             </Grid>
                             <Grid item xs={3} >
                                 <Paper
-                                    style={{ alignItems: "flex-end"  }}
+                                    style={{ alignItems: "flex-end" }}
                                     className={classes.paper}>
                                     <p className="checkoutCart_productTotal" > ${product.producttotal} </p>
                                 </Paper>
@@ -103,7 +104,7 @@ const CheckoutCartDisplay = ({ cartTotal, checkoutCart, shippingOption, handleDe
                     </Grid>
                     <Grid item xs={3} >
                         <Paper style={{ alignItems: "flex-end" }} className={classes.paper}>
-                            <p className="checkoutCart_total" > ${cartTotal} </p>
+                            <p className="checkoutCart_total" >  ${cartTotal} </p>
                         </Paper>
                     </Grid>
                 </Grid>
