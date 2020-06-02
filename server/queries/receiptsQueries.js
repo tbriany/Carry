@@ -5,28 +5,36 @@ const getAll = async () => {
 	return receipts;
 }
 
-const getAllCheckout = async () => {
-	const checkout = await db.any("SELECT * FROM checkouts")
-	return checkout;
+const getAllCheckoutCart = async () => {
+	const checkoutCart = await db.any("SELECT * FROM checkout_cart")
+	return checkoutCart;
 }
 
-const getCheckoutById = async (checkout_id) => {
-	const checkout = await db.one("SELECT * FROM checkouts WHERE checkout_id  = $1", checkout_id)
-	return checkout;
+const getCheckoutCartById = async (checkout_id) => {
+	const checkoutCart = await db.one("SELECT * FROM checkout_cart WHERE checkout_cart_id  = $1", checkout_id)
+	return checkoutCart;
 }
 
-const getCheckoutBySessionId = async (session_id) => {
-	const checkout = await db.any("SELECT * FROM checkouts WHERE session_id = $1", session_id)
-	return checkout;
+const getCheckoutCartBySessionId = async (session_id) => {
+	const checkoutCart = await db.oneOrNone(`SELECT * FROM checkout_cart WHERE session_id = $1
+	`, session_id)
+
+
+	return checkoutCart;
 }
 
-const deleteCheckoutById = async (checkout_id) => {
-	const checkout = await db.one("DELETE FROM checkouts WHERE checkout_id = $1 RETURNING *", checkout_id)
+
+
+
+
+const deleteCheckoutCartById = async (checkout_id) => {
+	const checkout = await db.one("DELETE FROM checkout_cart WHERE checkout_cart_id = $1 RETURNING *", checkout_id)
 	return checkout;
 }
 
 const saveReceipt = async (rec) => {
-	const newReceiptQuery = `
+	const newReceiptQuery = 
+	`
 		INSERT INTO receipts(customer_id, reciept)
 			VALUES($/customer_id/, $/reciept/)
 			RETURNING *
@@ -35,14 +43,26 @@ const saveReceipt = async (rec) => {
 	return newNote;
 }
 
-const saveCheckout = async (cart) => {
-	const newCheckoutQuery = `
-		INSERT INTO checkouts(session_id, cart)
-			VALUES($/session_id/, $/cart/)
-			RETURNING *
+const addCheckoutCart = async (obj) => {
+	const addCheckoutCart = 
 	`
-	const newCheckout = await db.one(newCheckoutQuery, cart)
-	return newCheckout
+		INSERT INTO checkout_cart(
+			session_id, 
+			store_id
+			)
+			VALUES(
+				$/session_id/, 
+				$/store_id/
+				)
+			RETURNING *
+	`;
+
+	
+	
+	const cart = await db.one(addCheckoutCart, obj)
+	return cart;
+
+
 }
 
 const getReceiptsByCustomerId = async (customer_id) => {
@@ -50,24 +70,23 @@ const getReceiptsByCustomerId = async (customer_id) => {
 	return receipts;
 }
 
-const updateCheckout = async (checkoutObj) => {
+const updateCheckoutCart = async (checkoutObj) => {
 	const updateQuery = `
-		UPDATE checkouts
+		UPDATE checkout_cart
 		SET cart = $/cart/
 			RETURNING *`
-
-	return await db.one(updateQuery,  checkoutObj )
+	return await db.one(updateQuery, checkoutObj)
 }
 
 
 module.exports = {
 	getAll,
-	saveCheckout,
+	addCheckoutCart,
 	saveReceipt,
 	getReceiptsByCustomerId,
-	getAllCheckout,
-	getCheckoutById,
-	getCheckoutBySessionId,
-	deleteCheckoutById,
-	updateCheckout
+	getAllCheckoutCart,
+	getCheckoutCartById,
+	getCheckoutCartBySessionId,
+	deleteCheckoutCartById,
+	updateCheckoutCart
 }
