@@ -86,14 +86,14 @@ CREATE TABLE products(
     material_id INT REFERENCES materials(material_id),
     color_id INT REFERENCES colors(color_id),
     product_description VARCHAR,
-    product_type INT REFERENCES product_type(product_type_id),
-    quantity INT
+    product_type INT REFERENCES product_type(product_type_id)
 );
 
-CREATE TABLE sizes(
-    sizes_id SERIAL PRIMARY KEY,
+CREATE TABLE product_inventory(
+    product_inventory_id SERIAL PRIMARY KEY,
     product_id INT REFERENCES products(product_id),
-    product_size VARCHAR
+    product_size VARCHAR,
+    product_quantity INT
 );
 
 CREATE TABLE productImage_id(
@@ -104,18 +104,15 @@ CREATE TABLE productImage_id(
 );
 
 
---Checkout Cart
+-- CheckoutCart
 
-
-
---checkouts
 CREATE TABLE checkout_cart  (
      checkout_cart_id SERIAL PRIMARY KEY,
      session_id VARCHAR,
      store_id INT REFERENCES stores(store_id)
 );
 
---checkoutcart
+
 CREATE TABLE checkout_items(
     checkout_items_id SERIAL PRIMARY KEY,
     product_id  INT REFERENCES products(product_id),
@@ -298,55 +295,63 @@ VALUES
 ('Ivory');
 
 INSERT INTO products
-    (product_name, brand_id, store_id, category_id, product_price, material_id, color_id, product_description, product_type, quantity)
+    (product_name, brand_id, store_id, category_id, product_price, material_id, color_id, product_description, product_type)
 VALUES 
-('Milan Leather Backpack', 1, 1, 4, 200.00, 5 , 1, 'Small leather backpack. Made in Peru.', 28, 5),
+('Milan Leather Backpack', 1, 1, 4, 200.00, 5 , 1, 'Small leather backpack. Made in Peru.', 28),
 
-('Milan Mini Backpack', 1, 1, 4, 150.00, 5, 13, 'Mini leather backpack. Made in Peru.', 28, 5),
+('Milan Mini Backpack', 1, 1, 4, 150.00, 5, 13, 'Mini leather backpack. Made in Peru.', 28),
 
-('Fanny Belt Bag', 1, 1, 4, 295.00, 5, 1, 'Fanny belt bag made for a traveler.', 28, 6),
+('Fanny Belt Bag', 1, 1, 4, 295.00, 5, 1, 'Fanny belt bag made for a traveler.', 28),
 
-('Leather Handbag', 1, 1, 4, 200.00, 5, 9, 'A bag perfect for everything', 28, 7),
+('Leather Handbag', 1, 1, 4, 200.00, 5, 9, 'A bag perfect for everything', 28),
 
-('Joaquina Top', 2, 1 , 1 , 225.00, 7, 4, 'High neck with ribbon neck detail, ideal to wear with jeans and skirts for a sophisticated but casual look', 1, 10),
+('Joaquina Top', 2, 1 , 1 , 225.00, 7, 4, 'High neck with ribbon neck detail, ideal to wear with jeans and skirts for a sophisticated but casual look', 1),
 
-('Zena Top', 2, 1 , 1, 265.00, 8, 7, 'Hand-loomed long sleeve asymmetrical sweater knit', 1, 9),
+('Zena Top', 2, 1 , 1, 265.00, 8, 7, 'Hand-loomed long sleeve asymmetrical sweater knit', 1),
 
-('Onyx Dress', 2, 1, 1, 300.00, 8, 4, 'A perfect classic go-to dress for the transitional weather', 3, 10), 
+('Onyx Dress', 2, 1, 1, 300.00, 8, 4, 'A perfect classic go-to dress for the transitional weather', 3), 
 
-('Moringa Face Oil', 3, 1, 3, 32.95, 1, 1, 'Reduces visible signs of aging, acne scars, psoriasis, and eczema', 21, 4 ),
+('Moringa Face Oil', 3, 1, 3, 32.95, 1, 1, 'Reduces visible signs of aging, acne scars, psoriasis, and eczema', 21 ),
 
-('Moringa Rose Cream', 3, 1, 3, 39.95, 1, 1, 'This formula offers rich hydration and intensive skin regeneration', 21, 4), 
+('Moringa Rose Cream', 3, 1, 3, 39.95, 1, 1, 'This formula offers rich hydration and intensive skin regeneration', 21), 
 
-('Roama Skirt', 2, 1, 1, 130.00, 8, 14, 'Classic go-to pencil mid-length skirt with double slits', 5, 5 ), 
+('Roama Skirt', 2, 1, 1, 130.00, 8, 14, 'Classic go-to pencil mid-length skirt with double slits', 5 ), 
 
-('Bucket Bag', null, 3, 4, 2000.00, 5, 1, 'Bucket bag with large woven motif', 28, 7), 
+('Bucket Bag', null, 3, 4, 2000.00, 5, 1, 'Bucket bag with large woven motif', 28), 
 
-('Light Sable Printed Dress', null, 3, 1, 3300.00, 6, 11, 'Light sable printed dress with collar.', 3, 3 ), 
+('Light Sable Printed Dress', null, 3, 1, 3300.00, 6, 11, 'Light sable printed dress with collar.', 3 ), 
 
-('Pascua Skirt', 2, 1,1, 280.00, 8, 1, 'Long skirt, double slit, hand-loom Alpaca skirt.', 5, 5);
-
-
+('Pascua Skirt', 2, 1,1, 280.00, 8, 1, 'Long skirt, double slit, hand-loom Alpaca skirt.', 5);
 
 
-
-INSERT INTO sizes
-    (product_id, product_size)
+INSERT INTO product_inventory
+    (product_id, product_size, product_quantity)
 VALUES
-    (1, '22cm x 25cm x 10cm'),
-    (2, '17cm x 20cm x 9cm'),
-    (3, '37cm x 64cm'),
-    (4, '37cm x 64cm' ), 
-    (5, 'Medium'),
-    (6, 'Small'),
-    (7, 'Small'), 
-    (8, 'One Size'),
-    (9, 'One size'),
-    (10, 'Medium'), 
-    (11, '23cm x 14cm x 17.5'), 
-    (11, 'Medium'), 
-    (12, 'Small'),
-    (13, 'Medium');
+    (1, '22cm x 25cm x 10cm', 5),
+    (2, '17cm x 20cm x 9cm', 5),
+    (3, '37cm x 64cm', 6),
+    (4, '37cm x 64cm',7), 
+    (5, 'Small', 4),
+    (5, 'Medium',5),
+    (5, 'Large', 5),
+    (6, 'Small',3),
+    (6, 'Medium', 42),
+    (6, 'Large', 34),
+    (7, 'Small', 33), 
+    (7, 'Medium',34),
+    (7, 'Large',64),
+    (8, 'One Size',15),
+    (9, 'One size',12),
+    (10, 'Small', 23),
+    (10, 'Medium',24), 
+    (10, 'Large',14),
+    (11, '23cm x 14cm x 17.5',8), 
+    (12, 'Small',37),
+    (12, 'Medium',39), 
+    (12, 'Large',33), 
+    (13, 'Small',21),
+    (13, 'Medium',45),
+    (13, 'Large',39);
 
 
 INSERT INTO productImage_id
