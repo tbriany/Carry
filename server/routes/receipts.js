@@ -47,11 +47,11 @@ router.post('/', loginRequired, async (req, res, next) => {
   }
 });
 
-router.post('/checkouts/:checkout_id/commit', loginRequired, async (req, res, next) => {
+router.post('/checkoutCart/:checkout_id/commit', loginRequired, async (req, res, next) => {
   const { checkout_id } = req.params
   try {
-    let checkout = await receiptsQueries.getCheckoutById(checkout_id)
-    if (checkout.session_id !== req.session.id) {
+    let checkoutCart = await receiptsQueries.getCheckoutCartById(checkout_id)
+    if (checkoutCart.session_id !== req.session.id) {
       return res.status(401).json({
         payload: null,
         msg: "Forbidden. Checkout does not belong to your session or checkout was created in a session other than the current session.",
@@ -73,7 +73,7 @@ router.post('/checkouts/:checkout_id/commit', loginRequired, async (req, res, ne
     })
 
 
-    await receiptsQueries.deleteCheckoutById(checkout_id)
+    await receiptsQueries.deleteCheckoutCartById(checkout_id)
   } catch (err) {
     console.log(err)
     res.status(500).json({
@@ -87,16 +87,17 @@ router.post('/checkouts/:checkout_id/commit', loginRequired, async (req, res, ne
 
 
 
-router.post('/checkouts', async (req, res, next) => {
+router.post('/ ', async (req, res, next) => {
   console.log('session id:', req.session.id)
   let checkoutCart = {
     session_id: req.session.id,
-    cart: req.body.cart
+    store_id:req.body.store_id
   }
 
+  console.log('session_id KMDEIUHIHKj', req.session.id , req.body.store_id )
+  // console.log(' store_id:req.body.store_id',   req.body.store_id)
   try {
-    let checkout = await receiptsQueries.saveCheckout(checkoutCart)
-
+    let checkout = await receiptsQueries.addCheckoutCart(checkoutCart)
     res.json({
       payload: checkout,
       msg: "Saved new cart",
@@ -117,13 +118,15 @@ router.post('/checkouts', async (req, res, next) => {
 
 
 
-router.get('/checkouts', async (req, res, next) => {
+router.get('/checkoutCart', async (req, res, next) => {
   const session_id = req.session.id
   try {
     console.log('session id:', req.session.id)
-    let checkout = await receiptsQueries.getCheckoutBySessionId(session_id)
+    let checkoutCart = await receiptsQueries.getCheckoutCartBySessionId(session_id)
+    console.log("GET/checkouts ********", checkoutCart)
     res.json({
-      payload: checkout,
+      session: req.session.id,
+      payload: checkoutCart,
       msg: "Retrieved all checkout, for current session.",
       err: false
     })
@@ -138,17 +141,17 @@ router.get('/checkouts', async (req, res, next) => {
 });
 
 
-router.patch("/checkouts/edit/:checkout_id", async (req, res, next) => {
+router.patch("/checkoutCart/edit/:checkout_id", async (req, res, next) => {
     try {
       const {checkout_id }= req.params
       const { cart} = req.body
 
 
 
-      const checkoutUpdate = await receiptsQueries.updateCheckout({checkout_id, cart});
+      const checkoutCartUpdate = await receiptsQueries.updateCheckoutCart({checkout_id, cart});
   
       res.status(200).json({
-        payload: checkoutUpdate,
+        payload: checkoutCartUpdate,
         msg:`Checkout ${checkout_id} updated sucessfully.`,
         err: false
       });
