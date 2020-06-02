@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import '../App.css';
 import { Link, Route } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -17,68 +16,12 @@ import customTheme from './styling/customTheme';
 import CartPopUp from './CartPopUp';
 import { Context, Store } from '../Contexts/CustomerContext';
 import ProductsPage from './ProductPage/productsPage';
+import navbarStyles from './styling/navbarStyles';
+import popoverTheme from './styling/navbarStyles';
 import { useRadioGroup } from '@material-ui/core';
 
-
-const useStyles = makeStyles((theme) => ({
-  grow: {
-    flexGrow: 1,
-  },
-  appBar: {
-    backgroundColor: customTheme.palette.primary.main,
-    '.MuiAppBar-colorPrimary': {
-      color: customTheme.palette.secondary.dark
-    },
-    '.MuiSvgIcon-root': {
-      color: customTheme.palette.secondary.dark
-    },
-  },
-  customerMenu: {
-    color: customTheme.palette.secondary.dark,
-    'a:link': {
-      textDecoration: 'none'
-    }
-  },
-  iconStyling: {
-    color: customTheme.palette.secondary.dark
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    display: 'none',
-    textDecoration: 'none',
-    [theme.breakpoints.up('sm')]: {
-      display: 'block',
-    },
-  },
-  sectionDesktop: {
-    display: 'none',
-    [theme.breakpoints.up('md')]: {
-      display: 'flex',
-    },
-  },
-  sectionMobile: {
-    display: 'flex',
-    [theme.breakpoints.up('md')]: {
-      display: 'none',
-    },
-  },
-}));
-
-const popoverTheme = makeStyles((theme) => ({
-    popover: {
-        pointerEvents: 'none',
-    },
-    paper: {
-        padding: theme.spacing(1),
-    },
-}));
-
-
 function Navbar() {
-  const [state] = useContext(Context);
-  const classes = useStyles();
+  const classes = navbarStyles();
   const popoverClasses = popoverTheme()
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -151,12 +94,6 @@ function Navbar() {
         </MenuItem>
       </div>}
       </Menu>
-
-
-    //   {/* <MenuItem onClick={handleMenuClose} className={classes.customerMenu}><Link to='/login' style={{ textDecoration: 'none', color: customTheme.palette.secondary.dark }}>Log In</Link></MenuItem>} */}
-    //   {/* <MenuItem onClick={handleMenuClose} className={classes.customerMenu}>My account</MenuItem> */}
-    //   {/* <MenuItem onClick={handleMenuClose} className={classes.customerMenu}>My orders</MenuItem> */}
-    
   );
 
   const mobileMenuId = 'primary-search-account-menu-mobile';
