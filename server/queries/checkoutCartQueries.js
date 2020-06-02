@@ -65,13 +65,14 @@ const getProductFromCartSession = async (obj, sessionId, getStoreId) => {
 }
 
 
-const getSumOfCheckout = async () => {
+const getSumOfCheckout = async (checkout_cart_id) => {
     const getTotalQueries = `
    SELECT SUM (checkout_items.quantity * products.product_price) AS checkoutTotal
    FROM checkout_items 
    JOIN products ON checkout_items.product_id =  products.product_id 
+   WHERE checkout_items.checkout_cart_id = $/checkout_cart_id/
    `
-    return await db.one(getTotalQueries)
+    return await db.one(getTotalQueries, {checkout_cart_id})
 }
 
 
