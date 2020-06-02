@@ -19,7 +19,7 @@ import ProductsPage from './ProductPage/productsPage';
 import { navbarStyles, popoverTheme } from './styling/navbarStyles';
 import { useRadioGroup } from '@material-ui/core';
 
-function Navbar(props) {
+function Navbar() {
   const classes = navbarStyles();
   const popoverClasses = popoverTheme();
   const [anchorEl, setAnchorEl] = React.useState(null);
