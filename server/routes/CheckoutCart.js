@@ -57,12 +57,14 @@ router.get("/items/productId/:productId/:size", async (req, res, next) => {
 
 
 router.get("/items/checkoutTotal", async (req, res, next) => {
+    const sessionId = req.session.id
     try {
-        const checkoutTotal = await checkoutQueries.getSumOfCheckout();
+        let checkout = await receiptsQueries.getCheckoutCartBySessionId(sessionId)
+        const checkoutTotalBySession = await checkoutQueries.getSumOfCheckout( checkout.checkout_cart_id);
         res.status(200).json({
             status: "success",
             message: `Checkout Cart Total retrieved`,
-            payload: checkoutTotal
+            payload: checkoutTotalBySession
         });
     } catch (err) {
         handleErrors(res, err);
