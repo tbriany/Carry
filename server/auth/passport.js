@@ -5,7 +5,7 @@ const customerQueries = require('../queries/customersQueries');
 
 passport.use(new LocalStrategy({ usernameField: 'email', passwordField: 'password', passReqToCallback: true }, async (request, email, inputPassword, done) => {
   try {
-    const customer = await customerQueries.getCustomerByEmailAuth(email);
+    const customer = await customerQueries.getCustomerByEmail(email);
     if (!customer) {
       return done(null, false);
     }

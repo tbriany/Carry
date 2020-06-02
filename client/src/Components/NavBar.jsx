@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import '../App.css';
 import { Link, Route } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
@@ -15,7 +15,9 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 import Popover from '@material-ui/core/Popover';
 import customTheme from './styling/customTheme';
 import CartPopUp from './CartPopUp';
-import { CustomerContext } from '../Contexts/CustomerContext';
+import { Context, Store } from '../Contexts/CustomerContext';
+import ProductsPage from './ProductPage/productsPage';
+import { useRadioGroup } from '@material-ui/core';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -64,9 +66,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
-
-
 const popoverTheme = makeStyles((theme) => ({
     popover: {
         pointerEvents: 'none',
@@ -77,9 +76,8 @@ const popoverTheme = makeStyles((theme) => ({
 }));
 
 
-
-
 function Navbar() {
+  const [state] = useContext(Context);
   const classes = useStyles();
   const popoverClasses = popoverTheme()
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -127,12 +125,38 @@ function Navbar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
       className={classes.iconStyling}
-    >
-      <MenuItem onClick={handleMenuClose} className={classes.customerMenu}><Link to='/signup' style={{ textDecoration: 'none', color: customTheme.palette.secondary.dark }}>Sign Up</Link></MenuItem>
-      <MenuItem onClick={handleMenuClose} className={classes.customerMenu}><Link to='/login' style={{ textDecoration: 'none', color: customTheme.palette.secondary.dark }}>Log In</Link></MenuItem>
-      <MenuItem onClick={handleMenuClose} className={classes.customerMenu}>My account</MenuItem>
-      <MenuItem onClick={handleMenuClose} className={classes.customerMenu}>My orders</MenuItem>
-    </Menu>
+      >
+      {!state.user.isAnon ? 
+      <div> <MenuItem onClick={handleMenuClose} className={classes.customerMenu}>
+        <Link to='/orders' style={{ textDecoration: 'none', color: customTheme.palette.secondary.dark }}>
+          My Orders
+    </Link>
+      </MenuItem>
+        <MenuItem onClick={handleMenuClose} className={classes.customerMenu}>
+          <Link to='/account' style={{ textDecoration: 'none', color: customTheme.palette.secondary.dark }}>
+            My Account
+    </Link>
+        </MenuItem> </div>
+      :
+      <div>
+        <MenuItem onClick={handleMenuClose} className={classes.customerMenu}>
+          <Link to='/login' style={{ textDecoration: 'none', color: customTheme.palette.secondary.dark }}>
+            Login
+        </Link>
+        </MenuItem>
+        <MenuItem onClick={handleMenuClose} className={classes.customerMenu}>
+          <Link to='/signup' style={{ textDecoration: 'none', color: customTheme.palette.secondary.dark }}>
+            Sign Up
+          </Link>
+        </MenuItem>
+      </div>}
+      </Menu>
+
+
+    //   {/* <MenuItem onClick={handleMenuClose} className={classes.customerMenu}><Link to='/login' style={{ textDecoration: 'none', color: customTheme.palette.secondary.dark }}>Log In</Link></MenuItem>} */}
+    //   {/* <MenuItem onClick={handleMenuClose} className={classes.customerMenu}>My account</MenuItem> */}
+    //   {/* <MenuItem onClick={handleMenuClose} className={classes.customerMenu}>My orders</MenuItem> */}
+    
   );
 
   const mobileMenuId = 'primary-search-account-menu-mobile';
@@ -177,7 +201,7 @@ function Navbar() {
       </MenuItem>
     </Menu>
   );
-
+  console.log('state', state)
   return (
     <div className={classes.grow} 
     style={{

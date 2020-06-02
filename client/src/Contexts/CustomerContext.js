@@ -1,67 +1,42 @@
-import React, { createContext, useState } from 'react';
-import axios from 'axios';
-export const CustomerContext = createContext();
+import React, { createContext, useReducer, useEffect } from 'react';
+import { LoginReducer } from '../Components/Reducers/reducers';
 
-//reset-remove user for logout route
-//calls all hooks that set information to empty/null
-
-const CustomerContextProvider = (props) => {
-    const [isLoggedIn, setLogIn] = useState(false);
-    const [customerId, setCustomerId] = useState(null);
-    const [customerFirstname, setCustomerFirstname] = useState(null);
-    const [customerLastname, setCustomerLastname] = useState(null);
-    const [customerPhoneNumber, setCustomerPhoneNumber] = useState(null);
-    const [customerEmail, setCustomerEmail] = useState(null);
-    const [customerAddress, setCustomerAddress] = useState(null);
-    const [customerCity, setCustomerCity] = useState(null);
-    const [customerState, setCustomerState] = useState(null);
-    const [customerZip, setCustomerZip] = useState(null);
-    const [customerAvatar, setCustomerAvatar] = useState(null);
-
-    const logUserIn = (customerObj) => {
-        console.log("customer object in context file", customerObj)
-        const { customer_id, firstname, lastname, phone_number, email, address, city, state, zip_code, avatar_url } = customerObj;
-
-        setLogIn(true);
-        setCustomerId(parseInt(customer_id))
-        setCustomerFirstname(firstname);
-        setCustomerLastname(lastname);
-        setCustomerPhoneNumber(phone_number);
-        setCustomerEmail(email);
-        setCustomerAddress(address);
-        setCustomerCity(city);
-        setCustomerState(state);
-        setCustomerZip(parseInt(zip_code));
-        setCustomerAvatar(avatar_url);
-    };
-    const logUserOut = () => {
-        setLogIn(false);
-        setLogIn(null);
-        setCustomerId(null)
-        setCustomerFirstname(null);
-        setCustomerLastname(null);
-        setCustomerPhoneNumber(null);
-        setCustomerEmail(null);
-        setCustomerAddress(null);
-        setCustomerCity(null);
-        setCustomerState(null);
-        setCustomerZip(null);
-        setCustomerAvatar(null);
-    };
-    const setCustomerContext = async (customerObj) => {
-        const { email } = customerObj;
-        try {
-            let customerContextInfo = await axios.get(`customers/email/${email}`).then(res => res.data.payload);
-            await logUserIn(customerContextInfo);
-        }
-        catch(err){
-            console.log(err)
-        }
-    };
+//listener function checks browser localStorage to see if the key 'customer' exists
+//if it does, it will take the string thats saved under customer, turn it into a JSON object and return that object
+//if not, it will return an empty object that we will use when we modify the state in the store
+const listener = () => {
+    if (window.localStorage.getItem('customer') !== null) {
+        return JSON.parse(
+            window.localStorage.getItem('customer')
+        )
+    }
+    return {}
+};
+//we initalize the beginning state for our context file/ hook which is an empty object
+const initialState = {
+    user: {}
+};
+export const Context = createContext(initialState);
+//Store function declares the state (that will be shared amongst components) and the dispatch function (that is able to modify the state with an action and object)\
+//is is made using the react hook useReducer, which takes in two arguments 
+//-- a reducer, imported from another file 
+//-- and an initalState, which is declared previously
+export const Store = ({ children }) => {
+    const [state, dispatch] = useReducer(LoginReducer, initialState);
+//the useEEffect hook here takes an object from the listener function that can be either a user that is stored in the LocalStorage or an empty object, meaning there is no user stored / logged in and they are anonymous
+    useEffect(() => {
+        let data = listener();
+        dispatch({ type: 'USER_CLICKED_LOGIN', payload: data });
+    }, []);
+//every time the store mounts (since it is a context wrapper, it will mount across our app) the useEffect hook will read the localStorage to see if there is a user logged it or not. it will then modify our state in the store with the action USER_CLICKED_LOGIN and the objet containing user info or empty object
     return (
-        <CustomerContext.Provider value={{ logUserIn, logUserOut, setCustomerContext, isLoggedIn, customerId, customerFirstname, customerLastname, customerPhoneNumber, customerEmail, customerAddress, customerCity, customerState, customerZip, customerAvatar }}>
-            {props.children}
-        </CustomerContext.Provider >
+        <Context.Provider value={[state, dispatch]}>
+            {children}
+        </Context.Provider>
     )
 };
-export default CustomerContextProvider;
+
+
+//To-do:
+//reset-remove user for logout route
+//calls all hooks that set information to empty/null

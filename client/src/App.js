@@ -5,24 +5,28 @@ import Landing from "./Components/Landing";
 import Navbar from './Components/NavBar';
 import ItemPopUp from './Components/ItemPopUp'
 import CategoryPage from './Components/LandingPageComponents/CategoryPage'
+import { Store } from './Contexts/CustomerContext';
 import CheckoutCartContextProvider from './Contexts/CheckoutCartContext';
-import CustomerContextProvider from './Contexts/CustomerContext';
 import LandingContextProvider from './Contexts/LandingPageDetailsContext'
 import Login from './Components/Login';
 import Signup from './Components/Signup';
 import StorePage from './Components/StorePage/storePage';
 import ProductsPage from './Components/ProductPage/productsPage';
 import CheckoutLanding from './Components/CheckoutLanding.jsx'
+import ProtectedRoute from './Components/util/ProtectedRoute';
 
 function App() {
   return (
     <div className="App">
       <LandingContextProvider>
+   
+      <Store>
       <CheckoutCartContextProvider>
-      <CustomerContextProvider>
         <Navbar />
       <Switch>
           <Route exact path="/" component={Landing} />
+          {/* <ProtectedRoute exact path='/checkout' component={Checkout} /> */}
+          {/* <ProtectedRoute exact path='/checkout' component={CheckoutLanding} /> */}
           <Route exact path="/checkout" component={CheckoutLanding} />
           <Route exact path="/popup/:product_id" component={ItemPopUp} />
           <Route exact path="/login" component={Login}/>
@@ -31,11 +35,14 @@ function App() {
           <Route exact path="/store/:id" component={StorePage} />
           <Route path="/store/:id/:category_name" component={ProductsPage} />
       </Switch>
-     </CustomerContextProvider>
      </CheckoutCartContextProvider>
+     </Store>
+
     </LandingContextProvider>
     </div>
       );
     }
     
 export default App;
+
+//merge both checkout components 
