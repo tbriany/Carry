@@ -68,16 +68,14 @@ const CheckoutCart = () => {
     return (
         <div >
             <p className='checkoutCart_heading' >Shopping Bag</p>
-            {checkoutCart.length > 0 ? (<div>
-                <CheckoutCartDisplay
-                    checkoutCart={checkoutCart}
-                    shippingOption={shippingOption}
-                    handleDeleteProduct={handleDeleteProduct}
-                    handleIncrementQty={handleIncrementQty}
-                    handleDecrementQty={handleDecrementQty}
-                    cartTotal={cartTotal}
-                />
-            </div>) : (<></>)}
+            <CheckoutCartDisplay
+                checkoutCart={checkoutCart}
+                shippingOption={shippingOption}
+                handleDeleteProduct={handleDeleteProduct}
+                handleIncrementQty={handleIncrementQty}
+                handleDecrementQty={handleDecrementQty}
+                cartTotal={cartTotal}
+            />
         </div >
     )
 }
