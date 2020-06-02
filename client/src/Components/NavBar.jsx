@@ -14,10 +14,11 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 import Popover from '@material-ui/core/Popover';
 import customTheme from './styling/customTheme';
 import CartPopUp from './CartPopUp';
-import { Context } from '../Contexts/CustomerContext';
+import { Context, Store } from '../Contexts/CustomerContext';
 import ProductsPage from './ProductPage/productsPage';
-import navbarStyles from './styling/navbarStyles'
+import navbarStyles from './styling/navbarStyles';
 import popoverTheme from './styling/navbarStyles';
+import { useRadioGroup } from '@material-ui/core';
 
 function Navbar() {
   const classes = navbarStyles();
@@ -68,7 +69,7 @@ function Navbar() {
       onClose={handleMenuClose}
       className={classes.iconStyling}
       >
-      {/* {props ? 
+      {!state.user.isAnon ? 
       <div> <MenuItem onClick={handleMenuClose} className={classes.customerMenu}>
         <Link to='/orders' style={{ textDecoration: 'none', color: customTheme.palette.secondary.dark }}>
           My Orders
@@ -91,14 +92,8 @@ function Navbar() {
             Sign Up
           </Link>
         </MenuItem>
-      </div>} */}
+      </div>}
       </Menu>
-
-
-    //   {/* <MenuItem onClick={handleMenuClose} className={classes.customerMenu}><Link to='/login' style={{ textDecoration: 'none', color: customTheme.palette.secondary.dark }}>Log In</Link></MenuItem>} */}
-    //   {/* <MenuItem onClick={handleMenuClose} className={classes.customerMenu}>My account</MenuItem> */}
-    //   {/* <MenuItem onClick={handleMenuClose} className={classes.customerMenu}>My orders</MenuItem> */}
-    
   );
 
   const mobileMenuId = 'primary-search-account-menu-mobile';
@@ -143,6 +138,7 @@ function Navbar() {
       </MenuItem>
     </Menu>
   );
+  console.log('state', state)
   return (
     <div className={classes.grow} 
     style={{
