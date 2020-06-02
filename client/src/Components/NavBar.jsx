@@ -16,17 +16,16 @@ import customTheme from './styling/customTheme';
 import CartPopUp from './CartPopUp';
 import { Context, Store } from '../Contexts/CustomerContext';
 import ProductsPage from './ProductPage/productsPage';
-import navbarStyles from './styling/navbarStyles';
-import popoverTheme from './styling/navbarStyles';
+import { navbarStyles, popoverTheme } from './styling/navbarStyles';
 import { useRadioGroup } from '@material-ui/core';
 
 function Navbar() {
   const classes = navbarStyles();
-  const popoverClasses = popoverTheme()
+  const popoverClasses = popoverTheme();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const [popOver, setPopOver] = React.useState(null);
-
+  const [ state ] = useContext(Context);
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -69,7 +68,7 @@ function Navbar() {
       onClose={handleMenuClose}
       className={classes.iconStyling}
       >
-      {!state.user.isAnon ? 
+      {/* {!state.user.isAnon ?  */}
       <div> <MenuItem onClick={handleMenuClose} className={classes.customerMenu}>
         <Link to='/orders' style={{ textDecoration: 'none', color: customTheme.palette.secondary.dark }}>
           My Orders
@@ -80,7 +79,7 @@ function Navbar() {
             My Account
     </Link>
         </MenuItem> </div>
-      :
+      {/* : */}
       <div>
         <MenuItem onClick={handleMenuClose} className={classes.customerMenu}>
           <Link to='/login' style={{ textDecoration: 'none', color: customTheme.palette.secondary.dark }}>
@@ -92,7 +91,8 @@ function Navbar() {
             Sign Up
           </Link>
         </MenuItem>
-      </div>}
+      </div>
+      {/* } */}
       </Menu>
   );
 
