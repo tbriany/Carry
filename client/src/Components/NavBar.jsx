@@ -70,7 +70,7 @@ function Navbar() {
       onClose={handleMenuClose}
       className={classes.iconStyling}
     >
-      {!state.user.isAnon ?
+      {state.user.isAnon ?
         <div>
           <MenuItem onClick={handleMenuClose} className={classes.customerMenu}>
             <Link to='/login' style={{ textDecoration: 'none', color: customTheme.palette.secondary.dark }}>
