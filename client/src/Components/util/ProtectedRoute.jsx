@@ -5,7 +5,7 @@ import { Context } from '../../Contexts/CustomerContext';
 const ProtectedRoute = (props) => {
     const [state] = useContext(Context);
     const Component = props.component;
-    const isAuthenticated = !state.user.isAnon;
+    const isAuthenticated = state.user.isAnon;
     return (
         isAuthenticated ? <Component /> : <Redirect to={{ pathname: '/login' }} />
     )

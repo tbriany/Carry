@@ -70,7 +70,7 @@ function Navbar() {
       onClose={handleMenuClose}
       className={classes.iconStyling}
     >
-      {state.user.isAnon ?
+      {!state.user.isAnon ?
         <div>
           <MenuItem onClick={handleMenuClose} className={classes.customerMenu}>
             <Link to='/login' style={{ textDecoration: 'none', color: customTheme.palette.secondary.dark }}>
@@ -83,7 +83,8 @@ function Navbar() {
             </Link>
           </MenuItem>
         </div>
-        : <div>
+        : 
+        <div>
           <MenuItem onClick={handleMenuClose} className={classes.customerMenu}>
             <Link to='/orders' style={{ textDecoration: 'none', color: customTheme.palette.secondary.dark }}>
               My Orders
@@ -146,7 +147,6 @@ function Navbar() {
       </MenuItem>
     </Menu>
   );
-  console.log('state', state)
   return (
     <div className={classes.grow}
       style={{
