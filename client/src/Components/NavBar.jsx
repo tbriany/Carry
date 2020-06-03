@@ -25,7 +25,7 @@ function Navbar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const [popOver, setPopOver] = React.useState(null);
-  const [ state ] = useContext(Context);
+  const [state, dispatch] = useContext(Context);
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -53,10 +53,12 @@ function Navbar() {
   const handlePopoverClose = () => {
     setPopOver(null);
   };
-
   const open = Boolean(popOver);
-
   const menuId = 'primary-search-account-menu';
+  const logUserOut = () => {
+    dispatch({ type: 'USER_CLICKED_LOGOUT', payload: {} });
+    window.localStorage.setItem('customer', JSON.stringify({}));
+  }
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
@@ -67,33 +69,40 @@ function Navbar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
       className={classes.iconStyling}
-      >
-      {/* {!state.user.isAnon ?  */}
-      <div> <MenuItem onClick={handleMenuClose} className={classes.customerMenu}>
-        <Link to='/orders' style={{ textDecoration: 'none', color: customTheme.palette.secondary.dark }}>
-          My Orders
-    </Link>
-      </MenuItem>
-        <MenuItem onClick={handleMenuClose} className={classes.customerMenu}>
-          <Link to='/account' style={{ textDecoration: 'none', color: customTheme.palette.secondary.dark }}>
-            My Account
-    </Link>
-        </MenuItem> </div>
-      {/* : */}
-      <div>
-        <MenuItem onClick={handleMenuClose} className={classes.customerMenu}>
-          <Link to='/login' style={{ textDecoration: 'none', color: customTheme.palette.secondary.dark }}>
-            Login
-        </Link>
-        </MenuItem>
-        <MenuItem onClick={handleMenuClose} className={classes.customerMenu}>
-          <Link to='/signup' style={{ textDecoration: 'none', color: customTheme.palette.secondary.dark }}>
-            Sign Up
+    >
+      {state.user.isAnon ?
+        <div>
+          <MenuItem onClick={handleMenuClose} className={classes.customerMenu}>
+            <Link to='/login' style={{ textDecoration: 'none', color: customTheme.palette.secondary.dark }}>
+              Login
+            </Link>
+          </MenuItem>
+          <MenuItem onClick={handleMenuClose} className={classes.customerMenu}>
+            <Link to='/signup' style={{ textDecoration: 'none', color: customTheme.palette.secondary.dark }}>
+              Sign Up
+            </Link>
+          </MenuItem>
+        </div>
+        : 
+        <div>
+          <MenuItem onClick={handleMenuClose} className={classes.customerMenu}>
+            <Link to='/orders' style={{ textDecoration: 'none', color: customTheme.palette.secondary.dark }}>
+              My Orders
           </Link>
-        </MenuItem>
-      </div>
-      {/* } */}
-      </Menu>
+          </MenuItem>
+          <MenuItem onClick={handleMenuClose} className={classes.customerMenu}>
+            <Link to='/account' style={{ textDecoration: 'none', color: customTheme.palette.secondary.dark }}>
+              My Account
+          </Link>
+          </MenuItem>
+          <MenuItem onClick={handleMenuClose} className={classes.customerMenu}>
+            <Link to='/' style={{ textDecoration: 'none', color: customTheme.palette.secondary.dark }} onClick={logUserOut}>
+              Logout
+           </Link>
+          </MenuItem>
+        </div>
+      }
+    </Menu>
   );
 
   const mobileMenuId = 'primary-search-account-menu-mobile';
@@ -138,17 +147,16 @@ function Navbar() {
       </MenuItem>
     </Menu>
   );
-  console.log('state', state)
   return (
-    <div className={classes.grow} 
-    style={{
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      zIndex: 9000,
-      width: '100%'
-    }}
-     >
+    <div className={classes.grow}
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        // zIndex: 9000,
+        width: '100%'
+      }}
+    >
       <AppBar position="static" className={classes.appBar}>
         <Toolbar>
           <Link to='/'
@@ -199,17 +207,17 @@ function Navbar() {
               anchorOrigin={{
                 vertical: "top",
                 horizontal: "right",
-               
+
               }}
               transformOrigin={{
                 vertical: "top",
                 horizontal: "right"
-                
+
               }}
               onClose={handlePopoverClose}
               disableRestoreFocus
               style={{
-                zIndex: 9001, 
+                zIndex: 1,
               }}
             >
               <CartPopUp />
