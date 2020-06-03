@@ -56,7 +56,6 @@ const CheckoutCartContextProvider = (props) => {
                 }
             } else {
                 let updateQty = productExistPayload.cartquantity + parseInt(productQty)
-                console.log(productExistPayload, productExistPayload.product_id, productExistPayload.size)
                 try {
                     await axios.patch(`/checkoutCart/items/edit`, { product_id: productExistPayload.product_id, size: productExistPayload.size, quantity: updateQty })
                 } catch (err) {

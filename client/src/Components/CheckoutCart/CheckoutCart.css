@@ -3,7 +3,9 @@
     justify-content: flex-start;
     border-bottom: 1px solid black;
     font-size: x-large;
+    font-family: 'Avenir Next Demi',HelveticaNeue-Medium,'Helvetica Medium',sans-serif;
 }
+
 
 .product_img{
     margin: 0px;

@@ -13,7 +13,7 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import Popover from '@material-ui/core/Popover';
 import customTheme from './styling/customTheme';
-import CartPopUp from './CartPopUp';
+import CartPopover from './Popover/CartPopover';
 import { Context, Store } from '../Contexts/CustomerContext';
 import ProductsPage from './ProductPage/productsPage';
 import { navbarStyles, popoverTheme } from './styling/navbarStyles';
@@ -220,7 +220,7 @@ function Navbar() {
                 zIndex: 1,
               }}
             >
-              <CartPopUp />
+              <CartPopover/>
             </Popover>
 
           </div>
