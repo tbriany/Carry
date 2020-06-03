@@ -92,7 +92,7 @@ console.log(categories)
             <img
               src={tile.category_logo}
               alt={tile.title}
-              style={{ width: '100%' , height: '100%'}}
+              style={{ width: '100%' , height: '100%', objectScale: 'scale-down'}}
             />
               <GridListTileBar
                 title={tile.category_name}
