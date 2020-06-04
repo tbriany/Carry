@@ -13,7 +13,7 @@ import Playground from './CategoryFilterForm'	// styling
 
 
 const CategoryPage = (props) => {
-  const { getProductId } = useContext(CheckoutCartContext);
+  const { getProductId, productId } = useContext(CheckoutCartContext);
   const [products, setProducts] = useState([]);
   const { categories } = useContext(
     LandingContext
@@ -87,6 +87,7 @@ const CategoryPage = (props) => {
             product_name={products.product_name}
             products={products}
             getProductId={getProductId}
+            currentProdId={productId}
           />
         </div>
       </div>

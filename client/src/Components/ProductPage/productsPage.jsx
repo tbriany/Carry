@@ -79,7 +79,7 @@ function ProductsPage(props) {
       </h2>
       <ProductsDisplay
         getProductId={getProductId}
-        currentProduId={productId}
+        currentProdId={productId}
         products={products}
       />
     </div>
