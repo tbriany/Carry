@@ -1,6 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
-
 export const CheckoutCartContext = createContext();
 
 
@@ -30,17 +29,10 @@ const CheckoutCartContextProvider = (props) => {
         setShippingOption(option)
     }
 
-    useEffect(() => {
-        getCheckout();
-
-    }, [])
-
     const getCheckout = async () => {
         let getCheckoutCart = await axios.get('/checkoutCart/session')
         let CartPayload = getCheckoutCart.data.payload
         setCheckoutCart(CartPayload)
-
-
     };
 
     const addToCart = async () => {
