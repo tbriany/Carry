@@ -26,13 +26,11 @@ router.get('/', async (req, res, next) => {
 
 
 
-
-//END OF CHCKOUT AND USER DID NOT LOGIN, CHANGES SESSION ID, SAVES RECIEPTS AND DELETE CHECKOUTCART
-router.post('/checkoutCart/:checkoutItemsId/commit', loginRequired, async (req, res, next) => {
-  
+// Saves the checkoutcart items into receipts table, Delete the items in the checkoutcart and update the order table
+router.post('/checkoutCart/:checkoutItemsId/commit', loginRequired, async (req, res, next) => {  
   const { checkoutItemsId } = req.params
   try {
-    let checkoutCart = await getCheckoutCartById(checkoutItemsId)
+    let checkoutCart = await getCheckoutCartById(checkoutItemsId)  
     if (checkoutCart.session_id !== req.session.id) {
       return res.status(401).json({
         payload: null,
@@ -45,28 +43,26 @@ router.post('/checkoutCart/:checkoutItemsId/commit', loginRequired, async (req, 
       customer_id: req.user.customer_id,
       reciept: JSON.stringify(getAllCheckoutItems)
     }
-    let newReceipt = await addReceipt(receipt)
-    await deleteCheckoutItemByCart(checkoutItemsId) 
-    await deleteCheckoutCartById(checkoutItemsId) 
+    let newReceipt = await addReceipt(receipt) 
+    let createOrder = {
+      order_status: "Pending",
+      required_date: req.body.required_date,
+      receipt_id: newReceipt.receipt_id,
+      customer_id: req.user.customer_id,
+      store_id: checkoutCart.store_id,
+      courier_id : null,
+      delivery_fee : req.body.delivery_fee,
+      total: req.body.total
+    }
 
+    await addOrder(createOrder)
+    await deleteCheckoutItemByCart(checkoutItemsId) 
+    // await deleteCheckoutCartById(checkoutItemsId) 
     res.json({
-      payload: newReceipt,
+      payload: newReceipt.reciept,
       message: "checkout saved into receipt and checkout cart cleared",
       err: false
     })
-
-
-    // let addOrder = {
-    //   order_status: "Pending" ,
-    //   required_date: "null",
-    //   customer_id: newReceipt.customer_id,
-    //   store_id:
-    //   courier_id, 
-    //   delivery_fee, 
-    //   total
-    // }
-  
-    // await addOrder(addOrder)
 
   } catch (err) {
     console.log(err)
