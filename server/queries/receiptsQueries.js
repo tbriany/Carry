@@ -7,11 +7,11 @@ const getAll = async () => {
 
 
 const addReceipt = async (rec) => {
-	const newReceiptQuery = 
-	`
+	const newReceiptQuery =
+		`
 		INSERT INTO receipts(customer_id, reciept)
 			VALUES($/customer_id/, $/reciept/)
-			RETURNING reciept
+			RETURNING reciept, receipt_id
 	`
 	const newNote = await db.one(newReceiptQuery, rec)
 	return newNote;
