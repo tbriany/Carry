@@ -17,7 +17,7 @@ router.get('/', async (req, res, next) => {
 })
 
 
-router.get('/session/', async (req, res, next) => {
+router.get('/session', async (req, res, next) => {
     const sessionId = req.session.id
     try {
         let allCheckoutCart = await checkoutQueries.getAllFromCartSession(sessionId)
