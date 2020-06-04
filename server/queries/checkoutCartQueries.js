@@ -1,5 +1,30 @@
 const db = require("../database/db");
-const { getCheckoutCartBySessionId, addCheckoutCart } = require('./receiptsQueries')
+
+
+const getCheckoutCartBySessionId = async (session_id) => {
+    const checkoutCart = await db.oneOrNone(`SELECT * FROM checkout_cart WHERE session_id = $1
+	`, session_id)
+
+    return checkoutCart;
+}
+
+const getCheckoutCartById = async (checkout_id) => {
+	const checkoutCart = await db.one(
+        `SELECT * FROM checkout_cart         
+        WHERE checkout_cart_id  = $1`, checkout_id)
+	return checkoutCart;
+}
+
+const deleteCheckoutCartById = async (checkout_id) => {
+	const checkout = await db.one("DELETE FROM checkout_cart WHERE checkout_cart_id = $1 RETURNING *", checkout_id)
+	return checkout;
+}
+
+
+const deleteCheckoutItemByCart = async (checkout_id) => {
+	const checkout = await db.any("DELETE FROM checkout_items WHERE checkout_cart_id = $1 RETURNING *", checkout_id)
+	return checkout;
+}
 
 
 const getAllFromCart = async () => {
@@ -72,7 +97,7 @@ const getSumOfCheckout = async (checkout_cart_id) => {
    JOIN products ON checkout_items.product_id =  products.product_id 
    WHERE checkout_items.checkout_cart_id = $/checkout_cart_id/
    `
-    return await db.one(getTotalQueries, {checkout_cart_id})
+    return await db.one(getTotalQueries, { checkout_cart_id })
 }
 
 
@@ -98,6 +123,24 @@ const getStoreIdByProdId = async (product_id) => {
     `;
     return await db.one(getQuery, { product_id });
 }
+
+const addCheckoutCart = async (obj) => {
+    const addCheckoutCart =
+        `
+		INSERT INTO checkout_cart(
+			session_id, 
+			store_id
+			)
+			VALUES(
+				$/session_id/, 
+				$/store_id/
+				)
+			RETURNING *
+	`;
+    const cart = await db.one(addCheckoutCart, obj)
+    return cart;
+}
+
 
 const addToCart = async (bodyObj, sessionId, getStoreId) => {
     let checkout = await getCheckoutCartBySessionId(sessionId)
@@ -161,5 +204,10 @@ module.exports = {
     addToCart,
     updatecheckoutItems,
     deleteCheckoutItems,
-    getStoreIdByProdId
+    getStoreIdByProdId,
+    getCheckoutCartBySessionId,
+    addCheckoutCart,
+    getCheckoutCartById,
+    deleteCheckoutCartById,
+    deleteCheckoutItemByCart
 };
