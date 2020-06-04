@@ -9,10 +9,10 @@ const getCheckoutCartBySessionId = async (session_id) => {
 }
 
 const getCheckoutCartById = async (checkout_id) => {
-	const checkoutCart = await db.one(
+    const checkoutCart = await db.one(
         `SELECT * FROM checkout_cart         
         WHERE checkout_cart_id  = $1`, checkout_id)
-	return checkoutCart;
+    return checkoutCart;
 }
 
 const deleteCheckoutCartById = async (checkout_id) => {
@@ -188,12 +188,6 @@ const updatecheckoutItems = async (updateObj) => {
     return await db.one(updateQuery, updateObj);
 }
 
-const deleteCheckoutItems = async (checkout_items_id) => {
-    const deleteQuery = `
-    DELETE FROM checkout_items
-    WHERE checkout_items_id = $/checkout_items_id/`
-    return await db.none(deleteQuery, { checkout_items_id });
-};
 
 module.exports = {
     getAllFromCart,
@@ -203,7 +197,6 @@ module.exports = {
     getcheckoutCart,
     addToCart,
     updatecheckoutItems,
-    deleteCheckoutItems,
     getStoreIdByProdId,
     getCheckoutCartBySessionId,
     addCheckoutCart,
