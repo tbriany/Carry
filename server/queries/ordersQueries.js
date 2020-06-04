@@ -5,6 +5,7 @@ const addOrder = async (bodyObj) => {
         INSERT INTO orders (
             order_status, 
             required_date, 
+            receipt_id,
             customer_id, 
             store_id, 
             courier_id, 
@@ -14,6 +15,7 @@ const addOrder = async (bodyObj) => {
         VALUES (
             $/order_status/,
             $/required_date/,
+            $/receipt_id/,
             $/customer_id/,
             $/store_id/,
             $/courier_id/,
@@ -24,6 +26,7 @@ const addOrder = async (bodyObj) => {
         order_status, 
         required_date, 
         time_ordered,
+        receipt_id,
         customer_id, 
         store_id, 
         courier_id, 
@@ -44,12 +47,13 @@ const getOrderByStoreID = async (store_id) => {
 // ORDER BY CUSTOMER ID
 const getOrderByCustomerId = async (customer_id) => {
   const getQuery = `
-    SELECT firstname, lastname,phone_number, email, address, city, state, zip_code, avatar_url, receipts.reciept, receipts.receipt_id
-    FROM receipts  
-    JOIN customers ON receipts.customer_id = customers.customer_id 
-
-    WHERE customers.customer_id =$/customer_id/
-    `;
+  SELECT firstname, lastname,phone_number, email, address, city, state, zip_code, avatar_url, receipts.reciept, receipts.receipt_id,
+  orders.*, receipts.reciept
+  FROM orders  
+  JOIN customers ON orders.customer_id =  customers.customer_id
+  JOIN receipts ON orders.receipt_id = receipts.receipt_id 
+  WHERE orders.customer_id =$/customer_id/
+  `;
 
   return await db.any(getQuery, { customer_id });
 };
@@ -76,8 +80,8 @@ const getOrderItemsByOrderId = async (order_id) => {
 };
 
 // UPDATE ORDER
-const editOrder = async (order_id) =>{
-    const updateQuery = `
+const editOrder = async (order_id) => {
+  const updateQuery = `
     UPDATE orders
     SET order_status = $/order_status/,
         required_date = $/required_date/,
@@ -86,7 +90,7 @@ const editOrder = async (order_id) =>{
         WHERE order_id = $/order_id /
         RETURNING *`
 
-        return await db.one(updateQuery, {order_id})
+  return await db.one(updateQuery, { order_id })
 }
 
 // Delete Order
