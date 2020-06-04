@@ -7,7 +7,7 @@ const CheckoutCartContextProvider = (props) => {
     const [brandIdInCart, setBrandIdInCart] = useState(0);
     const [brandId, setBrandId] = useState(0);
     const [productId, setProductId] = useState(1);//Current Product id
-    const [productQty, setProductQty] = useState(0);
+    const [productQty, setProductQty] = useState(1);
     const [totalProductQty, setTotalProductQty] = useState(0); //Total of Product Qty from the itempopup page
     const [productSize, setProductSize] = useState('default');
     const [checkoutCart, setCheckoutCart] = useState([]);
@@ -36,7 +36,7 @@ const CheckoutCartContextProvider = (props) => {
     };
 
     const addToCart = async () => {
-        if (productQty !== 0 && productSize !== 'default') {
+        if (productSize !== 'default') {
             const productExistInCart = await axios.get(`/checkoutCart/items/productId/${productId}/${productSize}`)
             const productExistPayload = productExistInCart.data.payload
             if (checkoutCart.length === 0 || !productExistPayload) {
@@ -55,7 +55,7 @@ const CheckoutCartContextProvider = (props) => {
                 }
                 getCheckout()
             }
-            setProductQty(0)
+            setProductQty(1)
             setProductSize('default')
         }
     }
