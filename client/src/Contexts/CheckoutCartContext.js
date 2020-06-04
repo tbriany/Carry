@@ -39,7 +39,7 @@ const CheckoutCartContextProvider = (props) => {
         if (productSize !== 'default') {
             const productExistInCart = await axios.get(`/checkoutCart/items/productId/${productId}/${productSize}`)
             const productExistPayload = productExistInCart.data.payload
-            if (checkoutCart.length === 0 || !productExistPayload) {
+            if (!productExistPayload) {
                 try {
                     await axios.post('/checkoutCart/items/add', { product_id: productId, size: productSize, quantity: productQty })
                     getCheckout()
