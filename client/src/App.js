@@ -15,6 +15,7 @@ import ProductsPage from './Components/ProductPage/productsPage';
 import Checkout from './Components/Checkout';
 import CheckoutLanding from './Components/CheckoutLanding.jsx'
 import ProtectedRoute from './Components/util/ProtectedRoute';
+import Account from './Components/Account';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route exact path="/" component={Landing} />
           <ProtectedRoute path='/checkout' component={CheckoutLanding} />
           <Route exact path="/checkout" component={CheckoutLanding} />
+          <ProtectedRoute exact path="/account" component={Account}/>
           <Route exact path="/popup/:product_id" component={ItemPopUp} />
           <Route exact path="/login" component={Login}/>
           <Route exact path="/signup" component={Signup}/>
