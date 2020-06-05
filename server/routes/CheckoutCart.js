@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const checkoutQueries = require('../queries/checkoutCartQueries')
-const receiptsQueries = require('../queries/receiptsQueries')
 const { handleErrors } = require('../helpers/helpers')
 
 router.get('/', async (req, res, next) => {
@@ -18,7 +17,7 @@ router.get('/', async (req, res, next) => {
 })
 
 
-router.get('/session/', async (req, res, next) => {
+router.get('/session', async (req, res, next) => {
     const sessionId = req.session.id
     try {
         let allCheckoutCart = await checkoutQueries.getAllFromCartSession(sessionId)
@@ -34,6 +33,7 @@ router.get('/session/', async (req, res, next) => {
 
 
 router.get("/items/productId/:productId/:size", async (req, res, next) => {
+    console.log("HERE PRODUCTS AND SIZE")
 
     try {
         const sessionId = req.session.id
@@ -59,7 +59,7 @@ router.get("/items/productId/:productId/:size", async (req, res, next) => {
 router.get("/items/checkoutTotal", async (req, res, next) => {
     const sessionId = req.session.id
     try {
-        let checkout = await receiptsQueries.getCheckoutCartBySessionId(sessionId)
+        let checkout = await checkoutQueries.getCheckoutCartBySessionId(sessionId)
         const checkoutTotalBySession = await checkoutQueries.getSumOfCheckout( checkout.checkout_cart_id);
         res.status(200).json({
             status: "success",
@@ -103,7 +103,7 @@ router.patch("/items/edit", async (req, res, next) => {
         const checkoutItemsId = parseInt(req.params.checkoutItemsId)
         const { product_id, size, quantity } = req.body
 
-        let checkout = await receiptsQueries.getCheckoutCartBySessionId(sessionId)
+        let checkout = await checkoutQueries.getCheckoutCartBySessionId(sessionId)
         let cartItems = {
             product_id: parseInt(product_id),
             size: size,

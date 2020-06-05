@@ -29,7 +29,7 @@ const CartPopoverDisplay = ({ cartTotal, checkoutCart }) => {
             {checkoutCart.length > 0 ? (<div>
                 {checkoutCart.map((product) => {
                     return (
-                        <div key={product.checkoutcart_id} className={classes.root}>
+                        <div key={product.checkout_items_id} className={classes.root}>
                             <Grid container spacing={0}>
 
                                 <Grid item xs={9} >

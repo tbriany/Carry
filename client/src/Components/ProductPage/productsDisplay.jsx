@@ -9,7 +9,7 @@ import List from '@material-ui/core/List';
 import clsx from 'clsx';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import ItemPopUp from '../ItemPopUp'
-import {sidePopUp} from '../styling/sidePopTheme'
+import { sidePopUp } from '../styling/sidePopTheme'
 
 
 
@@ -26,47 +26,17 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-export default function ProductsDisplay({getProductId, products}) {
+export default function ProductsDisplay({ getProductId, products ,currentProdId}) {
   const classes = useStyles();
 
   const popUp = sidePopUp();
-  const [state, setState] = React.useState({
-    right: false
-  });
+  const [open, setOpen] = React.useState({ right: false });
 
   const toggleDrawer = (right, open, prodId) => event => {
-    if (
-      event &&
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
-      
-    ) {
-      
-   getProductId(prodId)
-      return;
-    }
-
-   getProductId(prodId)
-    setState({ ...state, right: open });
+    open ? getProductId(prodId) : getProductId(currentProdId)
+    setOpen({ ...open, right: open });
   };
 
-
-  const list = (anchor) => (
-    <div
-      className={clsx(popUp.list, {
-        [popUp.fullList]: anchor === 'top' || anchor === 'bottom',
-      })}
-      role="presentation"
-
-      onKeyDown={toggleDrawer(anchor, false)}
-    >
-      <List>
-        <ItemPopUp />
-      </List>
-    </div>
-  );
-
-  
   return (
     <div className={classes.root} style={{ margin: '20px', padding: '15px' }}>
       <Grid container className={classes.root} justify='center'>
@@ -83,15 +53,18 @@ export default function ProductsDisplay({getProductId, products}) {
                 </Grid>
               </Button>
             ))}
-
             <SwipeableDrawer
               anchor={"right"}
-              open={state["right"]}
-              onClose={toggleDrawer("right", false, 0)}
-              onOpen={toggleDrawer("right", true)}  
-              classes={{paperAnchorRight : popUp.paperAnchorRight}}
-            >
-              {list('right')}
+              open={open.right}
+              onClose={toggleDrawer(open.right, false)}
+              onOpen={toggleDrawer(open.right, true)}
+              classes={{ paperAnchorRight: popUp.paperAnchorRight }}
+              >
+              <div className={clsx(popUp.list)} role="presentation" onKeyDown={toggleDrawer(open.right, false)}>
+                <List>
+                  <ItemPopUp />
+                </List>
+              </div>
             </SwipeableDrawer>
           </Grid>
         </Grid>

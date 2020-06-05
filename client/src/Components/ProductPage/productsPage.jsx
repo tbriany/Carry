@@ -86,10 +86,11 @@ function ProductsPage(props) {
         style={{ float: 'right', width: '70%', paddingTop: '20px' }}>
         <ProductsDisplay
           getProductId={getProductId}
-          currentProduId={productId}
+          currentProdId={productId}
           products={products}
         />
       </div>
+
 
     </div>
   );
