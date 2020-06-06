@@ -73,6 +73,7 @@ const CheckoutCartDisplay = ({ checkoutCart, shippingOption, handleDeleteProduct
                                 <Grid item xs={3} >
                                     <Paper
                                         style={{ alignItems: "flex-end" }}
+                                       
                                         className={classes.paper}>
                                         <p className="checkoutCart_productTotal" > ${product.producttotal} </p>
                                     </Paper>
@@ -100,10 +101,12 @@ const CheckoutCartDisplay = ({ checkoutCart, shippingOption, handleDeleteProduct
                 <div className={classes.root}>
                     <Grid container spacing={1}>
                         <Grid item xs={9} >
-                            <Paper style={{ alignItems: "flex-start" }} className={classes.paper}>Total:</Paper>
+
+
+                            <Paper style={{ alignItems: "flex-start", marginTop: '0px', paddingTop: '0px'}} className={classes.paper}>Total:</Paper>
                         </Grid>
                         <Grid item xs={3} >
-                            <Paper style={{ alignItems: "flex-end" }} className={classes.paper}>
+                            <Paper style={{ alignItems: "flex-end"  , marginTop: '0px', paddingTop: '0px'}} className={classes.paper}>
                                 <p className="checkoutCart_total" >  ${cartTotal} </p>
                             </Paper>
                         </Grid>
