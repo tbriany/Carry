@@ -225,7 +225,7 @@ function Navbar() {
               onClose={handlePopoverClose}
               disableRestoreFocus
               style={{
-                zIndex: 1,
+                zIndex: 9002,
               }}
             >
               <CartPopover />
