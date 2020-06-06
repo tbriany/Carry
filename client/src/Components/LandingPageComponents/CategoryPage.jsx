@@ -5,10 +5,10 @@ import { LandingContext } from "../../Contexts/LandingPageDetailsContext"
 import CategoryGridList from "./CategoryGrid";
 import MultilineTextFields from './CategorySearchBar';
 import { CheckoutCartContext } from '../../Contexts/CheckoutCartContext';
-import customTheme from '../styling/customTheme';
 // styling 
+import customTheme from '../styling/customTheme';
 import { CheckBoxOutlineBlankOutlined } from "@material-ui/icons";
-import Playground from './CategoryFilterForm'	// styling 
+import Playground from './CategoryFilterForm'	
 
 
 
@@ -65,7 +65,8 @@ const CategoryPage = (props) => {
           fontFamily: "Palatino Linotype",
           textAlign: "left",
           color: customTheme.palette.secondary.dark,
-        }}>{category_name}</h1>
+        }}>{category_name}
+        </h1>
 
         <div className="SearchBar">
           {" "}
@@ -78,7 +79,8 @@ const CategoryPage = (props) => {
       >
         <div className='Filter_sideBar'
           style={{ margin: '25px', float: 'left', padding: '20px' }}>
-          <Playground />
+          <Playground
+           products={products} />
         </div>
         <div
           style={{ float: 'right', width: '70%', paddingTop: '20px' }}>

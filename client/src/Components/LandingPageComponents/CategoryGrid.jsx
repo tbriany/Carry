@@ -82,7 +82,7 @@ export default function CategoryGrid({ product_name, getProductId, products }) {
                     <Grid item>
                       <Typography gutterBottom variant="subtitle1">
                         {value.product_name}
-                      </Typography>
+                      </Typography>3
                       <Typography variant="subtitle1">
                       <Link to={`/store/${value.store_id}`}>{value.store_name} </Link>
                       </Typography>
