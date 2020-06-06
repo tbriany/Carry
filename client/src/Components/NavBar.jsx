@@ -171,10 +171,12 @@ function Navbar() {
           </Link>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
+            <Link to ='/explore'>
             <IconButton
               color={customTheme.palette.secondary.main}>
               <ExploreIcon />
             </IconButton>
+            </Link>
             <IconButton
               edge="end"
               aria-label="account of current user"
