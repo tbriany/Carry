@@ -29,7 +29,7 @@ const fetchTypes = async () => {
 
 
   return (
-    <div style={{ width: 300 }}>
+    <div style={{ width: '300', margin: '20px'}}>
       <Autocomplete
         freeSolo
         id="free-solo-2-demo"
