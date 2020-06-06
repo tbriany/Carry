@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const ordersQueries = require("../queries/ordersQueries");
+const { loginRequired } = require('../auth/helpers')
 
 // Add Order
 router.post("/add", async (req, res, next) => {
@@ -48,18 +49,22 @@ router.get("/store_orders/:store_id", async (req, res, next) => {
 });
 
 //GET ORDER BY CUSTOMER ID
-router.get("/customer_orders/:customer_id", async (req, res, next) => {
+router.get("/receipts/:customer_id", loginRequired, async (req, res, next) => {
   try {
     const customer_id = parseInt(req.params.customer_id);
-    const orderByCustomerId = await ordersQueries.getOrderByCustomerId(
-      customer_id
-    );
+    const orderByCustomerId = await ordersQueries.getOrderByCustomerId(customer_id);
     res.status(200).json({
       message: `Orders for customer id ${customer_id} retrieved.`,
       payload: orderByCustomerId,
-    });
+      err: false
+    })
   } catch (err) {
-    console.log("ERROR", err);
+    console.log(err)
+    res.status(500).json({
+      payload: null,
+      message: "Failed retrieving receipts",
+      err: true
+    })
   }
 });
 

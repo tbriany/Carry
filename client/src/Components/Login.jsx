@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import Button from '@material-ui/core/Button';
@@ -12,7 +12,7 @@ import { Visibility, VisibilityOff } from '@material-ui/icons';
 import Container from '@material-ui/core/Container';
 import { checkValidEmail, checkValidPassword } from "./util/inputHelpers";
 import InputAdornment from '@material-ui/core/InputAdornment';
-import {Context} from '../Contexts/CustomerContext';
+import { Context } from '../Contexts/CustomerContext';
 import { loginStyles } from './styling/loginStyles';
 
 const Login = () => {

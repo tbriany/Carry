@@ -97,8 +97,8 @@ function ItemPopUp() {
                                         style={{ margin: "10px", borderRadius: 35, backgroundColor: "#eed7c1", padding: "10px 24px", fontSize: "14px" }}
                                         variant="contained"
                                         className="ItemInputSubmit" type="submit" value="ADD TO BAG"
-                                        disabled={!productSize || !productQty || !productSize && productQty}
-                                        onClick={addToCart}>ADD TO BAG</Button>
+                                        disabled={productSize === 'default'}
+                                        onClick={addToCart}>ADD TO BAG </Button>
                                 </div>
 
 

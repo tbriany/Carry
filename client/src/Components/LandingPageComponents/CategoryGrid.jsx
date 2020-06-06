@@ -9,7 +9,7 @@ import List from "@material-ui/core/List";
 import clsx from "clsx";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import ItemPopUp from "../ItemPopUp";
-import {sidePopUp} from '../styling/sidePopTheme'
+import { sidePopUp } from '../styling/sidePopTheme'
 
 
 
@@ -25,43 +25,19 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function CategoryGrid({ product_name, getProductId, products }) {
+export default function CategoryGrid({ product_name, getProductId, products, currentProdId }) {
   const classes = useStyles();
 
   // const [products, setProducts] = useState([])
 
   const popUp = sidePopUp();
-  const [state, setState] = React.useState({
-    right: false,
-  });
+  const [open, setOpen] = React.useState({ right: false });
 
-  const toggleDrawer = (right, open, prodId) => (event) => {
-    if (
-      event &&
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
-    ) {
-      getProductId(prodId);
-      return;
-    }
-
-    getProductId(prodId);
-    setState({ ...state, right: open });
+  const toggleDrawer = (right, open, prodId) => event => {
+    open ? getProductId(prodId) : getProductId(currentProdId)
+    setOpen({ ...open, right: open });
   };
 
-  const list = (anchor) => (
-    <div
-      className={clsx(popUp.list, {
-        [popUp.fullList]: anchor === "top" || anchor === "bottom",
-      })}
-      role="presentation"
-      onKeyDown={toggleDrawer(anchor, false)}
-    >
-      <List>
-        <ItemPopUp />
-      </List>
-    </div>
-  );
 
   return (
     <div>
@@ -72,7 +48,7 @@ export default function CategoryGrid({ product_name, getProductId, products }) {
           <Grid item md={25} spacing={50}>
             <Grid container justify="center" spacing={50}>
               {products.map((value) => (
-                <Button  key = {value.product_id} onClick={toggleDrawer("right", true, value.product_id)}>
+                <Button key={value.product_id} onClick={toggleDrawer("right", true, value.product_id)}>
                   <Grid key={value.product_id} item>
                     <img
                       alt="backpack"
@@ -96,12 +72,15 @@ export default function CategoryGrid({ product_name, getProductId, products }) {
 
               <SwipeableDrawer
                 anchor={"right"}
-                open={state["right"]}
-                onClose={toggleDrawer("right", false, 0)}
-                onOpen={toggleDrawer("right", true)}
-                classes={{paperAnchorRight : popUp.paperAnchorRight}}
-              >
-                {list("right")}
+                open={open.right}
+                onClose={toggleDrawer(open.right, false)}
+                onOpen={toggleDrawer(open.right, true)}
+                classes={{ paperAnchorRight: popUp.paperAnchorRight }}>
+                <div className={clsx(popUp.list)} role="presentation" onKeyDown={toggleDrawer(open.right, false)}>
+                  <List>
+                    <ItemPopUp />
+                  </List>
+                </div>
               </SwipeableDrawer>
             </Grid>
           </Grid>

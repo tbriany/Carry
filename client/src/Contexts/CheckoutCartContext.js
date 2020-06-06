@@ -1,6 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
-
 export const CheckoutCartContext = createContext();
 
 
@@ -8,7 +7,7 @@ const CheckoutCartContextProvider = (props) => {
     const [brandIdInCart, setBrandIdInCart] = useState(0);
     const [brandId, setBrandId] = useState(0);
     const [productId, setProductId] = useState(1);//Current Product id
-    const [productQty, setProductQty] = useState(0);
+    const [productQty, setProductQty] = useState(1);
     const [totalProductQty, setTotalProductQty] = useState(0); //Total of Product Qty from the itempopup page
     const [productSize, setProductSize] = useState('default');
     const [checkoutCart, setCheckoutCart] = useState([]);
@@ -30,24 +29,17 @@ const CheckoutCartContextProvider = (props) => {
         setShippingOption(option)
     }
 
-    useEffect(() => {
-        getCheckout();
-
-    }, [])
-
     const getCheckout = async () => {
         let getCheckoutCart = await axios.get('/checkoutCart/session')
         let CartPayload = getCheckoutCart.data.payload
         setCheckoutCart(CartPayload)
-
-
     };
 
     const addToCart = async () => {
-        if (productQty !== 0 && productSize !== 'default') {
+        if (productSize !== 'default') {
             const productExistInCart = await axios.get(`/checkoutCart/items/productId/${productId}/${productSize}`)
             const productExistPayload = productExistInCart.data.payload
-            if (checkoutCart.length === 0 || !productExistPayload) {
+            if (!productExistPayload) {
                 try {
                     await axios.post('/checkoutCart/items/add', { product_id: productId, size: productSize, quantity: productQty })
                     getCheckout()
@@ -56,7 +48,6 @@ const CheckoutCartContextProvider = (props) => {
                 }
             } else {
                 let updateQty = productExistPayload.cartquantity + parseInt(productQty)
-                console.log(productExistPayload, productExistPayload.product_id, productExistPayload.size)
                 try {
                     await axios.patch(`/checkoutCart/items/edit`, { product_id: productExistPayload.product_id, size: productExistPayload.size, quantity: updateQty })
                 } catch (err) {
@@ -64,7 +55,7 @@ const CheckoutCartContextProvider = (props) => {
                 }
                 getCheckout()
             }
-            setProductQty(0)
+            setProductQty(1)
             setProductSize('default')
         }
     }

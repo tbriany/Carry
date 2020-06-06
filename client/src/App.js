@@ -12,22 +12,23 @@ import Login from './Components/Login';
 import Signup from './Components/Signup';
 import StorePage from './Components/StorePage/storePage';
 import ProductsPage from './Components/ProductPage/productsPage';
+import Checkout from './Components/Checkout';
 import CheckoutLanding from './Components/CheckoutLanding.jsx'
 import ProtectedRoute from './Components/util/ProtectedRoute';
+import Account from './Components/Account';
 
 function App() {
   return (
     <div className="App">
       <LandingContextProvider>
-   
       <Store>
       <CheckoutCartContextProvider>
         <Navbar />
       <Switch>
           <Route exact path="/" component={Landing} />
-          {/* <ProtectedRoute exact path='/checkout' component={Checkout} /> */}
-          {/* <ProtectedRoute exact path='/checkout' component={CheckoutLanding} /> */}
+          <ProtectedRoute path='/checkout' component={CheckoutLanding} />
           <Route exact path="/checkout" component={CheckoutLanding} />
+          <ProtectedRoute exact path="/account" component={Account}/>
           <Route exact path="/popup/:product_id" component={ItemPopUp} />
           <Route exact path="/login" component={Login}/>
           <Route exact path="/signup" component={Signup}/>
@@ -37,7 +38,6 @@ function App() {
       </Switch>
      </CheckoutCartContextProvider>
      </Store>
-
     </LandingContextProvider>
     </div>
       );
