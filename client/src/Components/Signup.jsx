@@ -1,22 +1,18 @@
 import React, { useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
 import { checkValidEmail, checkValidPassword, checkEmptyInput } from './util/inputHelpers';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
-import { InputAdornment, IconButton } from '@material-ui/core';
+import { Button, CssBaseline, TextField, Link, Grid, Box, Typography, Container, InputAdornment, IconButton, Snackbar } from '@material-ui/core';
+import MuiAlert from '@material-ui/lab/Alert';
 import { signupStyles } from './styling/signupStyles';
 import { Context } from '../Contexts/CustomerContext';
 
 const Signup = () => {
     const classes = signupStyles();
-    const [ state, dispatch ] = useContext(Context);
+    const history = useHistory();
+    const [state, dispatch] = useContext(Context);
+    const [alert, setAlert] = useState(false);
     const [newFirstname, setFirstname] = useState({
         firstname: '',
         error: false,
@@ -80,20 +76,23 @@ const Signup = () => {
         let lastnameError = newLastname.error;
         let emailError = newCustomerEmail.error;
         let passwordError = newCustomerPassword.error;
-        console.log('firstname error: ', firstnameError);
-        console.log('lastname error: ', lastnameError);
-        console.log('email error: ', emailError);
-        console.log('password error:', passwordError);
-        try {
-            await axios.post('/auth/signup', { firstname: customerFirstname, lastname: customerLastname, email: customerEmail, password: customerPassword }).then(res => {
-                const user = res.data;
-                dispatch({type: 'USER_CLICKED_LOGIN', payload: user});
-                window.localStorage.setItem('customer', JSON.stringify(user.payload))
-            })
-        }
-        catch (err) {
-            throw err
-        }
+        if (!firstnameError && !lastnameError && !emailError && !passwordError) {
+            try {
+                await axios.post('/auth/signup', { firstname: customerFirstname, lastname: customerLastname, email: customerEmail, password: customerPassword }).then(res => {
+                    const user = res.data;
+                    window.localStorage.setItem('customer', JSON.stringify(user.payload));
+                    axios.post('/auth/login', user.email, user.customerPassword);
+                    dispatch({ type: 'USER_CLICKED_LOGIN', payload: user });
+                    setAlert(!alert)
+                    setTimeout(() => {
+                        history.push('/account')
+                    }, 3000);
+                });
+            }
+            catch (err) {
+                throw err
+            }
+        };
     };
     return (
         <Container component="main" maxWidth="xs">
@@ -198,6 +197,11 @@ const Signup = () => {
                         </Grid>
                     </Grid>
                 </form>
+                <Snackbar open={alert} autoHideDuration={6000} >
+                    <MuiAlert severity="success">
+                        User Successfully Registered!
+                    </MuiAlert>
+                </Snackbar>
             </div>
             <Box mt={5}>
             </Box>
