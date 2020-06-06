@@ -2,7 +2,7 @@ const db = require("../database/db");
 
 const getAllStores = async () => {
   const getAllQueries = `
-    SELECT * FROM stores
+    SELECT * FROM stores ORDER BY store_name
     `;
   return await db.any(getAllQueries);
 };
