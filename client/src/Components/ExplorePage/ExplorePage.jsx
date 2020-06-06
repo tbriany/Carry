@@ -3,6 +3,7 @@ import axios from "axios";
 import CategorySearch from "../ExplorePage/CategorySearchBar";
 import { LandingContext } from "../../Contexts/LandingPageDetailsContext";
 import ExploreStores from './exploreStores'
+import DiscreteSlider from "./DistanceInput";
 
 const ExplorePage = () => {
   const { Latitude, Longitude } = useContext(LandingContext);
@@ -33,7 +34,9 @@ const ExplorePage = () => {
         </div>
       </div>
       <div className="Contents">
-        <div className="Filter"></div>
+        <div className="Filter">
+          <DiscreteSlider/>
+        </div>
 
         <div className="Stores" style ={{float:'right'}}>
            <ExploreStores
