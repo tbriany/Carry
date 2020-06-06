@@ -27,12 +27,15 @@ export default function PplCard({storeid, email, store_name, avatar}) {
         <CardMedia
           className={classes.media}
           image={avatar}
-          style = {{borderRadius:'50%'}}
         />
         <CardContent>
-       <Typography>
-           {store_name}
-       </Typography>
+          <Typography gutterBottom variant="h5" component="h2">
+            Lizard
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
+            across all continents except Antarctica
+          </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>

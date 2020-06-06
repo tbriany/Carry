@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import CategorySearch from "../ExplorePage/CategorySearchBar";
+import CategorySearch from "./StoreSearch";
 import { LandingContext } from "../../Contexts/LandingPageDetailsContext";
 import ExploreStores from './exploreStores'
 import DiscreteSlider from "./DistanceInput";

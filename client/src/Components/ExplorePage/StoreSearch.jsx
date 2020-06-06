@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios'
+import {Link} from 'react-router-dom'
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
@@ -37,7 +38,6 @@ const fetchTypes = async () => {
         options={stores.map((option) => option.store_name)}
         renderInput={(params) => (
           <TextField
-      
             {...params}
             label="Stores on Carry?"
             margin="normal"

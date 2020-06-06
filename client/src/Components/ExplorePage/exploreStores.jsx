@@ -15,7 +15,8 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-around",
     overflow: "hidden",
     backgroundColor: theme.palette.background.paper,
-    maxWidth: '500px'
+    maxWidth: '500px',
+    maxHeight: '500px'
   },
   gridList: {
     //flexWrap: "nowrap",
@@ -64,21 +65,22 @@ const classes = useStyles();
       <GridList
         className={classes.gridList}
          cols={1}
-        // item
-        // xs={12}
-        // sm={6}
-        // md={4}
-        // lg={3}
-        // xl={2}
+        item
+        xs={12}
+        sm={6}
+        md={4}
+        lg={3}
+        xl={2}
         spacing={50}
         alignItems="vertical"
-        maxWidth="350px"
+       
       >
         
      {storess.map((store) => (
   
-          <GridListTile key={store.id}>
-            {/* <img style ={{borderRadius:'50%'}} src={user.avatar} alt={user.title} /> */}
+          <GridListTile key={store.id}  style={{ maxWidth:"350px",
+          maxHeight: '700px'}}>
+  
             <PplCard
               storeid={store.store_id}
               email={store.email}

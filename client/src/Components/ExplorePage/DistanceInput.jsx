@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
+import LandingContext from '../../Contexts/LandingPageDetailsContext'
 
 const useStyles = makeStyles({
   root: {
@@ -13,7 +14,9 @@ function valuetext(value) {
   return `${value} km`;
 }
 
-export default function DiscreteSlider() {
+export default function 
+DiscreteSlider() {
+
   const classes = useStyles();
 
   return (
