@@ -21,8 +21,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-
-const CartPopoverDisplay = ({ cartTotal, checkoutCart }) => {
+const CartPopoverDisplay = ({ checkoutCart }) => {
     const classes = useStyles();
     return (
         <div>
@@ -78,27 +77,7 @@ const CartPopoverDisplay = ({ cartTotal, checkoutCart }) => {
                         </div>
                     )
                 })}
-                <div className={classes.root}>
-                    <Grid container spacing={1}>
-                        <Grid item xs={9} >
-                            <Paper
-                                style={{ display: "flex", justifyContent: "flex-start", flexDirection: "column", alignItems: "flex-start", boxShadow: " 1px 1px 1px white", marginBottom: "15px", marginTop: "15px" }}
-                                className={classes.paper}
-                            > Total:
-                     </Paper>
-                        </Grid>
-
-                        <Grid item xs={3} >
-                            <Paper
-                                style={{ display: "flex", justifyContent: "flex-start", flexDirection: "column", alignItems: "flex-end", boxShadow: " 1px 1px 1px white", marginBottom: "15px", marginTop: "15px" }}
-                                className={classes.paper}
-                            >
-                                <p style={{ margin: "0px", fontSize: "small" }} > ${cartTotal} </p>
-                            </Paper>
-                        </Grid>
-                    </Grid>
-
-                </div>
+              
             </div>) : (
                     <div>
                         <h3 style={{ fontFamily: 'Arial, Helvetica, sans-serif', fontWeight: 'normal' }}>Is Currently Empty</h3>

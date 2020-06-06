@@ -40,8 +40,7 @@ const CheckoutLanding = () => {
           </Paper>
         </Grid>
         <Grid style={{
-
-          height: "100%",
+          height: "auto",
           borderLeft: '1px solid  #eed7c1'
 
         }}
@@ -50,6 +49,7 @@ const CheckoutLanding = () => {
             style={{
               boxShadow: " 1px 1px 1px white",
               color: "black",
+              height: '100vh'
             }}>
             <CheckoutCart
               getShipping={getShipping}

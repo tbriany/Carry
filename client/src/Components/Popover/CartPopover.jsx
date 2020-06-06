@@ -4,32 +4,12 @@ import { CheckoutCartContext } from '../../Contexts/CheckoutCartContext'
 import axios from "axios";
 
 
-
 const CartPopover = () => {
-
-
     const { getCheckout, checkoutCart } = useContext(CheckoutCartContext)
-    const [cartTotal, setCartTotal] = useState()
-
-
     useEffect(() => {
         getCheckout()
-        if (checkoutCart.length !== 0) {
-            handleCartTotal()
-        }
     }, [])
 
-    const handleCartTotal = async () => {
-        try {
-            let total = await axios.get(`/checkoutCart/items/checkoutTotal`)
-            setCartTotal(total.data.payload.checkouttotal)
-            console.log(total.data.payload.checkouttotal)
-
-
-        } catch (err) {
-            console.log("ERROR", err)
-        }
-    }
 
     return (
         <div >
@@ -37,7 +17,6 @@ const CartPopover = () => {
                 Your Shopping Bag</h1>
             <CartPopoverDisplay
                 checkoutCart={checkoutCart}
-                cartTotal={cartTotal}
             />
         </div >
     )
