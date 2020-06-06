@@ -4,7 +4,7 @@ import { Switch, Route, withRouter, Redirect } from 'react-router-dom'
 import Landing from "./Components/Landing";
 import Navbar from './Components/NavBar';
 import ItemPopUp from './Components/ItemPopUp'
-import CategoryPage from './Components/LandingPageComponents/CategoryPage'
+import CategoryPage from './Components/CategoryPage/CategoryPage'
 import { Store } from './Contexts/CustomerContext';
 import CheckoutCartContextProvider from './Contexts/CheckoutCartContext';
 import LandingContextProvider from './Contexts/LandingPageDetailsContext'
@@ -16,6 +16,7 @@ import Checkout from './Components/Checkout';
 import CheckoutLanding from './Components/CheckoutLanding.jsx'
 import ProtectedRoute from './Components/util/ProtectedRoute';
 import Account from './Components/Account';
+import ExplorePage from './Components/ExplorePage/ExplorePage'
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
           <Route exact path="/categories/:type" component={CategoryPage}/>
           <Route exact path="/store/:id" component={StorePage} />
           <Route path="/store/:id/:category_name" component={ProductsPage} />
+          <Route Path ='/explore' component={ExplorePage}/>
       </Switch>
      </CheckoutCartContextProvider>
      </Store>
