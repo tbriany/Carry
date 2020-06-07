@@ -15,7 +15,7 @@ const LandingPage = () => {
 
   // Checks if Geolocation API is available on browser. This is only available on secure contexts (HTTPS).
   if ("geolocation" in navigator) {
-    console.log("Landing Page Notification: geolocation is available");
+   // console.log("Landing Page Notification: geolocation is available");
     // calls function get geolocation of client(user). Needs a call back- async.
     navigator.geolocation.getCurrentPosition((position) => {
       //position: a object that is returned with timestamp, lat/long coordinates of the user accessing carry, etc.

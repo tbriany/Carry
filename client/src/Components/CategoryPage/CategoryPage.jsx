@@ -7,8 +7,10 @@ import { CheckoutCartContext } from "../../Contexts/CheckoutCartContext";
 // styling
 import customTheme from "../styling/customTheme";
 import Playground from "./CategoryFilterForm";
+import { CategoryStyles } from "../styling/CategoryPageStyles";
 
 const CategoryPage = (props) => {
+  const classes = CategoryStyles();
   const { getProductId, productId } = useContext(CheckoutCartContext);
   const [products, setProducts] = useState([]);
   const { categories } = useContext(LandingContext);
@@ -33,105 +35,70 @@ const CategoryPage = (props) => {
     fetchData();
   }, [category_name]);
 
-
+  // testing apply filter function
   const applyFilters = async (filter) => {
-    console.log(filter)
+    console.log(filter);
     try {
-      const res = await axios.get(`/products/category/${filter}/`)
-      // const categories = await axios.get(`/products/categories/all`)
+      const res = await axios.get(`/products/category/${filter}/`);
       setProducts(res.data.payload);
-      // setCategories(categories.data.payload);
+      console.log("category page products", products);
     } catch (error) {
-      setProducts([])
+      setProducts([]);
       console.log(error);
     }
-  }
+  };
 
+  // Filter that works for each drop down.
+  const applyAllFilters = async (filter) => {
+    let url = `/products/filter/${category_name}`;
 
-  const applyFiltersBrand = async (filter) => {
-    console.log(filter)
+    if (Object.keys(filter).length) {
+      let firstElem = Object.keys(filter)[0];
+      for (let el in filter) {
+        if (el === firstElem) {
+          url += `?${el}=${filter[el]}`;
+        } else {
+          url += `&${el}=${filter[el]}`;
+        }
+      }
+    }
+
     try {
-      const res = await axios.get(`/products/brand/${filter}/`)
-      // const categories = await axios.get(`/products/categories/all`)
+      const res = await axios.get(url);
       setProducts(res.data.payload);
-      // setCategories(categories.data.payload);
     } catch (error) {
-      setProducts([])
+      setProducts([]);
       console.log(error);
     }
-  }
-
-  const applyFiltersType = async (filter) => {
-    console.log(filter)
-    try {
-      const res = await axios.get(`/products/type/${filter}/`)
-      // const categories = await axios.get(`/products/categories/all`)
-      setProducts(res.data.payload);
-      // setCategories(categories.data.payload);
-    } catch (error) {
-      setProducts([])
-      console.log(error);
-    }
-  }
-
-
+  };
 
   return (
     <div className="CategoryPage">
-      <div
-        className="CategoryNav"
-        style={{
-          marginTop: "20px",
-          display: "flex",
-          justifyContent: "space-evenly",
-          marginLeft: "20px",
-          marginRight: "30px",
-        }}
-      >
+      <div className={classes.CategoryNavigation}>
         {categories.map((value) => (
           <Link
             to={`/categories/${value.category_name}`}
-            style={{
-              textDecoration: "none",
-              color: "#CD853F",
-              active: "#FAEBD7",
-            }}
+            class={classes.navLinks}
           >
-            {" "}
             {value.category_name}
           </Link>
         ))}
       </div>
 
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-evenly",
-          padding: "25px",
-        }}
-      >
-        <h1
-          style={{
-            fontFamily: "Palatino Linotype",
-            textAlign: "left",
-            color: customTheme.palette.secondary.dark,
-          }}
-        >
-          {category_name}
-        </h1>
+      <div className={classes.headerContainer}>
+        <h1 className={classes.pageTitle}>{category_name}</h1>
       </div>
 
-      <div className="Content" style={{ marginTop: "20px" }}>
-        <div
-          className="Filter_sideBar"
-          style={{ margin: "25px", float: "left", padding: "20px" }}
+      <div className={classes.mainContenContainer}>
+        <div className={classes.filter_sideBar}
         >
-          <Playground products={products}
-          applyFilters ={applyFilters}
-          applyFiltersBrand = {applyFiltersBrand}
-          applyFiltersType = {applyFiltersType} />
+          <Playground
+            products={products}
+            applyFilters={applyFilters}
+            applyAllFilters={applyAllFilters}
+          />
         </div>
-        <div style={{ float: "right", width: "70%", paddingTop: "20px" }}>
+        <div className ={classes.categoryProducts}>
           <CategoryGridList
             categoryId={props.categoryId}
             product_name={products.product_name}
