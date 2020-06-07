@@ -82,7 +82,7 @@ const Signup = () => {
                     const user = res.data;
                     window.localStorage.setItem('customer', JSON.stringify(user.payload));
                     axios.post('/auth/login', user.email, user.customerPassword);
-                    dispatch({ type: 'USER_CLICKED_LOGIN', payload: user });
+                    dispatch({ type: 'SET_USER', payload: user });
                     setAlert(!alert)
                     setTimeout(() => {
                         history.push('/account')

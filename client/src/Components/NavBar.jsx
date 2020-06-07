@@ -59,7 +59,7 @@ function Navbar() {
   const menuId = 'primary-search-account-menu';
   const logUserOut = async () => {
     await axios.get('/auth/logout')
-    dispatch({ type: 'USER_CLICKED_LOGOUT', payload: {} })
+    dispatch({ type: 'REMOVE_USER', payload: {} })
     window.localStorage.setItem('customer', JSON.stringify({}))
     setTimeout(() => {
       history.push('/')
@@ -103,9 +103,9 @@ function Navbar() {
           </Link>
           </MenuItem>
           <MenuItem onClick={handleMenuClose} className={classes.customerMenu}>
-            <Link style={{ textDecoration: 'none', color: customTheme.palette.secondary.dark }} onClick={logUserOut}>
+            <Typography style={{ textDecoration: 'none', color: customTheme.palette.secondary.dark }} onClick={logUserOut}>
               Logout
-           </Link>
+           </Typography>
           </MenuItem>
         </div>
       }
@@ -155,6 +155,7 @@ function Navbar() {
     </Menu>
   );
   console.log('state', state)
+  // debugger
   return (
     <div className={classes.grow}
       style={{
@@ -169,11 +170,7 @@ function Navbar() {
         <Toolbar>
           <Link to='/'
             style={{ textDecoration: 'none', color: customTheme.palette.secondary.dark }}>
-            <Typography
-              className={classes.title}
-              variant="h6" noWrap >
-              CARRY
-        </Typography>
+              <img src='carry.png' className={classes.logo}/>
           </Link>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>

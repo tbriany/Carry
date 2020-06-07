@@ -67,12 +67,13 @@ const Login = () => {
                 email, password
             }).then(res => {
                 const user = res.data;
-                dispatch({ type: 'USER_CLICKED_LOGIN', payload: user });
+                dispatch({ type: 'SET_USER', payload: user });
                 window.localStorage.setItem('customer', JSON.stringify(user.payload));
                 setAlert(!alert)
                 setTimeout(() => {
                     history.push('/')
                 }, 3000);
+                //change action  names
             })
                 .catch(err => handleWrongInputs(err))
         }
