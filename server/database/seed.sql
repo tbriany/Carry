@@ -47,7 +47,7 @@ CREATE TABLE couriers(
 
 CREATE TABLE categories(
     category_id SERIAL PRIMARY KEY,
-    category_name VARCHAR,
+    categories_name VARCHAR,
     category_Landing_Logo VARCHAR,
     category_logo VARCHAR
 );
@@ -66,14 +66,14 @@ CREATE TABLE materials(
 
 CREATE TABLE brands(
     brand_id SERIAL PRIMARY KEY,
-    brand_name VARCHAR,
+    brands_name VARCHAR,
     brand_description VARCHAR,
     store_id INT REFERENCES stores(store_id)
 );
 
 CREATE TABLE colors(
     color_id SERIAL PRIMARY KEY,
-    color_name VARCHAR NOT NULL
+    colors_name VARCHAR NOT NULL
 );
 
 CREATE TABLE products(
@@ -206,11 +206,10 @@ INSERT INTO couriers
 VALUES ('Jacob', 'Smith', '(347)-555-5553', 'Smith@courier.com', 'img', 'jacobsmith', 'bike');
 
 INSERT INTO categories 
-(category_name, category_Landing_Logo, category_logo)
+(categories_name, category_Landing_Logo, category_logo)
 VALUES 
 ('Women''s', 'https://imageproxy.viewbook.com/80941/b3458b281396eddd7ea1370e84434090_hd.jpg','https://www.voguehk.com/media/2019/10/00001PFW_DAY7_Vogueint_30sep19_credit_Jonathan-Daniel-Pryce_23-1280x853.jpg'), 
 ('Men''s','https://thumbs.dreamstime.com/b/fashion-man-men-sketches-white-background-autumn-127439059.jpg', 'https://content.api.news/v3/images/bin/f5e805f5912487f926d29b853ff76709'), 
--- ('Beauty','https://cdn.shopify.com/s/files/1/0580/0721/articles/iStock-1170104811_95fed370-9e0c-4fd8-a668-8d7e806c8f05_grande.jpg', 'https://edited.beautybay.com/wp-content/uploads/2019/04/edited_april19_revolution_skincare_landscape.jpg'), 
 ('Beauty','https://cdn.shopify.com/s/files/1/0580/0721/articles/iStock-1170104811_95fed370-9e0c-4fd8-a668-8d7e806c8f05_grande.jpg', 'https://s3.ap-south-1.amazonaws.com/hsdreams1/pins/2019/04/big/2865c49675193db171dfa50162fbb4f1.jpeg'), 
 ('Accessories', 'https://www.thestatesman.com/wp-content/uploads/2017/12/accessories.jpg','https://cdn.shopify.com/s/files/1/0298/0353/products/0_c278b29e-51ba-42b3-a300-c8c87b32ac86_1024x1024.jpg?v=1571317845'),
 ('Home Decor', 'https://cb2.scene7.com/is/image/CB2/122919_m_super_decor_accessories?wid=670&qlt=65', 'https://guinwa.com/wp-content/uploads/2019/01/Screen-Shot-2019-01-29-at-11.15.35-AM-1160x770.png'),
@@ -270,14 +269,14 @@ VALUES
 ('Alpaca');
 
 INSERT INTO brands
-(brand_name, brand_description)
+(brands_name, brand_description)
 VALUES 
 ('Lima Sagrada', 'Lima Sagrada is the name of a project that gives shape to raw materials such as leather in its most basic pure form, resulting in a modern and contemporary design founded by Vanessa Vila. Vanessa Vila is an architect, art director, and a stylist in Lima, Peru.'), 
 ('Aynx', 'A brand created out of a common love for high-quality products, nature''s finest materials, and strong economic and environmental engagement. '),
 ('Nutu', 'A regenerative business based on sustainable agroforestry.');
 
 INSERT INTO colors
-(color_name)
+(colors_name)
 VALUES 
 ('Black'),
 ('White'),
