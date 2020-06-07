@@ -175,17 +175,17 @@ VALUES ('Ana', 'Gomez', '(347)-555-5551', 'Ana@pursuit.org', '47-10 Austell Pl 2
 INSERT INTO stores
 (store_name, store_logo, avatar_url, phone_number, email, address, city, state, zip_code, password, lat, lng)
 VALUES 
-('PazLifestyle', 'https://cdn.shopify.com/s/files/1/0082/3558/1504/files/Aube1_2_2048x.jpg?v=1583910819','https://cdn.shopify.com/s/files/1/0082/3558/1504/files/pazlogo3_x45@2x.png', '(347)-555-5552', 'info@pazlifestyle.com', '123 Paz Street', 'New York', 'NY', 10031, 'lifestyle', 40.760350, -73.964930),
+('PazLifestyle', 'http://localhost:4008/images/stores/PazLifestyle/PazLifestyleLogo.jpg','http://localhost:4008/images/stores/PazLifestyle/PazLifeStyleAvatar.png', '(347)-555-5552', 'info@pazlifestyle.com', '123 Paz Street', 'New York', 'NY', 10031, 'lifestyle', 40.760350, -73.964930),
 
-('Louis Vuitton', 'https://us.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-find-a-store-us-louis-vuitton-denver-cherry-creek-curbside-pickup-only--StFi_Louis_Vuitton_Denver_CherryCreek_DI3_1.jpg', 'https://i.pinimg.com/originals/ce/6d/3e/ce6d3ed43b69df168ca4ce8a5e602759.jpg', '(212)758-8877', 'cannotfindemail@gmail.com', '1 East 57 St', 'New York', 'NY', 10022, 'Vuitton', 40.760350, -73.12112),
+('Louis Vuitton', 'http://localhost:4008/images/stores/LouisVuitton/LouisVuittonLogo.jpg', 'http://localhost:4008/images/stores/LouisVuitton/LouisVuittonAvatar.jpg', '(212)758-8877', 'cannotfindemail@gmail.com', '1 East 57 St', 'New York', 'NY', 10022, 'Vuitton', 40.760350, -73.12112),
 
-('Prada', 'https://i.pinimg.com/originals/ee/09/6d/ee096de9605daa58fd9c4df25b11fe5b.jpg', 'https://cdn.shopify.com/s/files/1/0049/8489/7625/products/Prada_580x.jpg', '(212)-327-4200', 'client.service.americas@prada.com','841 Madison Avenue', 'New York', 'NY',10021, 'Prada1', 40.770260, -73.966320),
+('Prada', 'http://localhost:4008/images/stores/Prada/PradaLogo.jpg', 'http://localhost:4008/images/stores/Prada/PradaAvatar.jpg', '(212)-327-4200', 'client.service.americas@prada.com','841 Madison Avenue', 'New York', 'NY',10021, 'Prada1', 40.770260, -73.966320),
 
-('Chanel', 'https://i2.wp.com/thecurrentdaily.com/wp-content/uploads/2018/02/chanel-storeofthefuture.jpg?fit=1400%2C600&ssl=1', 'https://www.agneseangelini.com/wp-content/uploads/2019/04/coco.jpg', '(212)355-5050', 'email@gmail.com','15 East 57th Street','New York', 'NY', 10022,'Chanel1', 40.762730, -73.972730),
+('Chanel', 'http://localhost:4008/images/stores/Chanel/ChanelLogo.jpg', 'http://localhost:4008/images/stores/Chanel/ChanelAvatar.jpg', '(212)355-5050', 'email@gmail.com','15 East 57th Street','New York', 'NY', 10022,'Chanel1', 40.762730, -73.972730),
 
-('Tiffany & Co.', 'https://media.tiffany.com/is/image/tiffanydm/1440x912_NSO?$tile$&wid=1440&hei=912', 'https://i.pinimg.com/originals/72/c5/69/72c56940aa7b09daf1c51855d8d062ec.jpg', '(212)755-8000', 'noemail@gmail.org','6 East 57th St', 'New York', 'NY', 10022, 'Tiffany1', 40.762810, -73.973710), 
+('Tiffany & Co.', 'http://localhost:4008/images/stores/Tiffany&Co/Tiffany&CoLogo.jpeg', 'http://localhost:4008/images/stores/Tiffany&Co/Tiffany&CoAvatar.jpg', '(212)755-8000', 'noemail@gmail.org','6 East 57th St', 'New York', 'NY', 10022, 'Tiffany1', 40.762810, -73.973710), 
 
-('Giorgio Armani New York', 'https://www.mygiftcardsite.us.com/wp-content/uploads/2018/03/Giorgio-Armani-Store-Front-Doha-Airport.jpg', 'https://cdn11.bigcommerce.com/s-sq9zkarfah/images/stencil/1280x1280/products/102879/127279/Giorgio-Armani-Logo-Decal-Sticker__10076.1510657355.jpg', '(212)988-9191', 'email2@gmail.com', '760 Madison Avenue', 'New York', 'NY', 10021, 'Giorgio1', 40.772460, -73.964930),
+('Giorgio Armani New York', 'http://localhost:4008/images/stores/GiorgioArmani/GiorgioArmaniLogo.jpg', 'https://cdn11.bigcommerce.com/s-sq9zkarfah/images/stencil/1280x1280/products/102879/127279/Giorgio-Armani-Logo-Decal-Sticker__10076.1510657355.jpg', '(212)988-9191', 'email2@gmail.com', '760 Madison Avenue', 'New York', 'NY', 10021, 'Giorgio1', 40.772460, -73.964930),
 
 ('Hermès Men', 'https://www.yourmindschool.com/wp-content/uploads/2017/09/how-to-get-hermes-birkins-my-experiences-on-buying-5-birkins-in-3-years.jpg', 'https://cdn11.bigcommerce.com/s-sq9zkarfah/images/stencil/1280x1280/products/102859/136658/Hermes-Logo-Decal-Sticker__53440.1510913981.jpg', '(212)751-3181', 'email4@gmail.com', '690 Madisoon Avenue', 'New York', 'NY', 10065, 'Hermes1',40.8307354 ,-73.9701922),
 
@@ -208,54 +208,54 @@ VALUES ('Jacob', 'Smith', '(347)-555-5553', 'Smith@courier.com', 'img', 'jacobsm
 INSERT INTO categories 
 (category_name, category_Landing_Logo, category_logo)
 VALUES 
-('Women''s', 'https://imageproxy.viewbook.com/80941/b3458b281396eddd7ea1370e84434090_hd.jpg','https://www.voguehk.com/media/2019/10/00001PFW_DAY7_Vogueint_30sep19_credit_Jonathan-Daniel-Pryce_23-1280x853.jpg'), 
-('Men''s','https://thumbs.dreamstime.com/b/fashion-man-men-sketches-white-background-autumn-127439059.jpg', 'https://content.api.news/v3/images/bin/f5e805f5912487f926d29b853ff76709'), 
+('Women''s', 'http://localhost:4008/images/categories/womens/womensLandingLogo.jpg','http://localhost:4008/images/categories/womens/womensLogo.jpg'), 
+('Men''s','http://localhost:4008/images/categories/mens/mensLandingLogo.jpg', 'https://content.api.news/v3/images/bin/f5e805f5912487f926d29b853ff76709'), 
 -- ('Beauty','https://cdn.shopify.com/s/files/1/0580/0721/articles/iStock-1170104811_95fed370-9e0c-4fd8-a668-8d7e806c8f05_grande.jpg', 'https://edited.beautybay.com/wp-content/uploads/2019/04/edited_april19_revolution_skincare_landscape.jpg'), 
-('Beauty','https://cdn.shopify.com/s/files/1/0580/0721/articles/iStock-1170104811_95fed370-9e0c-4fd8-a668-8d7e806c8f05_grande.jpg', 'https://s3.ap-south-1.amazonaws.com/hsdreams1/pins/2019/04/big/2865c49675193db171dfa50162fbb4f1.jpeg'), 
-('Accessories', 'https://www.thestatesman.com/wp-content/uploads/2017/12/accessories.jpg','https://cdn.shopify.com/s/files/1/0298/0353/products/0_c278b29e-51ba-42b3-a300-c8c87b32ac86_1024x1024.jpg?v=1571317845'),
-('Home Decor', 'https://cb2.scene7.com/is/image/CB2/122919_m_super_decor_accessories?wid=670&qlt=65', 'https://guinwa.com/wp-content/uploads/2019/01/Screen-Shot-2019-01-29-at-11.15.35-AM-1160x770.png'),
-('Kids', 'https://image.cnbcfm.com/api/v1/image/106032900-1563825608021rockets.jpg?v=1563825858&w=678&h=381','https://cdn.shopify.com/s/files/1/0053/7113/4055/articles/Susukoshi-gender-neutral-baby-clothes-babydonkie_1600x.jpg?v=1558919508');
+('Beauty','http://localhost:4008/images/categories/beauty/beautyLandingLogo.jpg', 'http://localhost:4008/images/categories/beauty/beautyLogo.jpeg'), 
+('Accessories', 'http://localhost:4008/images/categories/accessories/accessoriesLandingLogo.jpg','http://localhost:4008/images/categories/accessories/accessoriesLogo.jpg'),
+('Home Decor', 'http://localhost:4008/images/categories/homeDecor/homeDecorLandingLogo.jpeg', 'http://localhost:4008/images/categories/homeDecor/homeDecorLogo.png'),
+('Kids', 'http://localhost:4008/images/categories/kids/kidsLandingLogo.jpg','http://localhost:4008/images/categories/kids/kidsLogo.jpg');
 
 
 INSERT INTO product_type
 (category_id, product_type_name, product_type_logo)
 VALUES 
-(1, 'Tops', 'https://ae01.alicdn.com/kf/HTB1MWa5B5OYBuNjSsD4q6zSkFXa7/Loose-Retro-Style-Early-Flower-Print-Shirt-Women-s-Shirts-Clothes-Kawaii-Ulzzang-Vintage-Female-Punk.jpg'),
-(1, 'Pants', 'https://cfcdn.zulily.com/images/cache/product/452x1000/286848/zu55352758_main_tm1518815113.jpg'),
-(1, 'Dresses', 'https://n.nordstrommedia.com/ImageGallery/store/product/Zoom/13/_107141393.jpg?h=365&w=240&dpr=2&quality=45&fit=fill&fm=jpg'),
-(1, 'Jackets & Coats', 'https://img-static.tradesy.com/item/26514616/ted-baker-pink-melisar-dusty-wide-collar-wrap-women-s-coat-size-8-m-0-0-650-650.jpg'),
-(1, 'Skirts', 'https://target.scene7.com/is/image/Target/GUEST_9c278ec1-c44b-4612-b443-7881eb859ad6?wid=488&hei=488&fmt=pjpeg'),
-(1, 'Shorts', 'https://target.scene7.com/is/image/Target/GUEST_cabe96d5-3340-408b-a70c-756f24c6eaa5?hei=300&qlt=80&fmt=pjpeg'),
-(1, 'Shirts & Blouses', 'https://images.takeluckhome.com/images/392x588/201611/J/women-s-summer-blouses-v-neck-cuffed-sleeve-blouse-shirts-tops_1479382392925.jpg'),
-(1, 'Jeans', 'https://i.insider.com/5dcd5e913afd371aa87d4ce5?width=500&format=jpeg&auto=webp'),
-(1, 'Swimwear', 'https://images-na.ssl-images-amazon.com/images/I/51aBQQcqxrL._AC_UX385_.jpg'),
-(1, 'Hoodies & Sweatshirts', 'https://i.pinimg.com/originals/76/60/43/766043b32e2d7b8845571625be402e27.jpg'),
+(1, 'Tops', 'http://localhost:4008/images/categories/womens/womensTops.jpg'),
+(1, 'Pants', 'http://localhost:4008/images/categories/womens/womensPants.jpg'),
+(1, 'Dresses', 'http://localhost:4008/images/categories/womens/womensDresses.jpg'),
+(1, 'Jackets & Coats', 'http://localhost:4008/images/categories/womens/womensJackets&Coats.jpg'),
+(1, 'Skirts', 'http://localhost:4008/images/categories/womens/womensSkirts.jpeg'),
+(1, 'Shorts', 'http://localhost:4008/images/categories/womens/womensShorts.jpeg'),
+(1, 'Shirts & Blouses', 'http://localhost:4008/images/categories/womens/womensShirts&Blouses.jpg'),
+(1, 'Jeans', 'http://localhost:4008/images/categories/womens/womensJeans.jpeg'),
+(1, 'Swimwear', 'http://localhost:4008/images/categories/womens/womensSwimwear.jpg'),
+(1, 'Hoodies & Sweatshirts', 'http://localhost:4008/images/categories/womens/womensHoodies&Sweatshirts.jpg'),
 (1, 'Sportswear', 'https://im01.itaiwantrade.com/2190bacc-80e8-4892-8690-565b80c7a024/5433-2-480x480.png'),
-(2, 'Tops', 'https://slimages.macysassets.com/is/image/MCY/products/1/optimized/9220501_fpx.tif?op_sharpen=1&wid=500&hei=613&fit=fit,1&$filtersm$'),
-(2, 'Pants', 'https://images.timberland.com/is/image/timberland/A1OF4590-HERO?$PDP-FULL-IMAGE$'),
-(2, 'Jackets & Coats', 'https://dtpmhvbsmffsz.cloudfront.net/posts/2017/05/23/592446f5b4188ec1d9003e58/m_592446f5b4188ec1d9003e59.jpg'),
-(2, 'Shorts', 'https://images.nike.com/is/image/DotCom/BV2770_293?$NIKE_PWP_GRAY$&wid=420&hei=420'),
-(2, 'Shirts', 'https://slimages.macysassets.com/is/image/MCY/products/6/optimized/9591496_fpx.tif?op_sharpen=1&wid=500&hei=613&fit=fit,1&$filtersm$'),
-(2, 'Jeans', 'https://target.scene7.com/is/image/Target/GUEST_9129f49e-9e2a-4d43-b5da-cb990507b177?wid=488&hei=488&fmt=pjpeg'),
-(2, 'Swimwear', 'https://slimages.macysassets.com/is/image/MCY/products/9/optimized/2740499_fpx.tif?op_sharpen=1&wid=500&hei=613&fit=fit,1&$filtersm$'),
-(2, 'Hoodies & Sweatshirts', 'https://ak1.ostkcdn.com/images/products/is/images/direct/55809b1df3bf7dc47a53e0c8b52e0776b0e09532/Under-Armour-Mens-Sweater-Black-Size-XL-Textured-Pullover-Hooded.jpg?imwidth=400&impolicy=medium'),
-(2, 'Sportswear', 'https://slimages.macysassets.com/is/image/MCY/products/8/optimized/15655508_fpx.tif?op_sharpen=1&wid=500&hei=613&fit=fit,1&$filtersm$'),
+(2, 'Tops', 'http://localhost:4008/images/categories/mens/mensTops.jpeg'),
+(2, 'Pants', 'http://localhost:4008/images/categories/mens/mensPants.jpeg'),
+(2, 'Jackets & Coats', 'http://localhost:4008/images/categories/mens/mensJackets&Coats.jpg'),
+(2, 'Shorts', 'http://localhost:4008/images/categories/mens/mensShorts.jpeg'),
+(2, 'Shirts', 'http://localhost:4008/images/categories/mens/mensShirts.jpeg'),
+(2, 'Jeans', 'http://localhost:4008/images/categories/mens/mensJeans.jpeg'),
+(2, 'Swimwear', 'http://localhost:4008/images/categories/mens/mensSwimwear.jpeg'),
+(2, 'Hoodies & Sweatshirts', 'http://localhost:4008/images/categories/mens/mensHoodies&Sweatshirts.jpg'),
+(2, 'Sportswear', 'http://localhost:4008/images/categories/mens/mensSportswear.jpeg'),
 (3, 'Face', 'https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fcdn-img.instyle.com%2Fsites%2Fdefault%2Ffiles%2Fstyles%2F684xflex%2Fpublic%2Fimages%2F2018%2F04%2F042318-foundation-lead.jpg%3Fitok%3DA0rU78H2&w=450&c=sc&poi=face&q=85'),
-(3, 'Eyes', 'https://www.narscosmetics.com/dw/image/v2/BBSK_PRD/on/demandware.static/-/Sites-itemmaster_NARS/default/dwfc56d65a/hi-res/0607845013556.jpg?sw=375&sh=375&sm=fit'),
-(3, 'Lips', 'https://ysms.akamaized.net/Assets/18/376/l_p0108837618.jpg'),
-(3, 'Nails', 'https://target.scene7.com/is/image/Target/GUEST_117b1f4d-758d-411a-8e9d-ef3e435bc5d2'),
-(3, 'Bath & Body Care', 'https://cdn.accentuate.io/76171461/10644515291171/Beekman_1802_banner_mobile-004-v1569113362496.jpg?500x293'),
-(3, 'Hair', 'https://s1.thcdn.com/widgets/95-en/18/Hair-Care-05-032518.jpg'),
-(3, 'Brushes & Tools', 'https://cdn.shopify.com/s/files/1/1067/9720/products/best_hair_brush_set_marble_rose_gold_paddle_hairbrush_barrel_brush_gift_box_1000_new_1200x630.jpg?v=1580466777'),
-(4, 'Bags', 'https://cdn.shopify.com/s/files/1/2523/1254/products/PU_Leather_Circle_Round_Purses_Crossbody_Bags_For_Summer_18_59d7c67f-c83c-495f-bb7a-3416b8954448_500x.jpg?v=1587659834'),
-(4, 'Belts', 'https://sewguide.com/wp-content/uploads/2018/08/belt-123.jpg'),
-(4, 'Jewelry', 'https://i.pinimg.com/originals/de/b6/dc/deb6dc27899d59a7ceff27371ee11280.jpg'),
-(4, 'Hair Accessories', 'https://img1.cfcdn.club/a7/c7/a7ce5fd395fc7af6f299836c6fb591c7_350x350.jpg'),
-(4, 'Sunglasses', 'https://www.chloe.com/46/46689674KX_17_f.jpg'),
+(3, 'Eyes', 'http://localhost:4008/images/categories/beauty/eyes.jpg'),
+(3, 'Lips', 'http://localhost:4008/images/categories/beauty/lips.jpg'),
+(3, 'Nails', 'http://localhost:4008/images/categories/beauty/nails.jpeg'),
+(3, 'Bath & Body Care', 'http://localhost:4008/images/categories/beauty/bath&BodyCare.jpg'),
+(3, 'Hair', 'http://localhost:4008/images/categories/beauty/hair.jpg'),
+(3, 'Brushes & Tools', 'http://localhost:4008/images/categories/beauty/brushes&Tools.jpg'),
+(4, 'Bags', 'http://localhost:4008/images/categories/accessories/bags.jpg'),
+(4, 'Belts', 'http://localhost:4008/images/categories/accessories/belts.jpg'),
+(4, 'Jewelry', 'http://localhost:4008/images/categories/accessories/jewelry.jpg'),
+(4, 'Hair Accessories', 'http://localhost:4008/images/categories/accessories/hairAccessories.jpg'),
+(4, 'Sunglasses', 'http://localhost:4008/images/categories/accessories/sunglasses.jpg'),
 (4, 'Gloves', 'https://cdn11.bigcommerce.com/s-sn4d4efuta/images/stencil/337x337/products/25927/136500/40-Winter-Gloves-Faux-Suede-Full-Finger-Gloves-Women-Thicken-Warm-Mittens-Female-Elegant-Wrist__49173.1574214557.jpg?c=1'),
-(4, 'Scarves', 'https://avvenice.com/51775-large_default/hermes-vintage-memoire-d-hermes-silk-scarf-white-multi-silk-foulard-luxury-high-quality.jpg'),
-(4, 'Hats & Caps', 'https://i2.wp.com/ae01.alicdn.com/kf/HTB1vyvMDQyWBuNjy0Fpq6yssXXad/SUOGRY-Wide-Brim-Autumn-Female-font-b-Fashion-b-font-Top-Jazz-Cap-Winter-font-b.jpg?h=300&quality=70'),
-(4, 'Wallets & Coin purses', 'https://sc02.alicdn.com/kf/HTB1AY6JaojrK1RkHFNRq6ySvpXaJ/Guangzhou-genuine-leather-small-women-purse-wallet.jpg_350x350.jpg');
+(4, 'Scarves', 'http://localhost:4008/images/categories/accessories/scarves.jpg'),
+(4, 'Hats & Caps', 'http://localhost:4008/images/categories/accessories/hats&Caps.jpg'),
+(4, 'Wallets & Coin purses', 'http://localhost:4008/images/categories/accessories/wallets&CoinPurses.jpg');
 
 INSERT INTO materials
 (material_name)
