@@ -7,7 +7,7 @@ export const sidePopUp = makeStyles((theme) => ({
     width: "50%",
   },
   paperAnchorRight: {
-    width: "55%",
+    width: "50%",
     display: 'flex',
     alignItems: 'center',
     bottom: 'inherit',
