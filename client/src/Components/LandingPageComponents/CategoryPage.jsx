@@ -51,11 +51,11 @@ const CategoryPage = (props) => {
           marginLeft: '20px',
           marginRight: '30px'
         }}>
-        {categories.map((value) => (<Link to={`/categories/${value.category_name}`}
+        {categories.map((value) => (<Link to={`/categories/${value.categories_name}`}
 
           style={{ textDecoration: 'none', color: '#CD853F', active: '#FAEBD7' }}
 
-        >  {value.category_name}
+        >  {value.categories_name}
         </Link>))}
       </div>
 
