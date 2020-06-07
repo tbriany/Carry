@@ -175,17 +175,17 @@ VALUES ('Ana', 'Gomez', '(347)-555-5551', 'Ana@pursuit.org', '47-10 Austell Pl 2
 INSERT INTO stores
 (store_name, store_logo, avatar_url, phone_number, email, address, city, state, zip_code, password, lat, lng)
 VALUES 
-('PazLifestyle', 'http://localhost:4008/images/stores/PazLifestyle/PazLifestyleLogo.jpg','http://localhost:4008/images/stores/PazLifestyle/PazLifeStyleAvatar.png', '(347)-555-5552', 'info@pazlifestyle.com', '123 Paz Street', 'New York', 'NY', 10031, 'lifestyle', 40.760350, -73.964930),
+('PazLifestyle', 'http://localhost:4008/images/stores/PazLifestyle/PazLifestyleStore.jpg','http://localhost:4008/images/stores/PazLifestyle/PazLifeStyleAvatar.png', '(347)-555-5552', 'info@pazlifestyle.com', '123 Paz Street', 'New York', 'NY', 10031, 'lifestyle', 40.760350, -73.964930),
 
-('Louis Vuitton', 'http://localhost:4008/images/stores/LouisVuitton/LouisVuittonLogo.jpg', 'http://localhost:4008/images/stores/LouisVuitton/LouisVuittonAvatar.jpg', '(212)758-8877', 'cannotfindemail@gmail.com', '1 East 57 St', 'New York', 'NY', 10022, 'Vuitton', 40.760350, -73.12112),
+('Louis Vuitton', 'http://localhost:4008/images/stores/LouisVuitton/LouisVuittonStore.jpg', 'http://localhost:4008/images/stores/LouisVuitton/LouisVuittonAvatar.jpg', '(212)758-8877', 'cannotfindemail@gmail.com', '1 East 57 St', 'New York', 'NY', 10022, 'Vuitton', 40.760350, -73.12112),
 
-('Prada', 'http://localhost:4008/images/stores/Prada/PradaLogo.jpg', 'http://localhost:4008/images/stores/Prada/PradaAvatar.jpg', '(212)-327-4200', 'client.service.americas@prada.com','841 Madison Avenue', 'New York', 'NY',10021, 'Prada1', 40.770260, -73.966320),
+('Prada', 'http://localhost:4008/images/stores/Prada/PradaStore.jpg', 'http://localhost:4008/images/stores/Prada/PradaAvatar.jpg', '(212)-327-4200', 'client.service.americas@prada.com','841 Madison Avenue', 'New York', 'NY',10021, 'Prada1', 40.770260, -73.966320),
 
-('Chanel', 'http://localhost:4008/images/stores/Chanel/ChanelLogo.jpg', 'http://localhost:4008/images/stores/Chanel/ChanelAvatar.jpg', '(212)355-5050', 'email@gmail.com','15 East 57th Street','New York', 'NY', 10022,'Chanel1', 40.762730, -73.972730),
+('Chanel', 'http://localhost:4008/images/stores/Chanel/ChanelStore.jpg', 'http://localhost:4008/images/stores/Chanel/ChanelAvatar.jpg', '(212)355-5050', 'email@gmail.com','15 East 57th Street','New York', 'NY', 10022,'Chanel1', 40.762730, -73.972730),
 
-('Tiffany & Co.', 'http://localhost:4008/images/stores/Tiffany&Co/Tiffany&CoLogo.jpeg', 'http://localhost:4008/images/stores/Tiffany&Co/Tiffany&CoAvatar.jpg', '(212)755-8000', 'noemail@gmail.org','6 East 57th St', 'New York', 'NY', 10022, 'Tiffany1', 40.762810, -73.973710), 
+('Tiffany & Co.', 'http://localhost:4008/images/stores/Tiffany&Co/Tiffany&CoStore.jpeg', 'http://localhost:4008/images/stores/Tiffany&Co/Tiffany&CoAvatar.jpg', '(212)755-8000', 'noemail@gmail.org','6 East 57th St', 'New York', 'NY', 10022, 'Tiffany1', 40.762810, -73.973710), 
 
-('Giorgio Armani New York', 'http://localhost:4008/images/stores/GiorgioArmani/GiorgioArmaniLogo.jpg', 'https://cdn11.bigcommerce.com/s-sq9zkarfah/images/stencil/1280x1280/products/102879/127279/Giorgio-Armani-Logo-Decal-Sticker__10076.1510657355.jpg', '(212)988-9191', 'email2@gmail.com', '760 Madison Avenue', 'New York', 'NY', 10021, 'Giorgio1', 40.772460, -73.964930),
+('Giorgio Armani New York', 'http://localhost:4008/images/stores/GiorgioArmani/GiorgioArmaniStore.jpg', 'https://cdn11.bigcommerce.com/s-sq9zkarfah/images/stencil/1280x1280/products/102879/127279/Giorgio-Armani-Logo-Decal-Sticker__10076.1510657355.jpg', '(212)988-9191', 'email2@gmail.com', '760 Madison Avenue', 'New York', 'NY', 10021, 'Giorgio1', 40.772460, -73.964930),
 
 ('Hermès Men', 'https://www.yourmindschool.com/wp-content/uploads/2017/09/how-to-get-hermes-birkins-my-experiences-on-buying-5-birkins-in-3-years.jpg', 'https://cdn11.bigcommerce.com/s-sq9zkarfah/images/stencil/1280x1280/products/102859/136658/Hermes-Logo-Decal-Sticker__53440.1510913981.jpg', '(212)751-3181', 'email4@gmail.com', '690 Madisoon Avenue', 'New York', 'NY', 10065, 'Hermes1',40.8307354 ,-73.9701922),
 
