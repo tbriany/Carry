@@ -29,7 +29,7 @@ const deleteCheckoutItemByCart = async (checkout_id) => {
 
 const getAllFromCart = async () => {
     const getAllQueries = `
-    SELECT checkout_items.checkout_items_id,checkout_items.size, checkout_items.product_id , checkout_items.quantity As cartQuantity, productImage_id.*,brands.brand_name, products.*, colors.color_name, materials.material_name,
+    SELECT checkout_items.checkout_items_id,checkout_items.size, checkout_items.product_id , checkout_items.quantity As cartQuantity, productImage_id.*,brands.brands_name, products.*, colors.colors_name, materials.material_name,
     checkout_items.quantity * products.product_price AS productTotal, checkout_cart.*
     FROM products
     JOIN checkout_items ON products.product_id = checkout_items.product_id 
@@ -38,7 +38,7 @@ const getAllFromCart = async () => {
     JOIN materials ON products.material_id= materials.material_id
     JOIN brands ON products.brand_id = brands.brand_id 
     JOIN  productImage_id  ON  products.product_id = productImage_id.product_id 
-    GROUP BY checkout_items.checkout_items_id, productimage_id.product_image_id, brands.brand_name, products.product_id, colors.color_name, materials.material_name, checkout_cart.checkout_cart_id
+    GROUP BY checkout_items.checkout_items_id, productimage_id.product_image_id, brands.brands_name, products.product_id, colors.colors_name, materials.material_name, checkout_cart.checkout_cart_id
     ORDER BY checkout_items_id ASC
     `;
     return await db.any(getAllQueries);
@@ -46,7 +46,7 @@ const getAllFromCart = async () => {
 
 const getAllFromCartSession = async (session_id) => {
     const getAllQueries = `
-    SELECT checkout_items.checkout_items_id,checkout_items.size, checkout_items.product_id , checkout_items.quantity As cartQuantity, productImage_id.*,brands.brand_name, products.*, colors.color_name, materials.material_name,
+    SELECT checkout_items.checkout_items_id,checkout_items.size, checkout_items.product_id , checkout_items.quantity As cartQuantity, productImage_id.*,brands.brands_name, products.*, colors.colors_name, materials.material_name,
     checkout_items.quantity * products.product_price AS productTotal, checkout_cart.checkout_cart_id
     FROM products
     JOIN checkout_items ON products.product_id = checkout_items.product_id 
@@ -56,7 +56,7 @@ const getAllFromCartSession = async (session_id) => {
     JOIN brands ON products.brand_id = brands.brand_id 
     JOIN  productImage_id  ON  products.product_id = productImage_id.product_id 
     WHERE checkout_cart.session_id= $/session_id/
-    GROUP BY checkout_items.checkout_items_id, productimage_id.product_image_id, brands.brand_name, products.product_id, colors.color_name, materials.material_name, checkout_cart.checkout_cart_id
+    GROUP BY checkout_items.checkout_items_id, productimage_id.product_image_id, brands.brands_name, products.product_id, colors.colors_name, materials.material_name, checkout_cart.checkout_cart_id
     ORDER BY checkout_items_id ASC
     `;
     return await db.any(getAllQueries, { session_id });
@@ -103,7 +103,7 @@ const getSumOfCheckout = async (checkout_cart_id) => {
 
 const getcheckoutCart = async (id) => {
     const getQuery = `
-    SELECT checkout_items.checkout_items_id, checkout_items.product_id , checkout_items.size, checkout_items.quantity As cartQuantity,  productImage_id.*,brands.brand_name, products.*, colors.color_name, materials.material_name
+    SELECT checkout_items.checkout_items_id, checkout_items.product_id , checkout_items.size, checkout_items.quantity As cartQuantity,  productImage_id.*,brands.brands_name, products.*, colors.colors_name, materials.material_name
     FROM products
     JOIN checkout_items ON products.product_id = checkout_items.product_id 
     JOIN colors ON  products.color_id  = colors.color_id
