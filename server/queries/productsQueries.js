@@ -249,7 +249,46 @@ categories.category_name,materials.material_name,colors.color_name, product_type
     `;
     return await db.any(getNewArrivalsQuery, [id])
 }
-//once merge conflict is solved move getNewArrivals up
+
+const getProductsOfCategoryByFilter = async (filters, category_name) => {
+    
+    let getQuery = `
+    SELECT products.product_id, products.product_name, products.product_price, products.product_description,  products.store_id,
+    brands.brand_name, categories.category_name, materials.material_name, colors.color_name, 
+    stores.store_name,product_type.product_type_name, productImage_id.*,
+    array_agg(product_inventory.product_size) AS product_size
+    FROM products 
+    JOIN brands ON brands.brand_id = products.brand_id
+    JOIN categories ON categories.category_id = products.category_id
+    JOIN materials ON materials.material_id = products.material_id
+    JOIN colors ON colors.color_id = products.color_id
+    JOIN product_type ON product_type.product_type_id = products.product_type
+    JOIN  productImage_id  ON productImage_id.product_id = products.product_id
+    JOIN product_inventory ON product_inventory.product_id = products.product_id 
+    JOIN stores ON stores.store_id = products.store_id
+    WHERE categories.category_name = $/category_name/
+    GROUP BY products.product_id, brands.brand_id, categories.category_name,materials.material_name,colors.color_name, stores.store_name,product_type.product_type_name,
+    productimage_id.product_image_id;`
+
+    let properties = [category_name]
+    let num = 2
+    let firstElem = Object.keys(filters)[0]
+
+    for (el in filters){
+        if(el === firstElem){
+         getQuery += `${el}.${el}_name = $${num} `
+        } else {
+         getQuery += `OR ${el}.${el}_name = $${num} `
+        }
+        properties.push(filters[el])
+        num++;
+    }
+
+    getQuery += `GROUP BY products.product_id, brands.brand_id, categories.categories_name,materials.material_name,colors.colors_name, product_type.product_type_name,
+    productimage_id.product_image_id`
+   
+    return await db.any(getQuery, properties);
+}
 
 module.exports = {
     getProductImageById,
@@ -266,5 +305,6 @@ module.exports = {
     getColors,
     getSizes,
     getNewArrivals,
-    getAllProductsByCategory
+    getAllProductsByCategory,
+    getProductsOfCategoryByFilter
 }
