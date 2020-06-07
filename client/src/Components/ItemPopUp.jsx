@@ -41,7 +41,7 @@ function ItemPopUp() {
         <div className="ItemPopUp-stage"  >
             <Grid container className={classes.root} spacing={2} style={{ width: '100%' }}>
                 <Grid item xs={12} style={{ padding: '0px' }}>
-                    <Grid container justify="center" spacing={3} style={{ width: '100%', margin: '0px',padding: '10% 0px',   display: 'flex', 
+                    <Grid container justify="center" spacing={3} style={{ width: '100%', margin: '0px',padding: '10% 0px 10% 0px',   display: 'flex', 
     alignContent: 'center' }} >
 
                         <Grid className='itemPopUp-image' item xs={6} style={{  width: '100%' , padding: '0px 20px ', boxSizing: 'initial'}} >
@@ -97,7 +97,7 @@ function ItemPopUp() {
                                     <Button
                                         style={{ margin: "10px", borderRadius: 35, backgroundColor: "#eed7c1", padding: "10px 24px", fontSize: "14px" }}
                                         variant="contained"
-                                        className="ItemInputSubmit" type="submit" value="ADD TO BAG"
+                                        className="ItemInputSubmit" type="submit" value="ADD TO BAG" 
                                         disabled={productSize === 'default'}
                                         onClick={addToCart}>ADD TO BAG </Button>
                                 </div>
