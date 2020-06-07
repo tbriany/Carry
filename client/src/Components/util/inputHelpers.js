@@ -1,3 +1,5 @@
+import React from 'react';
+import { Snackbar } from '@material-ui/core';
 export const checkValidEmail = (input, errorFunction) => {
     if (input.length === 0 || !input.includes('@') || !input.includes('.')) {
         errorFunction(true, 'Please enter a valid email');

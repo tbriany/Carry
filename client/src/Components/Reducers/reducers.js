@@ -2,7 +2,7 @@
 //state = initialState null object
 export const LoginReducer = (state, action) => {
     switch (action.type) {
-        case 'USER_CLICKED_LOGIN':
+        case 'SET_USER':
             return {
                 ...state,
                 user: {
@@ -10,7 +10,7 @@ export const LoginReducer = (state, action) => {
                     info: action.payload
                 }
             }
-        case 'USER_CLICKED_LOGOUT':
+        case 'REMOVE_USER':
             return {
                 ...state,
                 user: {
