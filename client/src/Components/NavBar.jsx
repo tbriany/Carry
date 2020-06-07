@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import '../App.css';
 import { Link, useHistory } from 'react-router-dom';
 import AppBar from '@material-ui/core/AppBar';
@@ -30,6 +30,7 @@ function Navbar() {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const history = useHistory();
+  const logo = require('./carry.png')
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -63,7 +64,7 @@ function Navbar() {
     window.localStorage.setItem('customer', JSON.stringify({}))
     setTimeout(() => {
       history.push('/')
-    }, 2000)
+    }, 10)
   }
   const renderMenu = (
     <Menu
@@ -170,7 +171,7 @@ function Navbar() {
         <Toolbar>
           <Link to='/'
             style={{ textDecoration: 'none', color: customTheme.palette.secondary.dark }}>
-              <img src='carry.png' className={classes.logo}/>
+            <img src={logo} className={classes.logo} />
           </Link>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
