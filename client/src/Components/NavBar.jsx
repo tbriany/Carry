@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import '../App.css';
-import { Link, Route } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -18,6 +18,7 @@ import { Context, Store } from '../Contexts/CustomerContext';
 import ProductsPage from './ProductPage/productsPage';
 import { navbarStyles, popoverTheme } from './styling/navbarStyles';
 import { useRadioGroup } from '@material-ui/core';
+import axios from 'axios';
 
 function Navbar() {
   const classes = navbarStyles();
@@ -28,6 +29,7 @@ function Navbar() {
   const [state, dispatch] = useContext(Context);
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const history = useHistory();
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -55,9 +57,13 @@ function Navbar() {
   };
   const open = Boolean(popOver);
   const menuId = 'primary-search-account-menu';
-  const logUserOut = () => {
-    dispatch({ type: 'USER_CLICKED_LOGOUT', payload: {} });
-    window.localStorage.setItem('customer', JSON.stringify({}));
+  const logUserOut = async () => {
+    await axios.get('/auth/logout')
+    dispatch({ type: 'REMOVE_USER', payload: {} })
+    window.localStorage.setItem('customer', JSON.stringify({}))
+    setTimeout(() => {
+      history.push('/')
+    }, 2000)
   }
   const renderMenu = (
     <Menu
@@ -69,12 +75,12 @@ function Navbar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
       className={classes.iconStyling}
-      style={{zIndex: 9001}}
+      style={{ zIndex: 9001 }}
     >
       {state.user.isAnon ?
         <div>
           <MenuItem onClick={handleMenuClose} className={classes.customerMenu}>
-            <Link to='/login' style={{ textDecoration: 'none', color: customTheme.palette.secondary.dark}}>
+            <Link to='/login' style={{ textDecoration: 'none', color: customTheme.palette.secondary.dark }}>
               Login
             </Link>
           </MenuItem>
@@ -84,7 +90,7 @@ function Navbar() {
             </Link>
           </MenuItem>
         </div>
-        : 
+        :
         <div>
           <MenuItem onClick={handleMenuClose} className={classes.customerMenu}>
             <Link to='/orders' style={{ textDecoration: 'none', color: customTheme.palette.secondary.dark }}>
@@ -97,9 +103,9 @@ function Navbar() {
           </Link>
           </MenuItem>
           <MenuItem onClick={handleMenuClose} className={classes.customerMenu}>
-            <Link to='/' style={{ textDecoration: 'none', color: customTheme.palette.secondary.dark }} onClick={logUserOut}>
+            <Typography style={{ textDecoration: 'none', color: customTheme.palette.secondary.dark }} onClick={logUserOut}>
               Logout
-           </Link>
+           </Typography>
           </MenuItem>
         </div>
       }
@@ -149,6 +155,7 @@ function Navbar() {
     </Menu>
   );
   console.log('state', state)
+  // debugger
   return (
     <div className={classes.grow}
       style={{
@@ -163,11 +170,7 @@ function Navbar() {
         <Toolbar>
           <Link to='/'
             style={{ textDecoration: 'none', color: customTheme.palette.secondary.dark }}>
-            <Typography
-              className={classes.title}
-              variant="h6" noWrap >
-              CARRY
-        </Typography>
+              <img src='carry.png' className={classes.logo}/>
           </Link>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
@@ -222,7 +225,7 @@ function Navbar() {
                 zIndex: 9002,
               }}
             >
-              <CartPopover/>
+              <CartPopover />
             </Popover>
 
           </div>

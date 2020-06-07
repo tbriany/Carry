@@ -15,6 +15,9 @@ export const navbarStyles = makeStyles((theme) => ({
     grow: {
       flexGrow: 1,
     },
+    logo: {
+      height: '50px'
+    },
     appBar: {
       backgroundColor: customTheme.palette.primary.main,
       '.MuiAppBar-colorPrimary': {

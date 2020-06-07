@@ -34,12 +34,22 @@ function ProductsPage(props) {
 
 
   const applyFilters = async (filter) => {
-    console.log(filter)
+    let url = `/products/filter/${storeId}`
+
+    if(Object.keys(filter).length){
+      let firstElem = Object.keys(filter)[0]
+      for (let el in filter){
+        if (el === firstElem){
+          url += `?${el}=${filter[el]}`
+        } else {
+          url += `&${el}=${filter[el]}`
+        }
+      }
+    }
+    
     try {
-      const res = await axios.get(`/products/category/${filter}/${storeId}`)
-      // const categories = await axios.get(`/products/categories/all`)
+      const res = await axios.get(url)
       setProducts(res.data.payload);
-      // setCategories(categories.data.payload);
     } catch (error) {
       setProducts([])
       console.log(error);
@@ -63,11 +73,11 @@ function ProductsPage(props) {
           marginRight: '30px',
           marginBottom: '35px',
         }}>
-        {categories.map((value) => (<Link key={value.category_id} to={`/store/${storeId}/${value.category_name}`}
+        {categories.map((value) => (<Link key={value.category_id} to={`/store/${storeId}/${value.categories_name}`}
 
           style={{ textDecoration: 'none', color: '#CD853F', active: '#FAEBD7' }}
 
-        >  {value.category_name}
+        >  {value.categories_name}
         </Link>))}
       </div>
 

@@ -54,7 +54,7 @@ const CartPopoverDisplay = ({ checkoutCart }) => {
                                                     className={classes.paper}
                                                 >
                                                     <h1 style={{ margin: "0px", fontSize: "x-small" }}>{product.product_name}</h1>
-                                                    <p style={{ margin: "0px", fontSize: "x-small" }}> Color:{product.color_name}</p>
+                                                    <p style={{ margin: "0px", fontSize: "x-small" }}> Color:{product.colors_name}</p>
                                                     <p style={{ margin: "0px", fontSize: "x-small" }}>Size:{product.size}</p>
                                                     <p style={{ margin: "0px", fontSize: "x-small" }}>Price:${product.product_price}</p>
                                                     <p style={{ margin: "0px", fontSize: "x-small" }}>QTY:{product.cartquantity}</p>

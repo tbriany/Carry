@@ -8,8 +8,9 @@ import FilterListIcon from '@material-ui/icons/FilterList';
 import Typography from '@material-ui/core/Typography';
 import customTheme from '../styling/customTheme';
 
+const filters = {}
 
-export default function MultipleSelect({applyFilters}) {
+export default function MultipleSelect({ applyFilters }) {
   const [categories, setCategories] = useState([]);
   const [types, setTypes] = useState([]);
   const [brands, setBrands] = useState([]);
@@ -65,12 +66,12 @@ export default function MultipleSelect({applyFilters}) {
 
   const Category = {
     options: categories,
-    getOptionLabel: (option) => option.category_name,
+    getOptionLabel: (option) => option.categories_name,
   };
 
   const Brand = {
     options: brands,
-    getOptionLabel: (option) => option.brand_name,
+    getOptionLabel: (option) => option.brands_name,
   };
 
   const Type = {
@@ -80,43 +81,52 @@ export default function MultipleSelect({applyFilters}) {
 
   const Color = {
     options: colors,
-    getOptionLabel: (option) => option.color_name,
+    getOptionLabel: (option) => option.colors_name,
   };
 
 
   return (
-    <div style={{ width: 250, paddingLeft: '15px'}}>
+    <div style={{ width: 250, paddingLeft: '15px' }}>
 
-      <div style={{float: 'left'}}>
-      <Icon color="inherit">
-        <FilterListIcon />
-      </Icon>
-      <Typography variant="button">
-        Refine By
+      <div style={{ float: 'left' }}>
+        <Icon color="inherit">
+          <FilterListIcon />
+        </Icon>
+        <Typography variant="button">
+          Refine By
       </Typography>
       </div>
 
+{/* 
       <Autocomplete
         {...Category}
         multiple
         id="tags-standard"
-        // id="debug"
-        // debug
         renderInput={(params) => <TextField {...params} label="Category" margin="normal" />}
         onChange={(event, newValue) => {
-          console.log(newValue[0].category_name);
-          applyFilters(newValue[0].category_name);
+          console.log(newValue[0].categories_name);
+          filters["categories"] = newValue[0].categories_name
+          applyFilters(filters)
+        }}
+      /> */}
+      <Autocomplete
+        {...Category}
+        id="debug"
+        debug
+        renderInput={(params) => <TextField {...params} label="Category" margin="normal" />}
+        onChange={(event, newValue) => {
+          filters["categories"] = newValue.categories_name
+          applyFilters(filters)
         }}
       />
       <Autocomplete
         {...Brand}
         id="debug"
         debug
-        renderInput={(params) => <TextField label='customTheme.palette.secondary.dark' {...params} label="Brand" margin="normal"
-        />}
+        renderInput={(params) => <TextField  {...params} label="Brand" margin="normal" />}
         onChange={(event, newValue) => {
-          console.log(newValue.brand_name);
-          applyFilters(newValue.brand_name);
+          filters["brands"] = newValue.brands_name;
+          applyFilters(filters);
         }}
       />
       <Autocomplete
@@ -125,8 +135,9 @@ export default function MultipleSelect({applyFilters}) {
         clearOnEscape
         renderInput={(params) => <TextField {...params} label="Type" margin="normal" />}
         onChange={(event, newValue) => {
-          console.log(newValue.product_type_name);
-          applyFilters(newValue.product_type_name);
+          console.log(newValue.product_type_name)
+          filters["product_type"] = newValue.product_type_name
+          applyFilters(filters);
         }}
       />
       <Autocomplete
@@ -135,8 +146,8 @@ export default function MultipleSelect({applyFilters}) {
         disableClearable
         renderInput={(params) => <TextField {...params} label="Color" margin="normal" />}
         onChange={(event, newValue) => {
-          console.log(newValue.color_name);
-          applyFilters(newValue.color_name);
+          filters["colors"] = newValue.colors_name
+          applyFilters(filters);
         }}
       />
 

@@ -47,7 +47,7 @@ CREATE TABLE couriers(
 
 CREATE TABLE categories(
     category_id SERIAL PRIMARY KEY,
-    category_name VARCHAR,
+    categories_name VARCHAR,
     category_Landing_Logo VARCHAR,
     category_logo VARCHAR
 );
@@ -66,14 +66,14 @@ CREATE TABLE materials(
 
 CREATE TABLE brands(
     brand_id SERIAL PRIMARY KEY,
-    brand_name VARCHAR,
+    brands_name VARCHAR,
     brand_description VARCHAR,
     store_id INT REFERENCES stores(store_id)
 );
 
 CREATE TABLE colors(
     color_id SERIAL PRIMARY KEY,
-    color_name VARCHAR NOT NULL
+    colors_name VARCHAR NOT NULL
 );
 
 CREATE TABLE products(
@@ -206,11 +206,10 @@ INSERT INTO couriers
 VALUES ('Jacob', 'Smith', '(347)-555-5553', 'Smith@courier.com', 'img', 'jacobsmith', 'bike');
 
 INSERT INTO categories 
-(category_name, category_Landing_Logo, category_logo)
+(categories_name, category_Landing_Logo, category_logo)
 VALUES 
 ('Women''s', 'http://localhost:4008/images/categories/womens/womensLandingLogo.jpg','http://localhost:4008/images/categories/womens/womensLogo.jpg'), 
 ('Men''s','http://localhost:4008/images/categories/mens/mensLandingLogo.jpg', 'http://localhost:4008/images/categories/mens/mensLogo.jpg'), 
--- ('Beauty','https://cdn.shopify.com/s/files/1/0580/0721/articles/iStock-1170104811_95fed370-9e0c-4fd8-a668-8d7e806c8f05_grande.jpg', 'https://edited.beautybay.com/wp-content/uploads/2019/04/edited_april19_revolution_skincare_landscape.jpg'), 
 ('Beauty','http://localhost:4008/images/categories/beauty/beautyLandingLogo.jpg', 'http://localhost:4008/images/categories/beauty/beautyLogo.jpeg'), 
 ('Accessories', 'http://localhost:4008/images/categories/accessories/accessoriesLandingLogo.jpg','http://localhost:4008/images/categories/accessories/accessoriesLogo.jpg'),
 ('Home Decor', 'http://localhost:4008/images/categories/homeDecor/homeDecorLandingLogo.jpeg', 'http://localhost:4008/images/categories/homeDecor/homeDecorLogo.png'),
@@ -270,14 +269,14 @@ VALUES
 ('Alpaca');
 
 INSERT INTO brands
-(brand_name, brand_description)
+(brands_name, brand_description)
 VALUES 
 ('Lima Sagrada', 'Lima Sagrada is the name of a project that gives shape to raw materials such as leather in its most basic pure form, resulting in a modern and contemporary design founded by Vanessa Vila. Vanessa Vila is an architect, art director, and a stylist in Lima, Peru.'), 
 ('Aynx', 'A brand created out of a common love for high-quality products, nature''s finest materials, and strong economic and environmental engagement. '),
 ('Nutu', 'A regenerative business based on sustainable agroforestry.');
 
 INSERT INTO colors
-(color_name)
+(colors_name)
 VALUES 
 ('Black'),
 ('White'),

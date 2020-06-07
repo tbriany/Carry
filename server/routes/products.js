@@ -217,4 +217,18 @@ router.get('/category/:category_name', async (req, res, next) =>{
     }
 });
 
+router.get('/filter/:storeId', async (req, res, next) =>{
+    try {
+        const {storeId} = req.params
+        const products = await productQueries.getProductsByFilter(req.query, storeId);
+        res.status(200).json({
+            message: 'All Products of specific category retrieved.',
+            payload: products
+        });
+    } catch (error){
+        console.log('ERROR, unable to get all products for specific category', error)
+    }
+});
+
+
 module.exports = router;

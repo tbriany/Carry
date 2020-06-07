@@ -88,14 +88,14 @@ console.log(categories)
         {categories.map((tile)  => (
           <GridListTile  
           key={tile.category_id} >
-           <Link to={`/categories/${tile.category_name}`}>
+           <Link to={`/categories/${tile.categories_name}`}>
             <img
               src={tile.category_logo}
               alt={tile.title}
               style={{ width: '100%' , height: '100%'}}
             />
               <GridListTileBar
-                title={tile.category_name}
+                title={tile.categories_name}
                 
                 classes={{
                   root: classes.titleBar,
