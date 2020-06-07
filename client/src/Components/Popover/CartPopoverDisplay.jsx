@@ -37,12 +37,12 @@ const CartPopoverDisplay = ({ checkoutCart }) => {
                                         className={classes.paper}
                                     >
                                         <Grid container spacing={1} >
-                                            <Grid style={{ padding: "0px" }} item xs={4} >
+                                            <Grid  item xs={4} >
                                                 <Paper
-                                                    style={{ display: "flex", justifyContent: "flex-start", flexDirection: "column", alignItems: "flex-start", boxShadow: " 1px 1px 1px white", padding: "0px", }}
+                                                    style={{ display: "flex", justifyContent: "flex-start", flexDirection: "column", alignItems: "flex-start", boxShadow: " 1px 1px 1px white", padding: "0px",     margin: '0px'}}
                                                     className={classes.paper}
                                                 >
-                                                    <img style={{ height: "50px", margin: "0px" }} src={product.product_image_url} alt={product.product_name} ></img>
+                                                    <img style={{ height: "50px",     margin: '4px 0px 0px 0px' }} src={product.product_image_url} alt={product.product_name} ></img>
                                                 </Paper>
                                             </Grid>
 
