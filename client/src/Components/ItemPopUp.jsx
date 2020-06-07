@@ -52,11 +52,11 @@ function ItemPopUp() {
                             <Paper style={{ height: '100%', color: 'black', boxShadow: " 1px 1px 1px white", paddingtop: '10px' }} className={classes.paper}>
                                 <div>
                                     <Link to={`/store/${1}`} style={{ textDecoration: 'none', color: 'black' }}>
-                                        <p className="item-brand">{itemInfo.brand_name}'s</p>
+                                        <p className="item-brand">{itemInfo.brands_name}'s</p>
                                     </Link>
                                     <p className="item-name">{itemInfo.product_name}</p>
                                     <p className="item-price">${itemInfo.product_price}</p>
-                                    <p className="item-color" >Color: {itemInfo.color_name}</p>
+                                    <p className="item-color" >Color: {itemInfo.colors_name}</p>
                                 </div>
 
                                 <div className='productQtySize'>
