@@ -39,14 +39,13 @@ function ItemPopUp() {
 
     return (
         <div className="ItemPopUp-stage"  >
-            <Grid container className={classes.root} spacing={2} style={{ width: '100%' }}>
+            <Grid container className={classes.root} spacing={2} style={{ width: '100%', margin: "0px" }}>
                 <Grid item xs={12} style={{ padding: '0px' }}>
-                    <Grid container justify="center" spacing={3} style={{ width: '100%', margin: '0px',padding: '10% 0px 10% 0px',   display: 'flex', 
-    alignContent: 'center' }} >
+                    <Grid container justify="center" spacing={3} style={{ width: '100%', margin: '0px', padding: '10% 0px 10% 0px', display: 'flex', alignContent: 'center' }} >
 
-                        <Grid className='itemPopUp-image' item xs={6} style={{  width: '100%' , padding: '0px 20px ', boxSizing: 'initial'}} >
+                        <Grid className='itemPopUp-image' item xs={6} style={{ width: '100%', padding: '0px 20px ', boxSizing: 'initial' }} >
                             <Paper style={{ boxShadow: " 1px 1px 1px white", height: '75%', paddingtop: '10px' }} className={classes.paper}>
-                                <img src={itemInfo.product_image_url} height='100%'  width='100%'  style = {{ marginTop: '33px'}}/>
+                                <img src={itemInfo.product_image_url} height='100%' width='100%' style={{ marginTop: '33px' }} />
                             </Paper>
                         </Grid>
                         <Grid className='product-info' item sm={5}   >
@@ -97,26 +96,26 @@ function ItemPopUp() {
                                     <Button
                                         style={{ margin: "10px", borderRadius: 35, backgroundColor: "#eed7c1", padding: "10px 24px", fontSize: "14px" }}
                                         variant="contained"
-                                        className="ItemInputSubmit" type="submit" value="ADD TO BAG" 
+                                        className="ItemInputSubmit" type="submit" value="ADD TO BAG"
                                         disabled={productSize === 'default'}
                                         onClick={addToCart}>ADD TO BAG </Button>
                                 </div>
 
 
-    <div style={{
-                display: 'flex', textAlign: 'left', flexDirection: 'column',
-            }}>
+                                <div style={{
+                                    display: 'flex', textAlign: 'left', flexDirection: 'column',
+                                }}>
 
-                <p className='itemPopup-materials'>
-                    Materials: {itemInfo.material_name}
-                </p>
-                <p className='itemPopup-descript' >
-                    Description: {itemInfo.product_description}
-                </p>
-            </div>
-    </Paper>
-</Grid>
-</Grid>
+                                    <p className='itemPopup-materials'>
+                                        Materials: {itemInfo.material_name}
+                                    </p>
+                                    <p className='itemPopup-descript' >
+                                        Description: {itemInfo.product_description}
+                                    </p>
+                                </div>
+                            </Paper>
+                        </Grid>
+                    </Grid>
                 </Grid>
 
             </Grid>
