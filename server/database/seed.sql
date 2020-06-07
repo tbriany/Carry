@@ -185,7 +185,7 @@ VALUES
 
 ('Tiffany & Co.', 'http://localhost:4008/images/stores/Tiffany&Co/Tiffany&CoStore.jpeg', 'http://localhost:4008/images/stores/Tiffany&Co/Tiffany&CoAvatar.jpg', '(212)755-8000', 'noemail@gmail.org','6 East 57th St', 'New York', 'NY', 10022, 'Tiffany1', 40.762810, -73.973710), 
 
-('Giorgio Armani New York', 'http://localhost:4008/images/stores/GiorgioArmani/GiorgioArmaniStore.jpg', 'https://cdn11.bigcommerce.com/s-sq9zkarfah/images/stencil/1280x1280/products/102879/127279/Giorgio-Armani-Logo-Decal-Sticker__10076.1510657355.jpg', '(212)988-9191', 'email2@gmail.com', '760 Madison Avenue', 'New York', 'NY', 10021, 'Giorgio1', 40.772460, -73.964930),
+('Giorgio Armani New York', 'http://localhost:4008/images/stores/GiorgioArmani/GiorgioArmaniStore.jpg', 'http://localhost:4008/images/stores/GiorgioArmani/GiorgioArmaniAvatar.jpg', '(212)988-9191', 'email2@gmail.com', '760 Madison Avenue', 'New York', 'NY', 10021, 'Giorgio1', 40.772460, -73.964930),
 
 ('Hermès Men', 'https://www.yourmindschool.com/wp-content/uploads/2017/09/how-to-get-hermes-birkins-my-experiences-on-buying-5-birkins-in-3-years.jpg', 'https://cdn11.bigcommerce.com/s-sq9zkarfah/images/stencil/1280x1280/products/102859/136658/Hermes-Logo-Decal-Sticker__53440.1510913981.jpg', '(212)751-3181', 'email4@gmail.com', '690 Madisoon Avenue', 'New York', 'NY', 10065, 'Hermes1',40.8307354 ,-73.9701922),
 
@@ -209,7 +209,7 @@ INSERT INTO categories
 (category_name, category_Landing_Logo, category_logo)
 VALUES 
 ('Women''s', 'http://localhost:4008/images/categories/womens/womensLandingLogo.jpg','http://localhost:4008/images/categories/womens/womensLogo.jpg'), 
-('Men''s','http://localhost:4008/images/categories/mens/mensLandingLogo.jpg', 'https://content.api.news/v3/images/bin/f5e805f5912487f926d29b853ff76709'), 
+('Men''s','http://localhost:4008/images/categories/mens/mensLandingLogo.jpg', 'http://localhost:4008/images/categories/mens/mensLogo.jpg'), 
 -- ('Beauty','https://cdn.shopify.com/s/files/1/0580/0721/articles/iStock-1170104811_95fed370-9e0c-4fd8-a668-8d7e806c8f05_grande.jpg', 'https://edited.beautybay.com/wp-content/uploads/2019/04/edited_april19_revolution_skincare_landscape.jpg'), 
 ('Beauty','http://localhost:4008/images/categories/beauty/beautyLandingLogo.jpg', 'http://localhost:4008/images/categories/beauty/beautyLogo.jpeg'), 
 ('Accessories', 'http://localhost:4008/images/categories/accessories/accessoriesLandingLogo.jpg','http://localhost:4008/images/categories/accessories/accessoriesLogo.jpg'),
@@ -230,7 +230,7 @@ VALUES
 (1, 'Jeans', 'http://localhost:4008/images/categories/womens/womensJeans.jpeg'),
 (1, 'Swimwear', 'http://localhost:4008/images/categories/womens/womensSwimwear.jpg'),
 (1, 'Hoodies & Sweatshirts', 'http://localhost:4008/images/categories/womens/womensHoodies&Sweatshirts.jpg'),
-(1, 'Sportswear', 'https://im01.itaiwantrade.com/2190bacc-80e8-4892-8690-565b80c7a024/5433-2-480x480.png'),
+(1, 'Sportswear', 'http://localhost:4008/images/categories/womens/womensSportswear.jpg'),
 (2, 'Tops', 'http://localhost:4008/images/categories/mens/mensTops.jpeg'),
 (2, 'Pants', 'http://localhost:4008/images/categories/mens/mensPants.jpeg'),
 (2, 'Jackets & Coats', 'http://localhost:4008/images/categories/mens/mensJackets&Coats.jpg'),
@@ -240,7 +240,7 @@ VALUES
 (2, 'Swimwear', 'http://localhost:4008/images/categories/mens/mensSwimwear.jpeg'),
 (2, 'Hoodies & Sweatshirts', 'http://localhost:4008/images/categories/mens/mensHoodies&Sweatshirts.jpg'),
 (2, 'Sportswear', 'http://localhost:4008/images/categories/mens/mensSportswear.jpeg'),
-(3, 'Face', 'https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fcdn-img.instyle.com%2Fsites%2Fdefault%2Ffiles%2Fstyles%2F684xflex%2Fpublic%2Fimages%2F2018%2F04%2F042318-foundation-lead.jpg%3Fitok%3DA0rU78H2&w=450&c=sc&poi=face&q=85'),
+(3, 'Face', 'http://localhost:4008/images/categories/beauty/face.jpg'),
 (3, 'Eyes', 'http://localhost:4008/images/categories/beauty/eyes.jpg'),
 (3, 'Lips', 'http://localhost:4008/images/categories/beauty/lips.jpg'),
 (3, 'Nails', 'http://localhost:4008/images/categories/beauty/nails.jpeg'),
@@ -252,7 +252,7 @@ VALUES
 (4, 'Jewelry', 'http://localhost:4008/images/categories/accessories/jewelry.jpg'),
 (4, 'Hair Accessories', 'http://localhost:4008/images/categories/accessories/hairAccessories.jpg'),
 (4, 'Sunglasses', 'http://localhost:4008/images/categories/accessories/sunglasses.jpg'),
-(4, 'Gloves', 'https://cdn11.bigcommerce.com/s-sn4d4efuta/images/stencil/337x337/products/25927/136500/40-Winter-Gloves-Faux-Suede-Full-Finger-Gloves-Women-Thicken-Warm-Mittens-Female-Elegant-Wrist__49173.1574214557.jpg?c=1'),
+(4, 'Gloves', 'http://localhost:4008/images/categories/accessories/gloves.jpg'),
 (4, 'Scarves', 'http://localhost:4008/images/categories/accessories/scarves.jpg'),
 (4, 'Hats & Caps', 'http://localhost:4008/images/categories/accessories/hats&Caps.jpg'),
 (4, 'Wallets & Coin purses', 'http://localhost:4008/images/categories/accessories/wallets&CoinPurses.jpg');
