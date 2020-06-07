@@ -80,7 +80,7 @@ export default function CategoriesGridList({storeId}) {
       <GridList className={classes.gridList} cols={3} cellHeight={350} spacing={13} >
         {categories.map((tile) => (
           <GridListTile key={tile.category_id}>
-            <Link to={`/store/${storeId}/${tile.category_name}`}>
+            <Link to={`/store/${storeId}/${tile.categories_name}`}>
               <img src={tile.category_logo} alt={tile.category_logo} style={{ width: '100%' , height: '100%'}}/>
               <span className={classes.imageButton}>
                 <Typography
@@ -89,7 +89,7 @@ export default function CategoriesGridList({storeId}) {
                   color="inherit"
                   className={classes.imageTitle}
                 >
-                  {tile.category_name}
+                  {tile.categories_name}
                 </Typography>
               </span>
             </Link>
