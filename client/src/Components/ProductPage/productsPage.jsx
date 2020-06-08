@@ -17,6 +17,7 @@ function ProductsPage(props) {
   const categoryName = props.match.params.category_name
   const storeId = props.match.params.id
 
+
   useEffect(() => {
     async function fetchData() {
       try {
@@ -32,27 +33,40 @@ function ProductsPage(props) {
     fetchData()
   }, [categoryName, storeId])
 
+  const fetchProducts = async () => {
+    try {
+      const res = await axios.get(`/products/category/${categoryName}/${storeId}`)
+      setProducts(res.data.payload);
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
   const applyFilters = async (filter) => {
-    let url = `/products/filter/${storeId}`
 
-    if(Object.keys(filter).length){
-      let firstElem = Object.keys(filter)[0]
-      for (let el in filter){
-        if (el === firstElem){
-          url += `?${el}=${filter[el]}`
-        } else {
-          url += `&${el}=${filter[el]}`
+    if (!Object.keys(filter).length) {
+      fetchProducts()
+
+    } else {
+      let url = `/products/filter/${storeId}`
+      if (Object.keys(filter).length) {
+        let firstElem = Object.keys(filter)[0]
+        for (let el in filter) {
+          if (el === firstElem) {
+            url += `?${el}=${filter[el]}`
+          } else {
+            url += `&${el}=${filter[el]}`
+          }
         }
       }
-    }
-    
-    try {
-      const res = await axios.get(url)
-      setProducts(res.data.payload);
-    } catch (error) {
-      setProducts([])
-      console.log(error);
+
+      try {
+        const res = await axios.get(url)
+        setProducts(res.data.payload);
+      } catch (error) {
+        setProducts([])
+        console.log(error);
+      }
     }
   }
 
@@ -82,13 +96,13 @@ function ProductsPage(props) {
       </div>
 
       <div className='Filter_sideBar' style={{ margin: '25px', float: 'left', padding: '20px' }}>
-        <MultipleSelect 
-        applyFilters={applyFilters}
+        <MultipleSelect
+          applyFilters={applyFilters}
         />
       </div>
 
       <br></br>
-      <h2 style={{fontFamily: "Palatino Linotype", color: "#CD853F"}}>
+      <h2 style={{ fontFamily: "Palatino Linotype", color: "#CD853F" }}>
         {props.match.params.category_name}
       </h2>
 
