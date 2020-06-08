@@ -15,8 +15,8 @@ const getCheckoutCartById = async (checkout_id) => {
     return checkoutCart;
 }
 
-const deleteCheckoutCartById = async (checkout_id) => {
-	const checkout = await db.one("DELETE FROM checkout_cart WHERE checkout_cart_id = $1 RETURNING *", checkout_id)
+const deleteCheckoutCartById = async (checkout_items_id) => {
+	const checkout = await db.one("DELETE FROM checkout_cart WHERE checkout_cart_id = $1 RETURNING *", checkout_items_id)
 	return checkout;
 }
 
@@ -25,6 +25,13 @@ const deleteCheckoutItemByCart = async (checkout_id) => {
 	const checkout = await db.any("DELETE FROM checkout_items WHERE checkout_cart_id = $1 RETURNING *", checkout_id)
 	return checkout;
 }
+
+const deleteCheckoutItemsCartByCartId = async (checkout_items_id) => {
+    const deleteQuery = `
+    DELETE FROM checkout_items
+    WHERE checkout_items_id = $/checkout_items_id/`
+    return await db.none(deleteQuery, { checkout_items_id });
+};
 
 
 const getAllFromCart = async () => {
@@ -202,5 +209,6 @@ module.exports = {
     addCheckoutCart,
     getCheckoutCartById,
     deleteCheckoutCartById,
-    deleteCheckoutItemByCart
+    deleteCheckoutItemByCart,
+    deleteCheckoutItemsCartByCartId
 };
