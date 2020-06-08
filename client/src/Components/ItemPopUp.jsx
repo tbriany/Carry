@@ -45,10 +45,10 @@ function ItemPopUp() {
 
                         <Grid className='itemPopUp-image' item xs={6} style={{ width: '100%', padding: '0px 20px ', boxSizing: 'initial' }} >
                             <Paper style={{ boxShadow: " 1px 1px 1px white", height: '75%', paddingtop: '10px' }} className={classes.paper}>
-                                <img src={itemInfo.product_image_url} height='100%' width='100%' style={{ marginTop: '33px' }} />
+                                <img src={itemInfo.product_image_url} height='100%' width='100%'/>
                             </Paper>
                         </Grid>
-                        <Grid className='product-info' item sm={5}   >
+                        <Grid className='product-info' item sm={5} style={{ padding: '0px 12px' }} >
                             <Paper style={{ height: '100%', color: 'black', boxShadow: " 1px 1px 1px white", paddingtop: '10px' }} className={classes.paper}>
                                 <div>
                                     <Link to={`/store/${1}`} style={{ textDecoration: 'none', color: 'black' }}>
@@ -61,17 +61,17 @@ function ItemPopUp() {
 
                                 <div className='productQtySize'>
                                     <FormControl className={classes.margin}>
-                                        <InputLabel htmlFor="demo-customized-select-native">Size</InputLabel>
+                                        <InputLabel htmlFor="native-select">Size</InputLabel>
                                         <NativeSelect
-                                            style={{ backgroundColor: "#eed7c1", }}
-                                            id="demo-customized-select-native"
+                                            style={{ backgroundColor: "#eed7c1" }}
+                                            className='native-select'
                                             value={productSize}
                                             onChange={e => {
                                                 getProductSize(e.target.value)
                                             }}
                                             input={<BootstrapInput />}
                                         >
-                                            <option value="default" autoFocus disabled>Choose a size</option>
+                                            <option value="default" autoFocus disabled >Choose a size</option>
                                             {allSizes.map(function (size, i) {
                                                 return (
                                                     <option key={i} value={size}
@@ -83,18 +83,19 @@ function ItemPopUp() {
 
                                     <input
                                         className="quantityInput"
-                                        type="number" placeholder="0"
-                                        min="0" max="100"
+                                        type="number" placeholder="1"
+                                        min="1" max="100"
                                         value={productQty}
                                         onChange={e => {
                                             updateProductQty(e.target.value)
                                         }}>
+
                                     </input>
                                 </div>
                                 <div className='submitButton'>
 
                                     <Button
-                                        style={{ margin: "10px", borderRadius: 35, backgroundColor: "#eed7c1", padding: "10px 24px", fontSize: "14px" }}
+                                        style={{ margin: "10px", borderRadius: 35, backgroundColor: "#eed7c1", padding: "10px 24px", fontSize: "16px" }}
                                         variant="contained"
                                         className="ItemInputSubmit" type="submit" value="ADD TO BAG"
                                         disabled={productSize === 'default'}
