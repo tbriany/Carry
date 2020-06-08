@@ -10,21 +10,11 @@ import Icon from '@material-ui/core/Icon';
 const filters = {}
 
 export default function Playground({ products, applyAllFilters }) {	
-const [categories, setCategories] = useState([]);
 const [stores, setStores]= useState([]);
 const [types, setTypes] = useState([]);
 const [brands, setBrands] = useState([]);
 const [colors, setColors] = useState([]);
 
-
-const fetchCategories = async () => {
-  try {
-    const categories = await axios.get(`/products/categories/all`)
-    setCategories(categories.data.payload)
-  } catch (err) {
-    console.log(err)
-  }
-}
 
 const fetchStores = async () => {
   try {
@@ -86,7 +76,7 @@ const Store = {
 
 const Brand = {
   options: brands,
-  getOptionLabel: (option) => option.brand_name,
+  getOptionLabel: (option) => option.brands_name,
 };
 
 const Type = {
@@ -96,7 +86,7 @@ const Type = {
 
 const Color = {
   options: colors,
-  getOptionLabel: (option) => option.color_name,
+  getOptionLabel: (option) => option.colors_name,
 };
 
 
@@ -118,9 +108,9 @@ return (
       renderInput={(params) => <TextField  {...params} label="Stores" margin="normal"
       />}
       onChange={(event, newValue) => {
-        console.log(newValue.store_name);
-        filters['stores'] = newValue.store_name
-        applyAllFilters(newValue.store_name);
+        console.log(newValue.stores_name);
+        filters['stores'] = newValue.stores_name
+        applyAllFilters(newValue.stores_name);
       }}
     />
     <Autocomplete
@@ -130,8 +120,8 @@ return (
       renderInput={(params) => <TextField  {...params} label="Brand" margin="normal"
       />}
       onChange={(event, newValue) => {
-        console.log(newValue.brand_name);
-        filters['brands']=newValue.brand_name
+        console.log(newValue.brands_name);
+        filters['brands']=newValue.brands_name
         applyAllFilters(filters);
       }}
     />
@@ -152,9 +142,9 @@ return (
       disableClearable
       renderInput={(params) => <TextField {...params} label="Color" margin="normal" />}
       onChange={(event, newValue) => {
-        console.log(newValue.color_name);
-        filters['color_name'] = newValue.color_name
-        applyAllFilters(newValue.color_name);
+        console.log(newValue.colors_name);
+        filters['colors_name'] = newValue.colors_name
+        applyAllFilters(newValue.colors_name);
       }}
     />
   </div>

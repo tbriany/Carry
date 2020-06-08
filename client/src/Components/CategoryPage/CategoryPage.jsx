@@ -14,7 +14,7 @@ const CategoryPage = (props) => {
   const { getProductId, productId } = useContext(CheckoutCartContext);
   const [products, setProducts] = useState([]);
   const { categories } = useContext(LandingContext);
-  console.log("category Page categories", categories);
+
 
   const category_name = props.match.params.type;
   console.log("categoryPage category_name", category_name);
@@ -26,7 +26,7 @@ const CategoryPage = (props) => {
       try {
         const res = await axios.get(`/products/category/${category_name}`);
         setProducts(res.data.payload);
-        console.log(res.data.payload);
+        console.log(`retriving products of ${category_name}`, res.data.payload);
       } catch (error) {
         setProducts([]);
         console.log(error);
@@ -47,7 +47,9 @@ const CategoryPage = (props) => {
       console.log(error);
     }
   };
+  console.log('categories on categories page', categories)
 
+  
   // Filter that works for each drop down.
   const applyAllFilters = async (filter) => {
     let url = `/products/filterbyCategory/${category_name}`;
@@ -78,10 +80,10 @@ console.log(url)
       <div className={classes.CategoryNavigation}>
         {categories.map((value) => (
           <Link
-            to={`/categories/${value.category_name}`}
+            to={`/categories/${value.categories_name}`}
             class={classes.navLinks}
           >
-            {value.category_name}
+            {value.categories_name}
           </Link>
         ))}
       </div>

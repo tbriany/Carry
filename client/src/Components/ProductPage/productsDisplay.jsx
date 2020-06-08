@@ -40,12 +40,10 @@ export default function ProductsDisplay({ getProductId, products ,currentProdId}
   return (
     <div className={classes.root} style={{ margin: '20px', padding: '15px' }}>
       <Grid container className={classes.root} justify='center'>
-        <Grid item md={10}>
+        <Grid item md={20}>
           <Grid container justify="center" spacing={5}>
             {products.map((value) => (
-
-              <Button key={value.product_id} onClick={toggleDrawer("right", true, value.product_id)}>
-
+              <Button key = {value.product_id} onClick={toggleDrawer("right", true, value.product_id)}>
                 <Grid key={value} item>
                   <img alt="backpack" src={value.product_image_url} className={classes.image}></img>
                   <Grid item>

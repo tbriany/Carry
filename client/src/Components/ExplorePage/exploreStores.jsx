@@ -65,36 +65,7 @@ const classes = useStyles();
   return (
     <div className="App">
     <h3> responsive </h3>
-    <Grid
-      container
-      spacing={10}
-      style={{ padding: "24px " }}
-      alignItems='Stretch'
-      justify="center"
-      // direction ="column"
-      
-    >
-      {/* {users.map((user) => ( */}
-        <Grid 
-       
-        >
-
-          {/* <PplCard
-            key = {user.id}
-            email={user.email}
-            firstname={user.firstname}
-            lastname={user.lastname}
-            avatar={user.avatar}
-
-          /> */}
-          <SingleLineGridList
-          /> 
-
-
-
-        </Grid>
-      {/* ))} */}
-    </Grid>
+   
   </div>
 );
 }

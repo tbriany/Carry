@@ -126,7 +126,7 @@ router.patch("/items/edit", async (req, res, next) => {
 router.delete("/items/delete/:id", async (req, res, next) => {
     try {
         const checkoutCart_id = parseInt(req.params.id)
-        const deletedCart = await checkoutQueries.deleteCheckoutItems(checkoutCart_id)
+        const deletedCart = await checkoutQueries.deleteCheckoutItemByCart(checkoutCart_id)
 
         res.status(200).json({
             status: 'success',

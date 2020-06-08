@@ -17,15 +17,6 @@ function ProductsPage(props) {
   const categoryName = props.match.params.category_name
   const storeId = props.match.params.id
 
-  // const fetchCategories = async () => {
-  //   try {
-  //     const categories = await axios.get(`/products/categories/all`)
-  //     setCategories(categories.data.payload)
-  //   } catch (err) {
-  //     console.log(err)
-  //   }
-  // }
-
   useEffect(() => {
     async function fetchData() {
       try {
@@ -42,6 +33,30 @@ function ProductsPage(props) {
   }, [categoryName, storeId])
 
 
+  const applyFilters = async (filter) => {
+    let url = `/products/filter/${storeId}`
+
+    if(Object.keys(filter).length){
+      let firstElem = Object.keys(filter)[0]
+      for (let el in filter){
+        if (el === firstElem){
+          url += `?${el}=${filter[el]}`
+        } else {
+          url += `&${el}=${filter[el]}`
+        }
+      }
+    }
+    
+    try {
+      const res = await axios.get(url)
+      setProducts(res.data.payload);
+    } catch (error) {
+      setProducts([])
+      console.log(error);
+    }
+  }
+
+
 
   return (
 
@@ -56,32 +71,37 @@ function ProductsPage(props) {
           justifyContent: 'space-evenly',
           marginLeft: '20px',
           marginRight: '30px',
-          marginBottom: '20px',
+          marginBottom: '35px',
         }}>
-        {categories.map((value) => (<Link key={value.category_id} to={`/store/${storeId}/${value.category_name}`}
+        {categories.map((value) => (<Link key={value.category_id} to={`/store/${storeId}/${value.categories_name}`}
 
           style={{ textDecoration: 'none', color: '#CD853F', active: '#FAEBD7' }}
 
-        >  {value.category_name}
+        >  {value.categories_name}
         </Link>))}
       </div>
 
-      <MultipleSelect />
+      <div className='Filter_sideBar' style={{ margin: '25px', float: 'left', padding: '20px' }}>
+        <MultipleSelect 
+        applyFilters={applyFilters}
+        />
+      </div>
+
       <br></br>
-      <h2
-        style={{
-          fontFamily: "Palatino Linotype",
-          // color: "black",
-          color: "#CD853F",
-        }}
-      >
+      <h2 style={{fontFamily: "Palatino Linotype", color: "#CD853F"}}>
         {props.match.params.category_name}
       </h2>
-      <ProductsDisplay
-        getProductId={getProductId}
-        currentProdId={productId}
-        products={products}
-      />
+
+      <div
+        style={{ float: 'right', width: '70%', paddingTop: '20px' }}>
+        <ProductsDisplay
+          getProductId={getProductId}
+          currentProdId={productId}
+          products={products}
+        />
+      </div>
+
+
     </div>
   );
 }

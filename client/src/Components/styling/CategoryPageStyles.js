@@ -15,6 +15,7 @@ export const CategoryStyles = makeStyles((theme) => ({
             textDecoration: "none",
             color: "#CD853F",
             active: "#FAEBD7",
+            fontFamily: "Palatino Linotype",
     }, 
     headerContainer:{
             display: "flex",
@@ -32,7 +33,7 @@ export const CategoryStyles = makeStyles((theme) => ({
     filter_sideBar:{
         margin: "25px", 
         float: "left", 
-        padding: "20px"
+        padding: "35px"
     }, 
     categoryProducts:{
         float: "right",

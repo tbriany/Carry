@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -10,18 +10,22 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
 import Container from '@material-ui/core/Container';
+import Snackbar from '@material-ui/core/Snackbar';
 import { checkValidEmail, checkValidPassword } from "./util/inputHelpers";
 import InputAdornment from '@material-ui/core/InputAdornment';
 import { Context } from '../Contexts/CustomerContext';
 import { loginStyles } from './styling/loginStyles';
+import MuiAlert from '@material-ui/lab/Alert';
 
 const Login = () => {
-    //imports the globla state and dispatch to modify global state 
+    const history = useHistory();
+    //imports the global state and dispatch to modify global state 
     //dispatch is a function that takes in an Action and object to add to the state
     const [state, dispatch] = useContext(Context);
     //imports styling for components
     const classes = loginStyles();
     //declaring hooks that hold values for inputs as object keys
+    const [alert, setAlert] = useState(false);
     const [customerEmail, setCustomerEmail] = useState({
         email: '',
         error: false,
@@ -33,7 +37,7 @@ const Login = () => {
         error: false,
         errorText: ''
     });
-//input handlers that modify input hooks through keys & events
+    //input handlers that modify input hooks through keys & events
     const handleInputChange = (key) => (e) => {
         key === 'email' ? setCustomerEmail({ ...customerEmail, [key]: e.target.value }) : setCustomerPassword({ ...customerPassword, [key]: e.target.value })
     };
@@ -50,7 +54,7 @@ const Login = () => {
         handleEmailError(true, 'Wrong email or password.');
         handlePasswordError(true, 'Wrong email or password.')
     };
-//login function that fires off authentication post and dispatch reducer 
+    //login function that fires off authentication post and dispatch reducer 
     const handleLogin = () => {
         let email = customerEmail.email;
         let password = customerPassword.password;
@@ -58,18 +62,22 @@ const Login = () => {
         checkValidPassword(password, handlePasswordError);
         let emailError = customerEmail.error;
         let passwordError = customerPassword.error;
-        if(!emailError && !passwordError) {
-                axios.post('auth/login', {
-                    email, password
-                }).then(res => {
-                    const user = res.data;
-                    dispatch({type: 'USER_CLICKED_LOGIN', payload: user});
-                    window.localStorage.setItem('customer', JSON.stringify(user.payload));
-                })
-                .catch(err => handleWrongInputs(err)
-                )
+        if (!emailError && !passwordError) {
+            axios.post('auth/login', {
+                email, password
+            }).then(res => {
+                const user = res.data;
+                dispatch({ type: 'SET_USER', payload: user });
+                window.localStorage.setItem('customer', JSON.stringify(user.payload));
+                setAlert(!alert)
+                setTimeout(() => {
+                    history.push('/')
+                }, 3000);
+                //change action  names
+            })
+                .catch(err => handleWrongInputs(err))
         }
-    } 
+    }
 
     return (
         <Container component="main" maxWidth="xs">
@@ -141,6 +149,11 @@ const Login = () => {
                         </Grid>
                     </Grid>
                 </form>
+                <Snackbar open={alert} autoHideDuration={6000} >
+                    <MuiAlert severity="success">
+                        User Successfully Signed In!
+                    </MuiAlert>
+                </Snackbar>
             </div>
         </Container>
     )
