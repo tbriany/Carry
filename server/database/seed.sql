@@ -310,7 +310,8 @@ VALUES
     ('Blue'),
     ('Pink'),
     ('Nude'),
-    ('Ivory');
+    ('Ivory'), 
+    ('Beige');
 
 INSERT INTO products
     (product_name, brand_id, store_id, category_id, product_price, material_id, color_id, product_description, product_type)
@@ -339,7 +340,15 @@ VALUES
 
     ('Light Sable Printed Dress', null, 3, 1, 3300.00, 6, 10, 'Light sable printed dress with collar.', 3 ),
 
-    ('Pascua Skirt', 2, 1, 1, 280.00, 8, 1, 'Long skirt, double slit, hand-loom Alpaca skirt.', 5);
+    ('Pascua Skirt', 2, 1, 1, 280.00, 8, 1, 'Long skirt, double slit, hand-loom Alpaca skirt.', 5), 
+
+    ('Sunqu Pants', 2, 1, 1, 205.00, 8, 13, 'Perfect for all-year-round weather', 2 ),
+    
+    ('Anta Pants', 2, 1, 1, 280.00, 8, 13, 'Alpaca ankle pants with front slits', 2), 
+
+    ('Clara Top', 2, 1, 1, 95.00, 8, 14, 'Perfect for all-year-round weather classic piece', 1 );
+
+
 
 
 INSERT INTO product_inventory
@@ -369,7 +378,19 @@ VALUES
     (12, 'Large', 33),
     (13, 'Small', 21),
     (13, 'Medium', 45),
-    (13, 'Large', 39);
+    (13, 'Large', 39), 
+    (14, 'Small', 30),
+    (14, 'Medium', 20),
+    (14, 'Large', 15), 
+    (15, 'Small', 40),
+    (15, 'Medium', 22),
+    (15, 'Large', 13),
+    (16, 'Small', 77),
+    (16, 'Medium', 22),
+    (16, 'Large', 13);
+
+    
+    
 
 
 INSERT INTO productImage_id
@@ -389,14 +410,19 @@ VALUES
 
     (9, 'http://localhost:4008/images/products/beauty/product9.jpg', 3),
 
-    (10, 'http://localhost:4008/images/products/women/product10.jpg', 1),
+    (10, 'http://localhost:4008/images/products/womens/product10.jpg', 1),
 
     (11, 'http://localhost:4008/images/products/accessories/product11.jpg', 4),
 
-    (12, 'http://localhost:4008/images/products/women/product12.jpg', 1),
+    (12, 'http://localhost:4008/images/products/womens/product12.jpg', 1),
 
-    (13, 'http://localhost:4008/images/products/women/product13.jpg', 1);
+    (13, 'http://localhost:4008/images/products/womens/product13.jpg', 1), 
 
+    (14, 'http://localhost:4008/images/products/womens/product14.jpg', 1), 
+
+    (15,'http://localhost:4008/images/products/womens/product15.jpg',1), 
+
+    (16, 'http://localhost:4008/images/products/womens/product15.jpg', 1);
 
 
 -- SELECT *
