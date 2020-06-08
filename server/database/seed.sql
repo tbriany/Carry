@@ -422,7 +422,7 @@ VALUES
 
     (15,'http://localhost:4008/images/products/womens/product15.jpg',1), 
 
-    (16, 'http://localhost:4008/images/products/womens/product15.jpg', 1);
+    (16, 'http://localhost:4008/images/products/womens/product16.jpg', 1);
 
 
 -- SELECT *
