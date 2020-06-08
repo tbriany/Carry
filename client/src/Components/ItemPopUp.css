@@ -3,9 +3,9 @@
     margin-top: 24px;
     margin-left: 9px;
     border: 1px solid #eed7c1;
-    border-radius: 4;
     position: relative;
-    font-size: 16;
+    display: flex;
+    text-align: center;
 }
 
 .quantityInput:focus,.quantityInput.active, .quantityInput:active, .quantityInput:focus:active , .quantityInput.hover {

@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useContext, useRef } from "react"
+import React, { useEffect, useContext} from "react"
 import CartPopoverDisplay from "./CartPopoverDisplay"
 import { CheckoutCartContext } from '../../Contexts/CheckoutCartContext'
-import axios from "axios";
 
 
 const CartPopover = () => {

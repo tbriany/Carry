@@ -4,17 +4,14 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 //Material UI
-import { ExpansionPanel, ExpansionPanelDetails, ExpansionPanelSummary, Button, InputLabel, MenuItem, Select, Typography, Paper, Grid, FormControl, NativeSelect } from '@material-ui/core'
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { Button, InputLabel, Paper, Grid, FormControl, NativeSelect } from '@material-ui/core'
 import { useStyles, BootstrapInput } from './styling/popoverTheme'
 import "./ItemPopUp.css";
 
 function ItemPopUp() {
     const classes = useStyles();
-    const [expanded, setExpanded] = React.useState(false);
 
-
-    const { updateCurrQty, updateProductQty, checkoutCart, addToCart, producstSize, productId, productQty, addItemToBag, productSize, getProductSize } = useContext(CheckoutCartContext);
+    const {  updateProductQty, addToCart, productId, productQty, productSize, getProductSize } = useContext(CheckoutCartContext);
     const [itemInfo, setItemInfo] = useState({}) //Recieves all of the product info
     const [allSizes, setAllSizes] = useState([])
     const [curreBrandId, setCurrBrandId] = useState(0)
@@ -45,7 +42,7 @@ function ItemPopUp() {
 
                         <Grid className='itemPopUp-image' item xs={6} style={{ width: '100%', padding: '0px 20px ', boxSizing: 'initial' }} >
                             <Paper style={{ boxShadow: " 1px 1px 1px white", height: '75%', paddingtop: '10px' }} className={classes.paper}>
-                                <img src={itemInfo.product_image_url} height='100%' width='100%'/>
+                                <img src={itemInfo.product_image_url} height='100%' width='100%' />
                             </Paper>
                         </Grid>
                         <Grid className='product-info' item sm={5} style={{ padding: '0px 12px' }} >
