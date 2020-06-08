@@ -10,43 +10,47 @@ import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 345,
+    maxWidth: 500,
+   
   },
   media: {
-    height: 100,
+    height: 200,
   },
 });
 
-export default function PplCard({storeid, email, store_name, avatar}) {
+export default function PplCard({storeid, email, store_name, avatar, phone}) {
   const classes = useStyles();
 
   return (
     <div> 
-    <Card className={classes.root}>
+    <Card className={classes.root}
+    height= '500px'>
     <CardActionArea>
       <CardMedia
         className={classes.media}
         image={avatar}
         title= {store_name}
       />
-      <CardContent>
+      <CardContent 
+      
+      >
         <Typography gutterBottom variant="h5" component="h2">
-          Lizard
+         {store_name}
         </Typography>
         <Typography variant="body2" color="textSecondary" component="p">
-          Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-          across all continents except Antarctica
+         
         </Typography>
       </CardContent>
     </CardActionArea>
-    <CardActions>
+
+    {/* <CardActions>
       <Button size="small" color="primary">
         Share
       </Button>
       <Button size="small" color="primary">
         Learn More
       </Button>
-    </CardActions>
+    </CardActions> */}
   </Card>
   </div>
   );

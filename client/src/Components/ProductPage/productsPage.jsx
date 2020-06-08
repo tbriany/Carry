@@ -6,10 +6,11 @@ import axios from 'axios';
 import Banner from '../StorePage/storeBanner';
 import MultipleSelect from '../StorePage/filterForm';
 import ProductsDisplay from '../ProductPage/productsDisplay';
-
+import {productPageStyles} from '../styling/productsPageStyles'
 
 
 function ProductsPage(props) {
+  const classes = productPageStyles();
   const { getProductId, productId } = useContext(CheckoutCartContext);
   const [products, setProducts] = useState([])
   const [categories, setCategories] = useState([]);
@@ -60,28 +61,20 @@ function ProductsPage(props) {
 
   return (
 
-    <div className="ProductsPage" style={{ textAlign: "center" }}>
+    <div className={classes.ProductsPage} >
       <Banner
         storeId={props.match.params.id}
       />
 
-      <div className='CategoryNav'
-        style={{
-          display: 'flex',
-          justifyContent: 'space-evenly',
-          marginLeft: '20px',
-          marginRight: '30px',
-          marginBottom: '35px',
-        }}>
+      <div className={classes.CategoryNav}>
         {categories.map((value) => (<Link key={value.category_id} to={`/store/${storeId}/${value.categories_name}`}
-
-          style={{ textDecoration: 'none', color: '#CD853F', active: '#FAEBD7' }}
+        class = {classes.NavLinks}
 
         >  {value.categories_name}
         </Link>))}
       </div>
 
-      <div className='Filter_sideBar' style={{ margin: '25px', float: 'left', padding: '20px' }}>
+      <div className={classes.Filter_sideBar}>
         <MultipleSelect 
         applyFilters={applyFilters}
         />
@@ -92,8 +85,7 @@ function ProductsPage(props) {
         {props.match.params.category_name}
       </h2>
 
-      <div
-        style={{ float: 'right', width: '70%', paddingTop: '20px' }}>
+      <div className ={classes.ProductsDisplay}>
         <ProductsDisplay
           getProductId={getProductId}
           currentProdId={productId}

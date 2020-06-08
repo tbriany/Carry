@@ -34,11 +34,16 @@ const ExplorePage = () => {
         </div>
       </div>
       <div className="Contents">
-        <div className="Filter">
+        <div className="Filter"
+        style={{
+          margin: "25px", 
+          float: "left", 
+          padding: "35px"
+        }}>
           <DiscreteSlider/>
         </div>
 
-        <div className="Stores" style ={{float:'right'}}>
+        <div className="Stores" style ={{float:'right', maxWidth:'800px', marginRight:'50px',   width: "70%"}}>
            <ExploreStores
           stores = {stores}
           /> 

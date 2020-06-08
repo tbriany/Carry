@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import {Link} from 'react-router-dom'
 import axios from 'axios'
 import { makeStyles } from "@material-ui/core/styles";
 import GridList from "@material-ui/core/GridList";
@@ -64,7 +65,43 @@ const classes = useStyles();
 
   return (
     <div className="App">
-    <h3> responsive </h3>
+    <div>
+      <div>
+        {" "}
+        <h2
+          style={{
+            fontFamily: "Palatino Linotype",
+            textAlign: "left",
+            // fontSize: "20px",
+          }}
+        >
+          {" "}
+          Stores On Carry{" "}
+        </h2>
+      </div>
+      <div className={classes.root}>
+        <GridList className={classes.gridList} 
+        cellHeight= {300} 
+        cellWidth ={700}
+        spacing= {25} 
+        cols={1}>
+          {storess.map((store) => (
+            <GridListTile key={store.store_id}>
+         <Link to={`/store/${store.store_id}`} ><PplCard
+          storeid = {store.store_id}
+          email = {store.store_email}
+          store_name ={store.store_name}
+          avatar = {store.store_logo}
+          address = {store.address}
+          city = {store.city}
+          phone = {store.phone}
+          />
+</Link>
+            </GridListTile>
+          ))}
+        </GridList>
+      </div>
+    </div>
    
   </div>
 );

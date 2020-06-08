@@ -3,11 +3,10 @@ import axios from 'axios'
 import {Link} from 'react-router-dom'
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import SearchIcon from '@material-ui/icons/Search';
 
 export default function CategorySearch() {
 const [stores, setTypes] = useState([]);
-
-
 
 const fetchTypes = async () => {
     try {
@@ -25,18 +24,16 @@ const fetchTypes = async () => {
     fetchData()
   }, [])
 
-
-
-
-
   return (
     <div style={{ width: '300', margin: '20px'}}>
+       
       <Autocomplete
         freeSolo
         id="free-solo-2-demo"
         disableClearable
         options={stores.map((option) => option.store_name)}
         renderInput={(params) => (
+          
           <TextField
             {...params}
             label="Stores on Carry?"
