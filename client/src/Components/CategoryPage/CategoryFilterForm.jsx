@@ -7,7 +7,9 @@ import FilterListIcon from '@material-ui/icons/FilterList';
 import Typography from '@material-ui/core/Typography';
 import Icon from '@material-ui/core/Icon';
 
-export default function Playground({ products, applyFilters, applyFiltersBrand, applyFiltersType}) {	
+const filters = {}
+
+export default function Playground({ products, applyAllFilters }) {	
 const [categories, setCategories] = useState([]);
 const [stores, setStores]= useState([]);
 const [types, setTypes] = useState([]);
@@ -63,7 +65,6 @@ const fetchColors = async () => {
 
 useEffect(() => {
   const fetchData = async () => {
-    await fetchCategories()
     await fetchStores()
     await fetchTypes()
     await fetchBrands()
@@ -73,10 +74,10 @@ useEffect(() => {
 }, [])
 
 
-const Category = {
-  options: categories,
-  getOptionLabel: (option) => option.category_name,
-};
+// const Category = {
+//   options: categories,
+//   getOptionLabel: (option) => option.category_name,
+// };
 
 const Store = {
   options: stores,
@@ -110,19 +111,6 @@ return (
       Refine By
     </Typography>
     </div>
-
-    <Autocomplete
-      {...Category}
-      multiple
-      id="tags-standard"
-      // id="debug"
-      // debug
-      renderInput={(params) => <TextField {...params} label="Category" margin="normal" />}
-      onChange={(event, newValue) => {
-        console.log(newValue[0].category_name);
-        applyFilters(newValue[0].category_name);
-      }}
-    />
      <Autocomplete
       {...Store}
       id="debug"
@@ -130,8 +118,9 @@ return (
       renderInput={(params) => <TextField  {...params} label="Stores" margin="normal"
       />}
       onChange={(event, newValue) => {
-        console.log(newValue.brand_name);
-        applyFilters(newValue.brand_name);
+        console.log(newValue.store_name);
+        filters['stores'] = newValue.store_name
+        applyAllFilters(newValue.store_name);
       }}
     />
     <Autocomplete
@@ -142,7 +131,8 @@ return (
       />}
       onChange={(event, newValue) => {
         console.log(newValue.brand_name);
-        applyFiltersBrand(newValue.brand_name);
+        filters['brands']=newValue.brand_name
+        applyAllFilters(filters);
       }}
     />
     <Autocomplete
@@ -152,7 +142,8 @@ return (
       renderInput={(params) => <TextField {...params} label="Type" margin="normal" />}
       onChange={(event, newValue) => {
         console.log(newValue.product_type_name);
-        applyFiltersType(newValue.product_type_name);
+        filters['product_type'] =newValue.product_type_name
+        applyAllFilters(filters);
       }}
     />
     <Autocomplete
@@ -162,10 +153,10 @@ return (
       renderInput={(params) => <TextField {...params} label="Color" margin="normal" />}
       onChange={(event, newValue) => {
         console.log(newValue.color_name);
-        applyFilters(newValue.color_name);
+        filters['color_name'] = newValue.color_name
+        applyAllFilters(newValue.color_name);
       }}
     />
-
   </div>
 );
 }

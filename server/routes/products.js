@@ -218,7 +218,8 @@ router.get('/category/:category_name', async (req, res, next) =>{
 });
 
 
-router.get('/filter/:category_name', async (req, res, next) =>{
+router.get('/filterbyCategory/:category_name', async (req, res, next) =>{
+   console.log(req.query)
     try {
         const {category_name} = req.params
         const products = await productQueries.getProductsOfCategoryByFilter(req.query, category_name);
@@ -226,6 +227,7 @@ router.get('/filter/:category_name', async (req, res, next) =>{
             message: 'All Products of specific category retrieved.',
             payload: products
         });
+        console.log(products)
     } catch (error){
         console.log('ERROR, unable to get all products for specific category', error)
     }

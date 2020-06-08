@@ -1,23 +1,23 @@
-import React, { useContext } from 'react';
-import '../App.css';
-import { Link, Route } from 'react-router-dom';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
-import ExploreIcon from '@material-ui/icons/Explore';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import MoreIcon from '@material-ui/icons/MoreVert';
-import Popover from '@material-ui/core/Popover';
-import customTheme from './styling/customTheme';
-import CartPopover from './Popover/CartPopover';
-import { Context, Store } from '../Contexts/CustomerContext';
-import ProductsPage from './ProductPage/productsPage';
-import { navbarStyles, popoverTheme } from './styling/navbarStyles';
-import { useRadioGroup } from '@material-ui/core';
+import React, { useContext } from "react";
+import "../App.css";
+import { Link, Route } from "react-router-dom";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import IconButton from "@material-ui/core/IconButton";
+import Typography from "@material-ui/core/Typography";
+import MenuItem from "@material-ui/core/MenuItem";
+import Menu from "@material-ui/core/Menu";
+import ExploreIcon from "@material-ui/icons/Explore";
+import AccountCircle from "@material-ui/icons/AccountCircle";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import MoreIcon from "@material-ui/icons/MoreVert";
+import Popover from "@material-ui/core/Popover";
+import customTheme from "./styling/customTheme";
+import CartPopover from "./Popover/CartPopover";
+import { Context, Store } from "../Contexts/CustomerContext";
+import ProductsPage from "./ProductPage/productsPage";
+import { navbarStyles, popoverTheme } from "./styling/navbarStyles";
+import { useRadioGroup } from "@material-ui/core";
 
 function Navbar() {
   const classes = navbarStyles();
@@ -54,66 +54,97 @@ function Navbar() {
     setPopOver(null);
   };
   const open = Boolean(popOver);
-  const menuId = 'primary-search-account-menu';
+  const menuId = "primary-search-account-menu";
   const logUserOut = () => {
-    dispatch({ type: 'USER_CLICKED_LOGOUT', payload: {} });
-    window.localStorage.setItem('customer', JSON.stringify({}));
-  }
+    dispatch({ type: "USER_CLICKED_LOGOUT", payload: {} });
+    window.localStorage.setItem("customer", JSON.stringify({}));
+  };
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      anchorOrigin={{ vertical: "top", horizontal: "right" }}
       id={menuId}
       keepMounted
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      transformOrigin={{ vertical: "top", horizontal: "right" }}
       open={isMenuOpen}
       onClose={handleMenuClose}
       className={classes.iconStyling}
-      style={{zIndex: 9001}}
+      style={{ zIndex: 9001 }}
     >
-      {state.user.isAnon ?
+      {state.user.isAnon ? (
         <div>
           <MenuItem onClick={handleMenuClose} className={classes.customerMenu}>
-            <Link to='/login' style={{ textDecoration: 'none', color: customTheme.palette.secondary.dark}}>
+            <Link
+              to="/login"
+              style={{
+                textDecoration: "none",
+                color: customTheme.palette.secondary.dark,
+              }}
+            >
               Login
             </Link>
           </MenuItem>
           <MenuItem onClick={handleMenuClose} className={classes.customerMenu}>
-            <Link to='/signup' style={{ textDecoration: 'none', color: customTheme.palette.secondary.dark }}>
+            <Link
+              to="/signup"
+              style={{
+                textDecoration: "none",
+                color: customTheme.palette.secondary.dark,
+              }}
+            >
               Sign Up
             </Link>
           </MenuItem>
         </div>
-        : 
+      ) : (
         <div>
           <MenuItem onClick={handleMenuClose} className={classes.customerMenu}>
-            <Link to='/orders' style={{ textDecoration: 'none', color: customTheme.palette.secondary.dark }}>
+            <Link
+              to="/orders"
+              style={{
+                textDecoration: "none",
+                color: customTheme.palette.secondary.dark,
+              }}
+            >
               My Orders
-          </Link>
+            </Link>
           </MenuItem>
           <MenuItem onClick={handleMenuClose} className={classes.customerMenu}>
-            <Link to='/account' style={{ textDecoration: 'none', color: customTheme.palette.secondary.dark }}>
+            <Link
+              to="/account"
+              style={{
+                textDecoration: "none",
+                color: customTheme.palette.secondary.dark,
+              }}
+            >
               My Account
-          </Link>
+            </Link>
           </MenuItem>
           <MenuItem onClick={handleMenuClose} className={classes.customerMenu}>
-            <Link to='/' style={{ textDecoration: 'none', color: customTheme.palette.secondary.dark }} onClick={logUserOut}>
+            <Link
+              to="/"
+              style={{
+                textDecoration: "none",
+                color: customTheme.palette.secondary.dark,
+              }}
+              onClick={logUserOut}
+            >
               Logout
-           </Link>
+            </Link>
           </MenuItem>
         </div>
-      }
+      )}
     </Menu>
   );
 
-  const mobileMenuId = 'primary-search-account-menu-mobile';
+  const mobileMenuId = "primary-search-account-menu-mobile";
   const renderMobileMenu = (
     <Menu
       anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      anchorOrigin={{ vertical: "top", horizontal: "right" }}
       id={mobileMenuId}
       keepMounted
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      transformOrigin={{ vertical: "top", horizontal: "right" }}
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
@@ -125,7 +156,7 @@ function Navbar() {
       </MenuItem>
 
       <MenuItem>
-        <IconButton className={classes.iconStyling} >
+        <IconButton className={classes.iconStyling}>
           {/* <Badge badgeContent={11} color="secondary"> */}
           <ShoppingCartIcon />
           {/* </Badge> */}
@@ -133,7 +164,6 @@ function Navbar() {
 
         <p>Shopping Cart</p>
       </MenuItem>
-
 
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
@@ -148,34 +178,37 @@ function Navbar() {
       </MenuItem>
     </Menu>
   );
-  console.log('state', state)
+  console.log("state", state);
   return (
-    <div className={classes.grow}
+    <div
+      className={classes.grow}
       style={{
-        position: 'fixed',
+        position: "fixed",
         top: 0,
         left: 0,
         zIndex: 9000,
-        width: '100%'
+        width: "100%",
       }}
     >
       <AppBar position="static" className={classes.appBar}>
         <Toolbar>
-          <Link to='/'
-            style={{ textDecoration: 'none', color: customTheme.palette.secondary.dark }}>
-            <Typography
-              className={classes.title}
-              variant="h6" noWrap >
+          <Link
+            to="/"
+            style={{
+              textDecoration: "none",
+              color: customTheme.palette.secondary.dark,
+            }}
+          >
+            <Typography className={classes.title} variant="h6" noWrap>
               CARRY
-        </Typography>
+            </Typography>
           </Link>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <Link to ='/explore'>
-            <IconButton
-              color={customTheme.palette.secondary.main}>
-              <ExploreIcon />
-            </IconButton>
+            <Link to="/explore">
+              <IconButton color={customTheme.palette.secondary.main}>
+                <ExploreIcon />
+              </IconButton>
             </Link>
             <IconButton
               edge="end"
@@ -198,25 +231,22 @@ function Navbar() {
                   <ShoppingCartIcon />
                 </IconButton>
               </Link>
-
             </Typography>
             <Popover
               id="mouse-over-popover"
               className={popoverClasses.popover}
               classes={{
-                paper: popoverClasses.paper
+                paper: popoverClasses.paper,
               }}
               open={open}
               anchorEl={popOver}
               anchorOrigin={{
                 vertical: "top",
                 horizontal: "right",
-
               }}
               transformOrigin={{
                 vertical: "top",
-                horizontal: "right"
-
+                horizontal: "right",
               }}
               onClose={handlePopoverClose}
               disableRestoreFocus
@@ -224,9 +254,8 @@ function Navbar() {
                 zIndex: 1,
               }}
             >
-              <CartPopover/>
+              <CartPopover />
             </Popover>
-
           </div>
           <div className={classes.sectionMobile}>
             <IconButton

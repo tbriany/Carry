@@ -13,7 +13,7 @@ const useStyles = makeStyles({
     maxWidth: 345,
   },
   media: {
-    height: 140,
+    height: 100,
   },
 });
 
@@ -21,25 +21,33 @@ export default function PplCard({storeid, email, store_name, avatar}) {
   const classes = useStyles();
 
   return (
-    <Card className={classes.root}
-    height = '100px'>
-      <CardActionArea>
-        <CardMedia
-          className={classes.media}
-          image={avatar}
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            Lizard
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-            across all continents except Antarctica
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-      <CardActions>
-      </CardActions>
-    </Card>
+    <div> 
+    <Card className={classes.root}>
+    <CardActionArea>
+      <CardMedia
+        className={classes.media}
+        image={avatar}
+        title= {store_name}
+      />
+      <CardContent>
+        <Typography gutterBottom variant="h5" component="h2">
+          Lizard
+        </Typography>
+        <Typography variant="body2" color="textSecondary" component="p">
+          Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
+          across all continents except Antarctica
+        </Typography>
+      </CardContent>
+    </CardActionArea>
+    <CardActions>
+      <Button size="small" color="primary">
+        Share
+      </Button>
+      <Button size="small" color="primary">
+        Learn More
+      </Button>
+    </CardActions>
+  </Card>
+  </div>
   );
 }

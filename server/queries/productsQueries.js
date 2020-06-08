@@ -251,7 +251,8 @@ categories.category_name,materials.material_name,colors.color_name, product_type
 }
 
 const getProductsOfCategoryByFilter = async (filters, category_name) => {
-    
+console.log(filters)
+console.log(category_name)
     let getQuery = `
     SELECT products.product_id, products.product_name, products.product_price, products.product_description,  products.store_id,
     brands.brand_name, categories.category_name, materials.material_name, colors.color_name, 
@@ -266,10 +267,8 @@ const getProductsOfCategoryByFilter = async (filters, category_name) => {
     JOIN  productImage_id  ON productImage_id.product_id = products.product_id
     JOIN product_inventory ON product_inventory.product_id = products.product_id 
     JOIN stores ON stores.store_id = products.store_id
-    WHERE categories.category_name = $/category_name/
-    GROUP BY products.product_id, brands.brand_id, categories.category_name,materials.material_name,colors.color_name, stores.store_name,product_type.product_type_name,
-    productimage_id.product_image_id;`
-
+    WHERE categories.category_name = $1 AND
+`
     let properties = [category_name]
     let num = 2
     let firstElem = Object.keys(filters)[0]
@@ -284,9 +283,10 @@ const getProductsOfCategoryByFilter = async (filters, category_name) => {
         num++;
     }
 
-    getQuery += `GROUP BY products.product_id, brands.brand_id, categories.categories_name,materials.material_name,colors.colors_name, product_type.product_type_name,
-    productimage_id.product_image_id`
-   
+    getQuery += `GROUP BY products.product_id, brands.brand_id, categories.category_name,materials.material_name,colors.color_name, product_type.product_type_name,
+    productimage_id.product_image_id, stores.store_name `
+   console.log(getQuery)
+   console.log(properties)
     return await db.any(getQuery, properties);
 }
 

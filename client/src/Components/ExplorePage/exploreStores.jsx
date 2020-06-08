@@ -16,9 +16,11 @@ const useStyles = makeStyles((theme) => ({
     overflow: "hidden",
     backgroundColor: theme.palette.background.paper,
     maxWidth: '500px',
-    maxHeight: '500px'
+    maxHeight: '800px'
   },
   gridList: {
+    width:500,
+    height:850,
     //flexWrap: "nowrap",
     // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
     transform: "translateZ(0)",
@@ -61,48 +63,49 @@ const classes = useStyles();
   
 
   return (
-    <div className={classes.root}>
-      <GridList
-        className={classes.gridList}
-         cols={1}
-        item
-        xs={12}
-        sm={6}
-        md={4}
-        lg={3}
-        xl={2}
-        spacing={50}
-        alignItems="vertical"
-       
-      >
-        
-     {storess.map((store) => (
-  
-          <GridListTile key={store.id}  style={{ maxWidth:"350px",
-          maxHeight: '700px'}}>
-  
-            <PplCard
-              storeid={store.store_id}
-              email={store.email}
-              store_name={store.store_name}
-              avatar={store.avatar_url}
-            />
-            <GridListTileBar
-              classes={{
-                root: classes.titleBar,
-                title: classes.title,
-              }}
-              actionIcon={
-                <IconButton aria-label={`star ${store.store_name}`}>
-                  <StarBorderIcon className={classes.title} />
-                </IconButton>
-              }
-            />
-          </GridListTile>
+    <div className="App">
+    <h3> responsive </h3>
+    <Grid
+      container
+      spacing={10}
+      style={{ padding: "24px " }}
+      alignItems='Stretch'
+      justify="center"
+      // direction ="column"
       
-        ))}
-  
-      </GridList>
-    </div>
-  );
+    >
+      {/* {users.map((user) => ( */}
+        <Grid 
+       
+        >
+
+          {/* <PplCard
+            key = {user.id}
+            email={user.email}
+            firstname={user.firstname}
+            lastname={user.lastname}
+            avatar={user.avatar}
+
+          /> */}
+          <SingleLineGridList
+          /> 
+
+
+
+        </Grid>
+      {/* ))} */}
+    </Grid>
+  </div>
+);
 }
+  
+
+
+
+
+
+
+
+
+
+

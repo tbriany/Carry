@@ -50,8 +50,8 @@ const CategoryPage = (props) => {
 
   // Filter that works for each drop down.
   const applyAllFilters = async (filter) => {
-    let url = `/products/filter/${category_name}`;
-
+    let url = `/products/filterbyCategory/${category_name}`;
+console.log(filter)
     if (Object.keys(filter).length) {
       let firstElem = Object.keys(filter)[0];
       for (let el in filter) {
@@ -62,7 +62,7 @@ const CategoryPage = (props) => {
         }
       }
     }
-
+console.log(url)
     try {
       const res = await axios.get(url);
       setProducts(res.data.payload);
@@ -71,6 +71,7 @@ const CategoryPage = (props) => {
       console.log(error);
     }
   };
+  
 
   return (
     <div className="CategoryPage">
