@@ -18,7 +18,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function PplCard({storeid, email, store_name, avatar, phone}) {
+export default function PplCard({storeid, email, store_name, avatar, phone, address, city}) {
   const classes = useStyles();
 
   return (
@@ -38,7 +38,9 @@ export default function PplCard({storeid, email, store_name, avatar, phone}) {
          {store_name}
         </Typography>
         <Typography variant="body2" color="textSecondary" component="p">
-         
+         {address} <br></br>
+         {city}
+
         </Typography>
       </CardContent>
     </CardActionArea>
