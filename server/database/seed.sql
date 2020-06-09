@@ -293,7 +293,8 @@ INSERT INTO brands
 VALUES
     ('Lima Sagrada', 'Lima Sagrada is the name of a project that gives shape to raw materials such as leather in its most basic pure form, resulting in a modern and contemporary design founded by Vanessa Vila. Vanessa Vila is an architect, art director, and a stylist in Lima, Peru.'),
     ('Aynx', 'A brand created out of a common love for high-quality products, nature''s finest materials, and strong economic and environmental engagement. '),
-    ('Nutu', 'A regenerative business based on sustainable agroforestry.');
+    ('Nutu', 'A regenerative business based on sustainable agroforestry.'), 
+    ('Prada S.p.A.', 'Is an Italian luxury fashion house, specializing in leather handbags, travel accessories, shoes, ready-to-wear, perfumes and other fashion accessories, founded in 1913');
 
 INSERT INTO colors
     (colors_name)
@@ -336,9 +337,9 @@ VALUES
 
     ('Roama Skirt', 2, 1, 1, 130.00, 8, 13, 'Classic go-to pencil mid-length skirt with double slits', 5 ),
 
-    ('Bucket Bag', null, 3, 4, 2000.00, 5, 1, 'Bucket bag with large woven motif', 28),
+    ('Bucket Bag', 4, 3, 4, 2000.00, 5, 1, 'Bucket bag with large woven motif', 28),
 
-    ('Light Sable Printed Dress', null, 3, 1, 3300.00, 6, 10, 'Light sable printed dress with collar.', 3 ),
+    ('Light Sable Printed Dress', 4, 3, 1, 3300.00, 6, 10, 'Light sable printed dress with collar.', 3 ),
 
     ('Pascua Skirt', 2, 1, 1, 280.00, 8, 1, 'Long skirt, double slit, hand-loom Alpaca skirt.', 5), 
 
