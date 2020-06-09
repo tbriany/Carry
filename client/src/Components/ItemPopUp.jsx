@@ -17,6 +17,7 @@ function ItemPopUp() {
     const [selectProduct, setSelectProduct] = useState({
         storeId: null, productId: productId, productSize: 'default', productQty: 1,
     })
+    const [quantity, setQuantity] = useState(1)
 
 
     useEffect(() => {
@@ -37,7 +38,7 @@ function ItemPopUp() {
     }, [productId])
 
 
-    
+
     const addToCart = async () => {
         if (selectProduct.productSize !== 'default') {
             const productExistInCart = await axios.get(`/checkoutCart/items/productId/${productId}/${selectProduct.productSize}`)
@@ -46,6 +47,7 @@ function ItemPopUp() {
             if (!productExistPayload) {
                 try {
                     await axios.post('/checkoutCart/items/add', { product_id: productId, size: selectProduct.productSize, quantity: selectProduct.productQty })
+
                 } catch (err) {
                     console.log("ERROR", err)
                 }
@@ -59,6 +61,15 @@ function ItemPopUp() {
             }
             await getCheckout()
 
+        }
+    }
+
+    const handleMaxValue = async (productSize) => {
+        if (productSize !== 'default') {
+            let quantity = await axios.get(`/products/productQty/${parseInt(selectProduct.productId)}/${productSize}`)
+            setQuantity(quantity.data.payload.product_quantity)
+        } else {
+            setQuantity(1)
         }
     }
 
@@ -94,6 +105,7 @@ function ItemPopUp() {
                                             value={selectProduct.productSize}
                                             onChange={e => {
                                                 let currSize = e.target.value
+                                                handleMaxValue(currSize)
                                                 setSelectProduct(prevState => {
                                                     return { ...prevState, productSize: currSize }
                                                 })
@@ -112,7 +124,7 @@ function ItemPopUp() {
                                     <input
                                         className="quantityInput"
                                         type="number" placeholder="1"
-                                        min="1" max="100" 
+                                        min="1" max={quantity}
                                         value={selectProduct.productQty}
                                         onChange={e => {
                                             const currQty = e.target.value
