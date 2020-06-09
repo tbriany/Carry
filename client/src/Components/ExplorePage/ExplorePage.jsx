@@ -19,6 +19,22 @@ const ExplorePage = () => {
     }
   };
 
+  const applyAllFilters = async (filter) => {
+    let url = `/products/filterbyCategory/${stores.store_id}`;
+console.log(filter)
+    if (Object.keys(filter).length) {
+      let firstElem = Object.keys(filter)[0];
+      for (let el in filter) {
+        if (el === firstElem) {
+          url += `?${el}=${filter[el]}`;
+        } else {
+          url += `&${el}=${filter[el]}`;
+        }
+      }
+    }
+  }
+
+
   useEffect(() => {
     const fetchData = async () => {
       await fetchStores();
@@ -30,7 +46,8 @@ const ExplorePage = () => {
     <div className="Explore Page">
       <div className="Header">
         <div className="SearchBar">
-          <CategorySearch />
+          <CategorySearch 
+          applyAllFilters={applyAllFilters}/>
         </div>
       </div>
       <div className="Contents">

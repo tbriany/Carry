@@ -1,65 +1,70 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect} from 'react';	
 import axios from 'axios'
-import {Link} from 'react-router-dom'
-import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import SearchIcon from '@material-ui/icons/Search';
+import TextField from '@material-ui/core/TextField';	
+import Autocomplete from '@material-ui/lab/Autocomplete';	
+import customTheme from '../styling/customTheme'
+import FilterListIcon from '@material-ui/icons/FilterList';
+import Typography from '@material-ui/core/Typography';
+import Icon from '@material-ui/core/Icon';
 
-export default function CategorySearch() {
-const [stores, setStores] = useState([]);
-const [selected, Setselected] = useState([])
+const filters = {}
+
+export default function CategoorySearch({ products, applyAllFilters }) {	
+const [stores, setStores]= useState([]);
+
+
 
 const fetchStores = async () => {
-    try {
-      const stores = await axios.get(`/stores`)
-      setStores(stores.data.payload)
-    } catch (err) {
-      console.log(err)
-    }
+  try {
+    const stores = await axios.get('/stores')
+    setStores(stores.data.payload)
+    console.log('filter stores', stores)
+  } catch (err) {
+    console.log(err)
   }
-
-  useEffect(() => {
-    const fetchData = async () => {
-      await fetchStores()
-    }
-    fetchData()
-  }, [])
-
-   const handleInput = event => {
-    Setselected({
-      [event.target.name]: event.target.value
-    });
-    console.log('search selected option', selected);
-  };
-  
- console.log('store page')
-
-
-
-
-  return (
-    <div style={{ width: '300', margin: '20px'}}>
-     
-      <Autocomplete
-        freeSolo
-        id="free-solo-2-demo"
-        disableClearable
-        options={stores.map((option) => option.store_name)}
-        renderInput={(params) => (
-          // <Link to = {`/store/${stores.store_name}`}>   
-          <TextField
-            {...params}
-            label="Stores on Carry?"
-            margin="normal"
-            variant="outlined"
-            InputProps={{ ...params.InputProps, type: 'search' }}
-            onChange = {handleInput}
-          />
-        // </Link> 
-         
-        )}
-      />
-    </div>
-  );
 }
 
+
+
+useEffect(() => {
+  const fetchData = async () => {
+    await fetchStores()
+
+  }
+  fetchData()
+}, [])
+
+
+// const Category = {
+//   options: categories,
+//   getOptionLabel: (option) => option.category_name,
+// };
+
+const Store = {
+  options: stores,
+  getOptionLabel: (option) => option.store_name,
+};
+
+
+return (
+  <div style={{ width: 250, paddingLeft: '15px'}}>
+
+    <div style={{float: 'left'}}>
+  
+     <Autocomplete
+      {...Store}
+      id="debug"
+      debug
+      renderInput={(params) => <TextField  {...params} label="Search for stores here" margin="normal"
+    
+      />}
+      onChange={(event, newValue) => {
+        console.log(newValue.stores_name);
+        filters['stores'] = newValue.stores_name
+        applyAllFilters(newValue.stores_name);
+      }}
+    />
+  </div>
+</div>
+);
+}
