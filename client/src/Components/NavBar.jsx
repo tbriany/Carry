@@ -31,6 +31,9 @@ function Navbar() {
   const [state, dispatch] = useContext(Context);
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const history = useHistory();
+  const logo = require('./carry.png')
+  
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -207,7 +210,8 @@ function Navbar() {
             }}
           >
             <Typography className={classes.title} variant="h6" noWrap>
-              CARRY
+           <img src = {logo}
+           className ={classes.logo}></img>
             </Typography>
           </Link>
           <div className={classes.grow} />
