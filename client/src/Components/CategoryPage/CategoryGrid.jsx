@@ -9,9 +9,7 @@ import List from "@material-ui/core/List";
 import clsx from "clsx";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import ItemPopUp from "../ItemPopUp";
-import { sidePopUp } from '../styling/sidePopTheme'
-
-
+import { sidePopUp } from "../styling/sidePopTheme";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,8 +22,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
-export default function CategoryGrid({ product_name, getProductId, products, currentProdId }) {
+export default function CategoryGrid({
+  product_name,
+  getProductId,
+  products,
+  currentProdId,
+}) {
   const classes = useStyles();
 
   // const [products, setProducts] = useState([])
@@ -33,34 +35,48 @@ export default function CategoryGrid({ product_name, getProductId, products, cur
   const popUp = sidePopUp();
   const [open, setOpen] = React.useState({ right: false });
 
-  const toggleDrawer = (right, open, prodId) => event => {
-    open ? getProductId(prodId) : getProductId(currentProdId)
+  const toggleDrawer = (right, open, prodId) => (event) => {
+    open ? getProductId(prodId) : getProductId(currentProdId);
     setOpen({ ...open, right: open });
   };
 
-
   return (
     <div>
-      <div className={classes.root}
-      //  style={{ margin: "20px", padding: "15px" }}
+      <div
+        className={classes.root}
+        //  style={{ margin: "20px", padding: "15px" }}
       >
         <Grid container className={classes.root} justify="center">
-          <Grid item md={25} spacing={50}>
-            <Grid container justify="center" spacing={50}>
+          <Grid item md={70} spacing={70}>
+            <Grid container justify="center" spacing={70}>
               {products.map((value) => (
-                <Button key={value.product_id} onClick={toggleDrawer("right", true, value.product_id)}>
+                <Button
+                  key={value.product_id}
+                  onClick={toggleDrawer("right", true, value.product_id)}
+                >
                   <Grid key={value.product_id} item>
                     <img
-                      alt="backpack"
+                      alt="poduct_type"
                       src={value.product_image_url}
                       className={classes.image}
+                      style={{
+                        objectFit: "scale-down",
+                        height: "350px",
+                        maxWidth: "244px",
+                      }}
                     ></img>
                     <Grid item>
                       <Typography gutterBottom variant="subtitle1">
                         {value.product_name}
                       </Typography>
+                      3
                       <Typography variant="subtitle1">
-                        {value.store_name}
+                        <Link
+                          to={`/store/${value.store_id}`}
+                          style={{ textDecoration: "none", color: "black" }}
+                        >
+                          {value.store_name}{" "}
+                        </Link>
                       </Typography>
                       <Typography variant="subtitle1">
                         $ {value.product_price}
@@ -75,8 +91,13 @@ export default function CategoryGrid({ product_name, getProductId, products, cur
                 open={open.right}
                 onClose={toggleDrawer(open.right, false)}
                 onOpen={toggleDrawer(open.right, true)}
-                classes={{ paperAnchorRight: popUp.paperAnchorRight }}>
-                <div className={clsx(popUp.list)} role="presentation" onKeyDown={toggleDrawer(open.right, false)}>
+                classes={{ paperAnchorRight: popUp.paperAnchorRight }}
+              >
+                <div
+                  className={clsx(popUp.list)}
+                  role="presentation"
+                  onKeyDown={toggleDrawer(open.right, false)}
+                >
                   <List>
                     <ItemPopUp />
                   </List>
