@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useContext, useEffect } from 'react';
+import React, { Fragment, useState, useContext } from 'react';
 import { Context } from '../Contexts/CustomerContext';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
