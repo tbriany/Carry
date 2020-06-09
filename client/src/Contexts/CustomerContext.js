@@ -24,15 +24,18 @@ export const Context = createContext(initialState);
 export const Store = ({ children }) => {
     const [state, dispatch] = useReducer(LoginReducer, initialState);
     //the useEEffect hook here takes an object from the getUser function that can be either a user that is stored in the LocalStorage or an empty object, meaning there is no user stored / logged in and they are anonymous
-    useEffect(() => {
+    // useEffect(() => {
+    //localstorage is synchronous so it doesn't require a componentDidMount effect. this if statement reads if there is a info key assigned to the user then it would read the localstorage 
+    if (!state.user.info) {
         let user = getUser();
         if (user.email) {
             dispatch({ type: 'SET_USER', payload: user });
         }
         else {
-            dispatch({ type: 'REMOVE_USER', payload: user});
+            dispatch({ type: 'REMOVE_USER', payload: user });
         }
-    }, []);
+    }
+    // }, []);
     //every time the store mounts (since it is a context wrapper, it will mount across our app) the useEffect hook will read the localStorage to see if there is a user logged it or not. it will then modify our state in the store with the action SET_USER and the objet containing user info or empty object
     return (
         <Context.Provider value={[state, dispatch]}>
