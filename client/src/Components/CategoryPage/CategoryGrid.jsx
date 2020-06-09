@@ -44,7 +44,7 @@ export default function CategoryGrid({
     <div>
       <div
         className={classes.root}
-        //  style={{ margin: "20px", padding: "15px" }}
+      //  style={{ margin: "20px", padding: "15px" }}
       >
         <Grid container className={classes.root} justify="center">
           <Grid item md={70} spacing={70}>
@@ -52,7 +52,10 @@ export default function CategoryGrid({
               {products.map((value) => (
                 <Button
                   key={value.product_id}
-                  onClick={toggleDrawer("right", true, value.product_id)}
+                  onClick={toggleDrawer(open.right, true, value.product_id)}
+                  disableFocusRipple={true}
+                  disableRipple={true}
+                  disableElevation={true}
                 >
                   <Grid key={value.product_id} item>
                     <img
@@ -69,7 +72,7 @@ export default function CategoryGrid({
                       <Typography gutterBottom variant="subtitle1">
                         {value.product_name}
                       </Typography>
-                      
+
                       <Typography variant="subtitle1">
                         <Link
                           to={`/store/${value.store_id}`}
