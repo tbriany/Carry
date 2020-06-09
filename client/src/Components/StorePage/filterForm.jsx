@@ -115,7 +115,13 @@ export default function MultipleSelect({ applyFilters }) {
         debug
         renderInput={(params) => <TextField {...params} label="Category" margin="normal" />}
         onChange={(event, newValue) => {
-          filters["categories"] = newValue.categories_name
+          if (newValue == null) {
+            if(filters["categories"]){
+              delete filters["categories"]
+            }
+          } else {
+            filters["categories"] = newValue.categories_name
+          }
           applyFilters(filters)
         }}
       />
@@ -125,28 +131,45 @@ export default function MultipleSelect({ applyFilters }) {
         debug
         renderInput={(params) => <TextField  {...params} label="Brand" margin="normal" />}
         onChange={(event, newValue) => {
-          filters["brands"] = newValue.brands_name;
+          if (newValue == null ){
+            if(filters["brands"]){
+              delete filters["brands"]
+            }
+          } else {
+            filters["brands"] = newValue.brands_name;
+          }
           applyFilters(filters);
         }}
       />
       <Autocomplete
         {...Type}
-        id="clear-on-escape"
-        clearOnEscape
+        id="debug"
+        debug
         renderInput={(params) => <TextField {...params} label="Type" margin="normal" />}
         onChange={(event, newValue) => {
-          console.log(newValue.product_type_name)
-          filters["product_type"] = newValue.product_type_name
+          if (newValue == null){
+            if(filters["product_type"]){
+              delete filters["product_type"]
+            }
+          } else {
+            filters["product_type"] = newValue.product_type_name
+          }
           applyFilters(filters);
         }}
       />
       <Autocomplete
         {...Color}
-        id="disable-clearable"
-        disableClearable
+        id="debug"
+        debug
         renderInput={(params) => <TextField {...params} label="Color" margin="normal" />}
         onChange={(event, newValue) => {
-          filters["colors"] = newValue.colors_name
+          if (newValue == null){
+            if(filters["colors"]){
+              delete filters["colors"]
+            }
+          } else {
+            filters["colors"] = newValue.colors_name
+          }
           applyFilters(filters);
         }}
       />
