@@ -6,16 +6,18 @@ import axios from 'axios';
 import Banner from '../StorePage/storeBanner';
 import MultipleSelect from '../StorePage/filterForm';
 import ProductsDisplay from '../ProductPage/productsDisplay';
-
+import {productPageStyles} from '../styling/productsPageStyles'
 
 
 function ProductsPage(props) {
+  const classes = productPageStyles();
   const { getProductId, productId } = useContext(CheckoutCartContext);
   const [products, setProducts] = useState([])
   const [categories, setCategories] = useState([]);
 
   const categoryName = props.match.params.category_name
   const storeId = props.match.params.id
+
 
   useEffect(() => {
     async function fetchData() {
@@ -32,27 +34,40 @@ function ProductsPage(props) {
     fetchData()
   }, [categoryName, storeId])
 
+  const fetchProducts = async () => {
+    try {
+      const res = await axios.get(`/products/category/${categoryName}/${storeId}`)
+      setProducts(res.data.payload);
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
   const applyFilters = async (filter) => {
-    let url = `/products/filter/${storeId}`
 
-    if(Object.keys(filter).length){
-      let firstElem = Object.keys(filter)[0]
-      for (let el in filter){
-        if (el === firstElem){
-          url += `?${el}=${filter[el]}`
-        } else {
-          url += `&${el}=${filter[el]}`
+    if (!Object.keys(filter).length) {
+      fetchProducts()
+
+    } else {
+      let url = `/products/filter/${storeId}`
+      if (Object.keys(filter).length) {
+        let firstElem = Object.keys(filter)[0]
+        for (let el in filter) {
+          if (el === firstElem) {
+            url += `?${el}=${filter[el]}`
+          } else {
+            url += `&${el}=${filter[el]}`
+          }
         }
       }
-    }
-    
-    try {
-      const res = await axios.get(url)
-      setProducts(res.data.payload);
-    } catch (error) {
-      setProducts([])
-      console.log(error);
+
+      try {
+        const res = await axios.get(url)
+        setProducts(res.data.payload);
+      } catch (error) {
+        setProducts([])
+        console.log(error);
+      }
     }
   }
 
@@ -60,40 +75,32 @@ function ProductsPage(props) {
 
   return (
 
-    <div className="ProductsPage" style={{ textAlign: "center" }}>
+    <div className={classes.ProductsPage} >
       <Banner
         storeId={props.match.params.id}
       />
 
-      <div className='CategoryNav'
-        style={{
-          display: 'flex',
-          justifyContent: 'space-evenly',
-          marginLeft: '20px',
-          marginRight: '30px',
-          marginBottom: '35px',
-        }}>
+      <div className={classes.CategoryNav}>
         {categories.map((value) => (<Link key={value.category_id} to={`/store/${storeId}/${value.categories_name}`}
-
-          style={{ textDecoration: 'none', color: '#CD853F', active: '#FAEBD7' }}
+        class = {classes.NavLinks}
 
         >  {value.categories_name}
         </Link>))}
       </div>
 
-      <div className='Filter_sideBar' style={{ margin: '25px', float: 'left', padding: '20px' }}>
+
+      <div className={classes.Filter_sideBar}>
         <MultipleSelect 
         applyFilters={applyFilters}
         />
       </div>
 
       <br></br>
-      <h2 style={{fontFamily: "Palatino Linotype", color: "#CD853F"}}>
+      <h2 style={{ fontFamily: "Palatino Linotype", color: "#CD853F" }}>
         {props.match.params.category_name}
       </h2>
 
-      <div
-        style={{ float: 'right', width: '70%', paddingTop: '20px' }}>
+      <div className ={classes.ProductsDisplay}>
         <ProductsDisplay
           getProductId={getProductId}
           currentProdId={productId}
