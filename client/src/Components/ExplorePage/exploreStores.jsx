@@ -87,7 +87,8 @@ const classes = useStyles();
         cols={1}>
           {storess.map((store) => (
             <GridListTile key={store.store_id}>
-         <Link to={`/store/${store.store_id}`} ><PplCard
+         <Link to={`/store/${store.store_id}`} >
+           <PplCard
           storeid = {store.store_id}
           email = {store.store_email}
           store_name ={store.store_name}
@@ -96,7 +97,7 @@ const classes = useStyles();
           city = {store.city}
           phone = {store.phone}
           />
-</Link>
+        </Link>
             </GridListTile>
           ))}
         </GridList>

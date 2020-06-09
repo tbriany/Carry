@@ -6,12 +6,13 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import SearchIcon from '@material-ui/icons/Search';
 
 export default function CategorySearch() {
-const [stores, setTypes] = useState([]);
+const [stores, setStores] = useState([]);
 const [selected, Setselected] = useState([])
-const fetchTypes = async () => {
+
+const fetchStores = async () => {
     try {
       const stores = await axios.get(`/stores`)
-      setTypes(stores.data.payload)
+      setStores(stores.data.payload)
     } catch (err) {
       console.log(err)
     }
@@ -19,7 +20,7 @@ const fetchTypes = async () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      await fetchTypes()
+      await fetchStores()
     }
     fetchData()
   }, [])
@@ -31,28 +32,30 @@ const fetchTypes = async () => {
     console.log('search selected option', selected);
   };
   
+ console.log('store page')
+
+
+
 
   return (
     <div style={{ width: '300', margin: '20px'}}>
-      
+     
       <Autocomplete
         freeSolo
         id="free-solo-2-demo"
         disableClearable
         options={stores.map((option) => option.store_name)}
         renderInput={(params) => (
-        //  <Link to = {`/store/${stores.store_id}`}>   <div>
-             
+          // <Link to = {`/store/${stores.store_name}`}>   
           <TextField
-       
             {...params}
             label="Stores on Carry?"
             margin="normal"
             variant="outlined"
             InputProps={{ ...params.InputProps, type: 'search' }}
+            onChange = {handleInput}
           />
-          // </div>
-          // </Link> 
+        // </Link> 
          
         )}
       />
