@@ -1,19 +1,22 @@
 import React, { useState, Fragment, useContext } from 'react';
 import { TextField } from '@material-ui/core';
 import { checkoutFormStyles } from '../styling/checkoutFormStyles';
-// import { CustomerContext } from '../../Contexts/CustomerContext';
+import { Context } from '../../Contexts/CustomerContext'
 
 
 const AddressForm = () => {
     const classes = checkoutFormStyles();
-    // const { isLoggedIn, logCustomerIn } = useContext(CustomerContext);
+    const [state, dispatch] = useContext(Context);
+    const [userInfo, setUserInfo] = useState({ ...state })
     return (
         <Fragment>
             <TextField
                 required
                 variant='standard'
                 label='Address Line 1'
-                className={classes.textField}></TextField><br />
+                className={classes.textField}
+                value={userInfo.address}>
+            </TextField><br />
             <TextField
                 variant='standard'
                 label='Address Line 2'

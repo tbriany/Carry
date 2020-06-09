@@ -27,10 +27,6 @@ const getStepComponent = (step, props) => {
 };
 //getStepComponent takes in a step from the activeStep state and based on it's value, displays a certain component
 const Checkout = (props) => {
-    // const { logUserOut, setCustomerContext, isLoggedIn, customerId, customerFirstname, customerLastname, customerPhoneNumber, customerEmail, customerAddress, customerCity, customerState, customerZip, customerAvatar } = useContext(CustomerContext);
-    // contextObj = {
-    //     logUserOut, setCustomerContext, isLoggedIn, customerId, customerFirstname, customerLastname, customerPhoneNumber, customerEmail, customerAddress, customerCity, customerState, customerZip, customerAvatar
-    // };
     const classes = checkoutStyles();
     const [activeStep, setActiveStep] = useState(0);
     const handleNextStep = () => {
