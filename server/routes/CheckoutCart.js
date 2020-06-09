@@ -24,7 +24,7 @@ router.get('/session', async (req, res, next) => {
         res.status(200).json({
             status: "success",
             message: 'All checkout cart recieved',
-            payload: allCheckoutCart
+            payload: allCheckoutCart 
         })
     } catch (err) {
         handleErrors(res, err);
@@ -33,8 +33,6 @@ router.get('/session', async (req, res, next) => {
 
 
 router.get("/items/productId/:productId/:size", async (req, res, next) => {
-    console.log("HERE PRODUCTS AND SIZE")
-
     try {
         const sessionId = req.session.id
         const { productId, size } = req.params
