@@ -66,13 +66,13 @@ const Login = () => {
             axios.post('auth/login', {
                 email, password
             }).then(res => {
-                const user = res.data;
+                const user = res.data.payload;
                 dispatch({ type: 'SET_USER', payload: user });
-                window.localStorage.setItem('customer', JSON.stringify(user.payload));
+                window.localStorage.setItem('customer', JSON.stringify(user));
                 setAlert(!alert)
                 setTimeout(() => {
                     history.push('/')
-                }, 3000);
+                }, 1500);
                 //change action  names
             })
                 .catch(err => handleWrongInputs(err))

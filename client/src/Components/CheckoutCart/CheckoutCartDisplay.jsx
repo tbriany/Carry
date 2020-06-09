@@ -50,7 +50,7 @@ const CheckoutCartDisplay = ({ checkoutCart, shippingOption, handleDeleteProduct
                                                     style={{ alignItems: "flex-start", textAlign: "-webkit-left", margin: '0px', padding: "0px", height: '100%', paddingLeft: "10%" }}
                                                     className={classes.paper}>
                                                     <h1 style={{fontSize:"medium"}} className="checkoutCart_product">{product.product_name}</h1>
-                                                    <p className="checkoutCart_product"> Color:{product.color_name}</p>
+                                                    <p className="checkoutCart_product"> Color:{product.colors_name}</p>
                                                     <p className="checkoutCart_product" >Size:{product.size}</p>
                                                     <p className="checkoutCart_product" >Price:${product.product_price}</p>
                                                     <div className="checkoutCart_buttons">
