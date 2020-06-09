@@ -23,8 +23,8 @@ const getProductImageById = async (id) => {
 
 const getProductById = async (id) => {
     const getQuery = `
-    SELECT products.product_id, products.product_name, products.product_price, products.product_description,  brands.*, categories.*, materials.material_name, colors.colors_name, product_type.product_type_name, 
-    productImage_id.*, 
+    SELECT products.product_id, products.store_id, products.product_name, products.product_price, products.product_description,  brands.brands_name, brands.brand_description , categories.*, materials.material_name, colors.colors_name, product_type.product_type_name, 
+    productImage_id.*,
     array_agg(product_inventory.product_size) AS product_size
     FROM products 
     JOIN brands ON brands.brand_id = products.brand_id
