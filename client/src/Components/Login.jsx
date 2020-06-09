@@ -73,7 +73,6 @@ const Login = () => {
                 setTimeout(() => {
                     history.push('/')
                 }, 1500);
-                //change action  names
             })
                 .catch(err => handleWrongInputs(err))
         }

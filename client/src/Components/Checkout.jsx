@@ -27,10 +27,6 @@ const getStepComponent = (step, props) => {
 };
 //getStepComponent takes in a step from the activeStep state and based on it's value, displays a certain component
 const Checkout = (props) => {
-    // const { logUserOut, setCustomerContext, isLoggedIn, customerId, customerFirstname, customerLastname, customerPhoneNumber, customerEmail, customerAddress, customerCity, customerState, customerZip, customerAvatar } = useContext(CustomerContext);
-    // contextObj = {
-    //     logUserOut, setCustomerContext, isLoggedIn, customerId, customerFirstname, customerLastname, customerPhoneNumber, customerEmail, customerAddress, customerCity, customerState, customerZip, customerAvatar
-    // };
     const classes = checkoutStyles();
     const [activeStep, setActiveStep] = useState(0);
     const handleNextStep = () => {
@@ -38,6 +34,9 @@ const Checkout = (props) => {
     };
     const handlePrevStep = () => {
         setActiveStep(activeStep - 1)
+    };
+    const handlePlaceOrder = () => {
+        console.log('order placed')
     };
     return (
         <Container>
@@ -57,19 +56,22 @@ const Checkout = (props) => {
                         </Step>
                     </Stepper>
                     {/* creates Stepper Component that holds Step & StepLabel components, each with their value being a certain index from the steps global array */}
-                    <Container className="formContainer">
-                        {getStepComponent(activeStep, props)}
-                    </Container>
-                    <div className={classes.buttons}>
-                        {activeStep !== 0 && (
-                            <Button onClick={handlePrevStep} className={classes.button}>
-                                Back
+                    <form>
+                        <Container className="formContainer">
+                            {getStepComponent(activeStep, props)}
+                        </Container>
+                        <div className={classes.buttons}>
+                            {activeStep !== 0 && (
+                                <Button onClick={handlePrevStep} className={classes.button}>
+                                    Back
                                  </Button>
-                        )}
-                        <Button onClick={handleNextStep} className={classes.button} variant='contained' color='grey'>
-                            {activeStep === steps.length - 1 ? 'Place Order' : 'Next'}
-                        </Button>
-                    </div>
+                            )}
+                            <Button 
+                            onClick={activeStep === steps.length - 1 ? handlePlaceOrder : handleNextStep} className={classes.button} variant='contained' color='grey'>
+                                {activeStep === steps.length - 1 ? 'Place Order' : 'Next'}
+                            </Button>
+                        </div>
+                    </form>
                 </Paper>
             </main>
         </Container>
