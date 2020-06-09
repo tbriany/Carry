@@ -18,6 +18,8 @@ import { Context, Store } from "../Contexts/CustomerContext";
 import { navbarStyles, popoverTheme } from "./styling/navbarStyles";
 import { useRadioGroup } from "@material-ui/core";
 import SearchAppBar from "../Components/CategoryPage/InputBase";
+import axios from 'axios';
+
 
 function Navbar() {
   const classes = navbarStyles();
@@ -55,10 +57,14 @@ function Navbar() {
   };
   const open = Boolean(popOver);
   const menuId = "primary-search-account-menu";
-  const logUserOut = () => {
-    dispatch({ type: "USER_CLICKED_LOGOUT", payload: {} });
-    window.localStorage.setItem("customer", JSON.stringify({}));
-  };
+  const logUserOut = async () => {
+    await axios.get('/auth/logout')
+    dispatch({ type: 'REMOVE_USER', payload: {} })
+    window.localStorage.setItem('customer', JSON.stringify({}))
+    setTimeout(() => {
+      history.push('/')
+    }, 10)
+  }
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
