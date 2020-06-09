@@ -15,8 +15,9 @@ import Popover from '@material-ui/core/Popover';
 import customTheme from './styling/customTheme';
 import CartPopover from './Popover/CartPopover';
 import { Context, Store } from '../Contexts/CustomerContext';
+import  {CheckoutCartContext} from '../Contexts/CheckoutCartContext'
 import ProductsPage from './ProductPage/productsPage';
-import { navbarStyles, popoverTheme } from './styling/navbarStyles';
+import { navbarStyles, popoverTheme, StyledBadge } from './styling/navbarStyles';
 import { useRadioGroup } from '@material-ui/core';
 import SearchAppBar from "../Components/CategoryPage/InputBase";
 import axios from 'axios';
@@ -29,6 +30,9 @@ function Navbar() {
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const [popOver, setPopOver] = React.useState(null);
   const [state, dispatch] = useContext(Context);
+
+  const { qtyInBag } = useContext(CheckoutCartContext);
+  console.log("qtyInBag ----", qtyInBag)
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const history = useHistory();
@@ -241,7 +245,9 @@ function Navbar() {
             >
               <Link to="/checkout">
                 <IconButton color={customTheme.palette.secondary.main}>
+                <StyledBadge badgeContent={qtyInBag} color="secondary">
                   <ShoppingCartIcon />
+                  </StyledBadge>
                 </IconButton>
               </Link>
             </Typography>
