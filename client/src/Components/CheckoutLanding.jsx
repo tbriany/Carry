@@ -32,6 +32,7 @@ const CheckoutLanding = () => {
             style={{
               boxShadow: " 1px 1px 1px white",
               color: "black",
+              height: '100%'
             }}>
             <Checkout
               getShipping={getShipping}
@@ -49,7 +50,7 @@ const CheckoutLanding = () => {
             style={{
               boxShadow: " 1px 1px 1px white",
               color: "black",
-              height: '100vh'
+              height: '100%'
             }}>
             <CheckoutCart
               getShipping={getShipping}
