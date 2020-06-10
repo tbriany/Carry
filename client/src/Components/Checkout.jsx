@@ -8,7 +8,9 @@ import PlaceOrder from './CheckoutForms/PlaceOrder';
 import customTheme from './styling/customTheme';
 import CustomerContext from '../Contexts/CustomerContext';
 import { checkoutStyles } from './styling/checkoutStyles';
+import sendMessage from './orderMessage';
 import axios from 'axios'
+
 
 const steps = ['Delivery address', 'Payment method', 'Delivery Terms'];
 const getStepComponent = (step, props) => {
@@ -37,12 +39,14 @@ const Checkout = (props) => {
         setActiveStep(activeStep - 1)
     };
 
-
+  
     const handlePlaceOrder = async() => {
-        console.log('order placed')
-        let response = await axios.post(`/receipts/checkoutCart/${props.checkoutCartId}/commit`, { order_status: "Pending", required_date: '2020/06/09', courier_id: null, delivery_fee:props.shippingOption, total: 1001 })
-        let receipt = response.data.payload
-        console.log("receipt",receipt)
+      console.log('order placed')
+      let response = await axios.post(`/receipts/checkoutCart/${props.checkoutCartId}/commit`, { order_status: "Pending", required_date: '2020/06/09', courier_id: null, delivery_fee:props.shippingOption, total: 1001 })
+      let receipt = response.data.payload
+      console.log("receipt",receipt)
+      sendMessage({orderNum: '12834969823'})
+
     };
     return (
         <Container>
