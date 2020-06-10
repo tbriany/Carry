@@ -38,10 +38,16 @@ const Checkout = (props) => {
     const handlePrevStep = () => {
         setActiveStep(activeStep - 1)
     };
-    const handlePlaceOrder = () => {
-        handleNextStep();
-        sendMessage({ orderNum: '12834969823' })
+
+    const handlePlaceOrder = async () => {
+    handleNextStep();
+      console.log('order placed')
+      let response = await axios.post(`/receipts/checkoutCart/${props.checkoutCartId}/commit`, { order_status: "Pending", required_date: '2020/06/09', courier_id: null, delivery_fee:props.shippingOption, total: 1001 })
+      let receipt = response.data.payload
+      console.log("receipt",receipt)
+      sendMessage({orderNum: '12834969823'})
     };
+
     return (
         <Container>
             <CssBaseline />

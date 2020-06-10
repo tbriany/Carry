@@ -25,7 +25,7 @@ const getProductById = async (id) => {
     const getQuery = `
     SELECT products.product_id, products.store_id, products.product_name, products.product_price, products.product_description,  brands.brands_name, brands.brand_description , categories.*, materials.material_name, colors.colors_name, product_type.product_type_name, 
     productImage_id.*,
-    array_agg(product_inventory.product_size) AS product_size
+    array_agg(product_inventory.product_size ORDER BY product_inventory.product_size DESC ) AS product_size
     FROM products 
     JOIN brands ON brands.brand_id = products.brand_id
     JOIN categories ON categories.category_id = products.category_id
@@ -318,7 +318,7 @@ const getProductsOfCategoryByFilter = async (filters, category_name) => {
 }
 
 
-const getProductQty = async(product_id, product_size) => {
+const getProductQty = async (product_id, product_size) => {
     const getQuery = `
             SELECT * 
             FROM products
@@ -328,6 +328,20 @@ const getProductQty = async(product_id, product_size) => {
     return await db.one(getQuery, { product_id, product_size });
 }
 
+
+const updateProductQty = async (product_id, product_size, product_quantity) => {
+    let updateQuery = `
+    UPDATE product_inventory
+    SET 
+    product_quantity = $/product_quantity/
+    WHERE 
+    product_id = $/product_id/ AND 
+    product_size = $/product_size/  
+     RETURNING *
+    ;
+`;
+    return await db.one(updateQuery, {product_id, product_size, product_quantity});
+}
 
 
 module.exports = {
@@ -348,5 +362,6 @@ module.exports = {
     getAllProductsByCategory,
     getProductsByFilter,
     getProductsOfCategoryByFilter,
-    getProductQty
+    getProductQty,
+    updateProductQty
 }
