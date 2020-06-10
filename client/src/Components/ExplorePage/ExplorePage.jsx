@@ -75,7 +75,7 @@ const ExplorePage = () => {
         </div>
         <br></br>
         <div className="SearchLocation" style={{ margin: "20px" }}>
-          <h2
+          <h1
             style={{
               fontFamily: "Palatino Linotype",
               paddingLeft: "20px",
@@ -84,7 +84,7 @@ const ExplorePage = () => {
           >
             {" "}
             Browse Stores in New York City
-          </h2>
+          </h1>
           <div className="boroughLinks" style={{ paddingLeft: "20px" }}>
             <Link
               to={"/explore/New%20York"}

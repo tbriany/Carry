@@ -16,6 +16,7 @@ export const CategoryStyles = makeStyles((theme) => ({
             color: "#CD853F",
             active: "#FAEBD7",
             fontFamily: "Palatino Linotype",
+            fontSize: '22.5px'
     }, 
     headerContainer:{
             display: "flex",
