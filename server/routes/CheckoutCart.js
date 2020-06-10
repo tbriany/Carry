@@ -24,7 +24,7 @@ router.get('/session', async (req, res, next) => {
         res.status(200).json({
             status: "success",
             message: 'All checkout cart recieved',
-            payload: allCheckoutCart 
+            payload: allCheckoutCart
         })
     } catch (err) {
         handleErrors(res, err);
@@ -45,7 +45,7 @@ router.get("/items/productId/:productId/:size", async (req, res, next) => {
         const checkoutCartByProdId = await checkoutQueries.getProductFromCartSession(productFromCart, sessionId, getStoreId);
         res.status(200).json({
             status: "success",
-            // message: `Checkout Cart ${checkoutId.checkout_cart_id} retrieved`,
+            message: `Checkout Cart retrieved`,
             payload: checkoutCartByProdId
         });
     } catch (err) {
@@ -58,7 +58,7 @@ router.get("/items/checkoutTotal", async (req, res, next) => {
     const sessionId = req.session.id
     try {
         let checkout = await checkoutQueries.getCheckoutCartBySessionId(sessionId)
-        const checkoutTotalBySession = await checkoutQueries.getSumOfCheckout( checkout.checkout_cart_id);
+        const checkoutTotalBySession = await checkoutQueries.getSumOfCheckout(checkout.checkout_cart_id);
         res.status(200).json({
             status: "success",
             message: `Checkout Cart Total retrieved`,
