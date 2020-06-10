@@ -6,8 +6,11 @@ import { LandingContext } from "../../Contexts/LandingPageDetailsContext";
 import ExploreStores from "./exploreStores";
 //import Location from './LocationExplore'
 import DiscreteSlider from "./DistanceInput";
+import { explorePageStyles} from '../styling/explorePageStyles';
+
 
 const ExplorePage = () => {
+  const classes = explorePageStyles();
   const { Latitude, Longitude, locationStatus } = useContext(LandingContext);
   const [stores, setStores] = useState([]);
   const [value, setNewValue] = useState(null);
