@@ -32,7 +32,7 @@ function Navbar() {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const history = useHistory();
-  const logo = require('./carry.png')
+  const logo = require('./carry2.png')
   
 
   const handleProfileMenuOpen = (event) => {
