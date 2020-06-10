@@ -10,6 +10,9 @@ router.post('/send', async (req, res, next) => {
   let phoneNum = req.body.number
   let text = req.body.text
 
+  console.log(phoneNum)
+  console.log(text)
+
   try {
     client.messages.create({
       from: process.env.TWILIO_PHONE_NUMBER,
