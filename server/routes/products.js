@@ -253,7 +253,6 @@ router.get('/filterbyCategory/:category_name', async (req, res, next) =>{
             message: 'Received the products quantity',
             payload: quantity
         });
-        console.log(quantity)
     } catch (err){
         console.log('ERROR', err)
     }
