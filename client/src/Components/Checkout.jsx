@@ -8,6 +8,7 @@ import PlaceOrder from './CheckoutForms/PlaceOrder';
 import customTheme from './styling/customTheme';
 import CustomerContext from '../Contexts/CustomerContext';
 import { checkoutStyles } from './styling/checkoutStyles';
+import sendMessage from './orderMessage';
 
 const steps = ['Delivery address', 'Payment method', 'Delivery Terms'];
 const getStepComponent = (step, props) => {
@@ -36,7 +37,7 @@ const Checkout = (props) => {
         setActiveStep(activeStep - 1)
     };
     const handlePlaceOrder = () => {
-        console.log('order placed')
+        sendMessage({orderNum: '12834969823'})
     };
     return (
         <Container>
