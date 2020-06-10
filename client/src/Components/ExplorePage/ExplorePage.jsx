@@ -19,17 +19,32 @@ const ExplorePage = () => {
     }
   };
 
-  const applyAllFilters = async (filter) => {
-    let url = `/products/filterbyCategory/${stores.store_id}`;
-console.log(filter)
-    if (Object.keys(filter).length) {
-      let firstElem = Object.keys(filter)[0];
-      for (let el in filter) {
-        if (el === firstElem) {
-          url += `?${el}=${filter[el]}`;
-        } else {
-          url += `&${el}=${filter[el]}`;
+  const applyFilters = async (filter) => {
+
+    if (!Object.keys(filter).length) {
+      fetchStores()
+
+    } else {
+      let url = `/stores/${filter.store_id}`
+      console.log('explore page filter', filter.store_id)
+      if (Object.keys(filter).length) {
+        let firstElem = Object.keys(filter)[0]
+        for (let el in filter) {
+          if (el === firstElem) {
+            url += `?${el}=${filter[el]}`
+          } else {
+            url += `&${el}=${filter[el]}`
+          }
         }
+      }
+
+      try {
+        const res = await axios.get(url)
+        setStores(res.data.payload);
+        console.log('press filter', stores)
+      } catch (error) {
+        setStores([])
+        console.log(error);
       }
     }
   }
@@ -47,7 +62,7 @@ console.log(filter)
       <div className="Header">
         <div className="SearchBar">
           <CategorySearch 
-          applyAllFilters={applyAllFilters}/>
+          applyFilters={applyFilters}/>
         </div>
       </div>
       <div className="Contents">

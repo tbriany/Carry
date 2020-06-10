@@ -9,7 +9,7 @@ import Icon from '@material-ui/core/Icon';
 
 const filters = {}
 
-export default function CategoorySearch({ products, applyAllFilters }) {	
+export default function CategoorySearch({ products, applyFilters }) {	
 const [stores, setStores]= useState([]);
 
 
@@ -23,8 +23,6 @@ const fetchStores = async () => {
     console.log(err)
   }
 }
-
-
 
 useEffect(() => {
   const fetchData = async () => {
@@ -53,15 +51,16 @@ return (
   
      <Autocomplete
       {...Store}
+      freeSolos
       id="debug"
       debug
       renderInput={(params) => <TextField  {...params} label="Search for stores here" margin="normal"
     
       />}
       onChange={(event, newValue) => {
-        console.log(newValue.stores_name);
-        filters['stores'] = newValue.stores_name
-        applyAllFilters(newValue.stores_name);
+        console.log(newValue);
+        filters['stores'] = newValue
+        applyFilters(newValue);
       }}
     />
   </div>
