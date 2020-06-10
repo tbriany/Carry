@@ -245,6 +245,19 @@ router.get('/filterbyCategory/:category_name', async (req, res, next) =>{
      }
  });
 
+ router.get('/productQty/:product_id/:product_size', async(req,res,next) =>{
+    try {
+        const {product_id,product_size} = req.params
+        const quantity = await productQueries.getProductQty(product_id,product_size);
+        res.status(200).json({
+            message: 'Received the products quantity',
+            payload: quantity
+        });
+        console.log(quantity)
+    } catch (err){
+        console.log('ERROR', err)
+    }
+ })
 
 
 module.exports = router;

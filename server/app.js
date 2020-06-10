@@ -6,6 +6,8 @@ const cors = require('cors');
 const session = require('express-session');
 const passport = require('./auth/passport');
 const { loginRequired } = require('./auth/helpers');
+require('dotenv').config();
+
 
 const authRouter = require('./routes/auth');
 const productsRouter = require('./routes/products');
@@ -15,6 +17,7 @@ const couriersRouter = require('./routes/couriers');
 const ordersRouter = require('./routes/orders');
 const receiptsRouter = require('./routes/receipts');
 const checkoutCartRouter = require ('./routes/CheckoutCart')
+const messageRouter = require('./routes/messages');
 
 
 const app = express();
@@ -43,6 +46,7 @@ app.use('/couriers',  couriersRouter);
 app.use('/orders',  ordersRouter);
 app.use('/receipts', receiptsRouter)
 app.use('/checkoutCart',checkoutCartRouter)
+app.use('/messages', messageRouter)
 
 
 

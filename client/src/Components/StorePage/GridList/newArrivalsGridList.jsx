@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-export default function NewArrivalsGridList({ storeId, getProductId , currentProdId}) {
+export default function NewArrivalsGridList({ storeId, getProductId, currentProdId }) {
     const classes = useStyles();
     const [newArrivals, setNewArrivals] = useState([])
 
@@ -60,7 +60,7 @@ export default function NewArrivalsGridList({ storeId, getProductId , currentPro
     const [open, setOpen] = React.useState({ right: false });
 
     const toggleDrawer = (right, open, prodId) => event => {
-        open ?  getProductId(prodId) :   getProductId(currentProdId)
+        open ? getProductId(prodId) : getProductId(currentProdId)
         setOpen({ ...open, right: open });
     };
 
@@ -93,7 +93,11 @@ export default function NewArrivalsGridList({ storeId, getProductId , currentPro
             <GridList className={classes.gridList} cols={4} cellHeight={300} spacing={10}>
                 {newArrivals.map((tile) => (
                     <GridListTile key={tile.product_id}>
-                        <Button key={tile.product_id} className='button' onClick={toggleDrawer(open.right, true, tile.product_id)}>
+                        <Button key={tile.product_id} className='button' onClick={toggleDrawer(open.right, true, tile.product_id)}
+                            disableFocusRipple={true}
+                            disableRipple={true}
+                            disableElevation={true}
+                        >
                             <Box display="flex" justifyContent="center">
                                 <img src={tile.product_image_url} alt={tile.product_name}
                                     style={{ width: '100%', height: '310px' }}
@@ -119,9 +123,8 @@ export default function NewArrivalsGridList({ storeId, getProductId , currentPro
                     anchor={"right"}
                     open={open.right}
                     onClose={toggleDrawer(open.right, false)}
-                    onOpen={toggleDrawer(open.right, true )}
+                    onOpen={toggleDrawer(open.right, true)}
                     classes={{ paperAnchorRight: popUp.paperAnchorRight }}
-
                 >
                     <div className={clsx(popUp.list)} role="presentation" onKeyDown={toggleDrawer(open.right, false)}
                     >
