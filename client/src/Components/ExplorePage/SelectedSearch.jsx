@@ -23,6 +23,7 @@ const useStyles = makeStyles({
 export default function SelectedCard({value}) {
   const classes = useStyles();
 const [store, setStore] = useState([])
+const [store_id, setStore_id] = useState(0)
 
 console.log('selected Search value', value)
 
@@ -30,6 +31,7 @@ const fetchStore = async () => {
     try {
       const response = await axios.get(`/stores/${value}`)
       setStore(response.data.payload)
+        setStore_id(value)
     } catch (err) {
       console.log(err)
     }
@@ -47,15 +49,13 @@ console.log('stores on selected store', store)
 
   return (
     <div> 
-
-        <p> what</p>
-        <Link to={`/store/${store.store_id}`}>
+        <Link to={`/store/${store_id}`}>
     <Card className={classes.root}
     height= '500px'>
     <CardActionArea>
       <CardMedia
         className={classes.media}
-        image={store.avatar_url}
+        image={store.store_logo}
         title= {store.store_name}
       />
       <CardContent 
@@ -65,21 +65,21 @@ console.log('stores on selected store', store)
          {store.store_name}
         </Typography>
         <Typography variant="body2" color="textSecondary" component="p">
-         {store.store_address} <br></br>
-         {store.store_city}
+         {store.address} <br></br>
+         {store.city}
 
         </Typography>
       </CardContent>
     </CardActionArea>
 
-     <CardActions>
+     {/* <CardActions>
       <Button size="small" color="primary">
         Share
       </Button>
       <Button size="small" color="primary">
         Learn More
       </Button>
-    </CardActions> 
+    </CardActions>  */}
    </Card> 
    </Link>
   </div>

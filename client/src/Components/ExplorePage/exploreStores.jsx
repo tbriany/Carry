@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     maxHeight: "800px",
   },
   gridList: {
-    width: 500,
+    width: 730,
     height: 850,
     //flexWrap: "nowrap",
     // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
@@ -82,16 +82,17 @@ export default function ExploreStores({ stores, value }) {
       <div className ='Content' style= {{margin:'35px'}}>
         <div className='Header'>
           {" "}
-          <h2
+          <h1
             style={{
               fontFamily: "Palatino Linotype",
               textAlign: "left",
               // fontSize: "20px",
+              padding: '20px'
             }}
           >
             {" "}
             Stores On Carry 
-          </h2>
+          </h1>
         </div>
         <div className ="Stores"> 
         {value ? (
@@ -108,6 +109,7 @@ export default function ExploreStores({ stores, value }) {
               {storess.map((store) => (
                 <GridListTile key={store.store_id}>
                   <Link to={`/store/${store.store_id}`}>
+                    <div style ={{width:'500px'}}>
                     <PplCard
                       storeid={store.store_id}
                       email={store.store_email}
@@ -117,6 +119,7 @@ export default function ExploreStores({ stores, value }) {
                       city={store.city}
                       phone={store.phone}
                     />
+                    </div>
                   </Link>
                 </GridListTile>
               ))}
