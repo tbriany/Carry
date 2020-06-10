@@ -45,19 +45,18 @@ router.post('/checkoutCart/:checkoutItemsId/commit', loginRequired, async (req, 
     }
     let newReceipt = await addReceipt(receipt) 
     let createOrder = {
-      order_status: "Pending",
+      order_status: req.body.order_status,
       required_date: req.body.required_date,
       receipt_id: newReceipt.receipt_id,
       customer_id: req.user.customer_id,
       store_id: checkoutCart.store_id,
-      courier_id : null,
+      courier_id : req.body.courier_id,
       delivery_fee : req.body.delivery_fee,
       total: req.body.total
     }
 
     await addOrder(createOrder)
     await deleteCheckoutItemByCart(checkoutItemsId) 
-    // await deleteCheckoutCartById(checkoutItemsId) 
     res.json({
       payload: newReceipt.reciept,
       message: "checkout saved into receipt and checkout cart cleared",
