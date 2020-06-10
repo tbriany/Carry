@@ -318,7 +318,7 @@ const getProductsOfCategoryByFilter = async (filters, category_name) => {
 }
 
 
-const getProductQty = async(product_id, product_size) => {
+const getProductQty = async (product_id, product_size) => {
     const getQuery = `
             SELECT * 
             FROM products
@@ -328,6 +328,20 @@ const getProductQty = async(product_id, product_size) => {
     return await db.one(getQuery, { product_id, product_size });
 }
 
+
+const updateProductQty = async (product_id, product_size, product_quantity) => {
+    let updateQuery = `
+    UPDATE product_inventory
+    SET 
+    product_quantity = $/product_quantity/
+    WHERE 
+    product_id = $/product_id/ AND 
+    product_size = $/product_size/  
+     RETURNING *
+    ;
+`;
+    return await db.one(updateQuery, {product_id, product_size, product_quantity});
+}
 
 
 module.exports = {
@@ -348,5 +362,6 @@ module.exports = {
     getAllProductsByCategory,
     getProductsByFilter,
     getProductsOfCategoryByFilter,
-    getProductQty
+    getProductQty,
+    updateProductQty
 }
