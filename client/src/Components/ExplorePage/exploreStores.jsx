@@ -35,17 +35,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SingleLineGridList() {
+export default function ExploreStores({stores, value}) {
 const classes = useStyles();
 
-
-  const [storess, setStores] = useState([]);
+console.log('store coming from apply filter',stores)
+console.log('value on explore page', value)
+  const [storess, setStoress] = useState([]);
 
 
   const fetchTypes = async () => {
     try {
-      const stores = await axios.get(`/stores`)
-      setStores(stores.data.payload)
+      const response = await axios.get(`/stores`)
+      setStoress(response.data.payload)
     } catch (err) {
       console.log(err)
     }
@@ -59,14 +60,17 @@ const classes = useStyles();
   }, [])
 
 
-
+console.log('gridlist current stores', storess)
 
   
 
   return (
     <div className="App">
+      <hi>
+       this working?
+      </hi>
     <div>
-      <div>
+       <div>
         {" "}
         <h2
           style={{
@@ -77,32 +81,39 @@ const classes = useStyles();
         >
           {" "}
           Stores On Carry{" "}
+         <p> what is value right now{value} fdsfsdafas </p> 
         </h2>
       </div>
-      <div className={classes.root}>
-        <GridList className={classes.gridList} 
-        cellHeight= {300} 
-        cellWidth ={700}
-        spacing= {25} 
-        cols={1}>
-          {storess.map((store) => (
-            <GridListTile key={store.store_id}>
-         <Link to={`/store/${store.store_id}`} >
-           <PplCard
-          storeid = {store.store_id}
-          email = {store.store_email}
-          store_name ={store.store_name}
-          avatar = {store.store_logo}
-          address = {store.address}
-          city = {store.city}
-          phone = {store.phone}
-          />
-        </Link>
-            </GridListTile>
-          ))}
-        </GridList>
-      </div>
-    </div>
+      {value ? (
+           <p> whats goood</p>
+           
+            ) : (
+              <div className={classes.root}>
+              <GridList className={classes.gridList} 
+              cellHeight= {300} 
+              cellWidth ={700}
+              spacing= {25} 
+              cols={1}>
+                {storess.map((store) => (
+                  <GridListTile key={store.store_id}>
+               <Link to={`/store/${store.store_id}`} >
+                 <PplCard
+                storeid = {store.store_id}
+                email = {store.store_email}
+                store_name ={store.store_name}
+                avatar = {store.store_logo}
+                address = {store.address}
+                city = {store.city}
+                phone = {store.phone}
+                />
+              </Link>
+                  </GridListTile>
+                ))}
+              </GridList>
+            </div>
+            )}
+      
+    </div> 
    
   </div>
 );

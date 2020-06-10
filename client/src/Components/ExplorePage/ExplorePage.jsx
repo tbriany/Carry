@@ -7,7 +7,8 @@ import DiscreteSlider from "./DistanceInput";
 
 const ExplorePage = () => {
   const { Latitude, Longitude } = useContext(LandingContext);
-  const [stores, setStores] = useState();
+  const [stores, setStores] = useState([]);
+ const [value, setNewValue] = useState(null)
 
   const fetchStores = async () => {
     try {
@@ -20,35 +21,24 @@ const ExplorePage = () => {
   };
 
   const applyFilters = async (filter) => {
-
-    if (!Object.keys(filter).length) {
-      fetchStores()
-
-    } else {
-      let url = `/stores/${filter.store_id}`
-      console.log('explore page filter', filter.store_id)
-      if (Object.keys(filter).length) {
-        let firstElem = Object.keys(filter)[0]
-        for (let el in filter) {
-          if (el === firstElem) {
-            url += `?${el}=${filter[el]}`
-          } else {
-            url += `&${el}=${filter[el]}`
-          }
-        }
-      }
-
+      // let url = `/stores/${filter.store_id}`
+      // console.log('explore page filter', filter.store_id)
       try {
-        const res = await axios.get(url)
-        setStores(res.data.payload);
-        console.log('press filter', stores)
+        // const res = await axios.get(`/stores/${filter.store_id}`)
+        // console.log('response of filter', res)
+        // console.log('explore page url', url)
+        // setStores(res.data.payload);
+        setNewValue(filter.store_id)
+        console.log(value)
+        
       } catch (error) {
         setStores([])
         console.log(error);
       }
+      return value
     }
-  }
-
+  // }
+  console.log('press filter', value)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -62,7 +52,8 @@ const ExplorePage = () => {
       <div className="Header">
         <div className="SearchBar">
           <CategorySearch 
-          applyFilters={applyFilters}/>
+          applyFilters={applyFilters}
+          />
         </div>
       </div>
       <div className="Contents">
@@ -78,6 +69,7 @@ const ExplorePage = () => {
         <div className="Stores" style ={{float:'right', maxWidth:'800px', marginRight:'50px',   width: "70%"}}>
            <ExploreStores
           stores = {stores}
+           value ={value}
           /> 
         </div>
       </div>

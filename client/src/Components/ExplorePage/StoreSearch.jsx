@@ -58,7 +58,7 @@ return (
     
       />}
       onChange={(event, newValue) => {
-        console.log(newValue);
+        console.log('store search newvalue',newValue);
         filters['stores'] = newValue
         applyFilters(newValue);
       }}
