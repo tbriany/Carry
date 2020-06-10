@@ -43,9 +43,9 @@ const Checkout = (props) => {
             <CssBaseline />
             <main className={classes.layout} style={{ padding: "0px", margin: " 0px", width: "100%" }}>
                 <Paper className={classes.paper} style={{ padding: "0px", margin: " 0px" }} >
-                    <Stepper activeStep={activeStep} className={classes.stepper}>
-                        <Step key={steps[0]} className={classes.step}>
-                            <StepLabel>{steps[0]}</StepLabel>
+                    <Stepper activeStep={activeStep} className={classes.stepper} >
+                        <Step key={steps[0]} className={classes.step} >
+                            <StepLabel className={classes.label}>{steps[0]}</StepLabel>
                         </Step>
                         <Step key={steps[1]}>
                             <StepLabel>{steps[1]}</StepLabel>
