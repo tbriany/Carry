@@ -4,10 +4,7 @@ import { CheckoutCartContext } from '../../Contexts/CheckoutCartContext'
 
 
 const CartPopover = () => {
-    const { getCheckout, checkoutCart } = useContext(CheckoutCartContext)
-    useEffect(() => {
-        getCheckout()
-    }, [])
+    const { checkoutCart } = useContext(CheckoutCartContext)
 
 
     return (
