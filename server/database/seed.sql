@@ -214,7 +214,7 @@ VALUES
 
     ('Fendi', 'http://localhost:4008/images/stores/Fendi/FendiStore.jpg', 'http://localhost:4008/images/stores/Fendi/FendiAvatar.jpg', '(212)897-2244', 'email7@gmail.com', '598 Madisoon Avenue', 'New York', 'NY', 10022, 'fendi1', 40.7626106, -73.9723989),
 
-    ('Sephora', 'http://localhost:4008/images/stores/Sephora/SephoraStore.jpg', 'http://localhost:4008/images/stores/Sephora/SephoraAvatar.jpg', '(212)278-0037', 'email8@gmail.com', '580 5th Avenue', 'New York', 'NY', 10036, 'Sephora1', 40.7570994, -73.9791521),
+    ('Sephora', 'http://localhost:4008/images/stores/Sephora/SephoraStore.jpg', 'http://localhost:4008/images/stores/Sephora/SephoraAvatar.jpg', '(212)278-0037', 'email8@gmail.com', '580 5th Avenue', 'Bronx', 'NY', 10036, 'Sephora1', 40.7570994, -73.9791521),
 
     ('Coach', 'http://localhost:4008/images/stores/Coach/CoachStore.jpg', 'http://localhost:4008/images/stores/Coach/CoachAvatar.jpg', '(212)599-4777', 'email9@gmail.com', '342 Madison Avenue', 'New York', 'NY', 10173, 'Coach1', 40.7541208, 73.9786107 ),
 
