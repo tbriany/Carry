@@ -71,7 +71,7 @@ const ExplorePage = () => {
   }, []);
 
   return (
-    <div className="Explore Page">
+    <div className="ExplorePage">
       <div className="Header" style={{ display: "block", float: "left" }}>
         <div className="SearchBar">
           <CategorySearch applyFilters={applyFilters} />
