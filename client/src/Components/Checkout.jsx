@@ -6,12 +6,10 @@ import PaymentForm from './CheckoutForms/PaymentForm';
 import Review from './CheckoutForms/Review';
 import PlaceOrder from './CheckoutForms/PlaceOrder';
 import customTheme from './styling/customTheme';
-import CustomerContext from '../Contexts/CustomerContext';
+import { Context } from '../Contexts/CustomerContext';
 import { checkoutStyles } from './styling/checkoutStyles';
 import sendMessage from './orderMessage';
 import axios from 'axios'
-
-
 
 const steps = ['Delivery address', 'Payment method', 'Delivery Terms'];
 const getStepComponent = (step, props) => {
@@ -31,6 +29,7 @@ const getStepComponent = (step, props) => {
 };
 //getStepComponent takes in a step from the activeStep state and based on it's value, displays a certain component
 const Checkout = (props) => {
+    const [state, dispatch] = useContext(Context);
     const classes = checkoutStyles();
     const [activeStep, setActiveStep] = useState(0);
     const handleNextStep = () => {
@@ -42,38 +41,32 @@ const Checkout = (props) => {
 
 
     const handlePlaceOrder = async () => {
-        console.log('order placed')
-        // Need to pass checkoutCart total , required date , and userInformation. 
-        // Need to pass userInfomation becasue the users information will be null
-
+        let userInfo = state.user.info
 
         try {
-            let response = await axios.post(`/receipts/checkoutCart/${props.checkoutCartId}/commit`, { order_status: "Pending", required_date: '2020/06/09', courier_id: null, delivery_fee: props.shippingOption, total: 1001, phone_number: "3475544780", address: "111 Random", city: "brooklyn", state: "ny", zip_code: 11111 })
+            let response = await axios.post(`/receipts/checkoutCart/${props.checkoutCartId}/commit`, { order_status: "Pending", required_date: '2020/06/09', courier_id: null, delivery_fee: props.shippingOption, total: 1001, phone_number: userInfo.phone_number, address: userInfo.address, city: userInfo.city, state: userInfo.state, zip_code: userInfo.zip_code })
             let receipt = response.data.payload
             console.log("receipt", receipt)
-            sendMessage({orderNum: '12834969823'})
+            sendMessage({ orderNum: '12834969823' })
             await props.getCheckout()
         } catch (err) {
-
+            console.log("ERROR", err)
         }
-
-
-
 
     };
     return (
         <Container  >
-            <CssBaseline   />
+            <CssBaseline />
             <main className={classes.layout} style={{ padding: "0px", margin: " 0px", width: "100%" }}>
-                <Paper   className={classes.paper} style={{ padding: "0px", margin: " 0px" }} >
-                    <Stepper   activeStep={activeStep} className={classes.stepper} >
-                        <Step    key={steps[0]} className={classes.step} >
-                            <StepLabel    className={classes.label }>{steps[0]} </StepLabel>
+                <Paper className={classes.paper} style={{ padding: "0px", margin: " 0px" }} >
+                    <Stepper activeStep={activeStep} className={classes.stepper} >
+                        <Step key={steps[0]} className={classes.step} >
+                            <StepLabel className={classes.label}>{steps[0]} </StepLabel>
                         </Step>
-                        <Step    key={steps[1]}>
+                        <Step key={steps[1]}>
                             <StepLabel  >{steps[1]}</StepLabel>
                         </Step>
-                        <Step   key={steps[2]}
+                        <Step key={steps[2]}
                         >
                             <StepLabel>{steps[2]}</StepLabel>
                         </Step>
