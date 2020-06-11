@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const CheckoutLanding = () => {
-  const { shippingOption, getShipping, checkoutCartId } = useContext(CheckoutCartContext);
+  const { shippingOption, getShipping, checkoutCartId, getCheckout } = useContext(CheckoutCartContext);
   const classes = useStyles();
 
   return (
@@ -38,6 +38,7 @@ const CheckoutLanding = () => {
               getShipping={getShipping}
               shippingOption={shippingOption}
               checkoutCartId= {checkoutCartId}
+              getCheckout={getCheckout}
             />
           </Paper>
         </Grid>
