@@ -8,10 +8,9 @@ import Categories from "./LandingPageComponents/LandingPagecategories";
 
 const LandingPage = () => {
   const classes = landingStyles();
-  const { latitude, longitude, SetLatitude, SetLongitude } = useContext(
+  const { latitude, longitude, SetLatitude, SetLongitude, setLocationStatus, locationStatus} = useContext(
     LandingContext
   );
-  const [locationStatus, setLocationStatus] = useState(false);
 
   // Checks if Geolocation API is available on browser. This is only available on secure contexts (HTTPS).
   if ("geolocation" in navigator) {

@@ -90,7 +90,7 @@ const deleteStore = async (id) => {
 };
 
 
-// Not my own query https://jonisalonen.com/2014/computing-distance-between-coordinates-can-be-simple-and-fast/ got from this source. 
+
 async function getStoresByLocation (user_latitude, user_longitude){
   console.log(user_latitude, user_longitude);
 
@@ -108,6 +108,23 @@ async function getStoresByLocation (user_latitude, user_longitude){
 };
 
 
+const getAllStoresByCity = async (city) => {
+  const getQuery = `
+  SELECT  store_name,
+          store_id,
+          store_logo,
+          avatar_url,
+          phone_number,
+          email,
+          address,
+          state,
+          zip_code
+      FROM stores
+      WHERE city = $/city/;
+    `;
+  return await db.any(getQuery, { city });
+};
+
 module.exports = {
   getAllStores,
   getStoreById,
@@ -115,4 +132,5 @@ module.exports = {
   updateStoreInfo,
   deleteStore,
   getStoresByLocation,
+  getAllStoresByCity
 };

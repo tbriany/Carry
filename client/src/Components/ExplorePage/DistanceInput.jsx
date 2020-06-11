@@ -22,9 +22,13 @@ DiscreteSlider() {
   return (
     <div className={classes.root}
     style={{margin:'20px'}}>
-      <Typography id="discrete-slider-small-steps" gutterBottom>
-        Distance? 
-      </Typography>
+      {/* <Typography id="discrete-slider-small-steps" gutterBottom>
+       Browse By Distance
+      </Typography> */}
+      <h1   style={{
+              fontFamily: "Palatino Linotype", 
+              color: '#CD853F'
+            }}> Browse By Distance</h1>
       <Slider
         defaultValue={20}
         getAriaValueText={valuetext}

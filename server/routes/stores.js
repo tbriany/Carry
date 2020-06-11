@@ -98,6 +98,20 @@ router.get("/location/:latitude/:longitude", async (req, res, next) => {
         }
 });
 
+router.get("/city/:city", async (req, res, next) => {
+    try {
+        const city = (req.params.city)
+        const storeByCity = await storesQueries.getAllStoresByCity(city);
+
+        res.status(200).json({
+            status: "success",
+            message: `Store ${city} retrieved`,
+            payload: storeByCity
+        });
+    } catch (err) {
+        console.log("ERROR not able to get store by City", err)
+        }
+});
 
 
 module.exports = router;
