@@ -9,7 +9,7 @@ import customTheme from './styling/customTheme';
 import { Context } from '../Contexts/CustomerContext';
 import { checkoutStyles } from './styling/checkoutStyles';
 import sendMessage from './orderMessage';
-import axios from 'axios'
+import axios from 'axios';
 
 const steps = ['Delivery address', 'Payment method', 'Delivery Terms'];
 const getStepComponent = (step, props) => {
@@ -32,6 +32,7 @@ const Checkout = (props) => {
     const [state, dispatch] = useContext(Context);
     const classes = checkoutStyles();
     const [activeStep, setActiveStep] = useState(0);
+    const [state, dispatch] = useContext(Context);
     const handleNextStep = () => {
         setActiveStep(activeStep + 1)
     };
@@ -42,7 +43,7 @@ const Checkout = (props) => {
 
     const handlePlaceOrder = async () => {
         let userInfo = state.user.info
-
+       // handleNextStep();
         try {
             let response = await axios.post(`/receipts/checkoutCart/${props.checkoutCartId}/commit`, { order_status: "Pending", required_date: '2020/06/09', courier_id: null, delivery_fee: props.shippingOption, total: 1001, phone_number: userInfo.phone_number, address: userInfo.address, city: userInfo.city, state: userInfo.state, zip_code: userInfo.zip_code })
             let receipt = response.data.payload
@@ -52,8 +53,8 @@ const Checkout = (props) => {
         } catch (err) {
             console.log("ERROR", err)
         }
-
     };
+
     return (
         <Container  >
             <CssBaseline />
