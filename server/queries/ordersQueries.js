@@ -1,7 +1,10 @@
 const db = require("../database/db");
+const {updateCustomerReceipt} = require('./customersQueries')
 
-const addOrder = async (bodyObj) => {
-  const postQuery = `
+
+const addOrder = async (bodyObj,customerObj ) => {
+  const postQuery = 
+  `
         INSERT INTO orders (
             order_status, 
             required_date, 
@@ -33,6 +36,8 @@ const addOrder = async (bodyObj) => {
         delivery_fee, 
         total
       `;
+
+      updateCustomerReceipt(customerObj)
   return await db.one(postQuery, bodyObj);
 };
 // ORBER BY STOREID 
