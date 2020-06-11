@@ -18,6 +18,8 @@ import ProtectedRoute from "./Components/util/ProtectedRoute";
 import Account from "./Components/Account";
 import ExplorePage from "./Components/ExplorePage/ExplorePage";
 import LocationExplore from './Components/ExplorePage/LocationExplore'
+import Orders from './Components/Orders'
+
 
 function App() {
   return (
@@ -39,6 +41,7 @@ function App() {
               <Route path="/store/:id/:category_name" component={ProductsPage}/>
               <Route exact path="/explore" component={ExplorePage} />
               <Route exact path="/explore/:city" component={LocationExplore} />
+              <Route exact path="/orders" component={Orders} />
             </Switch>
           </CheckoutCartContextProvider>
         </Store>

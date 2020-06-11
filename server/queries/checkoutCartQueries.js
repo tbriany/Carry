@@ -16,14 +16,14 @@ const getCheckoutCartById = async (checkout_id) => {
 }
 
 const deleteCheckoutCartById = async (checkout_items_id) => {
-	const checkout = await db.one("DELETE FROM checkout_cart WHERE checkout_cart_id = $1 RETURNING *", checkout_items_id)
-	return checkout;
+    const checkout = await db.one("DELETE FROM checkout_cart WHERE checkout_cart_id = $1 RETURNING *", checkout_items_id)
+    return checkout;
 }
 
 
 const deleteCheckoutItemByCart = async (checkout_id) => {
-	const checkout = await db.any("DELETE FROM checkout_items WHERE checkout_cart_id = $1 RETURNING *", checkout_id)
-	return checkout;
+    const checkout = await db.any("DELETE FROM checkout_items WHERE checkout_cart_id = $1 RETURNING *", checkout_id)
+    return checkout;
 }
 
 const deleteCheckoutItemsCartByCartId = async (checkout_items_id) => {
@@ -70,15 +70,12 @@ const getAllFromCartSession = async (session_id) => {
 };
 
 
-
-
 const getProductFromCartSession = async (obj, sessionId, getStoreId) => {
     let checkout = await getCheckoutCartBySessionId(sessionId)
     if (!checkout) {
-
         let addTocheckout_items = {
             session_id: sessionId,
-            store_id: getStoreId.product_id
+            store_id: parseInt(getStoreId.store_id)
         }
         checkout = await addCheckoutCart(addTocheckout_items)
     }
@@ -125,10 +122,10 @@ const getcheckoutCart = async (id) => {
 
 const getStoreIdByProdId = async (product_id) => {
     const getQuery = `
-    SELECT product_id FROM products
+    SELECT store_id FROM products
     WHERE product_id = $/product_id/;
     `;
-    return await db.one(getQuery, { product_id });
+    return await db.oneOrNone(getQuery, { product_id });
 }
 
 const addCheckoutCart = async (obj) => {

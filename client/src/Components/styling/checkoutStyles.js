@@ -29,11 +29,13 @@ export const checkoutStyles = makeStyles((theme) => ({
     },
     step: {
         '.MuiSvgIcon-root': {
-            color: 'rgba(0, 0, 0, 0.38)',
-            '.MuiStepIcon-root.MuiStepIcon-active': {
-            color: customTheme.palette.secondary.dark,
-        },
+            color: customTheme.palette.secondary.main
+        }
     },
+    label: {
+            '.MuiStepLabel-iconContainer.MuiSvgIcon-root.MuiStepIcon-root.MuiStepIcon-active': {
+                color: customTheme.palette.secondary.main
+        }
     },
     buttonContainer: {
         justifyContent: 'baseline'
@@ -47,4 +49,9 @@ export const checkoutStyles = makeStyles((theme) => ({
         marginBottom: theme.spacing(2),
         marginRight: theme.spacing(2)
     },
+    '.MuiStepLabel-label': {
+        '.MuiStepLabel-active': {
+            color: customTheme.palette.secondary.main
+        }
+    }
 }));

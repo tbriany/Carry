@@ -22,7 +22,7 @@ CREATE TABLE customers
 CREATE TABLE stores
 (
     store_id SERIAL PRIMARY KEY,
-    store_name VARCHAR NOT NULL,
+    stores_name VARCHAR NOT NULL,
     store_logo VARCHAR NOT NULL,
     avatar_url VARCHAR NOT NULL,
     phone_number VARCHAR UNIQUE NOT NULL,
@@ -192,7 +192,7 @@ VALUES
     ('Ana', 'Gomez', '(347)-555-5551', 'Ana@pursuit.org', '47-10 Austell Pl 2nd floor', 'Long Island City', 'NY', 11101, 'img' , 'ana');
 
 INSERT INTO stores
-    (store_name, store_logo, avatar_url, phone_number, email, address, city, state, zip_code, password, lat, lng)
+    (stores_name, store_logo, avatar_url, phone_number, email, address, city, state, zip_code, password, lat, lng)
 VALUES
     ('PazLifestyle', 'http://localhost:4008/images/stores/PazLifestyle/PazLifestyleStore.jpg', 'http://localhost:4008/images/stores/PazLifestyle/PazLifeStyleAvatar.png', '(347)-555-5552', 'info@pazlifestyle.com', '123 Paz Street', 'New York', 'NY', 10031, 'lifestyle', 40.760350, -73.964930),
 

@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const CheckoutLanding = () => {
-  const { shippingOption, getShipping } = useContext(CheckoutCartContext);
+  const { shippingOption, getShipping, checkoutCartId, getCheckout } = useContext(CheckoutCartContext);
   const classes = useStyles();
 
   return (
@@ -32,10 +32,13 @@ const CheckoutLanding = () => {
             style={{
               boxShadow: " 1px 1px 1px white",
               color: "black",
+              height: '100%'
             }}>
             <Checkout
               getShipping={getShipping}
               shippingOption={shippingOption}
+              checkoutCartId= {checkoutCartId}
+              getCheckout={getCheckout}
             />
           </Paper>
         </Grid>
@@ -49,7 +52,7 @@ const CheckoutLanding = () => {
             style={{
               boxShadow: " 1px 1px 1px white",
               color: "black",
-              height: '100vh'
+              height: '100%'
             }}>
             <CheckoutCart
               getShipping={getShipping}

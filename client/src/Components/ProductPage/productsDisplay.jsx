@@ -45,7 +45,10 @@ export default function ProductsDisplay({
             {products.map((value) => (
               <Button
                 key={value.product_id}
-                onClick={toggleDrawer("right", true, value.product_id)}
+                onClick={toggleDrawer(open.right, true, value.product_id)}
+                disableFocusRipple={true}
+                disableRipple={true}
+                disableElevation={true}
               >
                 <Grid key={value} item>
                   <img

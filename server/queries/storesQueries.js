@@ -2,14 +2,14 @@ const db = require("../database/db");
 
 const getAllStores = async () => {
   const getAllQueries = `
-    SELECT * FROM stores ORDER BY store_name
+    SELECT * FROM stores ORDER BY stores_name
     `;
   return await db.any(getAllQueries);
 };
 
 const getStoreById = async (id) => {
   const getQuery = `
-  SELECT  store_name,
+  SELECT  stores_name,
           store_logo,
           avatar_url,
           phone_number,
@@ -27,7 +27,7 @@ const getStoreById = async (id) => {
 const addStore = async (bodyObj) => {
   const postQuery = `
       INSERT INTO stores (
-          store_name,
+          stores_name,
           avatar_url,
           phone_number,
           email,
@@ -38,7 +38,7 @@ const addStore = async (bodyObj) => {
           password
       )
       VALUES (
-          $/store_name/,
+          $/stores_name/,
           $/avatar_url/,
           $/phone_number/,
           $/email/,
@@ -50,7 +50,7 @@ const addStore = async (bodyObj) => {
       )
       RETURNING 
           store_id,
-          store_name,
+          stores_name,
           avatar_url
           phone_number,
           email,
@@ -65,7 +65,7 @@ const addStore = async (bodyObj) => {
 const updateStoreInfo = async (updateObj) => {
   let updateQuery = `
       UPDATE stores
-      SET store_name = $/store_name/,
+      SET stores_name = $/stores_name/,
           avatar_url = $/avatar_url/,
           phone_number = $/phone_number/,
           email = $/email/,
@@ -97,7 +97,7 @@ async function getStoresByLocation (user_latitude, user_longitude){
   const getQuery = `
   SELECT  lat,
           lng, 
-          store_name, 
+          stores_name, 
           avatar_url,
           store_id
   FROM stores

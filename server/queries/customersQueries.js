@@ -105,10 +105,26 @@ const updateCustomerInfo = async (updateObj) => {
             WHERE customer_id = $/customer_id /
             RETURNING *
         ;
+
     `;
+
     return await db.one(updateQuery, updateObj);
 }
 
+const updateCustomerReceipt= async (updateObj) => {
+    let updateQuery = `
+        UPDATE customers
+        SET  phone_number = $/phone_number/,
+            address = $/address/,
+            city = $/city/,
+            state = $/state/,
+            zip_code = $/zip_code/
+            WHERE customer_id = $/customer_id /
+            RETURNING *
+        ;
+    `;
+    return await db.one(updateQuery, updateObj);
+}
 
 const deleteCustomer = async (id) => {
     const deleteQuery = `DELETE FROM customers
@@ -124,4 +140,5 @@ module.exports = {
     getCustomerById,
     updateCustomerInfo,
     deleteCustomer,
+    updateCustomerReceipt
 };

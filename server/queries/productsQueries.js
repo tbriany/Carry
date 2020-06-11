@@ -23,9 +23,9 @@ const getProductImageById = async (id) => {
 
 const getProductById = async (id) => {
     const getQuery = `
-    SELECT products.product_id, products.product_name, products.product_price, products.product_description,  brands.*, categories.*, materials.material_name, colors.colors_name, product_type.product_type_name, 
-    productImage_id.*, 
-    array_agg(product_inventory.product_size) AS product_size
+    SELECT products.product_id, products.store_id, products.product_name, products.product_price, products.product_description,  brands.brands_name, brands.brand_description , categories.*, materials.material_name, colors.colors_name, product_type.product_type_name, 
+    productImage_id.*,
+    array_agg(product_inventory.product_size ORDER BY product_inventory.product_size DESC ) AS product_size
     FROM products 
     JOIN brands ON brands.brand_id = products.brand_id
     JOIN categories ON categories.category_id = products.category_id
@@ -83,7 +83,7 @@ const getProductBySize = async (size) => {
     WHERE product_inventory.product_size = $/size/;
     `
     return await db.any(getQuery, { size });
-//     return await db.any(getQuery, { name });
+    //     return await db.any(getQuery, { name });
 }
 
 
@@ -100,10 +100,10 @@ const getProductByColor = async (color) => {
     WHERE colors.colors_name= $/color/;
     `
     return await db.any(getQuery, { color });
-//     JOIN product_inventory ON product_inventory.product_id = products.product_id 
-//     WHERE product_inventory.product_size = $/size/;
-//     `
-//     return await db.any(getQuery, { size });
+    //     JOIN product_inventory ON product_inventory.product_id = products.product_id 
+    //     WHERE product_inventory.product_size = $/size/;
+    //     `
+    //     return await db.any(getQuery, { size });
 }
 
 const getProductByBrand = async (brand) => {
@@ -141,10 +141,10 @@ const getProductByCategory = async (category, store_id) => {
     return await db.any(getQuery, { category, store_id });
 }
 
-const getAllProductsByCategory = async (categories_name) =>{
+const getAllProductsByCategory = async (categories_name) => {
     const getQuery = `SELECT products.product_id, products.product_name, products.product_price, products.product_description,  products.store_id,
     brands.brands_name, categories.categories_name, materials.material_name, colors.colors_name, 
-    stores.store_name,product_type.product_type_name, productImage_id.*,
+    stores.stores_name,product_type.product_type_name, productImage_id.*,
     array_agg(product_inventory.product_size) AS product_size
     FROM products 
     JOIN brands ON brands.brand_id = products.brand_id
@@ -156,9 +156,9 @@ const getAllProductsByCategory = async (categories_name) =>{
     JOIN product_inventory ON product_inventory.product_id = products.product_id 
     JOIN stores ON stores.store_id = products.store_id
     WHERE categories.categories_name = $/categories_name/
-    GROUP BY products.product_id, brands.brand_id, categories.categories_name,materials.material_name,colors.colors_name, stores.store_name,product_type.product_type_name,
+    GROUP BY products.product_id, brands.brand_id, categories.categories_name,materials.material_name,colors.colors_name, stores.stores_name,product_type.product_type_name,
     productimage_id.product_image_id;`
-    return await db.any(getQuery, {categories_name});
+    return await db.any(getQuery, { categories_name });
 }
 
 const getProductByType = async (type, store_id) => {
@@ -186,14 +186,14 @@ const getCategories = async () => {
       `;
     return await db.any(getCategoriesQuery);
 };
-  
+
 const getProductTypes = async () => {
     const getTypesQuery = `
       SELECT * FROM product_type
       `;
     return await db.any(getTypesQuery);
 };
-  
+
 const getBrands = async () => {
     const getBrandsQuery = `
       SELECT * FROM brands
@@ -240,7 +240,7 @@ categories.categories_name,materials.material_name,colors.colors_name, product_t
 }
 
 const getProductsByFilter = async (filters, store_id) => {
-    
+
     let getQuery = `
     SELECT products.product_id, products.product_name, products.product_price, products.product_description,  products.store_id,
     brands.brands_name, categories.categories_name, materials.material_name, colors.colors_name, product_type.product_type_name, productImage_id.*,
@@ -260,11 +260,11 @@ const getProductsByFilter = async (filters, store_id) => {
     let num = 2
     let firstElem = Object.keys(filters)[0]
 
-    for (el in filters){
-        if(el === firstElem){
-         getQuery += `${el}.${el}_name = $${num} `
+    for (el in filters) {
+        if (el === firstElem) {
+            getQuery += `${el}.${el}_name = $${num} `
         } else {
-         getQuery += `OR ${el}.${el}_name = $${num} `
+            getQuery += `OR ${el}.${el}_name = $${num} `
         }
         properties.push(filters[el])
         num++;
@@ -280,7 +280,7 @@ const getProductsByFilter = async (filters, store_id) => {
 const getProductsOfCategoryByFilter = async (filters, category_name) => {
     console.log(filters)
     console.log(category_name)
-        let getQuery = `
+    let getQuery = `
         SELECT products.product_id, products.product_name, products.product_price, products.product_description,  products.store_id,
         brands.brands_name, categories.categories_name, materials.material_name, colors.colors_name, product_type.product_type_name, productImage_id.*,
         array_agg(product_inventory.product_size) AS product_size
@@ -296,27 +296,52 @@ const getProductsOfCategoryByFilter = async (filters, category_name) => {
         WHERE categories.categories_name = $1 AND
     
     `
-        let properties = [category_name]
-        let num = 2
-        let firstElem = Object.keys(filters)[0]
-    
-        for (el in filters){
-            if(el === firstElem){
-             getQuery += `${el}.${el}_name = $${num} `
-            } else {
-             getQuery += `OR ${el}.${el}_name = $${num} `
-            }
-            properties.push(filters[el])
-            num++;
+    let properties = [category_name]
+    let num = 2
+    let firstElem = Object.keys(filters)[0]
+
+    for (el in filters) {
+        if (el === firstElem) {
+            getQuery += `${el}.${el}_name = $${num} `
+        } else {
+            getQuery += `OR ${el}.${el}_name = $${num} `
         }
-    
-        getQuery += `GROUP BY products.product_id, brands.brand_id, categories.categories_name,materials.material_name,colors.colors_name, product_type.product_type_name,
-        productimage_id.product_image_id`
-       console.log(getQuery)
-       console.log(properties)
-        return await db.any(getQuery, properties);
+        properties.push(filters[el])
+        num++;
     }
 
+    getQuery += `GROUP BY products.product_id, brands.brand_id, categories.categories_name,materials.material_name,colors.colors_name, product_type.product_type_name,
+        productimage_id.product_image_id`
+    console.log(getQuery)
+    console.log(properties)
+    return await db.any(getQuery, properties);
+}
+
+
+const getProductQty = async (product_id, product_size) => {
+    const getQuery = `
+            SELECT * 
+            FROM products
+            JOIN product_inventory ON product_inventory.product_id = products.product_id 
+            WHERE product_inventory.product_id = $/product_id/  AND product_inventory.product_size = $/product_size/
+            `
+    return await db.one(getQuery, { product_id, product_size });
+}
+
+
+const updateProductQty = async (product_id, product_size, product_quantity) => {
+    let updateQuery = `
+    UPDATE product_inventory
+    SET 
+    product_quantity = $/product_quantity/
+    WHERE 
+    product_id = $/product_id/ AND 
+    product_size = $/product_size/  
+     RETURNING *
+    ;
+`;
+    return await db.one(updateQuery, {product_id, product_size, product_quantity});
+}
 
 
 module.exports = {
@@ -336,5 +361,7 @@ module.exports = {
     getNewArrivals,
     getAllProductsByCategory,
     getProductsByFilter,
-    getProductsOfCategoryByFilter
+    getProductsOfCategoryByFilter,
+    getProductQty,
+    updateProductQty
 }

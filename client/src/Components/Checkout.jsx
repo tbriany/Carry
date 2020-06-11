@@ -6,8 +6,10 @@ import PaymentForm from './CheckoutForms/PaymentForm';
 import Review from './CheckoutForms/Review';
 import PlaceOrder from './CheckoutForms/PlaceOrder';
 import customTheme from './styling/customTheme';
-import CustomerContext from '../Contexts/CustomerContext';
+import { Context } from '../Contexts/CustomerContext';
 import { checkoutStyles } from './styling/checkoutStyles';
+import sendMessage from './orderMessage';
+import axios from 'axios';
 
 const steps = ['Delivery address', 'Payment method', 'Delivery Terms'];
 const getStepComponent = (step, props) => {
@@ -27,29 +29,43 @@ const getStepComponent = (step, props) => {
 };
 //getStepComponent takes in a step from the activeStep state and based on it's value, displays a certain component
 const Checkout = (props) => {
-    // const { logUserOut, setCustomerContext, isLoggedIn, customerId, customerFirstname, customerLastname, customerPhoneNumber, customerEmail, customerAddress, customerCity, customerState, customerZip, customerAvatar } = useContext(CustomerContext);
-    // contextObj = {
-    //     logUserOut, setCustomerContext, isLoggedIn, customerId, customerFirstname, customerLastname, customerPhoneNumber, customerEmail, customerAddress, customerCity, customerState, customerZip, customerAvatar
-    // };
+    const [state, dispatch] = useContext(Context);
     const classes = checkoutStyles();
     const [activeStep, setActiveStep] = useState(0);
+    const [state, dispatch] = useContext(Context);
     const handleNextStep = () => {
         setActiveStep(activeStep + 1)
     };
     const handlePrevStep = () => {
         setActiveStep(activeStep - 1)
     };
+
+
+    const handlePlaceOrder = async () => {
+        let userInfo = state.user.info
+       // handleNextStep();
+        try {
+            let response = await axios.post(`/receipts/checkoutCart/${props.checkoutCartId}/commit`, { order_status: "Pending", required_date: '2020/06/09', courier_id: null, delivery_fee: props.shippingOption, total: 1001, phone_number: userInfo.phone_number, address: userInfo.address, city: userInfo.city, state: userInfo.state, zip_code: userInfo.zip_code })
+            let receipt = response.data.payload
+            console.log("receipt", receipt)
+            sendMessage({ orderNum: '12834969823' })
+            await props.getCheckout()
+        } catch (err) {
+            console.log("ERROR", err)
+        }
+    };
+
     return (
-        <Container>
+        <Container  >
             <CssBaseline />
             <main className={classes.layout} style={{ padding: "0px", margin: " 0px", width: "100%" }}>
                 <Paper className={classes.paper} style={{ padding: "0px", margin: " 0px" }} >
-                    <Stepper activeStep={activeStep} className={classes.stepper}>
-                        <Step key={steps[0]} className={classes.step}>
-                            <StepLabel>{steps[0]}</StepLabel>
+                    <Stepper activeStep={activeStep} className={classes.stepper} >
+                        <Step key={steps[0]} className={classes.step} >
+                            <StepLabel className={classes.label}>{steps[0]} </StepLabel>
                         </Step>
                         <Step key={steps[1]}>
-                            <StepLabel>{steps[1]}</StepLabel>
+                            <StepLabel  >{steps[1]}</StepLabel>
                         </Step>
                         <Step key={steps[2]}
                         >
@@ -57,19 +73,22 @@ const Checkout = (props) => {
                         </Step>
                     </Stepper>
                     {/* creates Stepper Component that holds Step & StepLabel components, each with their value being a certain index from the steps global array */}
-                    <Container className="formContainer">
-                        {getStepComponent(activeStep, props)}
-                    </Container>
-                    <div className={classes.buttons}>
-                        {activeStep !== 0 && (
-                            <Button onClick={handlePrevStep} className={classes.button}>
-                                Back
+                    <form>
+                        <Container className="formContainer">
+                            {getStepComponent(activeStep, props)}
+                        </Container>
+                        <div className={classes.buttons}>
+                            {activeStep !== 0 && (
+                                <Button onClick={handlePrevStep} className={classes.button}>
+                                    Back
                                  </Button>
-                        )}
-                        <Button onClick={handleNextStep} className={classes.button} variant='contained' color='grey'>
-                            {activeStep === steps.length - 1 ? 'Place Order' : 'Next'}
-                        </Button>
-                    </div>
+                            )}
+                            <Button
+                                onClick={activeStep === steps.length - 1 ? handlePlaceOrder : handleNextStep} className={classes.button} variant='contained' color='grey'>
+                                {activeStep === steps.length - 1 ? 'Place Order' : 'Next'}
+                            </Button>
+                        </div>
+                    </form>
                 </Paper>
             </main>
         </Container>
