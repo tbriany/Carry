@@ -52,9 +52,10 @@ const getOrderByStoreID = async (store_id) => {
 // ORDER BY CUSTOMER ID
 const getOrderByCustomerId = async (customer_id) => {
   const getQuery = `
-  SELECT firstname, lastname,phone_number, email, address, city, state, zip_code, avatar_url, receipts.reciept, receipts.receipt_id,
-  orders.*, receipts.reciept
+  SELECT customers.city, customers.state, customers.zip_code,  customers.address, customers.firstname, customers.firstname,    customers.address, stores.stores_name, stores.store_logo, stores.address, stores.city,  stores.state, stores.zip_code,
+  orders.order_status, orders.required_date, orders.time_ordered,  orders.delivery_fee,  orders.total, receipts.reciept
   FROM orders  
+  JOIN stores ON orders.store_id =stores.store_id
   JOIN customers ON orders.customer_id =  customers.customer_id
   JOIN receipts ON orders.receipt_id = receipts.receipt_id 
   WHERE orders.customer_id =$/customer_id/
