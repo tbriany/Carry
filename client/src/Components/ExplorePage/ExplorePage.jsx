@@ -7,16 +7,53 @@ import ExploreStores from "./exploreStores";
 //import Location from './LocationExplore'
 import DiscreteSlider from "./DistanceInput";
 import { explorePageStyles} from '../styling/explorePageStyles';
+import GridList from "@material-ui/core/GridList";
+import GridListTile from "@material-ui/core/GridListTile";
+import PplCard from "./StoreCard";
+import SelectedCard from "./SelectedSearch";
+import GridListTileBar from "@material-ui/core/GridListTileBar";
+import { makeStyles } from "@material-ui/core/styles";
+import Autocomplete from "@material-ui/lab/Autocomplete";
+import TextField from "@material-ui/core/TextField";
+
+const filters = {};
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "space-around",
+    overflow: "hidden",
+    backgroundColor: theme.palette.background.paper,
+    maxWidth: "500px",
+    maxHeight: "800px",
+  },
+  gridList: {
+    width: 730,
+    height: 850,
+    //flexWrap: "nowrap",
+    // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
+    transform: "translateZ(0)",
+  },
+  title: {
+    color: theme.palette.primary.light,
+  },
+  titleBar: {
+    background: "white",
+    //   'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
+  },
+}));
+
 
 
 const ExplorePage = () => {
-  const classes = explorePageStyles();
-  const { Latitude, Longitude, locationStatus } = useContext(LandingContext);
+  const classes = useStyles();
   const [stores, setStores] = useState([]);
   const [value, setNewValue] = useState(null);
-  const [oneStore, setOneStore] = useState([]);
-  console.log("location status on explore page", locationStatus);
+  //const [oneStore, setOneStore] = useState([]);
+  //console.log("location status on explore page", locationStatus);
 
+  // get all stores 
   const fetchStores = async () => {
     try {
       const stores = await axios.get(`/stores`);
@@ -27,15 +64,17 @@ const ExplorePage = () => {
     }
   };
 
+  //filters
   const applyFilters = async (filter, value) => {
     // let url = `/stores/${filter.store_id}`
     // console.log('explore page filter', filter.store_id)
     try {
       const res = await axios.get(`/stores/${filter.store_id}`);
       console.log("response of filter", res);
-      setStores(res.data.payload);
+      // setStores(res.data.payload);
       setNewValue(filter.store_id);
       console.log(value);
+      console.log('stores on filter', stores)
     } catch (error) {
       setStores([]);
       console.log(error);
@@ -46,38 +85,65 @@ const ExplorePage = () => {
   // }
   console.log("press filter", value);
 
-  // attempting to get value from the selected drop down menu.
-  // const applyValue = async (value)=>{
-  //   if (value != null){
-  //     try {
-  //       const response = await axios.get(`/stores/${value}`);
-  //       setOneStore(response.data.payload);
-  //       console.log('getting one store', oneStore);
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   }
-  //   return oneStore
-  // }
 
-  console.log(oneStore, "one store on explore page");
 
   useEffect(() => {
     const fetchData = async () => {
       await fetchStores();
-      //await applyValue()
     };
     fetchData();
   }, []);
 
+
+   const Store = {
+    options: stores,
+    getOptionLabel: (option) => option.store_name,
+  };
+
+
   return (
     <div className="ExplorePage">
       <div className="Header" style={{ display: "block", float: "left" }}>
-        <div className="SearchBar">
-          <CategorySearch applyFilters={applyFilters} />
-        </div>
+      <div style={{ width: 250, paddingLeft: "15px" }}>
+      <div style={{margin:'25px', float: "left" }}>
+        <Autocomplete
+          {...Store}
+          freeSolos
+          id="store"
+          debug
+          fullWidth
+          style={{ width: 500 }}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label="Search for stores here"
+              margin="normal"
+              fullWidth
+            />
+          )}
+          onChange={(event, newValue) => {
+            console.log(newValue);
+            filters["stores"] = newValue;
+            applyFilters(newValue);
+          }}
+        />
+      </div>
+    </div>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        {/* <div className="SearchBar">
+          <CategorySearch applyFilters={applyFilters}
+          stores ={stores} />
+        </div> */}
         <br></br>
-        <div className="SearchLocation" style={{ margin: "20px" }}>
+        {/* <div className="SearchLocation" style={{ margin: "20px" }}>
           <h1
             style={{
               fontFamily: "Palatino Linotype",
@@ -136,7 +202,7 @@ const ExplorePage = () => {
           float: "left"
         }}>
           <DiscreteSlider/>
-        </div>
+        </div> */}
       </div>
 
       <div className="Contents">
@@ -150,7 +216,55 @@ const ExplorePage = () => {
             width: "70%",
           }}
         >
-          <ExploreStores stores={stores} value={value} />
+           <div className ='Content' style= {{margin:'35px'}}>
+        <div className='Header'>
+          {" "}
+          <h1
+            style={{
+              fontFamily: "Palatino Linotype",
+              textAlign: "left",
+              // fontSize: "20px",
+              padding: '20px'
+            }}
+          >
+            {" "}
+            Stores On Carry 
+          </h1>
+        </div>
+        <div className ="Stores"> 
+        {value ? (
+          <SelectedCard value={value} />
+        ) : (
+          <div className={classes.root}>
+            <GridList
+              className={classes.gridList}
+              cellHeight={300}
+              cellWidth={800}
+              spacing={25}
+              cols={1}
+            >
+              {stores.map((store) => (
+                <GridListTile key={store.store_id}>
+                  <Link to={`/store/${store.store_id}`}>
+                    <div style ={{width:'500px'}}>
+                    <PplCard
+                      storeid={store.store_id}
+                      email={store.store_email}
+                      store_name={store.store_name}
+                      avatar={store.store_logo}
+                      address={store.address}
+                      city={store.city}
+                      phone={store.phone}
+                    />
+                    </div>
+                  </Link>
+                </GridListTile>
+              ))}
+            </GridList>
+          </div>
+        )}
+        </div>
+      </div>
         </div>
       </div>
     </div>
