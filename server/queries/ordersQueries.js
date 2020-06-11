@@ -26,6 +26,7 @@ const addOrder = async (bodyObj,customerObj ) => {
             $/total/
         )
         RETURNING 
+        order_id,
         order_status, 
         required_date, 
         time_ordered,
