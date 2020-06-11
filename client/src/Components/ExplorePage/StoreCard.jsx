@@ -34,7 +34,7 @@ export default function PplCard({storeid, email, store_name, avatar, phone, addr
       <CardContent 
       
       >
-        <Typography gutterBottom variant="h5" component="h2">
+        <Typography variant="h5" component="h2">
          {store_name}
         </Typography>
         <Typography variant="body2" color="textSecondary" component="p">

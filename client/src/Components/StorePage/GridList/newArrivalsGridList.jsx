@@ -81,15 +81,10 @@ export default function NewArrivalsGridList({ storeId, getProductId, currentProd
 
     return (
         <div className={classes.root} style={{ margin: "20px", padding: "15px" }}>
-            <h2
-                style={{
-                    fontFamily: "Palatino Linotype",
-                    textAlign: "left",
-                    color: "black",
-                }}
-            >
-                New Arrivals
-            </h2>
+            { newArrivals.length > 1 ? 
+            <h2 style={{fontFamily: "Palatino Linotype", textAlign: "left", color: "black"}}> New Arrivals</h2>
+            : null
+            }
             <GridList className={classes.gridList} cols={4} cellHeight={300} spacing={10}>
                 {newArrivals.map((tile) => (
                     <GridListTile key={tile.product_id}>

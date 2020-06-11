@@ -32,7 +32,7 @@ const Checkout = (props) => {
     const [state, dispatch] = useContext(Context);
     const classes = checkoutStyles();
     const [activeStep, setActiveStep] = useState(0);
-    const [state, dispatch] = useContext(Context);
+    // const [state, dispatch] = useContext(Context);
     const handleNextStep = () => {
         setActiveStep(activeStep + 1)
     };
@@ -43,12 +43,28 @@ const Checkout = (props) => {
 
     const handlePlaceOrder = async () => {
         let userInfo = state.user.info
-       // handleNextStep();
+        handleNextStep();
+
+        const order = {
+            order_status: "Pending",
+            required_date: '2020/06/09',
+            courier_id: null,
+            delivery_fee: props.shippingOption,
+            total: 1001,
+            phone_number: userInfo.phone_number,
+            address: userInfo.address,
+            city: userInfo.city,
+            state: userInfo.state,
+            zip_code: userInfo.zip_code
+        }
+
         try {
-            let response = await axios.post(`/receipts/checkoutCart/${props.checkoutCartId}/commit`, { order_status: "Pending", required_date: '2020/06/09', courier_id: null, delivery_fee: props.shippingOption, total: 1001, phone_number: userInfo.phone_number, address: userInfo.address, city: userInfo.city, state: userInfo.state, zip_code: userInfo.zip_code })
-            let receipt = response.data.payload
-            console.log("receipt", receipt)
-            sendMessage({ orderNum: '12834969823' })
+            let response = await axios.post(`/receipts/checkoutCart/${props.checkoutCartId}/commit`, order)
+            let receiptDetails = response.data.payload
+            let orderDetails = response.data.orderDetails
+            // console.log("orderDetails", orderDetails)
+            // console.log("receipt", receiptDetails)
+            sendMessage(orderDetails, receiptDetails)
             await props.getCheckout()
         } catch (err) {
             console.log("ERROR", err)

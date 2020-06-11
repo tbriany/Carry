@@ -32,7 +32,7 @@ function Navbar() {
   const [state, dispatch] = useContext(Context);
 
   const { qtyInBag } = useContext(CheckoutCartContext);
-  console.log("qtyInBag ----", qtyInBag)
+  // console.log("qtyInBag ----", qtyInBag)
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const history = useHistory();
@@ -192,7 +192,7 @@ function Navbar() {
       </MenuItem>
     </Menu>
   );
-  console.log("state", state);
+  // console.log("state", state);
   return (
     <div
       className={classes.grow}
