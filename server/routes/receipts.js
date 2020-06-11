@@ -30,6 +30,8 @@ router.get('/', async (req, res, next) => {
 // Saves the checkoutcart items into receipts table, Delete the items in the checkoutcart and update the order table
 router.post('/checkoutCart/:checkoutItemsId/commit', loginRequired, async (req, res, next) => {
   const { checkoutItemsId } = req.params
+  const { order_status, required_date, courier_id, delivery_fee, total, phone_number, address, city, state, zip_code } = req.body
+
   try {
     let checkoutCart = await getCheckoutCartById(checkoutItemsId)
     if (checkoutCart.session_id !== req.session.id) {
@@ -47,25 +49,35 @@ router.post('/checkoutCart/:checkoutItemsId/commit', loginRequired, async (req, 
     let allItemsInCart = getAllCheckoutItems
     //UPDATE  the quantity in the database
     await Promise.all(
-      allItemsInCart.map(product =>{
+      allItemsInCart.map(product => {
         updateProductQty(product.product_id, product.size, product.cartquantity)
       })
 
     );
 
+
     let newReceipt = await addReceipt(receipt)
     let createOrder = {
-      order_status: req.body.order_status,
-      required_date: req.body.required_date,
+      order_status: order_status,
+      required_date: required_date,
       receipt_id: newReceipt.receipt_id,
       customer_id: req.user.customer_id,
       store_id: checkoutCart.store_id,
-      courier_id: req.body.courier_id,
-      delivery_fee: req.body.delivery_fee,
-      total: req.body.total
+      courier_id: courier_id,
+      delivery_fee: delivery_fee,
+      total: total
     }
 
-    await addOrder(createOrder)
+
+    const updateCustomerInfo = {
+      phone_number: phone_number,
+      address: address,
+      city: city,
+      state: state,
+      zip_code: zip_code,
+      customer_id: req.user.customer_id,
+    }
+    await addOrder(createOrder, updateCustomerInfo)
     await deleteCheckoutItemByCart(checkoutItemsId)
     res.json({
       payload: newReceipt.reciept,

@@ -29,6 +29,7 @@ const getStepComponent = (step, props) => {
 };
 //getStepComponent takes in a step from the activeStep state and based on it's value, displays a certain component
 const Checkout = (props) => {
+    const [state, dispatch] = useContext(Context);
     const classes = checkoutStyles();
     const [activeStep, setActiveStep] = useState(0);
     const [state, dispatch] = useContext(Context);
@@ -39,26 +40,32 @@ const Checkout = (props) => {
         setActiveStep(activeStep - 1)
     };
 
+
     const handlePlaceOrder = async () => {
-    handleNextStep();
-      console.log('order placed')
-      let response = await axios.post(`/receipts/checkoutCart/${props.checkoutCartId}/commit`, { order_status: "Pending", required_date: '2020/06/09', courier_id: null, delivery_fee:props.shippingOption, total: 1001 })
-      let receipt = response.data.payload
-      console.log("receipt",receipt)
-      sendMessage({orderNum: '12834969823'})
+        let userInfo = state.user.info
+       // handleNextStep();
+        try {
+            let response = await axios.post(`/receipts/checkoutCart/${props.checkoutCartId}/commit`, { order_status: "Pending", required_date: '2020/06/09', courier_id: null, delivery_fee: props.shippingOption, total: 1001, phone_number: userInfo.phone_number, address: userInfo.address, city: userInfo.city, state: userInfo.state, zip_code: userInfo.zip_code })
+            let receipt = response.data.payload
+            console.log("receipt", receipt)
+            sendMessage({ orderNum: '12834969823' })
+            await props.getCheckout()
+        } catch (err) {
+            console.log("ERROR", err)
+        }
     };
 
     return (
-        <Container>
+        <Container  >
             <CssBaseline />
             <main className={classes.layout} style={{ padding: "0px", margin: " 0px", width: "100%" }}>
                 <Paper className={classes.paper} style={{ padding: "0px", margin: " 0px" }} >
                     <Stepper activeStep={activeStep} className={classes.stepper} >
                         <Step key={steps[0]} className={classes.step} >
-                            <StepLabel className={classes.label}>{steps[0]}</StepLabel>
+                            <StepLabel className={classes.label}>{steps[0]} </StepLabel>
                         </Step>
                         <Step key={steps[1]}>
-                            <StepLabel>{steps[1]}</StepLabel>
+                            <StepLabel  >{steps[1]}</StepLabel>
                         </Step>
                         <Step key={steps[2]}
                         >
@@ -77,10 +84,7 @@ const Checkout = (props) => {
                                  </Button>
                             )}
                             <Button
-                                onClick={activeStep === steps.length - 1 ? handlePlaceOrder : handleNextStep}
-                                className={classes.button}
-                                variant='contained'
-                                color={customTheme.palette.secondary.main}>
+                                onClick={activeStep === steps.length - 1 ? handlePlaceOrder : handleNextStep} className={classes.button} variant='contained' color='grey'>
                                 {activeStep === steps.length - 1 ? 'Place Order' : 'Next'}
                             </Button>
                         </div>
