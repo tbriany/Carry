@@ -18,7 +18,8 @@ import ProtectedRoute from "./Components/util/ProtectedRoute";
 import Account from "./Components/Account";
 import ExplorePage from "./Components/ExplorePage/ExplorePage";
 import LocationExplore from './Components/ExplorePage/LocationExplore'
-import Orders from './Components/Orders'
+import Orders from './Components/Orders/Orders'
+import Receipt from './Components/Orders/Receipt'
 
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
               <Route exact path="/explore" component={ExplorePage} />
               <Route exact path="/explore/:city" component={LocationExplore} />
               <Route exact path="/orders" component={Orders} />
+              <Route exact path="/orders/receipt/:orders_id" component={Receipt} />
             </Switch>
           </CheckoutCartContextProvider>
         </Store>
