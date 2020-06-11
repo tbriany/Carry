@@ -77,10 +77,11 @@ router.post('/checkoutCart/:checkoutItemsId/commit', loginRequired, async (req, 
       zip_code: zip_code,
       customer_id: req.user.customer_id,
     }
-    await addOrder(createOrder, updateCustomerInfo)
+    const newOrderDetails = await addOrder(createOrder, updateCustomerInfo)
     await deleteCheckoutItemByCart(checkoutItemsId)
     res.json({
       payload: newReceipt.reciept,
+      orderDetails: newOrderDetails,
       message: "checkout saved into receipt and checkout cart cleared",
       err: false
     })
