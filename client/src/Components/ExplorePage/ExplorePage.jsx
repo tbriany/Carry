@@ -50,7 +50,6 @@ const ExplorePage = () => {
   const classes = useStyles();
   const [stores, setStores] = useState([]);
   const [value, setNewValue] = useState(null);
-  //const [oneStore, setOneStore] = useState([]);
   //console.log("location status on explore page", locationStatus);
 
   // get all stores 
@@ -58,35 +57,12 @@ const ExplorePage = () => {
     try {
       const stores = await axios.get(`/stores`);
       setStores(stores.data.payload);
-      console.log("All stores on Explore Page", stores);
+      // console.log("All stores on Explore Page", stores.data.payload);
     } catch (err) {
       console.log(err);
     }
   };
-
-  //filters
-  const applyFilters = async (filter, value) => {
-    // let url = `/stores/${filter.store_id}`
-    // console.log('explore page filter', filter.store_id)
-    try {
-      const res = await axios.get(`/stores/${filter.store_id}`);
-      console.log("response of filter", res);
-      // setStores(res.data.payload);
-      setNewValue(filter.store_id);
-      console.log(value);
-      console.log('stores on filter', stores)
-    } catch (error) {
-      setStores([]);
-      console.log(error);
-    }
-
-    return value;
-  };
-  // }
-  console.log("press filter", value);
-
-
-
+ 
   useEffect(() => {
     const fetchData = async () => {
       await fetchStores();
@@ -97,9 +73,8 @@ const ExplorePage = () => {
 
    const Store = {
     options: stores,
-    getOptionLabel: (option) => option.store_name,
+    getOptionLabel: (option) => option.stores_name,
   };
-
 
   return (
     <div className="ExplorePage">
@@ -108,10 +83,8 @@ const ExplorePage = () => {
       <div style={{margin:'25px', float: "left" }}>
         <Autocomplete
           {...Store}
-          freeSolos
           id="store"
           debug
-          fullWidth
           style={{ width: 500 }}
           renderInput={(params) => (
             <TextField
@@ -121,22 +94,26 @@ const ExplorePage = () => {
               fullWidth
             />
           )}
-          onChange={(event, newValue) => {
-            console.log(newValue);
-            filters["stores"] = newValue;
-            applyFilters(newValue);
-          }}
-        />
+        //   onChange={(event, newValue) => {
+        //     // console.log('value inside onchange',newValue);
+        //     newValue == null ? 
+        //       setNewValue(null)
+        //     :
+        //       filters["stores"] = newValue
+        //       setNewValue(newValue.store_id)
+        //   }}
+        // />
+        onChange={(event, newValue) => {
+          // console.log('value inside onchange',newValue);
+          if (newValue == null) {
+            setNewValue(null)
+          } else {
+            filters["stores"] = newValue
+            setNewValue(newValue.store_id)}
+        }}
+      />
       </div>
     </div>
-        
-        
-        
-        
-        
-        
-        
-        
         
         {/* <div className="SearchBar">
           <CategorySearch applyFilters={applyFilters}
@@ -205,8 +182,7 @@ const ExplorePage = () => {
         </div> */}
       </div>
 
-      <div className="Contents">
-      
+      <div className="Contents">      
         <div
           className="Stores"
           style={{
@@ -250,7 +226,7 @@ const ExplorePage = () => {
                     <PplCard
                       storeid={store.store_id}
                       email={store.store_email}
-                      store_name={store.store_name}
+                      store_name={store.stores_name}
                       avatar={store.store_logo}
                       address={store.address}
                       city={store.city}
