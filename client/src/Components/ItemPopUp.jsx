@@ -82,7 +82,7 @@ function ItemPopUp() {
 
                         <Grid className='itemPopUp-image' item xs={6} style={{ width: '100%', padding: '0px 20px ', boxSizing: 'initial' }} >
                             <Paper style={{ boxShadow: " 1px 1px 1px white", height: '100%', paddingtop: '10px' }} className={classes.paper}>
-                                <img src={productInfo.product_image_url} alt={productInfo.product_name} height='100%' width='100%' style={{ objectFit: 'cover' }} />
+                                <img src={productInfo.product_image_url} alt={productInfo.product_name} height='100%' width='100%' style={{ objectFit: 'contain' }} />
                             </Paper>
                         </Grid>
                         <Grid className='product-info' item sm={5} style={{ padding: '0px 12px' }} >
