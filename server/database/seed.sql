@@ -189,7 +189,7 @@ CREATE TABLE bankInfo
 INSERT INTO customers
     (firstname, lastname, phone_number, email, address, city, state, zip_code, avatar_url, password)
 VALUES
-    ('Ana', 'Gomez', '(347)-555-5551', 'Ana@pursuit.org', '47-10 Austell Pl 2nd floor', 'Long Island City', 'NY', 11101, 'img' , 'ana');
+    ('Audrey', 'Hepburn', '(347)-555-5551', 'audrey@gmail.com', '123 5th Ave', 'New York', 'NY', 10011, 'img' , 'testing');
 
 INSERT INTO stores
     (stores_name, store_logo, avatar_url, phone_number, email, address, city, state, zip_code, password, lat, lng)
