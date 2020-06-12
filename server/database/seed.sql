@@ -1,9 +1,10 @@
-DROP DATABASE if exists carry;
-CREATE DATABASE carry;
+-- DROP DATABASE if exists carry;
+-- CREATE DATABASE carry;
 
-\c carry
+-- \c carry
 
 -- users
+DROP TABLE IF exists customer;
 CREATE TABLE customers
 (
     customer_id SERIAL PRIMARY KEY,
@@ -19,6 +20,7 @@ CREATE TABLE customers
     password VARCHAR NOT NULL
 );
 
+DROP TABLE IF exists stores;
 CREATE TABLE stores
 (
     store_id SERIAL PRIMARY KEY,
@@ -36,6 +38,7 @@ CREATE TABLE stores
     lng FLOAT
 );
 
+DROP TABLE IF exists couriers;
 CREATE TABLE couriers
 (
     courier_id SERIAL PRIMARY KEY,
@@ -48,6 +51,7 @@ CREATE TABLE couriers
     mode_of_transportation VARCHAR NOT NULL
 );
 
+DROP TABLE IF exists categories;
 CREATE TABLE categories
 (
     category_id SERIAL PRIMARY KEY,
@@ -56,6 +60,7 @@ CREATE TABLE categories
     category_logo VARCHAR
 );
 
+DROP TABLE IF exists product_type;
 CREATE TABLE product_type
 (
     product_type_id SERIAL PRIMARY KEY,
@@ -64,12 +69,16 @@ CREATE TABLE product_type
     product_type_logo VARCHAR
 );
 
+
+DROP TABLE IF exists materials;
 CREATE TABLE materials
 (
     material_id SERIAL PRIMARY KEY,
     material_name VARCHAR
 );
 
+
+DROP TABLE IF exists brands;
 CREATE TABLE brands
 (
     brand_id SERIAL PRIMARY KEY,
@@ -78,12 +87,16 @@ CREATE TABLE brands
     store_id INT REFERENCES stores(store_id)
 );
 
+
+DROP TABLE IF exists colors;
 CREATE TABLE colors
 (
     color_id SERIAL PRIMARY KEY,
     colors_name VARCHAR NOT NULL
 );
 
+
+DROP TABLE IF exists products;
 CREATE TABLE products
 (
     product_id SERIAL PRIMARY KEY,
@@ -98,6 +111,8 @@ CREATE TABLE products
     product_type INT REFERENCES product_type(product_type_id)
 );
 
+
+DROP TABLE IF exists product_inventory;
 CREATE TABLE product_inventory
 (
     product_inventory_id SERIAL PRIMARY KEY,
@@ -106,6 +121,8 @@ CREATE TABLE product_inventory
     product_quantity INT
 );
 
+
+DROP TABLE IF exists productImage_id;
 CREATE TABLE productImage_id
 (
     product_image_id SERIAL PRIMARY KEY,
@@ -117,6 +134,8 @@ CREATE TABLE productImage_id
 
 -- CheckoutCart
 
+
+DROP TABLE IF exists checkout_cart;
 CREATE TABLE checkout_cart
 (
     checkout_cart_id SERIAL PRIMARY KEY,
@@ -124,7 +143,7 @@ CREATE TABLE checkout_cart
     store_id INT REFERENCES stores(store_id)
 );
 
-
+DROP TABLE IF exists checkout_items;
 CREATE TABLE checkout_items
 (
     checkout_items_id SERIAL PRIMARY KEY,
@@ -136,6 +155,7 @@ CREATE TABLE checkout_items
 
 -- Orders 
 
+DROP TABLE IF exists receipts;
 CREATE TABLE receipts
 (
     receipt_id SERIAL PRIMARY KEY,
@@ -143,6 +163,8 @@ CREATE TABLE receipts
     reciept JSON
 );
 
+
+DROP TABLE IF exists orders;
 CREATE TABLE orders
 (
     order_id SERIAL PRIMARY KEY,
@@ -162,12 +184,15 @@ CREATE TABLE orders
 
 -- Payments
 
+DROP TABLE IF exists payment_type;
 CREATE TABLE payment_type
 (
     payment_type_id SERIAL PRIMARY KEY,
     payment_type_name VARCHAR
 );
 
+
+DROP TABLE IF exists payment;
 CREATE TABLE payment
 (
     payment_id SERIAL PRIMARY KEY,
@@ -178,6 +203,7 @@ CREATE TABLE payment
     cvv INT
 );
 
+DROP TABLE IF exists bankInfo;
 CREATE TABLE bankInfo
 (
     bankInfo_id SERIAL PRIMARY KEY,
@@ -186,10 +212,11 @@ CREATE TABLE bankInfo
     routing_number INT
 );
 
+
 INSERT INTO customers
     (firstname, lastname, phone_number, email, address, city, state, zip_code, avatar_url, password)
 VALUES
-    ('Ana', 'Gomez', '(347)-555-5551', 'Ana@pursuit.org', '47-10 Austell Pl 2nd floor', 'Long Island City', 'NY', 11101, 'img' , 'ana');
+    ('Audrey', 'Hepburn', '(347)-555-5551', 'audrey@gmail.com', '123 5th Ave', 'New York', 'NY', 10011, 'img' , 'testing');
 
 INSERT INTO stores
     (stores_name, store_logo, avatar_url, phone_number, email, address, city, state, zip_code, password, lat, lng)
