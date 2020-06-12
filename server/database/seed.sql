@@ -4,7 +4,7 @@
 -- \c carry
 
 -- users
-DROP TABLE IF exists customer;
+DROP TABLE IF exists customers CASCADE;
 CREATE TABLE customers
 (
     customer_id SERIAL PRIMARY KEY,
@@ -20,7 +20,7 @@ CREATE TABLE customers
     password VARCHAR NOT NULL
 );
 
-DROP TABLE IF exists stores;
+DROP TABLE IF exists stores CASCADE;
 CREATE TABLE stores
 (
     store_id SERIAL PRIMARY KEY,
@@ -38,7 +38,7 @@ CREATE TABLE stores
     lng FLOAT
 );
 
-DROP TABLE IF exists couriers;
+DROP TABLE IF exists couriers CASCADE;
 CREATE TABLE couriers
 (
     courier_id SERIAL PRIMARY KEY,
@@ -51,7 +51,7 @@ CREATE TABLE couriers
     mode_of_transportation VARCHAR NOT NULL
 );
 
-DROP TABLE IF exists categories;
+DROP TABLE IF exists categories CASCADE;
 CREATE TABLE categories
 (
     category_id SERIAL PRIMARY KEY,
@@ -60,7 +60,7 @@ CREATE TABLE categories
     category_logo VARCHAR
 );
 
-DROP TABLE IF exists product_type;
+DROP TABLE IF exists product_type CASCADE;
 CREATE TABLE product_type
 (
     product_type_id SERIAL PRIMARY KEY,
@@ -70,7 +70,7 @@ CREATE TABLE product_type
 );
 
 
-DROP TABLE IF exists materials;
+DROP TABLE IF exists materials CASCADE;
 CREATE TABLE materials
 (
     material_id SERIAL PRIMARY KEY,
@@ -78,7 +78,7 @@ CREATE TABLE materials
 );
 
 
-DROP TABLE IF exists brands;
+DROP TABLE IF exists brands CASCADE;
 CREATE TABLE brands
 (
     brand_id SERIAL PRIMARY KEY,
@@ -88,7 +88,7 @@ CREATE TABLE brands
 );
 
 
-DROP TABLE IF exists colors;
+DROP TABLE IF exists colors CASCADE;
 CREATE TABLE colors
 (
     color_id SERIAL PRIMARY KEY,
@@ -96,7 +96,7 @@ CREATE TABLE colors
 );
 
 
-DROP TABLE IF exists products;
+DROP TABLE IF exists products CASCADE;
 CREATE TABLE products
 (
     product_id SERIAL PRIMARY KEY,
@@ -112,7 +112,7 @@ CREATE TABLE products
 );
 
 
-DROP TABLE IF exists product_inventory;
+DROP TABLE IF exists product_inventory CASCADE;
 CREATE TABLE product_inventory
 (
     product_inventory_id SERIAL PRIMARY KEY,
@@ -122,7 +122,7 @@ CREATE TABLE product_inventory
 );
 
 
-DROP TABLE IF exists productImage_id;
+DROP TABLE IF exists productImage_id CASCADE;
 CREATE TABLE productImage_id
 (
     product_image_id SERIAL PRIMARY KEY,
@@ -135,7 +135,7 @@ CREATE TABLE productImage_id
 -- CheckoutCart
 
 
-DROP TABLE IF exists checkout_cart;
+DROP TABLE IF exists checkout_cart CASCADE;
 CREATE TABLE checkout_cart
 (
     checkout_cart_id SERIAL PRIMARY KEY,
@@ -143,7 +143,7 @@ CREATE TABLE checkout_cart
     store_id INT REFERENCES stores(store_id)
 );
 
-DROP TABLE IF exists checkout_items;
+DROP TABLE IF exists checkout_items CASCADE;
 CREATE TABLE checkout_items
 (
     checkout_items_id SERIAL PRIMARY KEY,
@@ -155,7 +155,7 @@ CREATE TABLE checkout_items
 
 -- Orders 
 
-DROP TABLE IF exists receipts;
+DROP TABLE IF exists receipts CASCADE;
 CREATE TABLE receipts
 (
     receipt_id SERIAL PRIMARY KEY,
@@ -164,7 +164,7 @@ CREATE TABLE receipts
 );
 
 
-DROP TABLE IF exists orders;
+DROP TABLE IF exists orders CASCADE;
 CREATE TABLE orders
 (
     order_id SERIAL PRIMARY KEY,
@@ -184,7 +184,7 @@ CREATE TABLE orders
 
 -- Payments
 
-DROP TABLE IF exists payment_type;
+DROP TABLE IF exists payment_type CASCADE;
 CREATE TABLE payment_type
 (
     payment_type_id SERIAL PRIMARY KEY,
@@ -192,7 +192,7 @@ CREATE TABLE payment_type
 );
 
 
-DROP TABLE IF exists payment;
+DROP TABLE IF exists payment CASCADE;
 CREATE TABLE payment
 (
     payment_id SERIAL PRIMARY KEY,
@@ -203,7 +203,7 @@ CREATE TABLE payment
     cvv INT
 );
 
-DROP TABLE IF exists bankInfo;
+DROP TABLE IF exists bankInfo CASCADE;
 CREATE TABLE bankInfo
 (
     bankInfo_id SERIAL PRIMARY KEY,
@@ -221,31 +221,31 @@ VALUES
 INSERT INTO stores
     (stores_name, store_logo, avatar_url, phone_number, email, address, city, state, zip_code, password, lat, lng)
 VALUES
-    ('PazLifestyle', 'http://localhost:4008/images/stores/PazLifestyle/PazLifestyleStore.jpg', 'http://localhost:4008/images/stores/PazLifestyle/PazLifeStyleAvatar.png', '(347)-555-5552', 'info@pazlifestyle.com', '123 Paz Street', 'New York', 'NY', 10031, 'lifestyle', 40.760350, -73.964930),
+    ('PazLifestyle', '/images/stores/PazLifestyle/PazLifestyleStore.jpg', '/images/stores/PazLifestyle/PazLifeStyleAvatar.png', '(347)-555-5552', 'info@pazlifestyle.com', '123 Paz Street', 'New York', 'NY', 10031, 'lifestyle', 40.760350, -73.964930),
 
-    ('Louis Vuitton', 'http://localhost:4008/images/stores/LouisVuitton/LouisVuittonStore.jpg', 'http://localhost:4008/images/stores/LouisVuitton/LouisVuittonAvatar.jpg', '(212)758-8877', 'cannotfindemail@gmail.com', '1 East 57 St', 'New York', 'NY', 10022, 'Vuitton', 40.760350, -73.12112),
+    ('Louis Vuitton', '/images/stores/LouisVuitton/LouisVuittonStore.jpg', '/images/stores/LouisVuitton/LouisVuittonAvatar.jpg', '(212)758-8877', 'cannotfindemail@gmail.com', '1 East 57 St', 'New York', 'NY', 10022, 'Vuitton', 40.760350, -73.12112),
 
-    ('Prada', 'http://localhost:4008/images/stores/Prada/PradaStore.jpg', 'http://localhost:4008/images/stores/Prada/PradaAvatar.jpg', '(212)-327-4200', 'client.service.americas@prada.com', '841 Madison Avenue', 'New York', 'NY', 10021, 'Prada1', 40.770260, -73.966320),
+    ('Prada', '/images/stores/Prada/PradaStore.jpg', '/images/stores/Prada/PradaAvatar.jpg', '(212)-327-4200', 'client.service.americas@prada.com', '841 Madison Avenue', 'New York', 'NY', 10021, 'Prada1', 40.770260, -73.966320),
 
-    ('Chanel', 'http://localhost:4008/images/stores/Chanel/ChanelStore.jpg', 'http://localhost:4008/images/stores/Chanel/ChanelAvatar.jpg', '(212)355-5050', 'email@gmail.com', '15 East 57th Street', 'New York', 'NY', 10022, 'Chanel1', 40.762730, -73.972730),
+    ('Chanel', '/images/stores/Chanel/ChanelStore.jpg', '/images/stores/Chanel/ChanelAvatar.jpg', '(212)355-5050', 'email@gmail.com', '15 East 57th Street', 'New York', 'NY', 10022, 'Chanel1', 40.762730, -73.972730),
 
-    ('Tiffany & Co.', 'http://localhost:4008/images/stores/Tiffany&Co/Tiffany&CoStore.jpeg', 'http://localhost:4008/images/stores/Tiffany&Co/Tiffany&CoAvatar.jpg', '(212)755-8000', 'noemail@gmail.org', '6 East 57th St', 'New York', 'NY', 10022, 'Tiffany1', 40.762810, -73.973710),
+    ('Tiffany & Co.', '/images/stores/Tiffany&Co/Tiffany&CoStore.jpeg', '/images/stores/Tiffany&Co/Tiffany&CoAvatar.jpg', '(212)755-8000', 'noemail@gmail.org', '6 East 57th St', 'New York', 'NY', 10022, 'Tiffany1', 40.762810, -73.973710),
 
-    ('Giorgio Armani New York', 'http://localhost:4008/images/stores/GiorgioArmani/GiorgioArmaniStore.jpg', 'http://localhost:4008/images/stores/GiorgioArmani/GiorgioArmaniAvatar.jpg', '(212)988-9191', 'email2@gmail.com', '760 Madison Avenue', 'New York', 'NY', 10021, 'Giorgio1', 40.772460, -73.964930),
+    ('Giorgio Armani New York', '/images/stores/GiorgioArmani/GiorgioArmaniStore.jpg', '/images/stores/GiorgioArmani/GiorgioArmaniAvatar.jpg', '(212)988-9191', 'email2@gmail.com', '760 Madison Avenue', 'New York', 'NY', 10021, 'Giorgio1', 40.772460, -73.964930),
 
-    ('Hermès Men', 'http://localhost:4008/images/stores/HermesMen/HermesMenStore.jpg', 'http://localhost:4008/images/stores/HermesMen/HermesMenAvatar.jpg', '(212)751-3181', 'email4@gmail.com', '690 Madisoon Avenue', 'New York', 'NY', 10065, 'Hermes1', 40.8307354 , -73.9701922),
+    ('Hermès Men', '/images/stores/HermesMen/HermesMenStore.jpg', '/images/stores/HermesMen/HermesMenAvatar.jpg', '(212)751-3181', 'email4@gmail.com', '690 Madisoon Avenue', 'New York', 'NY', 10065, 'Hermes1', 40.8307354 , -73.9701922),
 
-    ('Dior', 'http://localhost:4008/images/stores/Dior/DiorStore.jpg', 'http://localhost:4008/images/stores/Dior/DiorAvatar.jpg', '(212)931-2950', 'email5@gmail.com', '21 East 57th St', 'New York', 'NY', 10022, 'Dior1', 40.7626074, -73.9726671 ),
+    ('Dior', '/images/stores/Dior/DiorStore.jpg', '/images/stores/Dior/DiorAvatar.jpg', '(212)931-2950', 'email5@gmail.com', '21 East 57th St', 'New York', 'NY', 10022, 'Dior1', 40.7626074, -73.9726671 ),
 
-    ('Versace', 'http://localhost:4008/images/stores/Versace/VersaceStore.jpg', 'http://localhost:4008/images/stores/Versace/VersaceAvatar.jpg', '(212)317-0224', 'email6@gmail.com', '647 5th Avenue', 'New York', 'NY', 10022, 'Versace1', 40.7594999, -73.9762444),
+    ('Versace', '/images/stores/Versace/VersaceStore.jpg', '/images/stores/Versace/VersaceAvatar.jpg', '(212)317-0224', 'email6@gmail.com', '647 5th Avenue', 'New York', 'NY', 10022, 'Versace1', 40.7594999, -73.9762444),
 
-    ('Fendi', 'http://localhost:4008/images/stores/Fendi/FendiStore.jpg', 'http://localhost:4008/images/stores/Fendi/FendiAvatar.jpg', '(212)897-2244', 'email7@gmail.com', '598 Madisoon Avenue', 'New York', 'NY', 10022, 'fendi1', 40.7626106, -73.9723989),
+    ('Fendi', '/images/stores/Fendi/FendiStore.jpg', '/images/stores/Fendi/FendiAvatar.jpg', '(212)897-2244', 'email7@gmail.com', '598 Madisoon Avenue', 'New York', 'NY', 10022, 'fendi1', 40.7626106, -73.9723989),
 
-    ('Sephora', 'http://localhost:4008/images/stores/Sephora/SephoraStore.jpg', 'http://localhost:4008/images/stores/Sephora/SephoraAvatar.jpg', '(212)278-0037', 'email8@gmail.com', '580 5th Avenue', 'Bronx', 'NY', 10036, 'Sephora1', 40.7570994, -73.9791521),
+    ('Sephora', '/images/stores/Sephora/SephoraStore.jpg', '/images/stores/Sephora/SephoraAvatar.jpg', '(212)278-0037', 'email8@gmail.com', '580 5th Avenue', 'Bronx', 'NY', 10036, 'Sephora1', 40.7570994, -73.9791521),
 
-    ('Coach', 'http://localhost:4008/images/stores/Coach/CoachStore.jpg', 'http://localhost:4008/images/stores/Coach/CoachAvatar.jpg', '(212)599-4777', 'email9@gmail.com', '342 Madison Avenue', 'New York', 'NY', 10173, 'Coach1', 40.7541208, 73.9786107 ),
+    ('Coach', '/images/stores/Coach/CoachStore.jpg', '/images/stores/Coach/CoachAvatar.jpg', '(212)599-4777', 'email9@gmail.com', '342 Madison Avenue', 'New York', 'NY', 10173, 'Coach1', 40.7541208, 73.9786107 ),
 
-    ('Dolce & Gabbana', 'http://localhost:4008/images/stores/DolceGabbana/DolceGabbanaStore.jpg', 'http://localhost:4008/images/stores/DolceGabbana/DolceGabbanaAvatar.jpg', '(212)897-9653', 'email10@gmail.com', '717 5th Avenue', 'New York', 'NY', 10022, 'Dolce1', 40.7619195, -73.9740741);
+    ('Dolce & Gabbana', '/images/stores/DolceGabbana/DolceGabbanaStore.jpg', '/images/stores/DolceGabbana/DolceGabbanaAvatar.jpg', '(212)897-9653', 'email10@gmail.com', '717 5th Avenue', 'New York', 'NY', 10022, 'Dolce1', 40.7619195, -73.9740741);
 
 INSERT INTO couriers
     (firstname, lastname, phone_number, email, avatar_url, password, mode_of_transportation)
@@ -255,53 +255,53 @@ VALUES
 INSERT INTO categories
     (categories_name, category_Landing_Logo, category_logo)
 VALUES
-    ('Women''s', 'http://localhost:4008/images/categories/womens/womensLandingLogo.jpg', 'http://localhost:4008/images/categories/womens/womensLogo.jpg'),
-    ('Men''s', 'http://localhost:4008/images/categories/mens/mensLandingLogo.jpg', 'http://localhost:4008/images/categories/mens/mensLogo.jpg'),
-    ('Beauty', 'http://localhost:4008/images/categories/beauty/beautyLandingLogo.jpg', 'http://localhost:4008/images/categories/beauty/beautyLogo.jpeg'),
-    ('Accessories', 'http://localhost:4008/images/categories/accessories/accessoriesLandingLogo.jpg', 'http://localhost:4008/images/categories/accessories/accessoriesLogo.jpg'),
-    ('Home Decor', 'http://localhost:4008/images/categories/homeDecor/homeDecorLandingLogo.jpeg', 'http://localhost:4008/images/categories/homeDecor/homeDecorLogo.png'),
-    ('Kids', 'http://localhost:4008/images/categories/kids/kidsLandingLogo.jpg', 'http://localhost:4008/images/categories/kids/kidsLogo.jpg');
+    ('Women''s', '/images/categories/womens/womensLandingLogo.jpg', '/images/categories/womens/womensLogo.jpg'),
+    ('Men''s', '/images/categories/mens/mensLandingLogo.jpg', '/images/categories/mens/mensLogo.jpg'),
+    ('Beauty', '/images/categories/beauty/beautyLandingLogo.jpg', '/images/categories/beauty/beautyLogo.jpeg'),
+    ('Accessories', '/images/categories/accessories/accessoriesLandingLogo.jpg', '/images/categories/accessories/accessoriesLogo.jpg'),
+    ('Home Decor', '/images/categories/homeDecor/homeDecorLandingLogo.jpeg', '/images/categories/homeDecor/homeDecorLogo.png'),
+    ('Kids', '/images/categories/kids/kidsLandingLogo.jpg', '/images/categories/kids/kidsLogo.jpg');
 
 
 INSERT INTO product_type
     (category_id, product_type_name, product_type_logo)
 VALUES
-    (1, 'Tops', 'http://localhost:4008/images/categories/womens/womensTops.jpg'),
-    (1, 'Pants', 'http://localhost:4008/images/categories/womens/womensPants.jpg'),
-    (1, 'Dresses', 'http://localhost:4008/images/categories/womens/womensDresses.jpg'),
-    (1, 'Jackets & Coats', 'http://localhost:4008/images/categories/womens/womensJackets&Coats.jpg'),
-    (1, 'Skirts', 'http://localhost:4008/images/categories/womens/womensSkirts.jpeg'),
-    (1, 'Shorts', 'http://localhost:4008/images/categories/womens/womensShorts.jpeg'),
-    (1, 'Shirts & Blouses', 'http://localhost:4008/images/categories/womens/womensShirts&Blouses.jpg'),
-    (1, 'Jeans', 'http://localhost:4008/images/categories/womens/womensJeans.jpeg'),
-    (1, 'Swimwear', 'http://localhost:4008/images/categories/womens/womensSwimwear.jpg'),
-    (1, 'Hoodies & Sweatshirts', 'http://localhost:4008/images/categories/womens/womensHoodies&Sweatshirts.jpg'),
-    (1, 'Sportswear', 'http://localhost:4008/images/categories/womens/womensSportswear.jpg'),
-    (2, 'Tops', 'http://localhost:4008/images/categories/mens/mensTops.jpeg'),
-    (2, 'Pants', 'http://localhost:4008/images/categories/mens/mensPants.jpeg'),
-    (2, 'Jackets & Coats', 'http://localhost:4008/images/categories/mens/mensJackets&Coats.jpg'),
-    (2, 'Shorts', 'http://localhost:4008/images/categories/mens/mensShorts.jpeg'),
-    (2, 'Shirts', 'http://localhost:4008/images/categories/mens/mensShirts.jpeg'),
-    (2, 'Jeans', 'http://localhost:4008/images/categories/mens/mensJeans.jpeg'),
-    (2, 'Swimwear', 'http://localhost:4008/images/categories/mens/mensSwimwear.jpeg'),
-    (2, 'Hoodies & Sweatshirts', 'http://localhost:4008/images/categories/mens/mensHoodies&Sweatshirts.jpg'),
-    (2, 'Sportswear', 'http://localhost:4008/images/categories/mens/mensSportswear.jpeg'),
-    (3, 'Face', 'http://localhost:4008/images/categories/beauty/face.jpg'),
-    (3, 'Eyes', 'http://localhost:4008/images/categories/beauty/eyes.jpg'),
-    (3, 'Lips', 'http://localhost:4008/images/categories/beauty/lips.jpg'),
-    (3, 'Nails', 'http://localhost:4008/images/categories/beauty/nails.jpeg'),
-    (3, 'Bath & Body Care', 'http://localhost:4008/images/categories/beauty/bath&BodyCare.jpg'),
-    (3, 'Hair', 'http://localhost:4008/images/categories/beauty/hair.jpg'),
-    (3, 'Brushes & Tools', 'http://localhost:4008/images/categories/beauty/brushes&Tools.jpg'),
-    (4, 'Bags', 'http://localhost:4008/images/categories/accessories/bags.jpg'),
-    (4, 'Belts', 'http://localhost:4008/images/categories/accessories/belts.jpg'),
-    (4, 'Jewelry', 'http://localhost:4008/images/categories/accessories/jewelry.jpg'),
-    (4, 'Hair Accessories', 'http://localhost:4008/images/categories/accessories/hairAccessories.jpg'),
-    (4, 'Sunglasses', 'http://localhost:4008/images/categories/accessories/sunglasses.jpg'),
-    (4, 'Gloves', 'http://localhost:4008/images/categories/accessories/gloves.jpg'),
-    (4, 'Scarves', 'http://localhost:4008/images/categories/accessories/scarves.jpg'),
-    (4, 'Hats & Caps', 'http://localhost:4008/images/categories/accessories/hats&Caps.jpg'),
-    (4, 'Wallets & Coin purses', 'http://localhost:4008/images/categories/accessories/wallets&CoinPurses.jpg');
+    (1, 'Tops', '/images/categories/womens/womensTops.jpg'),
+    (1, 'Pants', '/images/categories/womens/womensPants.jpg'),
+    (1, 'Dresses', '/images/categories/womens/womensDresses.jpg'),
+    (1, 'Jackets & Coats', '/images/categories/womens/womensJackets&Coats.jpg'),
+    (1, 'Skirts', '/images/categories/womens/womensSkirts.jpeg'),
+    (1, 'Shorts', '/images/categories/womens/womensShorts.jpeg'),
+    (1, 'Shirts & Blouses', '/images/categories/womens/womensShirts&Blouses.jpg'),
+    (1, 'Jeans', '/images/categories/womens/womensJeans.jpeg'),
+    (1, 'Swimwear', '/images/categories/womens/womensSwimwear.jpg'),
+    (1, 'Hoodies & Sweatshirts', '/images/categories/womens/womensHoodies&Sweatshirts.jpg'),
+    (1, 'Sportswear', '/images/categories/womens/womensSportswear.jpg'),
+    (2, 'Tops', '/images/categories/mens/mensTops.jpeg'),
+    (2, 'Pants', '/images/categories/mens/mensPants.jpeg'),
+    (2, 'Jackets & Coats', '/images/categories/mens/mensJackets&Coats.jpg'),
+    (2, 'Shorts', '/images/categories/mens/mensShorts.jpeg'),
+    (2, 'Shirts', '/images/categories/mens/mensShirts.jpeg'),
+    (2, 'Jeans', '/images/categories/mens/mensJeans.jpeg'),
+    (2, 'Swimwear', '/images/categories/mens/mensSwimwear.jpeg'),
+    (2, 'Hoodies & Sweatshirts', '/images/categories/mens/mensHoodies&Sweatshirts.jpg'),
+    (2, 'Sportswear', '/images/categories/mens/mensSportswear.jpeg'),
+    (3, 'Face', '/images/categories/beauty/face.jpg'),
+    (3, 'Eyes', '/images/categories/beauty/eyes.jpg'),
+    (3, 'Lips', '/images/categories/beauty/lips.jpg'),
+    (3, 'Nails', '/images/categories/beauty/nails.jpeg'),
+    (3, 'Bath & Body Care', '/images/categories/beauty/bath&BodyCare.jpg'),
+    (3, 'Hair', '/images/categories/beauty/hair.jpg'),
+    (3, 'Brushes & Tools', '/images/categories/beauty/brushes&Tools.jpg'),
+    (4, 'Bags', '/images/categories/accessories/bags.jpg'),
+    (4, 'Belts', '/images/categories/accessories/belts.jpg'),
+    (4, 'Jewelry', '/images/categories/accessories/jewelry.jpg'),
+    (4, 'Hair Accessories', '/images/categories/accessories/hairAccessories.jpg'),
+    (4, 'Sunglasses', '/images/categories/accessories/sunglasses.jpg'),
+    (4, 'Gloves', '/images/categories/accessories/gloves.jpg'),
+    (4, 'Scarves', '/images/categories/accessories/scarves.jpg'),
+    (4, 'Hats & Caps', '/images/categories/accessories/hats&Caps.jpg'),
+    (4, 'Wallets & Coin purses', '/images/categories/accessories/wallets&CoinPurses.jpg');
 
 INSERT INTO materials
     (material_name)
@@ -424,33 +424,33 @@ VALUES
 INSERT INTO productImage_id
     (product_id, product_image_url, category_id)
 VALUES
-    (1, 'http://localhost:4008/images/products/accessories/product1.jpg', 4),
-    (2, 'http://localhost:4008/images/products/accessories/product2.jpg', 4),
-    (3, 'http://localhost:4008/images/products/accessories/product3.jpg', 4),
-    (4, 'http://localhost:4008/images/products/accessories/product4.jpg', 4),
-    (5, 'http://localhost:4008/images/products/womens/product5.jpg', 1),
+    (1, '/images/products/accessories/product1.jpg', 4),
+    (2, '/images/products/accessories/product2.jpg', 4),
+    (3, '/images/products/accessories/product3.jpg', 4),
+    (4, '/images/products/accessories/product4.jpg', 4),
+    (5, '/images/products/womens/product5.jpg', 1),
 
-    (6, 'http://localhost:4008/images/products/womens/product6.jpg', 1 ),
+    (6, '/images/products/womens/product6.jpg', 1 ),
 
-    (7, 'http://localhost:4008/images/products/womens/product7.jpg', 1),
+    (7, '/images/products/womens/product7.jpg', 1),
 
-    (8, 'http://localhost:4008/images/products/beauty/product8.jpg', 3),
+    (8, '/images/products/beauty/product8.jpg', 3),
 
-    (9, 'http://localhost:4008/images/products/beauty/product9.jpg', 3),
+    (9, '/images/products/beauty/product9.jpg', 3),
 
-    (10, 'http://localhost:4008/images/products/womens/product10.jpg', 1),
+    (10, '/images/products/womens/product10.jpg', 1),
 
-    (11, 'http://localhost:4008/images/products/accessories/product11.jpg', 4),
+    (11, '/images/products/accessories/product11.jpg', 4),
 
-    (12, 'http://localhost:4008/images/products/womens/product12.jpg', 1),
+    (12, '/images/products/womens/product12.jpg', 1),
 
-    (13, 'http://localhost:4008/images/products/womens/product13.jpg', 1), 
+    (13, '/images/products/womens/product13.jpg', 1), 
 
-    (14, 'http://localhost:4008/images/products/womens/product14.jpg', 1), 
+    (14, '/images/products/womens/product14.jpg', 1), 
 
-    (15,'http://localhost:4008/images/products/womens/product15.jpg',1), 
+    (15,'/images/products/womens/product15.jpg',1), 
 
-    (16, 'http://localhost:4008/images/products/womens/product16.jpg', 1);
+    (16, '/images/products/womens/product16.jpg', 1);
 
 
 -- SELECT *
