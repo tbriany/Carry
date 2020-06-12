@@ -11,6 +11,7 @@ import { checkoutStyles } from './styling/checkoutStyles';
 import sendMessage from './orderMessage';
 import axios from 'axios';
 
+
 const steps = ['Delivery address', 'Payment method', 'Delivery Terms'];
 const getStepComponent = (step, props) => {
     switch (step) {
@@ -24,7 +25,8 @@ const getStepComponent = (step, props) => {
                 shippingOption={props.shippingOption}
             />
         default:
-            return <PlaceOrder />
+            return <PlaceOrder 
+                shippingOption={props.shippingOption}/>
     }
 };
 //getStepComponent takes in a step from the activeStep state and based on it's value, displays a certain component

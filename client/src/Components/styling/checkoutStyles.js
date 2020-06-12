@@ -30,11 +30,17 @@ export const checkoutStyles = makeStyles((theme) => ({
     step: {
         '.MuiSvgIcon-root': {
             color: customTheme.palette.secondary.main
+        },
+        '.MuiStepIcon-root.MuiStepIcon-completed': {
+            color: customTheme.palette.secondary.main
         }
     },
     label: {
-            '.MuiStepLabel-iconContainer.MuiSvgIcon-root.MuiStepIcon-root.MuiStepIcon-active': {
-                color: customTheme.palette.secondary.main
+        '.MuiStepLabel-iconContainer.MuiSvgIcon-root.MuiStepIcon-root.MuiStepIcon-active': {
+            color: customTheme.palette.secondary.main
+        },
+        '.MuiStepIcon-root.MuiStepIcon-completed': {
+            color: customTheme.palette.secondary.main
         }
     },
     buttonContainer: {
