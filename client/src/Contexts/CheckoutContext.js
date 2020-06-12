@@ -1,10 +1,11 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect, useContext } from 'react';
 import { Context } from './CustomerContext'
 export const CheckoutContext = createContext();
 
-const CheckoutContextProvider = () => {
+const CheckoutContextProvider = (props) => {
     const [customerInfo, setCustomerInfo] = useState({});
     const [state, dispatch] = useContext(Context);
+    const [placedOrderDetails, setPlacedOrderDetails] = useState({});
     const setCheckoutContext = () => {
         const stateCopy = { ...state };
         setCustomerInfo(stateCopy)
@@ -14,7 +15,7 @@ const CheckoutContextProvider = () => {
     }, []);
     console.log('checkout context', customerInfo)
     return (
-        <CheckoutContext.Provider value={{ customerInfo }}>
+        <CheckoutContext.Provider value={{ customerInfo, placedOrderDetails }}>
             {props.children}
         </CheckoutContext.Provider>
     )
