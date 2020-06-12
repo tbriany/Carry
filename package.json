@@ -1,0 +1,24 @@
+{
+  "name": "CapstoneG8",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "cd server && npm start",
+    "heroku-prebuild": "cd server && npm install && cd ../client && npm install && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tbriany/CapstoneG8.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tbriany/CapstoneG8/issues"
+  },
+  "homepage": "https://github.com/tbriany/CapstoneG8#readme"
+}
