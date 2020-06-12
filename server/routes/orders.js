@@ -85,7 +85,7 @@ router.get("/courier_orders/:courier_id", async (req, res, next) => {
 });
 
 //GET ALL ORDER ITEMS by ORDER ID
-router.get("/items/order_id", async (req, res, next) => {
+router.get("/items/:order_id", async (req, res, next) => {
   try {
     const order_id = parseInt(req.params.order_id);
     const orderItems = await ordersQueries.getOrderItemsByOrderId(order_id);

@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { deleteCheckoutCartById, deleteCheckoutItemByCart, getAllFromCartSession, getCheckoutCartById } = require('../queries/checkoutCartQueries')
 const { loginRequired } = require('../auth/helpers')
-const { addReceipt, getAll } = require('../queries/receiptsQueries')
+const { addReceipt, getAll , getreceiptByOrderId} = require('../queries/receiptsQueries')
 const { addOrder } = require('../queries/ordersQueries')
 const { updateProductQty } = require('../queries/productsQueries')
 
@@ -20,6 +20,26 @@ router.get('/', async (req, res, next) => {
     res.status(500).json({
       payload: null,
       msg: "Failed retrieving receipts",
+      err: true
+    })
+  }
+});
+
+
+router.get('/order/:order_id', loginRequired, async (req, res, next) => {
+  const {order_id} = req.params
+  try {
+    let receipts = await getreceiptByOrderId (order_id)
+    res.json({
+      payload: receipts,
+      msg: "Retrieved receipt",
+      err: false
+    })
+  } catch (err) {
+    console.log(err)
+    res.status(500).json({
+      payload: null,
+      msg: "Failed retrieving receipt",
       err: true
     })
   }
