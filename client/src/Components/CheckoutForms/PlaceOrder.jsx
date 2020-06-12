@@ -3,6 +3,7 @@ import customTheme from '../styling/customTheme';
 import { makeStyles, Container, Typography, CssBaseline } from '@material-ui/core';
 import { flexbox } from '@material-ui/system';
 import { Context } from '../../Contexts/CustomerContext';
+import CheckoutContext from '../../Contexts/CheckoutContext'
 
 const orderStyles = makeStyles((theme) => ({
     container: {

@@ -34,7 +34,6 @@ const Checkout = (props) => {
     const [state, dispatch] = useContext(Context);
     const classes = checkoutStyles();
     const [activeStep, setActiveStep] = useState(0);
-    // const [state, dispatch] = useContext(Context);
     const handleNextStep = () => {
         setActiveStep(activeStep + 1)
     };
