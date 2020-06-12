@@ -6,8 +6,9 @@ const client = new twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUT
 
 
 
+
 router.post('/send', async (req, res, next) => {
-  let phoneNum = req.body.number
+  let phoneNum = process.env.CUSTOMER_PHONE_NUMBER
   let text = req.body.text
 
   // console.log(phoneNum)
