@@ -22,13 +22,17 @@ const Account = () => {
         address: user.address,
         city: user.city,
         state: user.state,
-        zip_code: user.zip_code,
+        zip_code: 10011,
         phone_number: user.phone_number,
         email: user.email,
         password: user.password,
     });
     const updateKey = (key) => (e) => {
-            setUpdateUser({...updateUser, [key]: e.target.value})
+            if(key === 'zip_code'){
+            setUpdateUser({...updateUser, [key]: parseInt(e.target.value)})
+            }
+            else{ setUpdateUser({...updateUser, [key]: e.target.value})
+        }
     };
     const updateInfo = async (e) => {
         e.preventDefault();
@@ -96,8 +100,7 @@ const Account = () => {
                     className={classes.textField}
                     variant='standard'
                     label='Zip Code'
-                    value={updateUser.zip_code}
-                    onChange={updateKey('zip_code')}
+                    value={10011}
                 />
                 <br />
                 <TextField
