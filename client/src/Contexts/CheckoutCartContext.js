@@ -30,6 +30,8 @@ const CheckoutCartContextProvider = (props) => {
             let totalItem = 0
             allCartPayload.map(product => { totalItem = totalItem + product.cartquantity })
             setQtyInBag(totalItem)
+        } else {
+            setQtyInBag(0)
         }
         setCheckoutCart(allCartPayload)
     };
