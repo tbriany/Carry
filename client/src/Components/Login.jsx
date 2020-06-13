@@ -71,7 +71,7 @@ const Login = () => {
                 window.localStorage.setItem('customer', JSON.stringify(user));
                 setAlert(!alert)
                 setTimeout(() => {
-                    history.push('/')
+                    history.push('/checkout')
                 }, 1500);
             })
                 .catch(err => handleWrongInputs(err))

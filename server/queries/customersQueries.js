@@ -84,7 +84,8 @@ const addCustomer = async (bodyObj) => {
             city,
             state,
             zip_code,
-            avatar_url
+            avatar_url,
+            password
       `;
     return await db.one(postQuery, bodyObj);
 };
