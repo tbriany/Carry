@@ -41,17 +41,16 @@ const Checkout = (props) => {
         setActiveStep(activeStep - 1)
     };
 
-
     const handlePlaceOrder = async () => {
         let userInfo = state.user.info
         handleNextStep();
 
         const order = {
             order_status: "Pending",
-            required_date: '2020/06/09',
+            required_date: '2020/06/13',
             courier_id: null,
             delivery_fee: props.shippingOption,
-            total: 1001,
+            total: props.cartTotal,
             phone_number: userInfo.phone_number,
             address: userInfo.address,
             city: userInfo.city,
