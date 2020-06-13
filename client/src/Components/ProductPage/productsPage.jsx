@@ -4,7 +4,7 @@ import { Button, InputLabel, MenuItem, Select } from '@material-ui/core';
 import { CheckoutCartContext } from '../../Contexts/CheckoutCartContext';
 import axios from 'axios';
 import Banner from '../StorePage/storeBanner';
-import MultipleSelect from '../StorePage/filterForm';
+import MultipleSelect from './filterForm';
 import ProductsDisplay from '../ProductPage/productsDisplay';
 import {productPageStyles} from '../styling/productsPageStyles'
 
