@@ -9,9 +9,9 @@ const PaymentForm = () => {
     return (
         <Fragment>
             <TextField required variant='standard' label='Name On Card' value={`${userInfo.firstname} ${userInfo.lastname}`}></TextField><br/>
-            <TextField required variant='standard' label='Card Number'></TextField><br/>
-            <TextField required variant='standard' label='Expiration Date' ></TextField><br/>
-            <TextField required variant='standard' label='CVV' helperText='Last three/four digits on strip'></TextField><br/>
+            <TextField required variant='standard' label='Card Number' value='xxxx xxxxxx x1234'></TextField><br/>
+            <TextField required variant='standard' label='Expiration Date' value='06/20'></TextField><br/>
+            <TextField required variant='standard' label='CVV' helperText='Last three/four digits on strip' value='123'></TextField><br/>
         </Fragment>
     )
 };

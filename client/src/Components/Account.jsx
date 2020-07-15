@@ -6,71 +6,49 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import { accountStyles } from './styling/accountStyles';
 import EditIcon from '@material-ui/icons/Edit';
-import { IconButton } from '@material-ui/core';
+import { IconButton, Button} from '@material-ui/core';
+import customTheme from './styling/customTheme';
+import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 const Account = () => {
     const classes = accountStyles();
     const [state, dispatch] = useContext(Context);
     const [user, setUser] = useState({ ...state.user.info });
-    const updateInfoForm = () => {
-        return (
-            <>
-                <TextField
-                    className={classes.textField}
-                    variant='standard'
-                    label='First Name'
-                    value={user.firstname}
-                >
-                </TextField> <br />
-                <TextField
-                    classname={classes.textField}
-                    variant='standard'
-                    label='Last Name'
-                >
-
-                </TextField>
-                <br />
-                <TextField
-                    classname={classes.textField}
-                    variant='standard'
-                    label='Address'
-                >
-
-                </TextField>
-                <br />
-                <TextField
-                    classname={classes.textField}
-                    variant='standard'
-                    label='City'
-                >
-
-                </TextField>
-                <br />
-                <TextField
-                    classname={classes.textField}
-                    variant='standard'
-                    label='Zip Code'
-                >
-
-                </TextField>
-                <br />
-                <TextField
-                    classname={classes.textField}
-                    variant='standard'
-
-                >
-
-                </TextField>
-                <br />
-                <TextField
-                    classname={classes.textField}
-                    variant='standard'
-                >
-
-                </TextField>
-            </>
-        )
+    const history = useHistory();
+    const [updateUser, setUpdateUser] = useState({
+        firstname: user.firstname,
+        lastname: user.lastname, 
+        address: user.address,
+        city: user.city,
+        state: user.state,
+        zip_code: 10011,
+        phone_number: user.phone_number,
+        email: user.email,
+        password: user.password,
+    });
+    const updateKey = (key) => (e) => {
+            if(key === 'zip_code'){
+            setUpdateUser({...updateUser, [key]: parseInt(e.target.value)})
+            }
+            else{ setUpdateUser({...updateUser, [key]: e.target.value})
+        }
     };
+    const updateInfo = async (e) => {
+        e.preventDefault();
+        dispatch({ type: 'SET_USER', payload: updateUser});
+        window.localStorage.setItem('customer', JSON.stringify(updateUser));
+        try {
+            let updatedUser = await axios.patch(`/customers/edit/${user.customer_id}`, updateUser).then((res) => {return res.data.payload});
+            console.log('updatedUser', updatedUser)
+            setTimeout(() => {
+                history.push('/checkout')
+            }, 1500);
+        }
+        catch(err){
+            console.log(err)
+        }
+    }
     return (
         <Fragment>
             <CssBaseline />
@@ -78,74 +56,96 @@ const Account = () => {
                 <Typography variant='h4' className={classes.text}>
                     Welcome {user.firstname}.
                 </Typography>
-                <IconButton onClick={updateInfoForm}>
-                    <EditIcon/>
-                </IconButton><br/>
+                <form onSubmit={updateInfo}>
                 <TextField
                     className={classes.textField}
                     variant='standard'
                     label='First Name'
-                    value={user.firstname}
-                    disabled
+                    value={updateUser.firstname}
+                    onChange={updateKey('firstname')}
                 /> <br />
                 <TextField
-                    classname={classes.textField}
+                    className={classes.textField}
                     variant='standard'
                     label='Last Name'
-                    value={user.lastname}
-                    disabled
+                    value={updateUser.lastname}
+                    onChange={updateKey('lastname')}
                 />
                 <br />
                 <TextField
-                    classname={classes.textField}
+                    className={classes.textField}
                     variant='standard'
                     label='Address'
-                    value={user.address}
-                    disabled
+                    value={updateUser.address}
+                    onChange={updateKey('address')}
                 />
                 <br />
                 <TextField
-                    classname={classes.textField}
+                    className={classes.textField}
                     variant='standard'
                     label='City'
-                    value={user.city}
-                    disabled
+                    value={updateUser.city}
+                    onChange={updateKey('city')}
                 />
                 <br />
                 <TextField
-                    classname={classes.textField}
+                    className={classes.textField}
+                    variant='standard'
+                    label='State'
+                    value={updateUser.state}
+                    onChange={updateKey('state')}
+                />
+                <br />
+                <TextField
+                    className={classes.textField}
                     variant='standard'
                     label='Zip Code'
-                    value={user.zip_code}
-                    disabled
+                    value={10011}
                 />
                 <br />
                 <TextField
-                    classname={classes.textField}
+                    className={classes.textField}
                     variant='standard'
                     label='Phone Number'
-                    value={user.phone_number}
-                    disabled
+                    value={updateUser.phone_number}
+                    onChange={updateKey('phone_number')}
                 />
                 <br />
                 <TextField
-                    classname={classes.textField}
+                    className={classes.textField}
                     variant='standard'
-                    label='email'
-                    value={user.email}
-                    disabled
-                />
+                    label='Email'
+                    value={updateUser.email}
+                    onChange={updateKey('email')}
+                /><br/>
+                {/* <TextField
+                    className={classes.textField}
+                    variant='standard'
+                    label='Credit Card Info'
+                    value={updateUser.cc}
+                    onChange={updateKey('cc')}
+                /><br/>
+                <TextField
+                    className={classes.textField}
+                    variant='standard'
+                    label='Cvv'
+                    value={updateUser.cvv}
+                    onChange={updateKey('cvv')}
+                /><br/>
+                <TextField
+                    className={classes.textField}
+                    variant='standard'
+                    label='Expiration Date'
+                    value={updateUser.expiration}
+                    onChange={updateKey('expiration')}
+                /> */}
+                <br/><br/>
+                <Button style={{backgroundColor: customTheme.palette.secondary.main}} onClick={updateInfo}>Update Information</Button>
+                </form>
             </Container>
         </Fragment>
     )
 };
 
 
-export default Account
-
-    // const handleInputChange = (key) => (e) => {
-    //     switch(key){
-    //         case 'firstname': 
-
-    //     }
-    // }
+export default Account;

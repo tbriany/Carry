@@ -9,6 +9,7 @@ const CheckoutCartContextProvider = (props) => {
     const [shippingOption, setShippingOption] = useState(15)
     const [checkoutCartId, setCheckoutCartId] = useState(null)
     const [qtyInBag, setQtyInBag] = useState(0)
+    const [cartTotal, setCartTotal] = useState(0)
 
     const getProductId = (newProdId) => {
         setProductId(newProdId)
@@ -19,18 +20,20 @@ const CheckoutCartContextProvider = (props) => {
 
     useEffect(() => {
         getCheckout()
-    }, [shippingOption, qtyInBag]);
+    }, [cartTotal]);
 
     const getCheckout = async () => {
         let allCheckoutCart = await axios.get('/checkoutCart/session')
         let allCartPayload = allCheckoutCart.data.payload
         if (allCartPayload.length > 0) {
             setCheckoutCartId(allCartPayload[0].checkout_cart_id)
+            let totalItem = 0
+            allCartPayload.map(product => { totalItem = totalItem + product.cartquantity })
+            setQtyInBag(totalItem)
+        } else {
+            setQtyInBag(0)
         }
         setCheckoutCart(allCartPayload)
-        let totalItem = 0
-        allCartPayload.map(product => { totalItem = totalItem + product.cartquantity })
-        setQtyInBag(totalItem)
     };
 
 
@@ -38,7 +41,7 @@ const CheckoutCartContextProvider = (props) => {
         // Provider accepts a value containting state and functions. This allows the components access to the state but it must be descendants of the provider.
         <CheckoutCartContext.Provider value={{
             shippingOption, getShipping, getProductId, getCheckout, checkoutCart, productId, checkoutCartId,
-            qtyInBag, setQtyInBag
+            qtyInBag, setQtyInBag, cartTotal, setCartTotal
         }}>
             {props.children}
         </CheckoutCartContext.Provider>

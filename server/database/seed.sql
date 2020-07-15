@@ -15,7 +15,7 @@ CREATE TABLE customers
     address VARCHAR,
     city VARCHAR,
     state VARCHAR,
-    zip_code INT,
+    zip_code,
     avatar_url VARCHAR,
     password VARCHAR NOT NULL
 );

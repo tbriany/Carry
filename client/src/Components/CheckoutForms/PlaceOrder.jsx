@@ -38,16 +38,15 @@ const PlaceOrder = (props) => {
         <CssBaseline>
             <Container className={classes.container}>
                 <Typography className={classes.header} variant='h5'>
-                <b> Your order number: </b>  Order Number<br/><br/>
+                <b> Your order number: </b>{props.orderNumber}<br/><br/>
             </Typography>
                 <Container className={classes.innerContainer}>
-                    <Typography className={classes.typography} variant='subtitle2'>
+                    <Typography className={classes.typography} variant='subtitle1'>
                         <b>Name: </b>{userInfo.firstname} {userInfo.lastname} <br />
                         <b>Address: </b>{userInfo.address}<br />
                         <b>City: </b>{userInfo.city}<br />
                         <b>State: </b>{userInfo.state}<br />
                         <b>Zip: </b>{userInfo.zip_code} <br />
-                        <b>Payment: </b><br />
                         <b>Shipping: </b> {`$${shippingInfo}`}
                 </Typography>
                 </Container>
