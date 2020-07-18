@@ -59,3 +59,29 @@ Carry is a delivery service that allows users to place orders with some of their
     | POST    | /orders/add                          | Add a new order             | order_status, required_date, time_ordered, customer_id, store_id, courier_id, delivery_id, total |
     | PATCH   | /orders/update/:order_id             | Update an order             | order_status, required_date, time_ordered, customer_id, store_id, courier_id, delivery_id, total |
     | DELETE  | /orders/delete/:order_id             | Delete an order             | N/A           |
+    
+#   Local Setup
+You must have installed Node.js and PostgreSQL in your computer.
+
+You can check for these dependencies with node -v and psql -v. If your shell/terminal doesn't complain and you see version numbers you are good to go.
+
+Clone this repo: 
+git clone git@github.com/tbriany/Carry.git 
+
+Install dependencies for the Node/Express Server (backend folder):
+cd backend && npm install
+
+cd frontend && npm install
+Install dependencies the React App (frontend folder):
+
+Create database and seed sample data while being in the server directory with:
+psql -f .database/seed.sql
+Make sure PostgreSQL is running!
+
+To launch the Node/Express server, inside the backend folder run:
+ npm run start:dev
+ 
+To launch the React App, inside the frontend folder, and preferably in another terminal window run:
+ npm start
+ 
+A new browser tab should have been opened and the App should be running. If that is not the case check the terminals output for errors, if you are unable to troubleshoot the problem, I would be happy to address issues so open one
