@@ -1,10 +1,10 @@
--- DROP DATABASE if exists carry;
--- CREATE DATABASE carry;
+DROP DATABASE if exists carry;
+CREATE DATABASE carry;
 
--- \c carry
+\c carry
 
 -- users
-DROP TABLE IF exists customers CASCADE;
+-- DROP TABLE IF exists customers CASCADE;
 CREATE TABLE customers
 (
     customer_id SERIAL PRIMARY KEY,
@@ -20,7 +20,7 @@ CREATE TABLE customers
     password VARCHAR NOT NULL
 );
 
-DROP TABLE IF exists stores CASCADE;
+-- DROP TABLE IF exists stores CASCADE;
 CREATE TABLE stores
 (
     store_id SERIAL PRIMARY KEY,
@@ -38,7 +38,7 @@ CREATE TABLE stores
     lng FLOAT
 );
 
-DROP TABLE IF exists couriers CASCADE;
+-- DROP TABLE IF exists couriers CASCADE;
 CREATE TABLE couriers
 (
     courier_id SERIAL PRIMARY KEY,
@@ -51,7 +51,7 @@ CREATE TABLE couriers
     mode_of_transportation VARCHAR NOT NULL
 );
 
-DROP TABLE IF exists categories CASCADE;
+-- DROP TABLE IF exists categories CASCADE;
 CREATE TABLE categories
 (
     category_id SERIAL PRIMARY KEY,
@@ -60,7 +60,7 @@ CREATE TABLE categories
     category_logo VARCHAR
 );
 
-DROP TABLE IF exists product_type CASCADE;
+-- DROP TABLE IF exists product_type CASCADE;
 CREATE TABLE product_type
 (
     product_type_id SERIAL PRIMARY KEY,
@@ -70,7 +70,7 @@ CREATE TABLE product_type
 );
 
 
-DROP TABLE IF exists materials CASCADE;
+-- DROP TABLE IF exists materials CASCADE;
 CREATE TABLE materials
 (
     material_id SERIAL PRIMARY KEY,
@@ -78,7 +78,7 @@ CREATE TABLE materials
 );
 
 
-DROP TABLE IF exists brands CASCADE;
+-- DROP TABLE IF exists brands CASCADE;
 CREATE TABLE brands
 (
     brand_id SERIAL PRIMARY KEY,
@@ -88,7 +88,7 @@ CREATE TABLE brands
 );
 
 
-DROP TABLE IF exists colors CASCADE;
+-- DROP TABLE IF exists colors CASCADE;
 CREATE TABLE colors
 (
     color_id SERIAL PRIMARY KEY,
@@ -96,7 +96,7 @@ CREATE TABLE colors
 );
 
 
-DROP TABLE IF exists products CASCADE;
+-- DROP TABLE IF exists products CASCADE;
 CREATE TABLE products
 (
     product_id SERIAL PRIMARY KEY,
@@ -112,7 +112,7 @@ CREATE TABLE products
 );
 
 
-DROP TABLE IF exists product_inventory CASCADE;
+-- DROP TABLE IF exists product_inventory CASCADE;
 CREATE TABLE product_inventory
 (
     product_inventory_id SERIAL PRIMARY KEY,
@@ -122,7 +122,7 @@ CREATE TABLE product_inventory
 );
 
 
-DROP TABLE IF exists productImage_id CASCADE;
+-- DROP TABLE IF exists productImage_id CASCADE;
 CREATE TABLE productImage_id
 (
     product_image_id SERIAL PRIMARY KEY,
@@ -135,7 +135,7 @@ CREATE TABLE productImage_id
 -- CheckoutCart
 
 
-DROP TABLE IF exists checkout_cart CASCADE;
+-- DROP TABLE IF exists checkout_cart CASCADE;
 CREATE TABLE checkout_cart
 (
     checkout_cart_id SERIAL PRIMARY KEY,
@@ -143,7 +143,7 @@ CREATE TABLE checkout_cart
     store_id INT REFERENCES stores(store_id)
 );
 
-DROP TABLE IF exists checkout_items CASCADE;
+-- DROP TABLE IF exists checkout_items CASCADE;
 CREATE TABLE checkout_items
 (
     checkout_items_id SERIAL PRIMARY KEY,
@@ -155,7 +155,7 @@ CREATE TABLE checkout_items
 
 -- Orders 
 
-DROP TABLE IF exists receipts CASCADE;
+-- DROP TABLE IF exists receipts CASCADE;
 CREATE TABLE receipts
 (
     receipt_id SERIAL PRIMARY KEY,
@@ -164,7 +164,7 @@ CREATE TABLE receipts
 );
 
 
-DROP TABLE IF exists orders CASCADE;
+-- DROP TABLE IF exists orders CASCADE;
 CREATE TABLE orders
 (
     order_id SERIAL PRIMARY KEY,
@@ -184,7 +184,7 @@ CREATE TABLE orders
 
 -- Payments
 
-DROP TABLE IF exists payment_type CASCADE;
+-- DROP TABLE IF exists payment_type CASCADE;
 CREATE TABLE payment_type
 (
     payment_type_id SERIAL PRIMARY KEY,
@@ -192,7 +192,7 @@ CREATE TABLE payment_type
 );
 
 
-DROP TABLE IF exists payment CASCADE;
+-- DROP TABLE IF exists payment CASCADE;
 CREATE TABLE payment
 (
     payment_id SERIAL PRIMARY KEY,
@@ -203,7 +203,7 @@ CREATE TABLE payment
     cvv INT
 );
 
-DROP TABLE IF exists bankInfo CASCADE;
+-- DROP TABLE IF exists bankInfo CASCADE;
 CREATE TABLE bankInfo
 (
     bankInfo_id SERIAL PRIMARY KEY,
