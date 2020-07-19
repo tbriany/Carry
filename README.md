@@ -55,11 +55,11 @@ You can check for these dependencies with node -v and psql -v. If your shell/ter
 
 2. Install dependencies for the Node/Express Server (backend folder):
 
-   cd backend && npm install
+   cd server && npm install
 
 3. Install dependencies the React App (frontend folder):
 
-   cd frontend && npm install
+   cd client && npm install
 
 4. Create database and seed sample data while being in the server directory with:
  
