@@ -6,7 +6,9 @@ Carry is a delivery service that allows users to place orders with some of their
 Built with React.js, Node.js with Express, PostgreSQL, and Material UI.
 
 ![langingpage](./public/images/landingpage.png)
-
+![productpage](./public/images/productpage.png)
+![itempopup](./public/images/itempopup.png)
+![checkout](./public/images/checkout.png)
 
 ## Features
 
@@ -20,13 +22,6 @@ Users are able to:
 * Add products to their shopping cart. 
 * Begin check out process and view items in their shopping cart.
 
-## Technical milestones 
-
-* Using geo-location data and calculations module to get all stores near the user within a given radius.
-* Filtering products by 4 options, having page display those products or remove them from page if filters are removed.
-* Integrating user authentication with Passport.js, securely storing passwords and allowing for cookie-based authorization.
-* Creating sessions for shopping cart. Shopping cart persists even if user leaves page and returns.
-
 
 ## Technologies Used
 
@@ -37,6 +32,14 @@ Users are able to:
 * Passport.js. For handling user authentication and authorization.
 * pg-promise. For interfacing with our database in our backend code.
 * bcrypt. For hashing and salting passwords before storage.
+
+
+## Technical milestones 
+
+* Using geo-location data and calculations module to get all stores near the user within a given radius.
+* Filtering products by 4 options, having page display those products or remove them from page if filters are removed.
+* Integrating user authentication with Passport.js, securely storing passwords and allowing for cookie-based authorization.
+* Creating sessions for shopping cart. Shopping cart persists even if user leaves page and returns.
 
 
 ##  Local Setup
