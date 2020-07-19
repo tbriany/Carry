@@ -12,7 +12,7 @@ You must have installed Node.js and PostgreSQL in your computer.
 You can check for these dependencies with node -v and psql -v. If your shell/terminal doesn't complain and you see version numbers you are good to go.
 
 1. Clone this repo: 
-⋅⋅⋅git clone git@github.com/tbriany/Carry.git ⋅⋅
+* git clone git@github.com/tbriany/Carry.git 
 
 2. Install dependencies for the Node/Express Server (backend folder):
 cd backend && npm install
