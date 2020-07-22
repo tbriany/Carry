@@ -1,1 +1,1 @@
-![database schema](./database.png)
+![database schema](./database-schema.png)
