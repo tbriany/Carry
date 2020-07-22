@@ -11,6 +11,8 @@ Built with React.js, Node.js with Express, PostgreSQL, and Material UI.
 ![itempopup](./public/images/itempopup.png)
 ![checkout](./public/images/checkout.png)
 
+![wireframes](./public/images/wireframes.md)
+
 ## Features
 
 Users are able to:
